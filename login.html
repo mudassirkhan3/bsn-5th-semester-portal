@@ -18,13 +18,16 @@
     input:focus { border-color: #0284c7; box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); }
     .submit-btn { width: 100%; padding: 14px; background: #0284c7; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; }
     .submit-btn:hover { background: #0369a1; }
+    .forgot-link { font-size: 0.8rem; color: #0284c7; font-weight: 600; text-decoration: none; cursor: pointer; float: right; margin-bottom: 12px; }
+    .forgot-link:hover { text-decoration: underline; }
+    .back-btn { font-size: 0.82rem; color: #64748b; font-weight: 700; background: none; border: none; cursor: pointer; margin-bottom: 16px; display: inline-flex; align-items: center; gap: 4px; }
   </style>
 </head>
 <body>
 
 <div class="auth-card">
   <!-- Tabs -->
-  <div class="tabs">
+  <div class="tabs" id="authTabs">
     <button class="tab-btn active" id="loginTab" onclick="showForm('login')">Login</button>
     <button class="tab-btn" id="regTab" onclick="showForm('register')">Register Student</button>
   </div>
@@ -36,7 +39,10 @@
       <input type="email" id="loginEmail" placeholder="student@example.com" required>
     </div>
     <div class="form-group">
-      <label>Password</label>
+      <label>
+        Password 
+        <span class="forgot-link" onclick="showForm('forgot')">Forgot Password?</span>
+      </label>
       <input type="password" id="loginPassword" placeholder="••••••••" required>
     </div>
     <button type="submit" class="submit-btn">Login to Dashboard</button>
@@ -65,20 +71,49 @@
     </div>
     <button type="submit" class="submit-btn">Create Account</button>
   </form>
+
+  <!-- FORGOT PASSWORD FORM -->
+  <form id="forgotForm" style="display: none;" onsubmit="handleResetPassword(event)">
+    <button type="button" class="back-btn" onclick="showForm('login')">← Back to Login</button>
+    <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 12px;">Reset Password</h3>
+    <div class="form-group">
+      <label>Your Registered Email</label>
+      <input type="email" id="resetEmail" placeholder="student@example.com" required>
+    </div>
+    <div class="form-group">
+      <label>New Password</label>
+      <input type="password" id="newPassword" placeholder="Enter new password" required>
+    </div>
+    <button type="submit" class="submit-btn" style="background:#0d9488;">Update Password</button>
+  </form>
 </div>
 
 <script>
   function showForm(type) {
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const forgotForm = document.getElementById('forgotForm');
+    const authTabs = document.getElementById('authTabs');
+
     if (type === 'login') {
-      document.getElementById('loginForm').style.display = 'block';
-      document.getElementById('registerForm').style.display = 'none';
+      authTabs.style.display = 'flex';
+      loginForm.style.display = 'block';
+      registerForm.style.display = 'none';
+      forgotForm.style.display = 'none';
       document.getElementById('loginTab').classList.add('active');
       document.getElementById('regTab').classList.remove('active');
-    } else {
-      document.getElementById('loginForm').style.display = 'none';
-      document.getElementById('registerForm').style.display = 'block';
+    } else if (type === 'register') {
+      authTabs.style.display = 'flex';
+      loginForm.style.display = 'none';
+      registerForm.style.display = 'block';
+      forgotForm.style.display = 'none';
       document.getElementById('loginTab').classList.remove('active');
       document.getElementById('regTab').classList.add('active');
+    } else if (type === 'forgot') {
+      authTabs.style.display = 'none';
+      loginForm.style.display = 'none';
+      registerForm.style.display = 'none';
+      forgotForm.style.display = 'block';
     }
   }
 
@@ -86,7 +121,7 @@
     e.preventDefault();
     const user = {
       name: document.getElementById('regName').value,
-      email: document.getElementById('regEmail').value,
+      email: document.getElementById('regEmail').value.toLowerCase().trim(),
       semester: document.getElementById('regSemester').value,
       password: document.getElementById('regPassword').value,
       progress: 0
@@ -99,7 +134,7 @@
 
   function handleLogin(e) {
     e.preventDefault();
-    const email = document.getElementById('loginEmail').value;
+    const email = document.getElementById('loginEmail').value.toLowerCase().trim();
     const pass = document.getElementById('loginPassword').value;
     const savedUser = localStorage.getItem('bsn_user_' + email);
 
@@ -113,6 +148,23 @@
       }
     } else {
       alert('❌ No student account found with this email. Please register first.');
+    }
+  }
+
+  function handleResetPassword(e) {
+    e.preventDefault();
+    const email = document.getElementById('resetEmail').value.toLowerCase().trim();
+    const newPass = document.getElementById('newPassword').value;
+    const savedUser = localStorage.getItem('bsn_user_' + email);
+
+    if (savedUser) {
+      let user = JSON.parse(savedUser);
+      user.password = newPass;
+      localStorage.setItem('bsn_user_' + email, JSON.stringify(user));
+      alert('✅ Password updated successfully! You can now log in with your new password.');
+      showForm('login');
+    } else {
+      alert('❌ Email not found. Please verify your registered email address.');
     }
   }
 </script>
