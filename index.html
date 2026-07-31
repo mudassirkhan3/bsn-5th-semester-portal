@@ -22,7 +22,6 @@
       --border: #e2e8f0;
       --radius: 18px;
       --shadow: 0 10px 30px -5px rgba(2, 132, 199, 0.08);
-      --shadow-hover: 0 20px 35px -10px rgba(2, 132, 199, 0.18);
     }
 
     * {
@@ -42,7 +41,7 @@
       overflow-x: hidden;
     }
 
-    /* 1. NAVBAR */
+    /* NAVBAR */
     .navbar {
       position: sticky;
       top: 0;
@@ -94,12 +93,6 @@
       70% { transform: scale(1); }
     }
 
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
     .pay-menu-btn {
       background: linear-gradient(135deg, #10b981, #059669);
       color: white;
@@ -113,11 +106,9 @@
       transition: transform 0.2s;
     }
 
-    .pay-menu-btn:hover {
-      transform: translateY(-2px);
-    }
+    .pay-menu-btn:hover { transform: translateY(-2px); }
 
-    /* 2. HERO & STATS */
+    /* MAIN CONTENT */
     .main-wrapper {
       flex: 1;
       width: 100%;
@@ -133,8 +124,6 @@
       padding: 40px 32px;
       margin-bottom: 24px;
       box-shadow: 0 20px 40px -10px rgba(2, 132, 199, 0.3);
-      position: relative;
-      overflow: hidden;
     }
 
     .hero-tag {
@@ -150,16 +139,8 @@
       text-transform: uppercase;
     }
 
-    .hero-card h1 {
-      font-size: 1.9rem;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .hero-card p {
-      color: #bae6fd;
-      font-size: 0.95rem;
-    }
+    .hero-card h1 { font-size: 1.9rem; font-weight: 800; margin-bottom: 10px; }
+    .hero-card p { color: #bae6fd; font-size: 0.95rem; }
 
     .author-bar {
       margin-top: 24px;
@@ -169,37 +150,7 @@
       color: #e0f2fe;
     }
 
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-bottom: 28px;
-    }
-
-    .stat-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      text-align: center;
-      box-shadow: var(--shadow);
-    }
-
-    .stat-number {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--primary-dark);
-    }
-
-    .stat-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
-
-    /* 3. ACCESS CODE BANNER */
+    /* ACCESS BANNER */
     .access-banner {
       background: #ffffff;
       border: 2px dashed #0284c7;
@@ -218,11 +169,7 @@
       gap: 10px;
     }
 
-    .banner-head h3 {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: #0f172a;
-    }
+    .banner-head h3 { font-size: 1.1rem; font-weight: 800; color: #0f172a; }
 
     .code-input-group {
       display: flex;
@@ -267,12 +214,8 @@
       margin-bottom: 16px;
     }
 
-    /* 4. SUBJECT CARDS */
-    .subjects-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+    /* SUBJECT CARDS */
+    .subjects-grid { display: flex; flex-direction: column; gap: 16px; }
 
     .subject-card {
       background: var(--card-bg);
@@ -280,7 +223,7 @@
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s ease;
     }
 
     .card-head {
@@ -293,12 +236,7 @@
     }
 
     .card-head:hover { background: #f8fafc; }
-
-    .head-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+    .head-left { display: flex; align-items: center; gap: 16px; }
 
     .icon-box {
       width: 48px; height: 48px;
@@ -308,31 +246,12 @@
     }
 
     .bg-peds { background: #f0fdf4; }
-    .bg-chn { background: #f0f9ff; }
     .bg-repo { background: #fdf2f8; }
-    .bg-teaching { background: #fff7ed; }
     .bg-ethics { background: #fef2f2; }
     .bg-english { background: #f5f3ff; }
     .bg-perls { background: #f0fdfa; }
-    .bg-compass { background: #faf5ff; }
 
-    .card-title-wrap h2 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 4px;
-    }
-
-    .ch-badge {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 6px;
-    }
-
-    .ch-theory { background: #e0f2fe; color: #0369a1; }
-    .ch-clinical { background: #dcfce7; color: #15803d; }
+    .card-title-wrap h2 { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); }
 
     .chevron {
       width: 28px; height: 28px;
@@ -351,25 +270,18 @@
     .card-body {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: max-height 0.35s ease-out;
       background: #ffffff;
     }
 
-    .subject-card.active .card-body {
-      max-height: 240px;
-    }
+    .subject-card.active .card-body { max-height: 240px; }
 
     .card-content {
       padding: 16px 24px 20px 24px;
       border-top: 1px dashed var(--border);
     }
 
-    .resource-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    .resource-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 
     .resource-item a {
       display: flex;
@@ -384,7 +296,6 @@
       font-size: 0.88rem;
       font-weight: 600;
       transition: all 0.2s ease;
-      cursor: pointer;
     }
 
     .resource-item a:hover {
@@ -394,18 +305,11 @@
       transform: translateX(6px);
     }
 
-    .tag {
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 6px;
-      text-transform: uppercase;
-    }
-
+    .tag { font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; }
     .tag-lock { background: #fef3c7; color: #b45309; }
     .tag-free { background: #dcfce7; color: #15803d; }
 
-    /* 5. PAYMENT MODAL */
+    /* MODAL */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -426,13 +330,6 @@
       width: 100%;
       text-align: center;
       position: relative;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-      animation: modalSlideUp 0.3s ease-out;
-    }
-
-    @keyframes modalSlideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .close-btn {
@@ -442,18 +339,12 @@
       font-size: 1.5rem; color: #64748b; cursor: pointer;
     }
 
-    .modal-icon { font-size: 2.5rem; margin-bottom: 8px; }
-    .modal-box h2 { font-size: 1.25rem; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
-    .modal-sub { font-size: 0.85rem; color: #64748b; margin-bottom: 16px; line-height: 1.4; }
-    
     .price-tag {
       background: #f0f9ff; color: #0369a1;
       border: 1px solid #bae6fd;
       padding: 12px; border-radius: 12px;
-      font-size: 1.6rem; font-weight: 800; margin-bottom: 16px;
+      font-size: 1.6rem; font-weight: 800; margin: 16px 0;
     }
-    .price-tag .currency { font-size: 1rem; font-weight: 700; }
-    .price-tag .per { font-size: 0.75rem; color: #0284c7; font-weight: 600; }
 
     .payment-methods {
       background: #f8fafc; border: 1px solid #e2e8f0;
@@ -468,46 +359,15 @@
     .wa-btn {
       display: block; background: #25d366; color: white;
       text-decoration: none; font-weight: 700; font-size: 0.9rem;
-      padding: 14px; border-radius: 12px; transition: transform 0.2s;
+      padding: 14px; border-radius: 12px;
     }
 
-    .wa-btn:hover { transform: translateY(-2px); background: #20ba5a; }
-
-    /* FOOTER */
     footer {
       background: #0f172a; color: #94a3b8;
       border-top: 1px solid #1e293b;
       padding: 40px 24px; margin-top: 50px;
+      text-align: center; font-size: 0.85rem;
     }
-
-    .footer-container {
-      max-width: 860px; margin: 0 auto;
-      display: flex; flex-direction: column; gap: 24px;
-    }
-
-    .footer-top {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      flex-wrap: wrap; gap: 20px;
-    }
-
-    .footer-info h3 { color: #f8fafc; font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
-    .footer-info p { font-size: 0.85rem; color: #64748b; max-width: 380px; }
-
-    .back-top-btn {
-      background: #1e293b; color: #e2e8f0; border: 1px solid #334155;
-      padding: 10px 18px; border-radius: 12px; font-size: 0.85rem;
-      font-weight: 600; text-decoration: none; transition: all 0.2s ease;
-    }
-
-    .back-top-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
-
-    .footer-bottom {
-      border-top: 1px solid #1e293b; padding-top: 20px;
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 0.8rem; flex-wrap: wrap; gap: 12px;
-    }
-
-    @media (max-width: 600px) { .stats-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -519,9 +379,7 @@
         <div class="pulse-box">🩺</div>
         <span>BSN Portal</span>
       </a>
-      <div class="nav-actions">
-        <button class="pay-menu-btn" onclick="showModal('General Access')">💳 Buy Access</button>
-      </div>
+      <button class="pay-menu-btn" onclick="showModal('General Access')">💳 Buy Access</button>
     </div>
   </header>
 
@@ -532,27 +390,8 @@
     <div class="hero-card">
       <span class="hero-tag">BS Nursing • Official Curriculum</span>
       <h1>Academic & Clinical Portal</h1>
-      <p>Interactive study materials, lecture summaries, clinical log sheets, and practice quizzes.</p>
-      
-      <div class="author-bar">
-        👤 Curated & Maintained by <strong>Mudassir Khan</strong>
-      </div>
-    </div>
-
-    <!-- STATS GRID -->
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-number">20</div>
-        <div class="stat-label">Total Credit Hours</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">13</div>
-        <div class="stat-label">Theory Credits</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">07</div>
-        <div class="stat-label">Clinical Credits</div>
-      </div>
+      <p>Interactive study materials, lecture summaries, and clinical guides.</p>
+      <div class="author-bar">👤 Curated & Maintained by <strong>Mudassir Khan</strong></div>
     </div>
 
     <!-- ACCESS CODE BANNER -->
@@ -562,7 +401,6 @@
           <h3>🔑 Already have an Access Code?</h3>
           <p style="font-size: 0.85rem; color: #64748b;">Enter your code below to instantly unlock all modules.</p>
         </div>
-        <button class="pay-menu-btn" onclick="showModal('Direct Payment')">How to Pay via JazzCash</button>
       </div>
       
       <div class="code-input-group">
@@ -577,14 +415,13 @@
     <!-- SUBJECTS LIST -->
     <div class="subjects-grid">
 
-      <!-- 1. Pediatric Health Nursing - I -->
+      <!-- 1. PEDIATRIC -->
       <div class="subject-card active">
         <div class="card-head" onclick="toggleCard(this)">
           <div class="head-left">
             <div class="icon-box bg-peds">👶</div>
             <div class="card-title-wrap">
-              <h2>Pediatric Health Nursing - I</h2>
-              <span class="ch-badge ch-theory">Theory • 02 CH</span>
+              <h2>Pediatric Health Nursing</h2>
             </div>
           </div>
           <div class="chevron">▼</div>
@@ -593,9 +430,8 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <!-- LINKS TO README FILE -->
-                <a href="./pediatric/readme.md" onclick="return checkAccess(event, './pediatric/readme.md')">
-                  <span class="res-title">🔒 Pediatric Lecture Notes</span>
+                <a href="./pediatric/README.md" onclick="checkAccess(event)">
+                  <span class="res-title">🔒 Pediatric Notes</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -604,92 +440,13 @@
         </div>
       </div>
 
-      <!-- 2. Pediatric Health Nursing - I Clinical -->
-      <div class="subject-card">
-        <div class="card-head" onclick="toggleCard(this)">
-          <div class="head-left">
-            <div class="icon-box bg-peds">🏥</div>
-            <div class="card-title-wrap">
-              <h2>Pediatric Health Nursing - I Clinical</h2>
-              <span class="ch-badge ch-clinical">Clinical • 02 CH</span>
-            </div>
-          </div>
-          <div class="chevron">▼</div>
-        </div>
-        <div class="card-body">
-          <div class="card-content">
-            <ul class="resource-list">
-              <li class="resource-item">
-                <a href="./pediatric/logbook.md" onclick="return checkAccess(event, './pediatric/logbook.md')">
-                  <span class="res-title">🔒 Clinical Objectives & Logbook</span>
-                  <span class="tag tag-lock">Unlock (Paid)</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. Community Health Nursing - I -->
-      <div class="subject-card">
-        <div class="card-head" onclick="toggleCard(this)">
-          <div class="head-left">
-            <div class="icon-box bg-chn">🏘️</div>
-            <div class="card-title-wrap">
-              <h2>Community Health Nursing - I</h2>
-              <span class="ch-badge ch-theory">Theory • 02 CH</span>
-            </div>
-          </div>
-          <div class="chevron">▼</div>
-        </div>
-        <div class="card-body">
-          <div class="card-content">
-            <ul class="resource-list">
-              <li class="resource-item">
-                <a href="./chn/readme.md" onclick="return checkAccess(event, './chn/readme.md')">
-                  <span class="res-title">🔒 Lecture Notes</span>
-                  <span class="tag tag-lock">Unlock (Paid)</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4. Community Health Nursing - I Clinical -->
-      <div class="subject-card">
-        <div class="card-head" onclick="toggleCard(this)">
-          <div class="head-left">
-            <div class="icon-box bg-chn">🌱</div>
-            <div class="card-title-wrap">
-              <h2>Community Health Nursing - I Clinical</h2>
-              <span class="ch-badge ch-clinical">Clinical • 01 CH</span>
-            </div>
-          </div>
-          <div class="chevron">▼</div>
-        </div>
-        <div class="card-body">
-          <div class="card-content">
-            <ul class="resource-list">
-              <li class="resource-item">
-                <a href="./chn/field-visit.md" onclick="return checkAccess(event, './chn/field-visit.md')">
-                  <span class="res-title">🔒 Community Field Visit Logbook</span>
-                  <span class="tag tag-lock">Unlock (Paid)</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- 5. Reproductive Health -->
+      <!-- 2. REPRODUCTIVE -->
       <div class="subject-card">
         <div class="card-head" onclick="toggleCard(this)">
           <div class="head-left">
             <div class="icon-box bg-repo">🤰</div>
             <div class="card-title-wrap">
               <h2>Reproductive Health</h2>
-              <span class="ch-badge ch-theory">Theory • 02 CH</span>
             </div>
           </div>
           <div class="chevron">▼</div>
@@ -698,8 +455,8 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./reproductive/readme.md" onclick="return checkAccess(event, './reproductive/readme.md')">
-                  <span class="res-title">🔒 Lecture Notes</span>
+                <a href="./reproductive/README.md" onclick="checkAccess(event)">
+                  <span class="res-title">🔒 Reproductive Health Notes</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -708,14 +465,13 @@
         </div>
       </div>
 
-      <!-- 6. Nursing Ethics (FREE DEMO SUBJECT) -->
+      <!-- 3. ENGLISH -->
       <div class="subject-card">
         <div class="card-head" onclick="toggleCard(this)">
           <div class="head-left">
-            <div class="icon-box bg-ethics">⚖️</div>
+            <div class="icon-box bg-english">📚</div>
             <div class="card-title-wrap">
-              <h2>Nursing Ethics (Free Preview)</h2>
-              <span class="ch-badge ch-theory">Theory • 01 CH</span>
+              <h2>English</h2>
             </div>
           </div>
           <div class="chevron">▼</div>
@@ -724,8 +480,58 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./ethics/readme.md">
-                  <span>📖 Lecture Notes (Free Demo)</span>
+                <a href="./english/README.md" onclick="checkAccess(event)">
+                  <span class="res-title">🔒 English Notes</span>
+                  <span class="tag tag-lock">Unlock (Paid)</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. PERLS -->
+      <div class="subject-card">
+        <div class="card-head" onclick="toggleCard(this)">
+          <div class="head-left">
+            <div class="icon-box bg-perls">💡</div>
+            <div class="card-title-wrap">
+              <h2>PERLS</h2>
+            </div>
+          </div>
+          <div class="chevron">▼</div>
+        </div>
+        <div class="card-body">
+          <div class="card-content">
+            <ul class="resource-list">
+              <li class="resource-item">
+                <a href="./perls/README.md" onclick="checkAccess(event)">
+                  <span class="res-title">🔒 PERLS Notes</span>
+                  <span class="tag tag-lock">Unlock (Paid)</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. ETHICS (FREE PREVIEW) -->
+      <div class="subject-card">
+        <div class="card-head" onclick="toggleCard(this)">
+          <div class="head-left">
+            <div class="icon-box bg-ethics">⚖️</div>
+            <div class="card-title-wrap">
+              <h2>Nursing Ethics (Free Preview)</h2>
+            </div>
+          </div>
+          <div class="chevron">▼</div>
+        </div>
+        <div class="card-body">
+          <div class="card-content">
+            <ul class="resource-list">
+              <li class="resource-item">
+                <a href="./ethics/README.md">
+                  <span>📖 Nursing Ethics Notes (Free Demo)</span>
                   <span class="tag tag-free">Free Access</span>
                 </a>
               </li>
@@ -742,20 +548,17 @@
   <div id="paymentModal" class="modal-overlay" style="display:none;">
     <div class="modal-box">
       <button class="close-btn" onclick="closeModal()">×</button>
-      <div class="modal-icon">🔒</div>
       <h2>Unlock BSN Study Portal</h2>
-      <p class="modal-sub">Get access to all subject notes, clinical logbook guides, and practice quizzes!</p>
+      <p style="font-size:0.85rem; color:#64748b; margin-top:6px;">Get full access to all course notes & materials.</p>
       
       <div class="price-tag">
-        <span class="currency">PKR</span> 500 <span class="per">/ full semester</span>
+        <span style="font-size:1rem;">PKR</span> 500
       </div>
 
       <div class="payment-methods">
-        <div class="pay-option">
-          <strong>📱 JazzCash Transfer Details</strong>
-          <p style="margin-top:6px;">Account No: <code>03241064487</code></p>
-          <p style="margin-top:4px;">Account Name: <strong>Mudassir Hussain Khan</strong></p>
-        </div>
+        <strong>📱 JazzCash Transfer Details</strong>
+        <p style="margin-top:6px;">Account No: <code>03241064487</code></p>
+        <p style="margin-top:4px;">Account Name: <strong>Mudassir Hussain Khan</strong></p>
       </div>
 
       <a id="whatsappBtn" href="#" target="_blank" class="wa-btn">
@@ -766,20 +569,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-container">
-      <div class="footer-top">
-        <div class="footer-info">
-          <h3>BS Nursing Academic & Clinical Portal</h3>
-          <p>Organized academic resources and clinical log guides maintained by Mudassir Khan.</p>
-        </div>
-        <a href="#" class="back-top-btn">Back to Top ↑</a>
-      </div>
-      
-      <div class="footer-bottom">
-        <span>© 2026 Academic Portal • Prepared by Mudassir Khan</span>
-        <span>20 Credit Hours (13 Theory / 07 Clinical)</span>
-      </div>
-    </div>
+    <p>© 2026 Academic Portal • Prepared by Mudassir Khan</p>
   </footer>
 
   <!-- JAVASCRIPT LOGIC -->
@@ -808,22 +598,16 @@
       }
     }
 
-    // Checks access before opening the README link
-    function checkAccess(event, filePath) {
-      if (localStorage.getItem("bsn_unlocked") === "true") {
-        // UNLOCKED: Open the file!
-        window.location.href = filePath;
-        return false;
-      } else {
-        // LOCKED: Open JazzCash modal!
+    // Prevents link navigation if NOT unlocked
+    function checkAccess(event) {
+      if (localStorage.getItem("bsn_unlocked") !== "true") {
         event.preventDefault();
         showModal('Subject Notes');
-        return false;
       }
     }
 
     function showModal(subjectName) {
-      const text = encodeURIComponent(`Hi Mudassir, I want to get access for: ${subjectName}. Here is my JazzCash payment screenshot:`);
+      const text = encodeURIComponent(`Hi Mudassir, I want access for: ${subjectName}. Here is my JazzCash payment screenshot:`);
       document.getElementById("whatsappBtn").href = `https://wa.me/${MY_WHATSAPP_NUMBER}?text=${text}`;
       document.getElementById("paymentModal").style.display = "flex";
     }
@@ -849,7 +633,7 @@
         const inputGroup = document.querySelector(".access-banner");
         if(inputGroup) {
           inputGroup.innerHTML = `
-            <div style="color: #15803d; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+            <div style="color: #15803d; font-weight: 700; font-size: 0.95rem;">
               ✅ You have active VIP Access to all BSN Portal Materials.
             </div>`;
         }
