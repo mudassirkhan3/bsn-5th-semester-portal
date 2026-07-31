@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BSN Semester V Academic Portal - Mudassir Khan</title>
+  <title>BSN 5th Semester Academic Portal - Mudassir Khan</title>
+  
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +15,7 @@
       --primary: #0284c7;
       --primary-dark: #0369a1;
       --accent: #0d9488;
-      --bg-main: #f1f5f9;
+      --bg-main: #f8fafc;
       --card-bg: #ffffff;
       --text-dark: #0f172a;
       --text-muted: #64748b;
@@ -28,96 +29,182 @@
       margin: 0;
       padding: 0;
       font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      scroll-behavior: smooth;
     }
 
     body {
       background-color: var(--bg-main);
       color: var(--text-dark);
-      padding: 20px 12px;
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar Header Setup */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+    }
+
+    .nav-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .brand-icon {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
       justify-content: center;
+      font-size: 1.2rem;
     }
 
-    .app-container {
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-menu a:hover {
+      color: var(--primary);
+    }
+
+    .nav-badge {
+      background: #e0f2fe;
+      color: var(--primary-dark);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    /* Main Layout */
+    .main-wrapper {
+      flex: 1;
       width: 100%;
-      max-width: 680px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 32px 16px;
     }
 
-    /* Hero Header */
-    .header-card {
+    /* Hero Header Card */
+    .hero-card {
       background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
       color: white;
       border-radius: var(--radius);
-      padding: 28px 24px;
-      margin-bottom: 20px;
-      box-shadow: 0 12px 24px -6px rgba(2, 132, 199, 0.25);
+      padding: 36px 28px;
+      margin-bottom: 32px;
+      box-shadow: 0 14px 28px -4px rgba(2, 132, 199, 0.25);
       position: relative;
       overflow: hidden;
     }
 
-    .header-card::after {
-      content: '📚';
+    .hero-card::after {
+      content: '🎓';
       position: absolute;
       right: -10px;
-      bottom: -10px;
-      font-size: 7rem;
+      bottom: -15px;
+      font-size: 8rem;
       opacity: 0.12;
-      transform: rotate(-15deg);
+      transform: rotate(-12deg);
     }
 
-    .badge-header {
+    .hero-tag {
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(8px);
       color: #e0f2fe;
       font-size: 0.75rem;
       font-weight: 700;
-      padding: 4px 12px;
+      padding: 4px 14px;
       border-radius: 20px;
       display: inline-block;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       letter-spacing: 0.5px;
       text-transform: uppercase;
     }
 
-    .header-card h1 {
-      font-size: 1.6rem;
+    .hero-card h1 {
+      font-size: 1.8rem;
       font-weight: 800;
-      line-height: 1.3;
-      margin-bottom: 8px;
+      line-height: 1.25;
+      margin-bottom: 10px;
     }
 
-    .header-card p {
+    .hero-card p {
       color: #93c5fd;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       font-weight: 400;
       line-height: 1.5;
     }
 
-    .author-tag {
-      margin-top: 16px;
-      padding-top: 12px;
+    .author-bar {
+      margin-top: 20px;
+      padding-top: 14px;
       border-top: 1px solid rgba(255, 255, 255, 0.15);
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       color: #bae6fd;
-      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
     }
 
     .section-title {
       font-size: 0.85rem;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      margin: 24px 4px 12px 4px;
     }
 
-    /* Subject Cards */
+    /* Subject Cards Grid */
+    .subjects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
     .subject-card {
       background: var(--card-bg);
       border-radius: var(--radius);
-      padding: 20px;
-      margin-bottom: 16px;
+      padding: 24px;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -131,38 +218,36 @@
     .card-head {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
       border-bottom: 1px dashed var(--border);
     }
 
     .icon-box {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       flex-shrink: 0;
     }
 
-    .bg-peds { background: #f0fdf4; color: #16a34a; }
-    .bg-chn { background: #f0f9ff; color: #0284c7; }
-    .bg-repo { background: #fdf2f8; color: #db2777; }
-    .bg-teaching { background: #fff7ed; color: #ea580c; }
-    .bg-ethics { background: #fef2f2; color: #dc2626; }
-    .bg-english { background: #f5f3ff; color: #7c3aed; }
-    .bg-perls { background: #f0fdfa; color: #0d9488; }
+    .bg-peds { background: #f0fdf4; }
+    .bg-chn { background: #f0f9ff; }
+    .bg-teaching { background: #fff7ed; }
+    .bg-tropical { background: #fef2f2; }
+    .bg-english { background: #f5f3ff; }
 
     .card-head h2 {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: var(--text-dark);
     }
 
-    /* Resource Links */
+    /* Link Action Buttons */
     .resource-list {
       list-style: none;
       display: flex;
@@ -174,10 +259,10 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 14px;
+      padding: 12px 16px;
       background: #f8fafc;
       border: 1px solid #f1f5f9;
-      border-radius: 10px;
+      border-radius: 12px;
       text-decoration: none;
       color: var(--text-dark);
       font-size: 0.9rem;
@@ -198,14 +283,10 @@
       gap: 10px;
     }
 
-    .link-icon {
-      font-size: 1.1rem;
-    }
-
     .tag {
       font-size: 0.7rem;
       font-weight: 700;
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 6px;
       text-transform: uppercase;
     }
@@ -213,208 +294,254 @@
     .tag-note { background: #e0f2fe; color: #0369a1; }
     .tag-quiz { background: #fef3c7; color: #b45309; }
 
-    .security-notice {
-      background: #fffbebf5;
-      border: 1px solid #fef08a;
-      border-radius: var(--radius);
-      padding: 16px;
-      text-align: center;
-      margin-top: 28px;
-      font-size: 0.8rem;
-      color: #854d0e;
-      line-height: 1.4;
+    /* Footer Setup */
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      border-top: 1px solid #1e293b;
+      padding: 40px 24px;
+      margin-top: 40px;
     }
 
-    footer {
-      text-align: center;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 24px;
-      padding-bottom: 20px;
+    .footer-container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-info h3 {
+      color: #f8fafc;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .footer-info p {
+      font-size: 0.85rem;
+      color: #64748b;
+      max-width: 340px;
+      line-height: 1.5;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #1e293b;
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .nav-menu { display: none; }
+      .footer-top { flex-direction: column; }
+      .footer-bottom { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-  <div class="app-container">
+  <!-- Header Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <div class="brand-icon">🩺</div>
+        <span>BSN Portal</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#subjects">Subjects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><span class="nav-badge">5th Semester</span></li>
+      </ul>
+    </div>
+  </header>
 
-    <!-- Header -->
-    <div class="header-card">
-      <span class="badge-header">BS Nursing • Semester V</span>
+  <!-- Main Content Wrapper -->
+  <main class="main-wrapper">
+
+    <!-- Hero Card -->
+    <div class="hero-card">
+      <span class="hero-tag">BS Nursing • 5th Semester</span>
       <h1>Academic Study Portal</h1>
-      <p>High-yield lecture notes and practice quizzes for Semester V academic subjects.</p>
+      <p>High-yield lecture notes and practice quizzes tailored for 5th Semester subjects.</p>
       
-      <div class="author-tag">
-        👤 Maintained by: <strong>Mudassir Khan</strong>
+      <div class="author-bar">
+        👤 Curated & Maintained by <strong>Mudassir Khan</strong>
       </div>
     </div>
 
-    <div class="section-title">Academic Subjects</div>
+    <!-- Section Header -->
+    <div class="section-header" id="subjects">
+      <span class="section-title">5th Semester Academic Subjects</span>
+    </div>
 
-    <!-- Pediatric Health Nursing - I -->
-    <div class="subject-card">
-      <div class="card-head">
-        <div class="icon-box bg-peds">👶</div>
-        <h2>Pediatric Health Nursing - I</h2>
+    <!-- Subjects List -->
+    <div class="subjects-grid">
+
+      <!-- 1. Pediatric Health Nursing-II -->
+      <div class="subject-card">
+        <div class="card-head">
+          <div class="icon-box bg-peds">👶</div>
+          <h2>Pediatric Health Nursing-II</h2>
+        </div>
+        <ul class="resource-list">
+          <li class="resource-item">
+            <a href="./pediatric/notes.md">
+              <span class="link-info"><span>📖</span> Lecture Notes</span>
+              <span class="tag tag-note">Notes</span>
+            </a>
+          </li>
+          <li class="resource-item">
+            <a href="https://forms.google.com" target="_blank">
+              <span class="link-info"><span>📝</span> Practice Quiz</span>
+              <span class="tag tag-quiz">Quiz</span>
+            </a>
+          </li>
+        </ul>
       </div>
-      <ul class="resource-list">
-        <li class="resource-item">
-          <a href="./pediatric/notes.md">
-            <span class="link-info"><span class="link-icon">📖</span> Lecture Notes</span>
-            <span class="tag tag-note">Notes</span>
-          </a>
-        </li>
-        <li class="resource-item">
-          <a href="https://forms.google.com" target="_blank">
-            <span class="link-info"><span class="link-icon">📝</span> Practice Quiz</span>
-            <span class="tag tag-quiz">Quiz</span>
-          </a>
-        </li>
-      </ul>
-    </div>
 
-    <!-- Community Health Nursing - I -->
-    <div class="subject-card">
-      <div class="card-head">
-        <div class="icon-box bg-chn">🏘️</div>
-        <h2>Community Health Nursing - I</h2>
+      <!-- 2. Community Health Nursing-II -->
+      <div class="subject-card">
+        <div class="card-head">
+          <div class="icon-box bg-chn">🏘️</div>
+          <h2>Community Health Nursing-II</h2>
+        </div>
+        <ul class="resource-list">
+          <li class="resource-item">
+            <a href="./chn/notes.md">
+              <span class="link-info"><span>📖</span> Lecture Notes</span>
+              <span class="tag tag-note">Notes</span>
+            </a>
+          </li>
+          <li class="resource-item">
+            <a href="https://forms.google.com" target="_blank">
+              <span class="link-info"><span>📝</span> Practice Quiz</span>
+              <span class="tag tag-quiz">Quiz</span>
+            </a>
+          </li>
+        </ul>
       </div>
-      <ul class="resource-list">
-        <li class="resource-item">
-          <a href="./chn/notes.md">
-            <span class="link-info"><span class="link-icon">📖</span> Lecture Notes</span>
-            <span class="tag tag-note">Notes</span>
-          </a>
-        </li>
-        <li class="resource-item">
-          <a href="https://forms.google.com" target="_blank">
-            <span class="link-info"><span class="link-icon">📝</span> Practice Quiz</span>
-            <span class="tag tag-quiz">Quiz</span>
-          </a>
-        </li>
-      </ul>
-    </div>
 
-    <!-- Reproductive Health -->
-    <div class="subject-card">
-      <div class="card-head">
-        <div class="icon-box bg-repo">🤰</div>
-        <h2>Reproductive Health</h2>
+      <!-- 3. Teaching / Learning Strategies -->
+      <div class="subject-card">
+        <div class="card-head">
+          <div class="icon-box bg-teaching">🎓</div>
+          <h2>Teaching / Learning Strategies</h2>
+        </div>
+        <ul class="resource-list">
+          <li class="resource-item">
+            <a href="./teaching-learning/notes.md">
+              <span class="link-info"><span>📖</span> Lecture Notes</span>
+              <span class="tag tag-note">Notes</span>
+            </a>
+          </li>
+          <li class="resource-item">
+            <a href="https://forms.google.com" target="_blank">
+              <span class="link-info"><span>📝</span> Practice Quiz</span>
+              <span class="tag tag-quiz">Quiz</span>
+            </a>
+          </li>
+        </ul>
       </div>
-      <ul class="resource-list">
-        <li class="resource-item">
-          <a href="./reproductive/notes.md">
-            <span class="link-info"><span class="link-icon">📖</span> Lecture Notes</span>
-            <span class="tag tag-note">Notes</span>
-          </a>
-        </li>
-        <li class="resource-item">
-          <a href="https://forms.google.com" target="_blank">
-            <span class="link-info"><span class="link-icon">📝</span> Practice Quiz</span>
-            <span class="tag tag-quiz">Quiz</span>
-          </a>
-        </li>
-      </ul>
-    </div>
 
-    <!-- Teaching/Learning: Principles/Practices -->
-    <div class="subject-card">
-      <div class="card-head">
-        <div class="icon-box bg-teaching">🎓</div>
-        <h2>Teaching/Learning: Principles/Practices</h2>
+      <!-- 4. Tropical & Communicable Diseases -->
+      <div class="subject-card">
+        <div class="card-head">
+          <div class="icon-box bg-tropical">🦠</div>
+          <h2>Tropical & Communicable Diseases</h2>
+        </div>
+        <ul class="resource-list">
+          <li class="resource-item">
+            <a href="./tropical-diseases/notes.md">
+              <span class="link-info"><span>📖</span> Lecture Notes</span>
+              <span class="tag tag-note">Notes</span>
+            </a>
+          </li>
+          <li class="resource-item">
+            <a href="https://forms.google.com" target="_blank">
+              <span class="link-info"><span>📝</span> Practice Quiz</span>
+              <span class="tag tag-quiz">Quiz</span>
+            </a>
+          </li>
+        </ul>
       </div>
-      <ul class="resource-list">
-        <li class="resource-item">
-          <a href="./teaching-learning/notes.md">
-            <span class="link-info"><span class="link-icon">📖</span> Lecture Notes</span>
-            <span class="tag tag-note">Notes</span>
-          </a>
-        </li>
-        <li class="resource-item">
-          <a href="https://forms.google.com" target="_blank">
-            <span class="link-info"><span class="link-icon">📝</span> Practice Quiz</span>
-            <span class="tag tag-quiz">Quiz</span>
-          </a>
-        </li>
-      </ul>
-    </div>
 
-    <!-- Nursing Ethics -->
-    <div class="subject-card">
-      <div class="card-head">
-        <div class="icon-box bg-ethics">⚖️</div>
-        <h2>Nursing Ethics</h2>
+      <!-- 5. English V -->
+      <div class="subject-card">
+        <div class="card-head">
+          <div class="icon-box bg-english">✍️</div>
+          <h2>English V</h2>
+        </div>
+        <ul class="resource-list">
+          <li class="resource-item">
+            <a href="./english/notes.md">
+              <span class="link-info"><span>📖</span> Lecture Notes</span>
+              <span class="tag tag-note">Notes</span>
+            </a>
+          </li>
+          <li class="resource-item">
+            <a href="https://forms.google.com" target="_blank">
+              <span class="link-info"><span>📝</span> Practice Quiz</span>
+              <span class="tag tag-quiz">Quiz</span>
+            </a>
+          </li>
+        </ul>
       </div>
-      <ul class="resource-list">
-        <li class="resource-item">
-          <a href="./ethics/notes.md">
-            <span class="link-info"><span class="link-icon">📖</span> Lecture Notes</span>
-            <span class="tag tag-note">Notes</span>
-          </a>
-        </li>
-        <li class="resource-item">
-          <a href="https://forms.google.com" target="_blank">
-            <span class="link-info"><span class="link-icon">📝</span> Practice Quiz</span>
-            <span class="tag tag-quiz">Quiz</span>
-          </a>
-        </li>
-      </ul>
+
     </div>
 
-    <!-- English Proficiency Course - 3 (EPC 3) -->
-    <div class="subject-card">
-      <div class="card-head">
-        <div class="icon-box bg-english">✍️</div>
-        <h2>English Proficiency Course - 3 (EPC 3)</h2>
+  </main>
+
+  <!-- Footer Setup -->
+  <footer id="about">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-info">
+          <h3>BS Nursing 5th Semester Portal</h3>
+          <p>Designed to help nursing students easily access academic resources, key lecture summaries, and self-assessment tools.</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="#subjects">Subjects</a></li>
+          <li><a href="#">Back to Top ↑</a></li>
+        </ul>
       </div>
-      <ul class="resource-list">
-        <li class="resource-item">
-          <a href="./english/notes.md">
-            <span class="link-info"><span class="link-icon">📖</span> Lecture Notes</span>
-            <span class="tag tag-note">Notes</span>
-          </a>
-        </li>
-        <li class="resource-item">
-          <a href="https://forms.google.com" target="_blank">
-            <span class="link-info"><span class="link-icon">📝</span> Practice Quiz</span>
-            <span class="tag tag-quiz">Quiz</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <!-- PERLS 05 -->
-    <div class="subject-card">
-      <div class="card-head">
-        <div class="icon-box bg-perls">🌟</div>
-        <h2>PERLS 05</h2>
+      
+      <div class="footer-bottom">
+        <span>© 2026 Academic Portal • Prepared by Mudassir Khan</span>
+        <span>BS Nursing (Semester V)</span>
       </div>
-      <ul class="resource-list">
-        <li class="resource-item">
-          <a href="./perls/notes.md">
-            <span class="link-info"><span class="link-icon">📖</span> Lecture Notes</span>
-            <span class="tag tag-note">Notes</span>
-          </a>
-        </li>
-        <li class="resource-item">
-          <a href="https://forms.google.com" target="_blank">
-            <span class="link-info"><span class="link-icon">📝</span> Practice Quiz</span>
-            <span class="tag tag-quiz">Quiz</span>
-          </a>
-        </li>
-      </ul>
     </div>
-
-    <div class="security-notice">
-      <strong>🔒 Student Academic Portal</strong>
-      BS Nursing Semester IV Portal • Prepared by Mudassir Khan.
-    </div>
-
-    <footer>
-      © 2026 BS Nursing Semester IV Portal • Maintained by Mudassir Khan
-    </footer>
-
-  </div>
+  </footer>
 
 </body>
 </html>
