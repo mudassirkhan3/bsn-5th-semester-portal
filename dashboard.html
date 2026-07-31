@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Progress Dashboard | BSN Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background: #f8fafc; color: #0f172a; padding: 24px 16px; }
+    .container { max-width: 800px; margin: 0 auto; }
+    .header { background: #0369a1; color: white; border-radius: 20px; padding: 28px; margin-bottom: 24px; }
+    .progress-bar-bg { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-top: 14px; overflow: hidden; }
+    .progress-fill { background: #10b981; height: 100%; width: 0%; transition: width 0.4s ease; }
+    .card { background: white; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0; margin-bottom: 14px; }
+    .checklist { list-style: none; margin-top: 12px; }
+    .checklist li { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
+    .logout-btn { background: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; float: right; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <button class="logout-btn" onclick="logout()">Logout</button>
+    <h1 id="welcomeTitle">Welcome, Student</h1>
+    <p id="subInfo">BSN Portal • Track Your Learning Progress</p>
+    
+    <div style="margin-top: 16px;">
+      <span style="font-size: 0.85rem; font-weight: 700;">Overall Progress: <span id="progressPercent">0%</span></span>
+      <div class="progress-bar-bg">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📖 Course Notes Checklist</h3>
+    <ul class="checklist">
+      <li><input type="checkbox" onchange="updateProgress()" class="chk"> Pediatric Health Notes</li>
+      <li><input type="checkbox" onchange="updateProgress()" class="chk"> Reproductive Health Notes</li>
+      <li><input type="checkbox" onchange="updateProgress()" class="chk"> English Notes</li>
+      <li><input type="checkbox" onchange="updateProgress()" class="chk"> PERLS Notes</li>
+      <li><input type="checkbox" onchange="updateProgress()" class="chk"> Nursing Ethics Notes</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  const currentEmail = localStorage.getItem('bsn_current_user');
+  if (!currentEmail) {
+    window.location.href = 'login.html';
+  }
+
+  const userData = JSON.parse(localStorage.getItem('bsn_user_' + currentEmail) || '{}');
+  if (userData.name) {
+    document.getElementById('welcomeTitle').textContent = `Welcome, ${userData.name}!`;
+    document.getElementById('subInfo').textContent = `${userData.semester} • Track Your Learning Progress`;
+  }
+
+  function updateProgress() {
+    const checkboxes = document.querySelectorAll('.chk');
+    let checkedCount = 0;
+    checkboxes.forEach(c => { if(c.checked) checkedCount++; });
+
+    const total = checkboxes.length;
+    const percentage = Math.round((checkedCount / total) * 100);
+
+    document.getElementById('progressPercent').textContent = percentage + '%';
+    document.getElementById('progressFill').style.width = percentage + '%';
+  }
+
+  function logout() {
+    localStorage.removeItem('bsn_current_user');
+    window.location.href = 'login.html';
+  }
+</script>
+
+</body>
+</html>
