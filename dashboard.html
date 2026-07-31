@@ -83,11 +83,11 @@
     <!-- Welcome Card -->
     <div class="welcome-card">
       <div class="welcome-text">
-        <span class="badge">Academic Overview</span>
+        <span class="badge">Semester 4 Portal</span>
         <h1 id="welcomeGreeting">Welcome Back! 👋</h1>
-        <p>Keep tracking your daily nursing modules and prep for upcoming vivas.</p>
+        <p>Track your study notes, complete subject modules, and prepare for practical vivas.</p>
       </div>
-      <button class="btn-action" style="background: white; color: #0284c7; padding: 12px 20px; font-size: 0.9rem;" onclick="alert('Downloading latest syllabus...')">📥 Syllabus PDF</button>
+      <button class="btn-action" style="background: white; color: #0284c7; padding: 12px 20px; font-size: 0.9rem;" onclick="alert('Downloading Semester 4 Syllabus...')">📥 Syllabus PDF</button>
     </div>
 
     <!-- Stats Grid -->
@@ -101,94 +101,107 @@
       </div>
 
       <div class="stat-card">
-        <div class="stat-title">Completed Modules</div>
-        <div class="stat-value" id="completedCount">0 / 4</div>
+        <div class="stat-title">Completed Topics</div>
+        <div class="stat-value" id="completedCount">0 / 5</div>
       </div>
 
       <div class="stat-card">
-        <div class="stat-title">Study Time</div>
-        <div class="stat-value">12.5 hrs</div>
+        <div class="stat-title">Active Subjects</div>
+        <div class="stat-value">5 Courses</div>
       </div>
 
       <div class="stat-card">
-        <div class="stat-title">Quiz Score Avg</div>
-        <div class="stat-value" style="color: #10b981;">92%</div>
+        <div class="stat-title">Viva Readiness</div>
+        <div class="stat-value" style="color: #10b981;" id="vivaStatus">Pending</div>
       </div>
     </div>
 
     <!-- Main Grid -->
     <div class="main-grid">
       
-      <!-- Left Column: Active Subjects -->
+      <!-- Left Column: Your Specific Subjects -->
       <div>
         <div class="section-title">
-          <span>📚 Active Subjects</span>
+          <span>📚 Semester 4 Subjects</span>
         </div>
 
         <div class="subjects-grid">
           
           <!-- Subject 1 -->
           <div class="subject-card">
-            <div class="subject-icon">💊</div>
-            <div class="subject-name">Adult Health Nursing</div>
-            <div class="subject-meta">Unit 1 to 6 • Semester 4</div>
-            <button class="btn-action" onclick="alert('Opening Adult Health Nursing Notes...')">View Notes & Vivas →</button>
+            <div class="subject-icon">👶</div>
+            <div class="subject-name">Pediatric Health Nursing</div>
+            <div class="subject-meta">Growth & Development • Child Care • Vivas</div>
+            <button class="btn-action" onclick="alert('Opening Pediatric Health Notes...')">View Notes & Vivas →</button>
           </div>
 
           <!-- Subject 2 -->
           <div class="subject-card">
-            <div class="subject-icon">🧬</div>
-            <div class="subject-name">Pathophysiology</div>
-            <div class="subject-meta">Disease Mechanisms & Case Studies</div>
-            <button class="btn-action" onclick="alert('Opening Pathophysiology Modules...')">View Notes & Vivas →</button>
+            <div class="subject-icon">🤱</div>
+            <div class="subject-name">Reproductive Health</div>
+            <div class="subject-meta">Maternal Care • OB/GYN Concepts • Clinicals</div>
+            <button class="btn-action" onclick="alert('Opening Reproductive Health Notes...')">View Notes & Vivas →</button>
           </div>
 
           <!-- Subject 3 -->
           <div class="subject-card">
-            <div class="subject-icon">🧪</div>
-            <div class="subject-name">Pharmacology II</div>
-            <div class="subject-meta">Drug Classifications & Dosages</div>
-            <button class="btn-action" onclick="alert('Opening Pharmacology Modules...')">View Notes & Vivas →</button>
+            <div class="subject-icon">📖</div>
+            <div class="subject-name">English IV</div>
+            <div class="subject-meta">Academic Writing • Nursing Presentations</div>
+            <button class="btn-action" onclick="alert('Opening English IV Notes...')">View Notes & Vivas →</button>
           </div>
 
           <!-- Subject 4 -->
           <div class="subject-card">
-            <div class="subject-icon">📊</div>
-            <div class="subject-name">Nursing Research</div>
-            <div class="subject-meta">Methodology & Evidence-Based Practice</div>
-            <button class="btn-action" onclick="alert('Opening Nursing Research Modules...')">View Notes & Vivas →</button>
+            <div class="subject-icon">⚙️</div>
+            <div class="subject-name">PERLS</div>
+            <div class="subject-meta">Professional Ethics, Role & Leadership Skills</div>
+            <button class="btn-action" onclick="alert('Opening PERLS Notes...')">View Notes & Vivas →</button>
+          </div>
+
+          <!-- Subject 5 -->
+          <div class="subject-card">
+            <div class="subject-icon">⚖️</div>
+            <div class="subject-name">Nursing Ethics</div>
+            <div class="subject-meta">Code of Conduct • Legal & Moral Aspects</div>
+            <button class="btn-action" onclick="alert('Opening Nursing Ethics Notes...')">View Notes & Vivas →</button>
           </div>
 
         </div>
       </div>
 
-      <!-- Right Column: Active Progress Checklist -->
+      <!-- Right Column: Interactive Subject Checklist -->
       <div>
         <div class="section-title">
           <span>✅ Viva & Study Tracker</span>
         </div>
 
         <div class="checklist-card">
-          <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 16px;">Check off completed topics to automatically update your progress bar:</p>
+          <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 16px;">Check off completed subjects to update your overall semester progress:</p>
 
           <div class="task-item">
             <input type="checkbox" id="task1" onchange="updateProgress()">
-            <label class="task-label" for="task1">Adult Health Nursing Viva Prep</label>
+            <label class="task-label" for="task1">Pediatric Health Nursing Notes</label>
           </div>
 
           <div class="task-item">
             <input type="checkbox" id="task2" onchange="updateProgress()">
-            <label class="task-label" for="task2">Pathophysiology Diagrams</label>
+            <label class="task-label" for="task2">Reproductive Health Notes</label>
           </div>
 
           <div class="task-item">
             <input type="checkbox" id="task3" onchange="updateProgress()">
-            <label class="task-label" for="task3">Pharmacology Dosage Calculations</label>
+            <label class="task-label" for="task3">English IV Assignments</label>
           </div>
 
           <div class="task-item">
             <input type="checkbox" id="task4" onchange="updateProgress()">
-            <label class="task-label" for="task4">Research Proposal Draft</label>
+            <label class="task-label" for="task4">PERLS Modules</label>
+          </div>
+
+          <div class="task-item">
+            <input type="checkbox" id="task5" onchange="updateProgress()">
+            <label class="task-label" for="task5">Nursing Ethics Case Studies</label>
           </div>
         </div>
       </div>
@@ -202,7 +215,6 @@
       const currentEmail = localStorage.getItem('bsn_current_user');
       
       if (!currentEmail) {
-        // Redirect to login if user is not logged in
         window.location.href = 'login.html';
         return;
       }
@@ -212,14 +224,13 @@
       if (userData) {
         document.getElementById('navUserName').innerText = userData.name || 'Student';
         document.getElementById('welcomeGreeting').innerText = `Welcome Back, ${userData.name || 'Student'}! 👋`;
-        document.getElementById('navUserSem').innerText = userData.semester || 'BSN Student';
+        document.getElementById('navUserSem').innerText = userData.semester || 'BSN Semester 4';
         
-        // Avatar initials
         const initial = userData.name ? userData.name.charAt(0).toUpperCase() : 'S';
         document.getElementById('avatarCircle').innerText = initial;
       }
 
-      // Restore checklist state if saved
+      // Restore checklist state
       const savedTasks = JSON.parse(localStorage.getItem('bsn_tasks_' + currentEmail)) || [];
       savedTasks.forEach((checked, index) => {
         const checkbox = document.getElementById(`task${index + 1}`);
@@ -247,6 +258,19 @@
       document.getElementById('progressPercentage').innerText = `${percentage}%`;
       document.getElementById('globalProgressBar').style.width = `${percentage}%`;
       document.getElementById('completedCount').innerText = `${checkedCount} / ${total}`;
+
+      // Update Viva Readiness status
+      const statusElement = document.getElementById('vivaStatus');
+      if (percentage === 100) {
+        statusElement.innerText = 'Ready! 🎉';
+        statusElement.style.color = '#10b981';
+      } else if (percentage > 0) {
+        statusElement.innerText = 'In Progress ⏳';
+        statusElement.style.color = '#0284c7';
+      } else {
+        statusElement.innerText = 'Pending';
+        statusElement.style.color = '#ef4444';
+      }
 
       // Save state to LocalStorage
       const currentEmail = localStorage.getItem('bsn_current_user');
