@@ -901,22 +901,6 @@
       parentCard.classList.toggle('active');
     }
   </script>
-  <script>
-  (function securePortal() {
-    const PASSCODE = "BSN2026"; // Set your secret password here
-    let authenticated = sessionStorage.getItem("bsn_auth");
-
-    if (authenticated !== "true") {
-      let input = prompt("🔐 Enter Access Code to View BSN Portal:");
-      if (input === PASSCODE) {
-        sessionStorage.setItem("bsn_auth", "true");
-      } else {
-        alert("Incorrect Code. Access Denied.");
-        document.body.innerHTML = "<h2 style='text-align:center; margin-top:50px;'>🔒 Access Restricted. Please refresh and enter the correct password.</h2>";
-      }
-    }
-  })();
-</script>
 
 </body>
 </html>
