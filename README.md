@@ -1,1 +1,1 @@
-# bsn-5th-semester-portal
+# Bsn-5th-semester-portal
