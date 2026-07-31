@@ -199,7 +199,7 @@
       margin-top: 4px;
     }
 
-    /* 3. SEPARATE PAYMENT & ACCESS CODE MENU */
+    /* 3. ACCESS CODE BANNER */
     .access-banner {
       background: #ffffff;
       border: 2px dashed #0284c7;
@@ -405,7 +405,7 @@
     .tag-lock { background: #fef3c7; color: #b45309; }
     .tag-free { background: #dcfce7; color: #15803d; }
 
-    /* 5. PAYMENT MODAL (POPUP) */
+    /* 5. PAYMENT MODAL */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -594,13 +594,13 @@
             <ul class="resource-list">
               <li class="resource-item">
                 <a href="javascript:void(0)" onclick="openPaywall('Pediatric Health Nursing - I Notes')">
-                  <span>🔒 Pediatric Lecture Notes</span>
+                  <span class="res-title">🔒 Pediatric Lecture Notes</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
               <li class="resource-item">
                 <a href="javascript:void(0)" onclick="openPaywall('Pediatric Health Nursing - I Quiz')">
-                  <span>🔒 Practice Quiz</span>
+                  <span class="res-title">🔒 Practice Quiz</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -626,7 +626,7 @@
             <ul class="resource-list">
               <li class="resource-item">
                 <a href="javascript:void(0)" onclick="openPaywall('Pediatric Clinical Logbook')">
-                  <span>🔒 Clinical Objectives & Logbook</span>
+                  <span class="res-title">🔒 Clinical Objectives & Logbook</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -652,13 +652,13 @@
             <ul class="resource-list">
               <li class="resource-item">
                 <a href="javascript:void(0)" onclick="openPaywall('Community Health Nursing - I Notes')">
-                  <span>🔒 Lecture Notes</span>
+                  <span class="res-title">🔒 Lecture Notes</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
               <li class="resource-item">
                 <a href="javascript:void(0)" onclick="openPaywall('Community Health Nursing - I Quiz')">
-                  <span>🔒 Practice Quiz</span>
+                  <span class="res-title">🔒 Practice Quiz</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -684,7 +684,7 @@
             <ul class="resource-list">
               <li class="resource-item">
                 <a href="javascript:void(0)" onclick="openPaywall('Community Field Visit Logbook')">
-                  <span>🔒 Community Field Visit Logbook</span>
+                  <span class="res-title">🔒 Community Field Visit Logbook</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -710,7 +710,7 @@
             <ul class="resource-list">
               <li class="resource-item">
                 <a href="javascript:void(0)" onclick="openPaywall('Reproductive Health Notes')">
-                  <span>🔒 Lecture Notes</span>
+                  <span class="res-title">🔒 Lecture Notes</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -736,7 +736,7 @@
             <ul class="resource-list">
               <li class="resource-item">
                 <a href="javascript:void(0)" onclick="openPaywall('Reproductive Health Clinical Checklist')">
-                  <span>🔒 Clinical Procedure Checklist</span>
+                  <span class="res-title">🔒 Clinical Procedure Checklist</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -762,7 +762,7 @@
             <ul class="resource-list">
               <li class="resource-item">
                 <a href="javascript:void(0)" onclick="openPaywall('Teaching & Learning Notes')">
-                  <span>🔒 Lecture Notes</span>
+                  <span class="res-title">🔒 Lecture Notes</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -814,7 +814,7 @@
             <ul class="resource-list">
               <li class="resource-item">
                 <a href="javascript:void(0)" onclick="openPaywall('English Proficiency Course Notes')">
-                  <span>🔒 Lecture Notes</span>
+                  <span class="res-title">🔒 Lecture Notes</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -840,7 +840,7 @@
             <ul class="resource-list">
               <li class="resource-item">
                 <a href="javascript:void(0)" onclick="openPaywall('PERLS 05 Notes')">
-                  <span>🔒 Module Overview & Notes</span>
+                  <span class="res-title">🔒 Module Overview & Notes</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -866,7 +866,7 @@
             <ul class="resource-list">
               <li class="resource-item">
                 <a href="javascript:void(0)" onclick="openPaywall('COMPASS 05 Practical Log')">
-                  <span>🔒 Practical Assessment & Logbook</span>
+                  <span class="res-title">🔒 Practical Assessment & Logbook</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -925,10 +925,7 @@
 
   <!-- JAVASCRIPT LOGIC -->
   <script>
-    // ⚠️ Put your full WhatsApp number with country code here (e.g. 923241064487)
     const MY_WHATSAPP_NUMBER = "923241064487"; 
-    
-    // 🔑 Set your secret access code here
     const SECRET_PASSCODE = "BSN2026VIP"; 
 
     function toggleCard(headerElement) {
@@ -936,7 +933,7 @@
       parentCard.classList.toggle('active');
     }
 
-    // Function to check access code entered in the top banner input field
+    // Function to check access code entered in top banner
     function verifyCodeInput() {
       const code = document.getElementById("passcodeInput").value.trim();
       if (!code) {
@@ -947,16 +944,16 @@
       if (code === SECRET_PASSCODE) {
         localStorage.setItem("bsn_unlocked", "true");
         alert("🎉 Code Accepted! All BSN resources are now unlocked.");
-        location.reload();
+        applyUnlockedState();
       } else {
         alert("❌ Invalid Access Code. Please check the code or make payment via JazzCash.");
       }
     }
 
     function openPaywall(subjectName) {
-      // Check if user already unlocked
+      // If user is already unlocked, show access message
       if (localStorage.getItem("bsn_unlocked") === "true") {
-        alert("✅ Access Granted! Opening " + subjectName + "...");
+        alert(`✅ Access Granted! Opening ${subjectName}...`);
         return;
       }
 
@@ -973,25 +970,37 @@
       document.getElementById("paymentModal").style.display = "none";
     }
 
-    // Auto-check on load if user is already unlocked
-    window.onload = function() {
+    // Function to change all UI icons and badges once unlocked
+    function applyUnlockedState() {
       if (localStorage.getItem("bsn_unlocked") === "true") {
+        // Change Lock Tags to Unlocked
         const lockBadges = document.querySelectorAll(".tag-lock");
         lockBadges.forEach(badge => {
           badge.textContent = "Unlocked";
           badge.style.background = "#dcfce7";
           badge.style.color = "#15803d";
         });
+
+        // Remove 🔒 lock icons from resource titles
+        const resourceTitles = document.querySelectorAll(".res-title");
+        resourceTitles.forEach(title => {
+          title.textContent = title.textContent.replace("🔒 ", "📖 ");
+        });
         
-        // Update input area UI
+        // Update Access Code Banner
         const inputGroup = document.querySelector(".access-banner");
         if(inputGroup) {
           inputGroup.innerHTML = `
-            <div style="color: #15803d; font-weight: 700; display: flex; align-items: center; gap: 8px;">
-              ✅ You have VIP Unlocked Access to all BSN Portal Materials.
+            <div style="color: #15803d; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+              ✅ You have active VIP Access to all BSN Portal Materials.
             </div>`;
         }
       }
+    }
+
+    // Automatically apply unlocked UI on page load
+    window.onload = function() {
+      applyUnlockedState();
     };
   </script>
 
