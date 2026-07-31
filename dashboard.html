@@ -3,78 +3,264 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Progress Dashboard | BSN Portal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <title>Student Dashboard | BSN Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background: #f8fafc; color: #0f172a; padding: 24px 16px; }
-    .container { max-width: 800px; margin: 0 auto; }
-    .header { background: #0369a1; color: white; border-radius: 20px; padding: 28px; margin-bottom: 24px; }
-    .progress-bar-bg { background: rgba(255,255,255,0.2); height: 12px; border-radius: 6px; margin-top: 14px; overflow: hidden; }
-    .progress-fill { background: #10b981; height: 100%; width: 0%; transition: width 0.4s ease; }
-    .card { background: white; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0; margin-bottom: 14px; }
-    .checklist { list-style: none; margin-top: 12px; }
-    .checklist li { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
-    .logout-btn { background: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; float: right; }
+    body { background: #f8fafc; color: #0f172a; min-height: 100vh; display: flex; flex-direction: column; }
+    
+    /* Top Navigation */
+    .navbar { background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.2rem; color: #0284c7; text-decoration: none; }
+    .user-profile { display: flex; align-items: center; gap: 12px; }
+    .user-avatar { width: 38px; height: 38px; background: #e0f2fe; color: #0284c7; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+    .logout-btn { background: #f1f5f9; color: #64748b; border: none; padding: 8px 14px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
+    .logout-btn:hover { background: #fee2e2; color: #ef4444; }
+
+    /* Dashboard Layout */
+    .container { max-width: 1200px; margin: 0 auto; width: 100%; padding: 32px 24px; }
+    
+    /* Welcome Header */
+    .welcome-card { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: white; border-radius: 20px; padding: 32px; margin-bottom: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.3); }
+    .welcome-text h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 6px; }
+    .welcome-text p { opacity: 0.9; font-size: 0.95rem; }
+    .badge { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Stats Grid */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 32px; }
+    .stat-card { background: white; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .stat-title { font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 8px; }
+    .stat-value { font-size: 1.8rem; font-weight: 800; color: #0f172a; }
+    
+    /* Progress Bar Widget */
+    .progress-container { background: #e2e8f0; border-radius: 10px; height: 10px; overflow: hidden; margin-top: 12px; }
+    .progress-fill { background: #0284c7; height: 100%; width: 0%; transition: width 0.4s ease; }
+
+    /* Main Grid: Subjects & Checklist */
+    .main-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; }
+    @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
+
+    .section-title { font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+
+    /* Subject Cards */
+    .subjects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .subject-card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; }
+    .subject-card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .subject-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .subject-name { font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; }
+    .subject-meta { font-size: 0.8rem; color: #64748b; margin-bottom: 16px; }
+
+    /* Interactive Checklist Sidebar */
+    .checklist-card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 24px; }
+    .task-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f1f5f9; }
+    .task-item:last-child { border-bottom: none; }
+    .task-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: #0284c7; cursor: pointer; }
+    .task-label { font-size: 0.9rem; font-weight: 600; color: #334155; cursor: pointer; }
+
+    /* Action Buttons */
+    .btn-action { display: inline-flex; align-items: center; gap: 6px; background: #e0f2fe; color: #0284c7; padding: 8px 14px; border-radius: 8px; font-weight: 700; font-size: 0.82rem; text-decoration: none; border: none; cursor: pointer; }
+    .btn-action:hover { background: #0284c7; color: white; }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="header">
-    <button class="logout-btn" onclick="logout()">Logout</button>
-    <h1 id="welcomeTitle">Welcome, Student</h1>
-    <p id="subInfo">BSN Portal • Track Your Learning Progress</p>
-    
-    <div style="margin-top: 16px;">
-      <span style="font-size: 0.85rem; font-weight: 700;">Overall Progress: <span id="progressPercent">0%</span></span>
-      <div class="progress-bar-bg">
-        <div id="progressFill" class="progress-fill"></div>
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <a href="#" class="brand">🩺 BSN Portal</a>
+    <div class="user-profile">
+      <div class="user-avatar" id="avatarCircle">U</div>
+      <div>
+        <div style="font-weight: 700; font-size: 0.88rem;" id="navUserName">Student</div>
+        <div style="font-size: 0.75rem; color: #64748b;" id="navUserSem">BSN Semester 4</div>
       </div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container">
+    
+    <!-- Welcome Card -->
+    <div class="welcome-card">
+      <div class="welcome-text">
+        <span class="badge">Academic Overview</span>
+        <h1 id="welcomeGreeting">Welcome Back! 👋</h1>
+        <p>Keep tracking your daily nursing modules and prep for upcoming vivas.</p>
+      </div>
+      <button class="btn-action" style="background: white; color: #0284c7; padding: 12px 20px; font-size: 0.9rem;" onclick="alert('Downloading latest syllabus...')">📥 Syllabus PDF</button>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-title">Overall Progress</div>
+        <div class="stat-value" id="progressPercentage">0%</div>
+        <div class="progress-container">
+          <div class="progress-fill" id="globalProgressBar"></div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-title">Completed Modules</div>
+        <div class="stat-value" id="completedCount">0 / 4</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-title">Study Time</div>
+        <div class="stat-value">12.5 hrs</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-title">Quiz Score Avg</div>
+        <div class="stat-value" style="color: #10b981;">92%</div>
+      </div>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="main-grid">
+      
+      <!-- Left Column: Active Subjects -->
+      <div>
+        <div class="section-title">
+          <span>📚 Active Subjects</span>
+        </div>
+
+        <div class="subjects-grid">
+          
+          <!-- Subject 1 -->
+          <div class="subject-card">
+            <div class="subject-icon">💊</div>
+            <div class="subject-name">Adult Health Nursing</div>
+            <div class="subject-meta">Unit 1 to 6 • Semester 4</div>
+            <button class="btn-action" onclick="alert('Opening Adult Health Nursing Notes...')">View Notes & Vivas →</button>
+          </div>
+
+          <!-- Subject 2 -->
+          <div class="subject-card">
+            <div class="subject-icon">🧬</div>
+            <div class="subject-name">Pathophysiology</div>
+            <div class="subject-meta">Disease Mechanisms & Case Studies</div>
+            <button class="btn-action" onclick="alert('Opening Pathophysiology Modules...')">View Notes & Vivas →</button>
+          </div>
+
+          <!-- Subject 3 -->
+          <div class="subject-card">
+            <div class="subject-icon">🧪</div>
+            <div class="subject-name">Pharmacology II</div>
+            <div class="subject-meta">Drug Classifications & Dosages</div>
+            <button class="btn-action" onclick="alert('Opening Pharmacology Modules...')">View Notes & Vivas →</button>
+          </div>
+
+          <!-- Subject 4 -->
+          <div class="subject-card">
+            <div class="subject-icon">📊</div>
+            <div class="subject-name">Nursing Research</div>
+            <div class="subject-meta">Methodology & Evidence-Based Practice</div>
+            <button class="btn-action" onclick="alert('Opening Nursing Research Modules...')">View Notes & Vivas →</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right Column: Active Progress Checklist -->
+      <div>
+        <div class="section-title">
+          <span>✅ Viva & Study Tracker</span>
+        </div>
+
+        <div class="checklist-card">
+          <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 16px;">Check off completed topics to automatically update your progress bar:</p>
+
+          <div class="task-item">
+            <input type="checkbox" id="task1" onchange="updateProgress()">
+            <label class="task-label" for="task1">Adult Health Nursing Viva Prep</label>
+          </div>
+
+          <div class="task-item">
+            <input type="checkbox" id="task2" onchange="updateProgress()">
+            <label class="task-label" for="task2">Pathophysiology Diagrams</label>
+          </div>
+
+          <div class="task-item">
+            <input type="checkbox" id="task3" onchange="updateProgress()">
+            <label class="task-label" for="task3">Pharmacology Dosage Calculations</label>
+          </div>
+
+          <div class="task-item">
+            <input type="checkbox" id="task4" onchange="updateProgress()">
+            <label class="task-label" for="task4">Research Proposal Draft</label>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <div class="card">
-    <h3>📖 Course Notes Checklist</h3>
-    <ul class="checklist">
-      <li><input type="checkbox" onchange="updateProgress()" class="chk"> Pediatric Health Notes</li>
-      <li><input type="checkbox" onchange="updateProgress()" class="chk"> Reproductive Health Notes</li>
-      <li><input type="checkbox" onchange="updateProgress()" class="chk"> English Notes</li>
-      <li><input type="checkbox" onchange="updateProgress()" class="chk"> PERLS Notes</li>
-      <li><input type="checkbox" onchange="updateProgress()" class="chk"> Nursing Ethics Notes</li>
-    </ul>
-  </div>
-</div>
+  <script>
+    // Load student data from LocalStorage
+    document.addEventListener("DOMContentLoaded", () => {
+      const currentEmail = localStorage.getItem('bsn_current_user');
+      
+      if (!currentEmail) {
+        // Redirect to login if user is not logged in
+        window.location.href = 'login.html';
+        return;
+      }
 
-<script>
-  const currentEmail = localStorage.getItem('bsn_current_user');
-  if (!currentEmail) {
-    window.location.href = 'login.html';
-  }
+      const userData = JSON.parse(localStorage.getItem('bsn_user_' + currentEmail));
+      
+      if (userData) {
+        document.getElementById('navUserName').innerText = userData.name || 'Student';
+        document.getElementById('welcomeGreeting').innerText = `Welcome Back, ${userData.name || 'Student'}! 👋`;
+        document.getElementById('navUserSem').innerText = userData.semester || 'BSN Student';
+        
+        // Avatar initials
+        const initial = userData.name ? userData.name.charAt(0).toUpperCase() : 'S';
+        document.getElementById('avatarCircle').innerText = initial;
+      }
 
-  const userData = JSON.parse(localStorage.getItem('bsn_user_' + currentEmail) || '{}');
-  if (userData.name) {
-    document.getElementById('welcomeTitle').textContent = `Welcome, ${userData.name}!`;
-    document.getElementById('subInfo').textContent = `${userData.semester} • Track Your Learning Progress`;
-  }
+      // Restore checklist state if saved
+      const savedTasks = JSON.parse(localStorage.getItem('bsn_tasks_' + currentEmail)) || [];
+      savedTasks.forEach((checked, index) => {
+        const checkbox = document.getElementById(`task${index + 1}`);
+        if (checkbox) checkbox.checked = checked;
+      });
 
-  function updateProgress() {
-    const checkboxes = document.querySelectorAll('.chk');
-    let checkedCount = 0;
-    checkboxes.forEach(c => { if(c.checked) checkedCount++; });
+      updateProgress();
+    });
 
-    const total = checkboxes.length;
-    const percentage = Math.round((checkedCount / total) * 100);
+    // Dynamic Progress Calculator
+    function updateProgress() {
+      const checkboxes = document.querySelectorAll('.task-item input[type="checkbox"]');
+      let checkedCount = 0;
+      let taskStates = [];
 
-    document.getElementById('progressPercent').textContent = percentage + '%';
-    document.getElementById('progressFill').style.width = percentage + '%';
-  }
+      checkboxes.forEach(cb => {
+        if (cb.checked) checkedCount++;
+        taskStates.push(cb.checked);
+      });
 
-  function logout() {
-    localStorage.removeItem('bsn_current_user');
-    window.location.href = 'login.html';
-  }
-</script>
+      const total = checkboxes.length;
+      const percentage = Math.round((checkedCount / total) * 100);
+
+      // Update UI elements
+      document.getElementById('progressPercentage').innerText = `${percentage}%`;
+      document.getElementById('globalProgressBar').style.width = `${percentage}%`;
+      document.getElementById('completedCount').innerText = `${checkedCount} / ${total}`;
+
+      // Save state to LocalStorage
+      const currentEmail = localStorage.getItem('bsn_current_user');
+      if (currentEmail) {
+        localStorage.setItem('bsn_tasks_' + currentEmail, JSON.stringify(taskStates));
+      }
+    }
+
+    // Logout Function
+    function logout() {
+      localStorage.removeItem('bsn_current_user');
+      window.location.href = 'login.html';
+    }
+  </script>
 
 </body>
 </html>
