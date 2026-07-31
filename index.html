@@ -15,7 +15,6 @@
       --primary: #0284c7;
       --primary-dark: #0369a1;
       --accent: #0d9488;
-      --clinical: #059669;
       --bg-main: #f8fafc;
       --card-bg: #ffffff;
       --text-dark: #0f172a;
@@ -43,9 +42,7 @@
       overflow-x: hidden;
     }
 
-    /* --------------------------------------
-       1. ANIMATED GLASS NAVBAR
-    -------------------------------------- */
+    /* 1. NAVBAR */
     .navbar {
       position: sticky;
       top: 0;
@@ -124,9 +121,7 @@
       50% { opacity: 0.3; }
     }
 
-    /* --------------------------------------
-       2. HERO HEADER & STATS SUMMARY
-    -------------------------------------- */
+    /* 2. HERO & STATS */
     .main-wrapper {
       flex: 1;
       width: 100%;
@@ -146,35 +141,6 @@
       overflow: hidden;
     }
 
-    .hero-card::before {
-      content: '';
-      position: absolute;
-      top: -40px;
-      right: -40px;
-      width: 220px;
-      height: 220px;
-      background: rgba(13, 148, 136, 0.35);
-      filter: blur(50px);
-      border-radius: 50%;
-      animation: floatOrb 6s ease-in-out infinite alternate;
-    }
-
-    @keyframes floatOrb {
-      0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(20px) scale(1.1); }
-    }
-
-    .hero-card::after {
-      content: '🏥';
-      position: absolute;
-      right: 15px;
-      bottom: -15px;
-      font-size: 8rem;
-      opacity: 0.12;
-      transform: rotate(-10deg);
-      pointer-events: none;
-    }
-
     .hero-tag {
       background: rgba(255, 255, 255, 0.18);
       backdrop-filter: blur(8px);
@@ -185,25 +151,18 @@
       border-radius: 20px;
       display: inline-block;
       margin-bottom: 14px;
-      letter-spacing: 0.5px;
       text-transform: uppercase;
     }
 
     .hero-card h1 {
       font-size: 1.9rem;
       font-weight: 800;
-      line-height: 1.25;
       margin-bottom: 10px;
-      position: relative;
-      z-index: 1;
     }
 
     .hero-card p {
       color: #bae6fd;
       font-size: 0.95rem;
-      line-height: 1.5;
-      position: relative;
-      z-index: 1;
     }
 
     .author-bar {
@@ -212,11 +171,8 @@
       border-top: 1px solid rgba(255, 255, 255, 0.15);
       font-size: 0.85rem;
       color: #e0f2fe;
-      position: relative;
-      z-index: 1;
     }
 
-    /* Credit Hours Summary Banner */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -252,13 +208,10 @@
       font-weight: 800;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.8px;
       margin-bottom: 16px;
     }
 
-    /* --------------------------------------
-       3. INTERACTIVE SUBJECT ACCORDION CARDS
-    -------------------------------------- */
+    /* 3. SUBJECT CARDS */
     .subjects-grid {
       display: flex;
       flex-direction: column;
@@ -274,12 +227,6 @@
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .subject-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-hover);
-      border-color: rgba(2, 132, 199, 0.3);
-    }
-
     .card-head {
       display: flex;
       align-items: center;
@@ -287,12 +234,9 @@
       padding: 20px 24px;
       cursor: pointer;
       user-select: none;
-      transition: background 0.2s ease;
     }
 
-    .card-head:hover {
-      background: #f8fafc;
-    }
+    .card-head:hover { background: #f8fafc; }
 
     .head-left {
       display: flex;
@@ -301,19 +245,10 @@
     }
 
     .icon-box {
-      width: 48px;
-      height: 48px;
+      width: 48px; height: 48px;
       border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      flex-shrink: 0;
-      transition: transform 0.3s ease;
-    }
-
-    .subject-card:hover .icon-box {
-      transform: scale(1.1) rotate(5deg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; flex-shrink: 0;
     }
 
     .bg-peds { background: #f0fdf4; }
@@ -344,25 +279,19 @@
     .ch-clinical { background: #dcfce7; color: #15803d; }
 
     .chevron {
-      width: 28px;
-      height: 28px;
+      width: 28px; height: 28px;
       border-radius: 50%;
       background: #f1f5f9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      transition: transform 0.3s ease, background 0.3s ease;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; color: var(--text-muted);
+      transition: transform 0.3s ease;
     }
 
     .subject-card.active .chevron {
       transform: rotate(180deg);
-      background: #e0f2fe;
-      color: var(--primary-dark);
+      background: #e0f2fe; color: var(--primary-dark);
     }
 
-    /* Expandable Content */
     .card-body {
       max-height: 0;
       overflow: hidden;
@@ -375,9 +304,8 @@
     }
 
     .card-content {
-      padding: 0 24px 20px 24px;
+      padding: 16px 24px 20px 24px;
       border-top: 1px dashed var(--border);
-      padding-top: 16px;
     }
 
     .resource-list {
@@ -400,6 +328,7 @@
       font-size: 0.88rem;
       font-weight: 600;
       transition: all 0.2s ease;
+      cursor: pointer;
     }
 
     .resource-item a:hover {
@@ -417,90 +346,117 @@
       text-transform: uppercase;
     }
 
-    .tag-note { background: #e0f2fe; color: #0369a1; }
-    .tag-quiz { background: #fef3c7; color: #b45309; }
-    .tag-log { background: #dcfce7; color: #15803d; }
+    .tag-lock { background: #fef3c7; color: #b45309; }
+    .tag-free { background: #dcfce7; color: #15803d; }
 
-    /* --------------------------------------
-       4. IMPRESSIVE FOOTER
-    -------------------------------------- */
+    /* 4. PAYMENT MODAL (POPUP) */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 32px 24px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      animation: modalSlideUp 0.3s ease-out;
+    }
+
+    @keyframes modalSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 14px; right: 18px;
+      background: none; border: none;
+      font-size: 1.5rem; color: #64748b; cursor: pointer;
+    }
+
+    .modal-icon { font-size: 2.5rem; margin-bottom: 8px; }
+    .modal-box h2 { font-size: 1.25rem; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
+    .modal-sub { font-size: 0.85rem; color: #64748b; margin-bottom: 16px; line-height: 1.4; }
+    
+    .price-tag {
+      background: #f0f9ff; color: #0369a1;
+      border: 1px solid #bae6fd;
+      padding: 12px; border-radius: 12px;
+      font-size: 1.6rem; font-weight: 800; margin-bottom: 16px;
+    }
+    .price-tag .currency { font-size: 1rem; font-weight: 700; }
+    .price-tag .per { font-size: 0.75rem; color: #0284c7; font-weight: 600; }
+
+    .payment-methods {
+      background: #f8fafc; border: 1px solid #e2e8f0;
+      border-radius: 12px; padding: 14px; text-align: left;
+      font-size: 0.85rem; margin-bottom: 20px; color: #334155;
+    }
+
+    .payment-methods code {
+      background: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-family: monospace;
+    }
+
+    .wa-btn {
+      display: block; background: #25d366; color: white;
+      text-decoration: none; font-weight: 700; font-size: 0.9rem;
+      padding: 14px; border-radius: 12px; transition: transform 0.2s;
+    }
+
+    .wa-btn:hover { transform: translateY(-2px); background: #20ba5a; }
+
+    /* FOOTER */
     footer {
-      background: #0f172a;
-      color: #94a3b8;
+      background: #0f172a; color: #94a3b8;
       border-top: 1px solid #1e293b;
-      padding: 40px 24px;
-      margin-top: 50px;
+      padding: 40px 24px; margin-top: 50px;
     }
 
     .footer-container {
-      max-width: 860px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
+      max-width: 860px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 24px;
     }
 
     .footer-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 20px;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      flex-wrap: wrap; gap: 20px;
     }
 
-    .footer-info h3 {
-      color: #f8fafc;
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .footer-info p {
-      font-size: 0.85rem;
-      color: #64748b;
-      max-width: 380px;
-      line-height: 1.5;
-    }
+    .footer-info h3 { color: #f8fafc; font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
+    .footer-info p { font-size: 0.85rem; color: #64748b; max-width: 380px; }
 
     .back-top-btn {
-      background: #1e293b;
-      color: #e2e8f0;
-      border: 1px solid #334155;
-      padding: 10px 18px;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s ease;
+      background: #1e293b; color: #e2e8f0; border: 1px solid #334155;
+      padding: 10px 18px; border-radius: 12px; font-size: 0.85rem;
+      font-weight: 600; text-decoration: none; transition: all 0.2s ease;
     }
 
-    .back-top-btn:hover {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-      transform: translateY(-2px);
-    }
+    .back-top-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
 
     .footer-bottom {
-      border-top: 1px solid #1e293b;
-      padding-top: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.8rem;
-      flex-wrap: wrap;
-      gap: 12px;
+      border-top: 1px solid #1e293b; padding-top: 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.8rem; flex-wrap: wrap; gap: 12px;
     }
 
-    @media (max-width: 600px) {
-      .stats-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 600px) { .stats-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 
-  <!-- Animated Glass Header -->
+  <!-- NAVBAR -->
   <header class="navbar">
     <div class="nav-container">
       <a href="#" class="brand">
@@ -509,15 +465,15 @@
       </a>
       <div class="nav-badge">
         <span class="badge-dot"></span>
-        5th semeseter Active
+        Curriculum Active
       </div>
     </div>
   </header>
 
-  <!-- Main Content Wrapper -->
+  <!-- MAIN WRAPPER -->
   <main class="main-wrapper">
 
-    <!-- Hero Card -->
+    <!-- HERO CARD -->
     <div class="hero-card">
       <span class="hero-tag">BS Nursing • Official Curriculum</span>
       <h1>Academic & Clinical Portal</h1>
@@ -528,7 +484,7 @@
       </div>
     </div>
 
-    <!-- Credit Hours Summary Grid -->
+    <!-- STATS GRID -->
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-number">20</div>
@@ -544,10 +500,10 @@
       </div>
     </div>
 
-    <!-- Section Header -->
+    <!-- SECTION TITLE -->
     <div class="section-title">Enrolled Courses & Modules</div>
 
-    <!-- Course Accordion Grid -->
+    <!-- SUBJECTS LIST -->
     <div class="subjects-grid">
 
       <!-- 1. Pediatric Health Nursing - I -->
@@ -566,15 +522,15 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./pediatric/notes.md">
-                  <span>📖 Lecture Notes</span>
-                  <span class="tag tag-note">Notes</span>
+                <a href="javascript:void(0)" onclick="openPaywall('Pediatric Health Nursing - I Notes')">
+                  <span>🔒 Pediatric Lecture Notes</span>
+                  <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
               <li class="resource-item">
-                <a href="https://forms.google.com" target="_blank">
-                  <span>📝 Practice Quiz</span>
-                  <span class="tag tag-quiz">Quiz</span>
+                <a href="javascript:void(0)" onclick="openPaywall('Pediatric Health Nursing - I Quiz')">
+                  <span>🔒 Practice Quiz</span>
+                  <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
             </ul>
@@ -598,9 +554,9 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./pediatric-clinical/log.md">
-                  <span>📋 Clinical Objectives & Logbook</span>
-                  <span class="tag tag-log">Clinical Log</span>
+                <a href="javascript:void(0)" onclick="openPaywall('Pediatric Clinical Logbook')">
+                  <span>🔒 Clinical Objectives & Logbook</span>
+                  <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
             </ul>
@@ -624,15 +580,15 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./chn/notes.md">
-                  <span>📖 Lecture Notes</span>
-                  <span class="tag tag-note">Notes</span>
+                <a href="javascript:void(0)" onclick="openPaywall('Community Health Nursing - I Notes')">
+                  <span>🔒 Lecture Notes</span>
+                  <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
               <li class="resource-item">
-                <a href="https://forms.google.com" target="_blank">
-                  <span>📝 Practice Quiz</span>
-                  <span class="tag tag-quiz">Quiz</span>
+                <a href="javascript:void(0)" onclick="openPaywall('Community Health Nursing - I Quiz')">
+                  <span>🔒 Practice Quiz</span>
+                  <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
             </ul>
@@ -656,9 +612,9 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./chn-clinical/log.md">
-                  <span>📋 Community Field Visit Logbook</span>
-                  <span class="tag tag-log">Clinical Log</span>
+                <a href="javascript:void(0)" onclick="openPaywall('Community Field Visit Logbook')">
+                  <span>🔒 Community Field Visit Logbook</span>
+                  <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
             </ul>
@@ -682,15 +638,9 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./reproductive/notes.md">
-                  <span>📖 Lecture Notes</span>
-                  <span class="tag tag-note">Notes</span>
-                </a>
-              </li>
-              <li class="resource-item">
-                <a href="https://forms.google.com" target="_blank">
-                  <span>📝 Practice Quiz</span>
-                  <span class="tag tag-quiz">Quiz</span>
+                <a href="javascript:void(0)" onclick="openPaywall('Reproductive Health Notes')">
+                  <span>🔒 Lecture Notes</span>
+                  <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
             </ul>
@@ -714,9 +664,9 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./reproductive-clinical/log.md">
-                  <span>📋 Clinical Procedure Checklist</span>
-                  <span class="tag tag-log">Clinical Log</span>
+                <a href="javascript:void(0)" onclick="openPaywall('Reproductive Health Clinical Checklist')">
+                  <span>🔒 Clinical Procedure Checklist</span>
+                  <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
             </ul>
@@ -740,15 +690,9 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./teaching-learning/notes.md">
-                  <span>📖 Lecture Notes</span>
-                  <span class="tag tag-note">Notes</span>
-                </a>
-              </li>
-              <li class="resource-item">
-                <a href="https://forms.google.com" target="_blank">
-                  <span>📝 Practice Quiz</span>
-                  <span class="tag tag-quiz">Quiz</span>
+                <a href="javascript:void(0)" onclick="openPaywall('Teaching & Learning Notes')">
+                  <span>🔒 Lecture Notes</span>
+                  <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
             </ul>
@@ -756,13 +700,13 @@
         </div>
       </div>
 
-      <!-- 8. Nursing Ethics -->
+      <!-- 8. Nursing Ethics (FREE DEMO SUBJECT) -->
       <div class="subject-card">
         <div class="card-head" onclick="toggleCard(this)">
           <div class="head-left">
             <div class="icon-box bg-ethics">⚖️</div>
             <div class="card-title-wrap">
-              <h2>Nursing Ethics</h2>
+              <h2>Nursing Ethics (Free Preview)</h2>
               <span class="ch-badge ch-theory">Theory • 01 CH</span>
             </div>
           </div>
@@ -773,14 +717,8 @@
             <ul class="resource-list">
               <li class="resource-item">
                 <a href="./ethics/notes.md">
-                  <span>📖 Lecture Notes</span>
-                  <span class="tag tag-note">Notes</span>
-                </a>
-              </li>
-              <li class="resource-item">
-                <a href="https://forms.google.com" target="_blank">
-                  <span>📝 Practice Quiz</span>
-                  <span class="tag tag-quiz">Quiz</span>
+                  <span>📖 Lecture Notes (Free Demo)</span>
+                  <span class="tag tag-free">Free Access</span>
                 </a>
               </li>
             </ul>
@@ -804,15 +742,9 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./english/notes.md">
-                  <span>📖 Lecture Notes</span>
-                  <span class="tag tag-note">Notes</span>
-                </a>
-              </li>
-              <li class="resource-item">
-                <a href="https://forms.google.com" target="_blank">
-                  <span>📝 Practice Quiz</span>
-                  <span class="tag tag-quiz">Quiz</span>
+                <a href="javascript:void(0)" onclick="openPaywall('English Proficiency Course Notes')">
+                  <span>🔒 Lecture Notes</span>
+                  <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
             </ul>
@@ -836,9 +768,9 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./perls/notes.md">
-                  <span>📖 Module Overview & Notes</span>
-                  <span class="tag tag-note">Notes</span>
+                <a href="javascript:void(0)" onclick="openPaywall('PERLS 05 Notes')">
+                  <span>🔒 Module Overview & Notes</span>
+                  <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
             </ul>
@@ -862,9 +794,9 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./compass/log.md">
-                  <span>📋 Practical Assessment & Logbook</span>
-                  <span class="tag tag-log">Clinical Log</span>
+                <a href="javascript:void(0)" onclick="openPaywall('COMPASS 05 Practical Log')">
+                  <span>🔒 Practical Assessment & Logbook</span>
+                  <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
             </ul>
@@ -876,7 +808,33 @@
 
   </main>
 
-  <!-- Footer -->
+  <!-- 5. PAYMENT POPUP MODAL -->
+  <div id="paymentModal" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+      <button class="close-btn" onclick="closeModal()">×</button>
+      <div class="modal-icon">🔒</div>
+      <h2>Unlock BSN Study Portal</h2>
+      <p class="modal-sub">Get access to all 10 subject notes, clinical logbook guides, and practice quizzes!</p>
+      
+      <div class="price-tag">
+        <span class="currency">PKR</span> 500 <span class="per">/ full semester</span>
+      </div>
+
+      <div class="payment-methods">
+        <div class="pay-option">
+          <strong>📱 JazzCash / EasyPaisa</strong>
+          <p>Account: <code>03XX-XXXXXXX</code></p>
+          <p>Name: <strong>Mudassir Hussain Khan</strong></p>
+        </div>
+      </div>
+
+      <a id="whatsappBtn" href="#" target="_blank" class="wa-btn">
+        💬 Send Payment Screenshot on WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
   <footer>
     <div class="footer-container">
       <div class="footer-top">
@@ -894,108 +852,26 @@
     </div>
   </footer>
 
-  <!-- Interactive Accordion Script -->
+  <!-- JAVASCRIPT LOGIC -->
   <script>
+    // ⚠️ REPLACE THIS WITH YOUR WHATSAPP NUMBER (with country code, e.g. 923001234567)
+    const MY_WHATSAPP_NUMBER = "923XXXXXXXXX"; 
+
     function toggleCard(headerElement) {
       const parentCard = headerElement.parentElement;
       parentCard.classList.toggle('active');
     }
+
+    function openPaywall(subjectName) {
+      const text = encodeURIComponent(`Hi Mudassir, I want to buy access for: ${subjectName}. Here is my payment screenshot:`);
+      document.getElementById("whatsappBtn").href = `https://wa.me/${MY_WHATSAPP_NUMBER}?text=${text}`;
+      document.getElementById("paymentModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("paymentModal").style.display = "none";
+    }
   </script>
-  <!-- FREE PAYMENT MODAL (POPUP) -->
-<div id="paymentModal" class="modal-overlay" style="display:none;">
-  <div class="modal-box">
-    <button class="close-btn" onclick="closeModal()">×</button>
-    <div class="modal-icon">🔒</div>
-    <h2>Unlock Full BSN 5th Semester Portal</h2>
-    <p class="modal-sub">Get instant access to all 10 subject notes, clinical logbook guides, and practice quizzes!</p>
-    
-    <div class="price-tag">
-      <span class="currency">PKR</span> 500 <span class="per">/ full semester access</span>
-    </div>
-
-    <div class="payment-methods">
-      <div class="pay-option">
-        <strong>📱 JazzCash / EasyPaisa</strong>
-        <p>Account: <code>03XX-XXXXXXX</code></p>
-        <p>Name: <strong>Mudassir Hussain Khan</strong></p>
-      </div>
-    </div>
-
-    <a id="whatsappBtn" href="#" target="_blank" class="wa-btn">
-      💬 Send Payment Screenshot on WhatsApp
-    </a>
-  </div>
-</div>
-
-<style>
-  .modal-overlay {
-    position: fixed;
-    top:0; left:0; width:100%; height:100%;
-    background: rgba(15, 23, 42, 0.75);
-    backdrop-filter: blur(6px);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-  }
-  .modal-box {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 32px 24px;
-    max-width: 420px;
-    width: 100%;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  }
-  .close-btn {
-    position: absolute;
-    top: 14px; right: 18px;
-    background: none; border: none;
-    font-size: 1.5rem; color: #64748b; cursor: pointer;
-  }
-  .modal-icon { font-size: 2.5rem; margin-bottom: 8px; }
-  .modal-box h2 { font-size: 1.25rem; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
-  .modal-sub { font-size: 0.85rem; color: #64748b; margin-bottom: 16px; }
-  .price-tag {
-    background: #f0f9ff; color: #0369a1;
-    border: 1px solid #bae6fd;
-    padding: 12px; border-radius: 12px;
-    font-size: 1.6rem; font-weight: 800; margin-bottom: 16px;
-  }
-  .price-tag .currency { font-size: 1rem; font-weight: 700; }
-  .price-tag .per { font-size: 0.75rem; color: #0284c7; font-weight: 600; }
-  .payment-methods {
-    background: #f8fafc; border: 1px solid #e2e8f0;
-    border-radius: 12px; padding: 14px; text-align: left;
-    font-size: 0.85rem; margin-bottom: 20px; color: #334155;
-  }
-  .payment-methods code {
-    background: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-weight: 700;
-  }
-  .wa-btn {
-    display: block; background: #25d366; color: white;
-    text-decoration: none; font-weight: 700; font-size: 0.9rem;
-    padding: 14px; border-radius: 12px; transition: transform 0.2s;
-  }
-  .wa-btn:hover { transform: translateY(-2px); background: #20ba5a; }
-</style>
-
-<script>
-  // Add your WhatsApp number here (e.g. 923001234567)
-  const MY_WHATSAPP_NUMBER = "923XXXXXXXXX"; 
-
-  function openPaywall(subjectName) {
-    const text = encodeURIComponent(`Hi Mudassir, I want to buy access for the BSN Portal (${subjectName}). Here is my payment screenshot:`);
-    document.getElementById("whatsappBtn").href = `https://wa.me/${MY_WHATSAPP_NUMBER}?text=${text}`;
-    document.getElementById("paymentModal").style.display = "flex";
-  }
-
-  function closeModal() {
-    document.getElementById("paymentModal").style.display = "none";
-  }
-</script>
 
 </body>
 </html>
