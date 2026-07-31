@@ -44,7 +44,7 @@
       max-width: 680px;
     }
 
-    /* Hero Branding Header */
+    /* Hero Header */
     .header-card {
       background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
       color: white;
@@ -164,13 +164,14 @@
       flex-shrink: 0;
     }
 
-    .bg-msn { background: #f0fdf4; color: #16a34a; }
-    .bg-peds { background: #f0f9ff; color: #0284c7; }
-    .bg-epid { background: #fdf2f8; color: #db2777; }
-    .bg-research { background: #fff7ed; color: #ea580c; }
-    .bg-culture { background: #fef2f2; color: #dc2626; }
+    .bg-peds { background: #f0fdf4; color: #16a34a; }
+    .bg-chn { background: #f0f9ff; color: #0284c7; }
+    .bg-repo { background: #fdf2f8; color: #db2777; }
+    .bg-teaching { background: #fff7ed; color: #ea580c; }
+    .bg-ethics { background: #fef2f2; color: #dc2626; }
     .bg-english { background: #f5f3ff; color: #7c3aed; }
     .bg-perls { background: #f0fdfa; color: #0d9488; }
+    .bg-compass { background: #ecfdf5; color: #059669; }
 
     .card-head h2 {
       font-size: 1.1rem;
@@ -178,7 +179,7 @@
       color: var(--text-dark);
     }
 
-    /* Resource Links List */
+    /* Resource Links */
     .resource-list {
       list-style: none;
       display: flex;
@@ -255,19 +256,19 @@
 
   <div class="app-container">
 
-    <!-- Header Card -->
+    <!-- Header -->
     <div class="header-card">
-      <span class="badge-header">BS Nursing • Semester V</span>
+      <span class="badge-header">BS Nursing • Semester IV</span>
       <h1>Academic & Clinical Portal</h1>
-      <p>High-yield lecture notes, OSPE clinical checklists, and practice quizzes for 5th-semester nursing modules.</p>
+      <p>High-yield lecture notes, OSPE clinical checklists, COMPASS logbooks, and practice quizzes for Semester IV.</p>
       
       <div class="stats-bar">
         <div class="stat-item">
-          <div class="stat-val">18</div>
+          <div class="stat-val">20</div>
           <div class="stat-lbl">Credit Hours</div>
         </div>
         <div class="stat-item">
-          <div class="stat-val">7</div>
+          <div class="stat-val">8</div>
           <div class="stat-lbl">Modules</div>
         </div>
         <div class="stat-item">
@@ -279,130 +280,158 @@
 
     <div class="section-title">Academic & Clinical Modules</div>
 
-    <!-- Medical Surgical Nursing-II -->
+    <!-- Pediatric Health Nursing-I -->
     <div class="subject-card">
       <div class="card-head">
-        <div class="icon-box bg-msn">🏥</div>
-        <h2>Medical Surgical Nursing-II</h2>
+        <div class="icon-box bg-peds">👶</div>
+        <h2>Pediatric Health Nursing-I</h2>
       </div>
       <ul class="resource-list">
         <li class="resource-item">
-          <a href="./msn2/unit1.md">
-            <span class="link-info"><span class="link-icon">📖</span> Unit 1: Endocrine & Renal Disorders Notes</span>
+          <a href="./pediatric/unit1.md">
+            <span class="link-info"><span class="link-icon">📖</span> Unit 1: Child Health & Growth Notes</span>
             <span class="tag tag-note">Theory</span>
           </a>
         </li>
         <li class="resource-item">
-          <a href="./msn2/ospe.md">
-            <span class="link-info"><span class="link-icon">🩺</span> Adult Care Clinical OSPE Checklist</span>
+          <a href="./pediatric/ospe.md">
+            <span class="link-info"><span class="link-icon">🩺</span> Pediatric Clinical OSPE Checklist</span>
             <span class="tag tag-ospe">Clinical</span>
           </a>
         </li>
         <li class="resource-item">
           <a href="https://forms.google.com" target="_blank">
-            <span class="link-info"><span class="link-icon">📝</span> MSN-II Practice Quiz</span>
+            <span class="link-info"><span class="link-icon">📝</span> Pediatric Practice Quiz</span>
             <span class="tag tag-quiz">Quiz</span>
           </a>
         </li>
       </ul>
     </div>
 
-    <!-- Pediatric Health Nursing-II -->
+    <!-- Community Health Nursing-I -->
     <div class="subject-card">
       <div class="card-head">
-        <div class="icon-box bg-peds">👶</div>
-        <h2>Pediatric Health Nursing-II</h2>
+        <div class="icon-box bg-chn">🏘️</div>
+        <h2>Community Health Nursing-I</h2>
       </div>
       <ul class="resource-list">
         <li class="resource-item">
-          <a href="./pediatric2/unit1.md">
-            <span class="link-info"><span class="link-icon">📖</span> High-Risk Neonatal & Pediatric ICU Notes</span>
+          <a href="./chn/unit1.md">
+            <span class="link-info"><span class="link-icon">📖</span> Epidemiology & Primary Care Notes</span>
             <span class="tag tag-note">Theory</span>
           </a>
         </li>
         <li class="resource-item">
-          <a href="./pediatric2/ospe.md">
-            <span class="link-info"><span class="link-icon">🩺</span> Pediatric Clinical OSPE & Ward Skills</span>
+          <a href="./chn/clinical.md">
+            <span class="link-info"><span class="link-icon">🩺</span> CHN Clinical Logbook & Field Work</span>
+            <span class="tag tag-ospe">Clinical</span>
+          </a>
+        </li>
+        <li class="resource-item">
+          <a href="https://forms.google.com" target="_blank">
+            <span class="link-info"><span class="link-icon">📝</span> CHN Practice Quiz</span>
+            <span class="tag tag-quiz">Quiz</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Reproductive Health -->
+    <div class="subject-card">
+      <div class="card-head">
+        <div class="icon-box bg-repo">🤰</div>
+        <h2>Reproductive Health</h2>
+      </div>
+      <ul class="resource-list">
+        <li class="resource-item">
+          <a href="./reproductive/unit1.md">
+            <span class="link-info"><span class="link-icon">📖</span> Antenatal Care & Maternal Health Notes</span>
+            <span class="tag tag-note">Theory</span>
+          </a>
+        </li>
+        <li class="resource-item">
+          <a href="./reproductive/ospe.md">
+            <span class="link-info"><span class="link-icon">🩺</span> Labor Room Clinical OSPE Checklist</span>
             <span class="tag tag-ospe">Clinical</span>
           </a>
         </li>
       </ul>
     </div>
 
-    <!-- Epidemiology & Biostatistics -->
+    <!-- COMPASS 05 -->
     <div class="subject-card">
       <div class="card-head">
-        <div class="icon-box bg-epid">📊</div>
-        <h2>Epidemiology & Biostatistics</h2>
+        <div class="icon-box bg-compass">🧩</div>
+        <h2>COMPASS 05</h2>
       </div>
       <ul class="resource-list">
         <li class="resource-item">
-          <a href="./epidemiology/unit1.md">
-            <span class="link-info"><span class="link-icon">📖</span> Study Designs & Statistical Measures</span>
+          <a href="./compass/clinical.md">
+            <span class="link-info"><span class="link-icon">🩺</span> COMPASS 05 Clinical Competencies & Logbook</span>
+            <span class="tag tag-ospe">Clinical</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Teaching/Learning: Principles/Practices -->
+    <div class="subject-card">
+      <div class="card-head">
+        <div class="icon-box bg-teaching">🎓</div>
+        <h2>Teaching/Learning: Principles/Practices</h2>
+      </div>
+      <ul class="resource-list">
+        <li class="resource-item">
+          <a href="./teaching-learning/notes.md">
+            <span class="link-info"><span class="link-icon">📖</span> Educational Principles & Patient Teaching Notes</span>
             <span class="tag tag-note">Theory</span>
           </a>
         </li>
       </ul>
     </div>
 
-    <!-- Nursing Research & EBP -->
+    <!-- Nursing Ethics -->
     <div class="subject-card">
       <div class="card-head">
-        <div class="icon-box bg-research">🔬</div>
-        <h2>Nursing Research & EBP</h2>
+        <div class="icon-box bg-ethics">⚖️</div>
+        <h2>Nursing Ethics</h2>
       </div>
       <ul class="resource-list">
         <li class="resource-item">
-          <a href="./research/unit1.md">
-            <span class="link-info"><span class="link-icon">📖</span> Research Process & Proposal Writing</span>
+          <a href="./ethics/notes.md">
+            <span class="link-info"><span class="link-icon">📜</span> Nursing Code of Ethics & Legal Guidelines Notes</span>
             <span class="tag tag-note">Theory</span>
           </a>
         </li>
       </ul>
     </div>
 
-    <!-- Culture, Health & Society -->
-    <div class="subject-card">
-      <div class="card-head">
-        <div class="icon-box bg-culture">🌐</div>
-        <h2>Culture, Health & Society</h2>
-      </div>
-      <ul class="resource-list">
-        <li class="resource-item">
-          <a href="./culture/unit1.md">
-            <span class="link-info"><span class="link-icon">📖</span> Transcultural Nursing & Social Determinants</span>
-            <span class="tag tag-note">Theory</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <!-- English Proficiency Course-4 (EPC 4) -->
+    <!-- English Proficiency Course-3 (EPC 3) -->
     <div class="subject-card">
       <div class="card-head">
         <div class="icon-box bg-english">✍️</div>
-        <h2>English Proficiency Course-4 (EPC 4)</h2>
+        <h2>English Proficiency Course-3 (EPC 3)</h2>
       </div>
       <ul class="resource-list">
         <li class="resource-item">
           <a href="./english/notes.md">
-            <span class="link-info"><span class="link-icon">📝</span> Research Writing & Professional Presentations</span>
+            <span class="link-info"><span class="link-icon">📝</span> Academic & Medical Writing Skills Notes</span>
             <span class="tag tag-note">Theory</span>
           </a>
         </li>
       </ul>
     </div>
 
-    <!-- PERLS 06 -->
+    <!-- PERLS 05 -->
     <div class="subject-card">
       <div class="card-head">
         <div class="icon-box bg-perls">🌟</div>
-        <h2>PERLS 06</h2>
+        <h2>PERLS 05</h2>
       </div>
       <ul class="resource-list">
         <li class="resource-item">
           <a href="./perls/notes.md">
-            <span class="link-info"><span class="link-icon">💡</span> Professional Development & Leadership Skills</span>
+            <span class="link-info"><span class="link-icon">💡</span> Professionalism, Leadership & Ethics Notes</span>
             <span class="tag tag-note">Theory</span>
           </a>
         </li>
@@ -411,7 +440,7 @@
 
     <div class="security-notice">
       <strong>🔒 Authorized Student Access</strong>
-      BS Nursing Semester V Portal. Strictly for personal student revision and clinical preparation.
+      BS Nursing Semester V Portal. Strictly maintained for personal student revision and clinical preparation.
     </div>
 
     <footer>
