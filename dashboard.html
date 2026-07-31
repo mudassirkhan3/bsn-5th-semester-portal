@@ -18,7 +18,7 @@
     .logout-btn:hover { background: #fee2e2; color: #ef4444; }
 
     /* Dashboard Layout */
-    .container { max-width: 1200px; margin: 0 auto; width: 100%; padding: 32px 24px; }
+    .container { max-width: 1200px; margin: 0 auto; width: 100%; padding: 32px 24px; flex: 1; }
     
     /* Welcome Header */
     .welcome-card { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: white; border-radius: 20px; padding: 32px; margin-bottom: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.3); }
@@ -44,10 +44,10 @@
 
     /* Subject Cards */
     .subjects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-    .subject-card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; }
+    .subject-card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
     .subject-card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
     .subject-icon { font-size: 1.8rem; margin-bottom: 12px; }
-    .subject-name { font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; }
+    .subject-name { font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; color: #0f172a; }
     .subject-meta { font-size: 0.8rem; color: #64748b; margin-bottom: 16px; }
 
     /* Interactive Checklist Sidebar */
@@ -58,20 +58,23 @@
     .task-label { font-size: 0.9rem; font-weight: 600; color: #334155; cursor: pointer; }
 
     /* Action Buttons */
-    .btn-action { display: inline-flex; align-items: center; gap: 6px; background: #e0f2fe; color: #0284c7; padding: 8px 14px; border-radius: 8px; font-weight: 700; font-size: 0.82rem; text-decoration: none; border: none; cursor: pointer; }
+    .btn-action { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: #e0f2fe; color: #0284c7; padding: 10px 14px; border-radius: 8px; font-weight: 700; font-size: 0.82rem; text-decoration: none; border: none; cursor: pointer; transition: 0.2s; }
     .btn-action:hover { background: #0284c7; color: white; }
+
+    /* Footer */
+    footer { text-align: center; padding: 20px; font-size: 0.85rem; color: #64748b; border-top: 1px solid #e2e8f0; background: #ffffff; margin-top: 40px; }
   </style>
 </head>
 <body>
 
   <!-- Top Navbar -->
   <nav class="navbar">
-    <a href="#" class="brand">🩺 BSN Portal</a>
+    <a href="index.html" class="brand">🩺 BSN Portal</a>
     <div class="user-profile">
-      <div class="user-avatar" id="avatarCircle">U</div>
+      <div class="user-avatar" id="avatarCircle">M</div>
       <div>
-        <div style="font-weight: 700; font-size: 0.88rem;" id="navUserName">Student</div>
-        <div style="font-size: 0.75rem; color: #64748b;" id="navUserSem">BSN Semester 4</div>
+        <div style="font-weight: 700; font-size: 0.88rem;" id="navUserName">Mudassir Khan</div>
+        <div style="font-size: 0.75rem; color: #64748b;" id="navUserSem">BSN Semester 5</div>
       </div>
       <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
@@ -83,17 +86,17 @@
     <!-- Welcome Card -->
     <div class="welcome-card">
       <div class="welcome-text">
-        <span class="badge">Semester 4 Portal</span>
-        <h1 id="welcomeGreeting">Welcome Back! 👋</h1>
-        <p>Track your study notes, complete subject modules, and prepare for practical vivas.</p>
+        <span class="badge">Semester 5 Curriculum</span>
+        <h1 id="welcomeGreeting">Welcome Back, Mudassir! 👋</h1>
+        <p>Access your official Semester 5 course modules, study notes, and viva preparation tools.</p>
       </div>
-      <button class="btn-action" style="background: white; color: #0284c7; padding: 12px 20px; font-size: 0.9rem;" onclick="alert('Downloading Semester 4 Syllabus...')">📥 Syllabus PDF</button>
+      <a href="index.html" class="btn-action" style="background: white; color: #0284c7; padding: 12px 20px; font-size: 0.9rem; text-decoration: none;">🏠 Return to Home</a>
     </div>
 
     <!-- Stats Grid -->
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-title">Overall Progress</div>
+        <div class="stat-title">Semester Progress</div>
         <div class="stat-value" id="progressPercentage">0%</div>
         <div class="progress-container">
           <div class="progress-fill" id="globalProgressBar"></div>
@@ -101,87 +104,97 @@
       </div>
 
       <div class="stat-card">
-        <div class="stat-title">Completed Topics</div>
+        <div class="stat-title">Completed Courses</div>
         <div class="stat-value" id="completedCount">0 / 5</div>
       </div>
 
       <div class="stat-card">
-        <div class="stat-title">Active Subjects</div>
-        <div class="stat-value">5 Courses</div>
+        <div class="stat-title">Active Semester</div>
+        <div class="stat-value" style="font-size: 1.4rem; padding-top: 4px;">Semester 5</div>
       </div>
 
       <div class="stat-card">
-        <div class="stat-title">Viva Readiness</div>
-        <div class="stat-value" style="color: #10b981;" id="vivaStatus">Pending</div>
+        <div class="stat-title">Portal Status</div>
+        <div class="stat-value" style="color: #10b981; font-size: 1.4rem; padding-top: 4px;">Unlocked 🔓</div>
       </div>
     </div>
 
     <!-- Main Grid -->
     <div class="main-grid">
       
-      <!-- Left Column: Your Specific Subjects -->
+      <!-- Left Column: Semester 5 Enrolled Courses & Modules -->
       <div>
         <div class="section-title">
-          <span>📚 Semester 4 Subjects</span>
+          <span>📚 Enrolled Courses & Modules (Semester 5)</span>
         </div>
 
         <div class="subjects-grid">
           
           <!-- Subject 1 -->
           <div class="subject-card">
-            <div class="subject-icon">👶</div>
-            <div class="subject-name">Pediatric Health Nursing</div>
-            <div class="subject-meta">Growth & Development • Child Care • Vivas</div>
-            <button class="btn-action" onclick="alert('Opening Pediatric Health Notes...')">View Notes & Vivas →</button>
+            <div>
+              <div class="subject-icon">👶</div>
+              <div class="subject-name">Pediatric Health Nursing</div>
+              <div class="subject-meta">Child health care, growth milestones, and clinical assessments.</div>
+            </div>
+            <a href="pediatrics.html" class="btn-action">Open Subject Notes →</a>
           </div>
 
           <!-- Subject 2 -->
           <div class="subject-card">
-            <div class="subject-icon">🤱</div>
-            <div class="subject-name">Reproductive Health</div>
-            <div class="subject-meta">Maternal Care • OB/GYN Concepts • Clinicals</div>
-            <button class="btn-action" onclick="alert('Opening Reproductive Health Notes...')">View Notes & Vivas →</button>
+            <div>
+              <div class="subject-icon">🤰</div>
+              <div class="subject-name">Reproductive Health</div>
+              <div class="subject-meta">Maternal-neonatal health, OB/GYN care, and clinical protocols.</div>
+            </div>
+            <a href="reproductive-health.html" class="btn-action">Open Subject Notes →</a>
           </div>
 
           <!-- Subject 3 -->
           <div class="subject-card">
-            <div class="subject-icon">📖</div>
-            <div class="subject-name">English IV</div>
-            <div class="subject-meta">Academic Writing • Nursing Presentations</div>
-            <button class="btn-action" onclick="alert('Opening English IV Notes...')">View Notes & Vivas →</button>
+            <div>
+              <div class="subject-icon">📝</div>
+              <div class="subject-name">English IV</div>
+              <div class="subject-meta">Advanced technical writing, research papers, and presentations.</div>
+            </div>
+            <a href="english-iv.html" class="btn-action">Open Subject Notes →</a>
           </div>
 
           <!-- Subject 4 -->
           <div class="subject-card">
-            <div class="subject-icon">⚙️</div>
-            <div class="subject-name">PERLS</div>
-            <div class="subject-meta">Professional Ethics, Role & Leadership Skills</div>
-            <button class="btn-action" onclick="alert('Opening PERLS Notes...')">View Notes & Vivas →</button>
+            <div>
+              <div class="subject-icon">⭐</div>
+              <div class="subject-name">PERLS</div>
+              <div class="subject-meta">Professional ethics, leadership strategies, and clinical management.</div>
+            </div>
+            <a href="perls.html" class="btn-action">Open Subject Notes →</a>
           </div>
 
           <!-- Subject 5 -->
           <div class="subject-card">
-            <div class="subject-icon">⚖️</div>
-            <div class="subject-name">Nursing Ethics</div>
-            <div class="subject-meta">Code of Conduct • Legal & Moral Aspects</div>
-            <button class="btn-action" onclick="alert('Opening Nursing Ethics Notes...')">View Notes & Vivas →</button>
+            <div>
+              <div class="subject-icon">⚖️</div>
+              <div class="subject-name">Nursing Ethics</div>
+              <div class="subject-meta">Bioethical principles, patient rights, and legal obligations.</div>
+            </div>
+            <a href="nursing-ethics.html" class="btn-action">Open Subject Notes →</a>
           </div>
 
         </div>
       </div>
 
-      <!-- Right Column: Interactive Subject Checklist -->
+      <!-- Right Column: Interactive Checklist & Progress Tracker -->
       <div>
         <div class="section-title">
-          <span>✅ Viva & Study Tracker</span>
+          <span>✅ Study & Viva Checklist</span>
         </div>
 
         <div class="checklist-card">
-          <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 16px;">Check off completed subjects to update your overall semester progress:</p>
+          <p style="font-size: 0.82rem; color: #64748b; margin-bottom: 16px;">Check off completed course modules to calculate your active progress:</p>
 
           <div class="task-item">
             <input type="checkbox" id="task1" onchange="updateProgress()">
-            <label class="task-label" for="task1">Pediatric Health Nursing Notes</label>
+            <label class="task-label" for="task1">Pediatric Health Notes</label>
           </div>
 
           <div class="task-item">
@@ -191,7 +204,7 @@
 
           <div class="task-item">
             <input type="checkbox" id="task3" onchange="updateProgress()">
-            <label class="task-label" for="task3">English IV Assignments</label>
+            <label class="task-label" for="task3">English IV Materials</label>
           </div>
 
           <div class="task-item">
@@ -209,38 +222,39 @@
     </div>
   </div>
 
+  <!-- Footer -->
+  <footer>
+    © 2026 Academic Portal • Prepared by Mudassir Khan
+  </footer>
+
   <script>
-    // Load student data from LocalStorage
+    // Load student profile and checklist state
     document.addEventListener("DOMContentLoaded", () => {
       const currentEmail = localStorage.getItem('bsn_current_user');
       
-      if (!currentEmail) {
-        window.location.href = 'login.html';
-        return;
-      }
+      if (currentEmail) {
+        const userData = JSON.parse(localStorage.getItem('bsn_user_' + currentEmail) || '{}');
+        if (userData.name) {
+          document.getElementById('navUserName').innerText = userData.name;
+          document.getElementById('welcomeGreeting').innerText = `Welcome Back, ${userData.name}! 👋`;
+          document.getElementById('avatarCircle').innerText = userData.name.charAt(0).toUpperCase();
+        }
+        if (userData.semester) {
+          document.getElementById('navUserSem').innerText = userData.semester;
+        }
 
-      const userData = JSON.parse(localStorage.getItem('bsn_user_' + currentEmail));
-      
-      if (userData) {
-        document.getElementById('navUserName').innerText = userData.name || 'Student';
-        document.getElementById('welcomeGreeting').innerText = `Welcome Back, ${userData.name || 'Student'}! 👋`;
-        document.getElementById('navUserSem').innerText = userData.semester || 'BSN Semester 4';
-        
-        const initial = userData.name ? userData.name.charAt(0).toUpperCase() : 'S';
-        document.getElementById('avatarCircle').innerText = initial;
+        // Restore checklist states
+        const savedTasks = JSON.parse(localStorage.getItem('bsn_tasks_' + currentEmail)) || [];
+        savedTasks.forEach((checked, index) => {
+          const checkbox = document.getElementById(`task${index + 1}`);
+          if (checkbox) checkbox.checked = checked;
+        });
       }
-
-      // Restore checklist state
-      const savedTasks = JSON.parse(localStorage.getItem('bsn_tasks_' + currentEmail)) || [];
-      savedTasks.forEach((checked, index) => {
-        const checkbox = document.getElementById(`task${index + 1}`);
-        if (checkbox) checkbox.checked = checked;
-      });
 
       updateProgress();
     });
 
-    // Dynamic Progress Calculator
+    // Calculate live progress percentage
     function updateProgress() {
       const checkboxes = document.querySelectorAll('.task-item input[type="checkbox"]');
       let checkedCount = 0;
@@ -254,35 +268,20 @@
       const total = checkboxes.length;
       const percentage = Math.round((checkedCount / total) * 100);
 
-      // Update UI elements
       document.getElementById('progressPercentage').innerText = `${percentage}%`;
       document.getElementById('globalProgressBar').style.width = `${percentage}%`;
       document.getElementById('completedCount').innerText = `${checkedCount} / ${total}`;
 
-      // Update Viva Readiness status
-      const statusElement = document.getElementById('vivaStatus');
-      if (percentage === 100) {
-        statusElement.innerText = 'Ready! 🎉';
-        statusElement.style.color = '#10b981';
-      } else if (percentage > 0) {
-        statusElement.innerText = 'In Progress ⏳';
-        statusElement.style.color = '#0284c7';
-      } else {
-        statusElement.innerText = 'Pending';
-        statusElement.style.color = '#ef4444';
-      }
-
-      // Save state to LocalStorage
       const currentEmail = localStorage.getItem('bsn_current_user');
       if (currentEmail) {
         localStorage.setItem('bsn_tasks_' + currentEmail, JSON.stringify(taskStates));
       }
     }
 
-    // Logout Function
+    // Logout handler
     function logout() {
       localStorage.removeItem('bsn_current_user');
-      window.location.href = 'login.html';
+      window.location.href = 'index.html';
     }
   </script>
 
