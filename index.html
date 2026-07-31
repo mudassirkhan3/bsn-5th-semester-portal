@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BSN 5th Semester Academic Portal - Mudassir Khan</title>
+  <title>BSN 5th Semester Portal | Mudassir Khan</title>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,8 +20,9 @@
       --text-dark: #0f172a;
       --text-muted: #64748b;
       --border: #e2e8f0;
-      --radius: 16px;
-      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+      --radius: 18px;
+      --shadow: 0 10px 30px -5px rgba(2, 132, 199, 0.08);
+      --shadow-hover: 0 20px 35px -10px rgba(2, 132, 199, 0.18);
     }
 
     * {
@@ -38,21 +39,26 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
     }
 
-    /* Navbar Header Setup */
+    /* --------------------------------------
+       1. ANIMATED GLASS NAVBAR
+    -------------------------------------- */
     .navbar {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
       padding: 14px 24px;
+      transition: all 0.3s ease;
     }
 
     .nav-container {
-      max-width: 1000px;
+      max-width: 900px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -62,91 +68,122 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
       color: var(--text-dark);
       font-weight: 800;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
     }
 
-    .brand-icon {
+    /* Pulse animation for heartbeat badge */
+    .pulse-box {
       background: linear-gradient(135deg, var(--primary), var(--accent));
       color: white;
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+      animation: heartbeat 2s infinite ease-in-out;
     }
 
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      list-style: none;
-    }
-
-    .nav-menu a {
-      text-decoration: none;
-      color: var(--text-muted);
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav-menu a:hover {
-      color: var(--primary);
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      14% { transform: scale(1.08); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.08); }
+      70% { transform: scale(1); }
     }
 
     .nav-badge {
-      background: #e0f2fe;
+      background: rgba(2, 132, 199, 0.1);
       color: var(--primary-dark);
-      padding: 4px 12px;
-      border-radius: 20px;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+      padding: 6px 14px;
+      border-radius: 30px;
       font-size: 0.78rem;
       font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    /* Main Layout */
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* --------------------------------------
+       2. HERO HEADER WITH FLOATING ANIMATION
+    -------------------------------------- */
     .main-wrapper {
       flex: 1;
       width: 100%;
-      max-width: 800px;
+      max-width: 760px;
       margin: 0 auto;
       padding: 32px 16px;
     }
 
-    /* Hero Header Card */
     .hero-card {
-      background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
+      background: linear-gradient(135deg, #0f172a 0%, #0284c7 100%);
       color: white;
-      border-radius: var(--radius);
-      padding: 36px 28px;
+      border-radius: 24px;
+      padding: 40px 32px;
       margin-bottom: 32px;
-      box-shadow: 0 14px 28px -4px rgba(2, 132, 199, 0.25);
+      box-shadow: 0 20px 40px -10px rgba(2, 132, 199, 0.3);
       position: relative;
       overflow: hidden;
     }
 
-    .hero-card::after {
-      content: '🎓';
+    /* Floating background glowing orb */
+    .hero-card::before {
+      content: '';
       position: absolute;
-      right: -10px;
-      bottom: -15px;
-      font-size: 8rem;
+      top: -40px;
+      right: -40px;
+      width: 200px;
+      height: 200px;
+      background: rgba(13, 148, 136, 0.35);
+      filter: blur(50px);
+      border-radius: 50%;
+      animation: floatOrb 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(20px) scale(1.1); }
+    }
+
+    .hero-card::after {
+      content: '🩺';
+      position: absolute;
+      right: 15px;
+      bottom: -10px;
+      font-size: 7.5rem;
       opacity: 0.12;
-      transform: rotate(-12deg);
+      transform: rotate(-10deg);
+      pointer-events: none;
     }
 
     .hero-tag {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.18);
       backdrop-filter: blur(8px);
       color: #e0f2fe;
       font-size: 0.75rem;
       font-weight: 700;
-      padding: 4px 14px;
+      padding: 5px 14px;
       border-radius: 20px;
       display: inline-block;
       margin-bottom: 14px;
@@ -155,35 +192,35 @@
     }
 
     .hero-card h1 {
-      font-size: 1.8rem;
+      font-size: 1.9rem;
       font-weight: 800;
       line-height: 1.25;
       margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-card p {
-      color: #93c5fd;
+      color: #bae6fd;
       font-size: 0.95rem;
       font-weight: 400;
       line-height: 1.5;
+      max-width: 500px;
+      position: relative;
+      z-index: 1;
     }
 
     .author-bar {
-      margin-top: 20px;
-      padding-top: 14px;
+      margin-top: 24px;
+      padding-top: 16px;
       border-top: 1px solid rgba(255, 255, 255, 0.15);
       font-size: 0.85rem;
-      color: #bae6fd;
+      color: #e0f2fe;
       display: flex;
       align-items: center;
       gap: 8px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
     }
 
     .section-title {
@@ -192,9 +229,12 @@
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.8px;
+      margin-bottom: 16px;
     }
 
-    /* Subject Cards Grid */
+    /* --------------------------------------
+       3. INTERACTIVE ACCORDION SUBJECT CARDS
+    -------------------------------------- */
     .subjects-grid {
       display: flex;
       flex-direction: column;
@@ -204,35 +244,54 @@
     .subject-card {
       background: var(--card-bg);
       border-radius: var(--radius);
-      padding: 24px;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .subject-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 28px -4px rgba(0,0,0,0.08);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(2, 132, 199, 0.3);
     }
 
+    /* Clickable Card Header */
     .card-head {
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 18px;
-      padding-bottom: 14px;
-      border-bottom: 1px dashed var(--border);
+      justify-content: space-between;
+      padding: 20px 24px;
+      cursor: pointer;
+      user-select: none;
+      background: transparent;
+      transition: background 0.2s ease;
+    }
+
+    .card-head:hover {
+      background: #f8fafc;
+    }
+
+    .head-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
     .icon-box {
       width: 48px;
       height: 48px;
-      border-radius: 12px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.5rem;
       flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .subject-card:hover .icon-box {
+      transform: scale(1.1) rotate(5deg);
     }
 
     .bg-peds { background: #f0fdf4; }
@@ -242,12 +301,50 @@
     .bg-english { background: #f5f3ff; }
 
     .card-head h2 {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--text-dark);
     }
 
-    /* Link Action Buttons */
+    /* Chevron Dropdown Arrow */
+    .chevron {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .subject-card.active .chevron {
+      transform: rotate(180deg);
+      background: #e0f2fe;
+      color: var(--primary-dark);
+    }
+
+    /* Expandable Body */
+    .card-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      background: #ffffff;
+    }
+
+    .subject-card.active .card-body {
+      max-height: 200px; /* Expands smoothly */
+    }
+
+    .card-content {
+      padding: 0 24px 20px 24px;
+      border-top: 1px dashed var(--border);
+      padding-top: 16px;
+    }
+
+    /* Clickable Resource Links */
     .resource-list {
       list-style: none;
       display: flex;
@@ -259,22 +356,28 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 16px;
+      padding: 14px 16px;
       background: #f8fafc;
-      border: 1px solid #f1f5f9;
+      border: 1px solid var(--border);
       border-radius: 12px;
       text-decoration: none;
       color: var(--text-dark);
       font-size: 0.9rem;
       font-weight: 600;
       transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
     }
 
     .resource-item a:hover {
       background: #f0f9ff;
       border-color: #bae6fd;
       color: var(--primary-dark);
-      transform: translateX(4px);
+      transform: translateX(6px);
+    }
+
+    .resource-item a:active {
+      transform: scale(0.98);
     }
 
     .link-info {
@@ -294,17 +397,19 @@
     .tag-note { background: #e0f2fe; color: #0369a1; }
     .tag-quiz { background: #fef3c7; color: #b45309; }
 
-    /* Footer Setup */
+    /* --------------------------------------
+       4. MODERN IMPRESSIVE FOOTER
+    -------------------------------------- */
     footer {
       background: #0f172a;
       color: #94a3b8;
       border-top: 1px solid #1e293b;
       padding: 40px 24px;
-      margin-top: 40px;
+      margin-top: 50px;
     }
 
     .footer-container {
-      max-width: 800px;
+      max-width: 760px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -321,7 +426,7 @@
 
     .footer-info h3 {
       color: #f8fafc;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 700;
       margin-bottom: 6px;
     }
@@ -329,26 +434,28 @@
     .footer-info p {
       font-size: 0.85rem;
       color: #64748b;
-      max-width: 340px;
+      max-width: 360px;
       line-height: 1.5;
     }
 
-    .footer-links {
-      display: flex;
-      gap: 16px;
-      list-style: none;
-    }
-
-    .footer-links a {
-      color: #94a3b8;
-      text-decoration: none;
+    .back-top-btn {
+      background: #1e293b;
+      color: #e2e8f0;
+      border: 1px solid #334155;
+      padding: 10px 18px;
+      border-radius: 12px;
       font-size: 0.85rem;
       font-weight: 600;
-      transition: color 0.2s ease;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
     }
 
-    .footer-links a:hover {
-      color: var(--primary);
+    .back-top-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-2px);
     }
 
     .footer-bottom {
@@ -361,28 +468,21 @@
       flex-wrap: wrap;
       gap: 12px;
     }
-
-    @media (max-width: 600px) {
-      .nav-menu { display: none; }
-      .footer-top { flex-direction: column; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-    }
   </style>
 </head>
 <body>
 
-  <!-- Header Navigation -->
+  <!-- Animated Navbar -->
   <header class="navbar">
     <div class="nav-container">
       <a href="#" class="brand">
-        <div class="brand-icon">🩺</div>
+        <div class="pulse-box">🩺</div>
         <span>BSN Portal</span>
       </a>
-      <ul class="nav-menu">
-        <li><a href="#subjects">Subjects</a></li>
-        <li><a href="#about">About</a></li>
-        <li><span class="nav-badge">5th Semester</span></li>
-      </ul>
+      <div class="nav-badge">
+        <span class="badge-dot"></span>
+        5th Semester Active
+      </div>
     </div>
   </header>
 
@@ -391,157 +491,195 @@
 
     <!-- Hero Card -->
     <div class="hero-card">
-      <span class="hero-tag">BS Nursing • 5th Semester</span>
+      <span class="hero-tag">BS Nursing • Semester V</span>
       <h1>Academic Study Portal</h1>
-      <p>High-yield lecture notes and practice quizzes tailored for 5th Semester subjects.</p>
+      <p>High-yield lecture notes and interactive practice quizzes designed specifically for 5th Semester nursing courses.</p>
       
       <div class="author-bar">
         👤 Curated & Maintained by <strong>Mudassir Khan</strong>
       </div>
     </div>
 
-    <!-- Section Header -->
-    <div class="section-header" id="subjects">
-      <span class="section-title">5th Semester Academic Subjects</span>
-    </div>
+    <!-- Section Title -->
+    <div class="section-title">5th Semester Subjects</div>
 
-    <!-- Subjects List -->
+    <!-- Interactive Subject Accordion Cards -->
     <div class="subjects-grid">
 
       <!-- 1. Pediatric Health Nursing-II -->
-      <div class="subject-card">
-        <div class="card-head">
-          <div class="icon-box bg-peds">👶</div>
-          <h2>Pediatric Health Nursing-II</h2>
+      <div class="subject-card active">
+        <div class="card-head" onclick="toggleCard(this)">
+          <div class="head-left">
+            <div class="icon-box bg-peds">👶</div>
+            <h2>Pediatric Health Nursing-II</h2>
+          </div>
+          <div class="chevron">▼</div>
         </div>
-        <ul class="resource-list">
-          <li class="resource-item">
-            <a href="./pediatric/notes.md">
-              <span class="link-info"><span>📖</span> Lecture Notes</span>
-              <span class="tag tag-note">Notes</span>
-            </a>
-          </li>
-          <li class="resource-item">
-            <a href="https://forms.google.com" target="_blank">
-              <span class="link-info"><span>📝</span> Practice Quiz</span>
-              <span class="tag tag-quiz">Quiz</span>
-            </a>
-          </li>
-        </ul>
+        <div class="card-body">
+          <div class="card-content">
+            <ul class="resource-list">
+              <li class="resource-item">
+                <a href="./pediatric/notes.md">
+                  <span class="link-info"><span>📖</span> Lecture Notes</span>
+                  <span class="tag tag-note">Notes</span>
+                </a>
+              </li>
+              <li class="resource-item">
+                <a href="https://forms.google.com" target="_blank">
+                  <span class="link-info"><span>📝</span> Practice Quiz</span>
+                  <span class="tag tag-quiz">Quiz</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <!-- 2. Community Health Nursing-II -->
       <div class="subject-card">
-        <div class="card-head">
-          <div class="icon-box bg-chn">🏘️</div>
-          <h2>Community Health Nursing-II</h2>
+        <div class="card-head" onclick="toggleCard(this)">
+          <div class="head-left">
+            <div class="icon-box bg-chn">🏘️</div>
+            <h2>Community Health Nursing-II</h2>
+          </div>
+          <div class="chevron">▼</div>
         </div>
-        <ul class="resource-list">
-          <li class="resource-item">
-            <a href="./chn/notes.md">
-              <span class="link-info"><span>📖</span> Lecture Notes</span>
-              <span class="tag tag-note">Notes</span>
-            </a>
-          </li>
-          <li class="resource-item">
-            <a href="https://forms.google.com" target="_blank">
-              <span class="link-info"><span>📝</span> Practice Quiz</span>
-              <span class="tag tag-quiz">Quiz</span>
-            </a>
-          </li>
-        </ul>
+        <div class="card-body">
+          <div class="card-content">
+            <ul class="resource-list">
+              <li class="resource-item">
+                <a href="./chn/notes.md">
+                  <span class="link-info"><span>📖</span> Lecture Notes</span>
+                  <span class="tag tag-note">Notes</span>
+                </a>
+              </li>
+              <li class="resource-item">
+                <a href="https://forms.google.com" target="_blank">
+                  <span class="link-info"><span>📝</span> Practice Quiz</span>
+                  <span class="tag tag-quiz">Quiz</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <!-- 3. Teaching / Learning Strategies -->
       <div class="subject-card">
-        <div class="card-head">
-          <div class="icon-box bg-teaching">🎓</div>
-          <h2>Teaching / Learning Strategies</h2>
+        <div class="card-head" onclick="toggleCard(this)">
+          <div class="head-left">
+            <div class="icon-box bg-teaching">🎓</div>
+            <h2>Teaching / Learning Strategies</h2>
+          </div>
+          <div class="chevron">▼</div>
         </div>
-        <ul class="resource-list">
-          <li class="resource-item">
-            <a href="./teaching-learning/notes.md">
-              <span class="link-info"><span>📖</span> Lecture Notes</span>
-              <span class="tag tag-note">Notes</span>
-            </a>
-          </li>
-          <li class="resource-item">
-            <a href="https://forms.google.com" target="_blank">
-              <span class="link-info"><span>📝</span> Practice Quiz</span>
-              <span class="tag tag-quiz">Quiz</span>
-            </a>
-          </li>
-        </ul>
+        <div class="card-body">
+          <div class="card-content">
+            <ul class="resource-list">
+              <li class="resource-item">
+                <a href="./teaching-learning/notes.md">
+                  <span class="link-info"><span>📖</span> Lecture Notes</span>
+                  <span class="tag tag-note">Notes</span>
+                </a>
+              </li>
+              <li class="resource-item">
+                <a href="https://forms.google.com" target="_blank">
+                  <span class="link-info"><span>📝</span> Practice Quiz</span>
+                  <span class="tag tag-quiz">Quiz</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <!-- 4. Tropical & Communicable Diseases -->
       <div class="subject-card">
-        <div class="card-head">
-          <div class="icon-box bg-tropical">🦠</div>
-          <h2>Tropical & Communicable Diseases</h2>
+        <div class="card-head" onclick="toggleCard(this)">
+          <div class="head-left">
+            <div class="icon-box bg-tropical">🦠</div>
+            <h2>Tropical & Communicable Diseases</h2>
+          </div>
+          <div class="chevron">▼</div>
         </div>
-        <ul class="resource-list">
-          <li class="resource-item">
-            <a href="./tropical-diseases/notes.md">
-              <span class="link-info"><span>📖</span> Lecture Notes</span>
-              <span class="tag tag-note">Notes</span>
-            </a>
-          </li>
-          <li class="resource-item">
-            <a href="https://forms.google.com" target="_blank">
-              <span class="link-info"><span>📝</span> Practice Quiz</span>
-              <span class="tag tag-quiz">Quiz</span>
-            </a>
-          </li>
-        </ul>
+        <div class="card-body">
+          <div class="card-content">
+            <ul class="resource-list">
+              <li class="resource-item">
+                <a href="./tropical-diseases/notes.md">
+                  <span class="link-info"><span>📖</span> Lecture Notes</span>
+                  <span class="tag tag-note">Notes</span>
+                </a>
+              </li>
+              <li class="resource-item">
+                <a href="https://forms.google.com" target="_blank">
+                  <span class="link-info"><span>📝</span> Practice Quiz</span>
+                  <span class="tag tag-quiz">Quiz</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <!-- 5. English V -->
       <div class="subject-card">
-        <div class="card-head">
-          <div class="icon-box bg-english">✍️</div>
-          <h2>English V</h2>
+        <div class="card-head" onclick="toggleCard(this)">
+          <div class="head-left">
+            <div class="icon-box bg-english">✍️</div>
+            <h2>English V</h2>
+          </div>
+          <div class="chevron">▼</div>
         </div>
-        <ul class="resource-list">
-          <li class="resource-item">
-            <a href="./english/notes.md">
-              <span class="link-info"><span>📖</span> Lecture Notes</span>
-              <span class="tag tag-note">Notes</span>
-            </a>
-          </li>
-          <li class="resource-item">
-            <a href="https://forms.google.com" target="_blank">
-              <span class="link-info"><span>📝</span> Practice Quiz</span>
-              <span class="tag tag-quiz">Quiz</span>
-            </a>
-          </li>
-        </ul>
+        <div class="card-body">
+          <div class="card-content">
+            <ul class="resource-list">
+              <li class="resource-item">
+                <a href="./english/notes.md">
+                  <span class="link-info"><span>📖</span> Lecture Notes</span>
+                  <span class="tag tag-note">Notes</span>
+                </a>
+              </li>
+              <li class="resource-item">
+                <a href="https://forms.google.com" target="_blank">
+                  <span class="link-info"><span>📝</span> Practice Quiz</span>
+                  <span class="tag tag-quiz">Quiz</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
 
     </div>
 
   </main>
 
-  <!-- Footer Setup -->
-  <footer id="about">
+  <!-- Modern Footer -->
+  <footer>
     <div class="footer-container">
       <div class="footer-top">
         <div class="footer-info">
           <h3>BS Nursing 5th Semester Portal</h3>
-          <p>Designed to help nursing students easily access academic resources, key lecture summaries, and self-assessment tools.</p>
+          <p>Designed for fast access to high-yield notes and self-assessment quizzes.</p>
         </div>
-        <ul class="footer-links">
-          <li><a href="#subjects">Subjects</a></li>
-          <li><a href="#">Back to Top ↑</a></li>
-        </ul>
+        <a href="#" class="back-top-btn">Back to Top ↑</a>
       </div>
       
       <div class="footer-bottom">
         <span>© 2026 Academic Portal • Prepared by Mudassir Khan</span>
-        <span>BS Nursing (Semester V)</span>
+        <span>BS Nursing (5th Semester)</span>
       </div>
     </div>
   </footer>
+
+  <!-- Interactive Accordion Script -->
+  <script>
+    function toggleCard(headerElement) {
+      const parentCard = headerElement.parentElement;
+      parentCard.classList.toggle('active');
+    }
+  </script>
 
 </body>
 </html>
