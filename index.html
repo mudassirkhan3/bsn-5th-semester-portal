@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BSN 5th Semester Study Portal</title>
-  <!-- Google Fonts for modern typography -->
+  <title>BSN Semester IV Study Portal</title>
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -44,7 +44,7 @@
       max-width: 680px;
     }
 
-    /* Hero Header */
+    /* Hero Branding Header */
     .header-card {
       background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
       color: white;
@@ -119,7 +119,7 @@
       text-transform: uppercase;
     }
 
-    /* Section Headers */
+    /* Section Label */
     .section-title {
       font-size: 0.85rem;
       font-weight: 700;
@@ -168,7 +168,10 @@
     .bg-peds { background: #f0fdf4; color: #16a34a; }
     .bg-chn { background: #f0f9ff; color: #0284c7; }
     .bg-repo { background: #fdf2f8; color: #db2777; }
-    .bg-ethics { background: #fff7ed; color: #ea580c; }
+    .bg-teaching { background: #fff7ed; color: #ea580c; }
+    .bg-ethics { background: #fef2f2; color: #dc2626; }
+    .bg-english { background: #f5f3ff; color: #7c3aed; }
+    .bg-perls { background: #f0fdfa; color: #0d9488; }
 
     .card-head h2 {
       font-size: 1.1rem;
@@ -228,7 +231,7 @@
     .tag-quiz { background: #fef3c7; color: #b45309; }
     .tag-ospe { background: #dcfce7; color: #15803d; }
 
-    /* Security Notice Banner */
+    /* Security Notice */
     .security-notice {
       background: #fffbebf5;
       border: 1px solid #fef08a;
@@ -241,13 +244,6 @@
       line-height: 1.4;
     }
 
-    .security-notice strong {
-      display: block;
-      margin-bottom: 4px;
-      color: #713f12;
-    }
-
-    /* Footer */
     footer {
       text-align: center;
       font-size: 0.78rem;
@@ -261,20 +257,20 @@
 
   <div class="app-container">
 
-    <!-- Header / Branding -->
+    <!-- Header Card -->
     <div class="header-card">
-      <span class="badge-header">BS Nursing • 5th Semester</span>
-      <h1>Academic Revision & OSPE Hub</h1>
-      <p>Access high-yield lecture summaries, clinical checklists, and practice quizzes designed for board preparation.</p>
+      <span class="badge-header">BS Nursing • Semester IV</span>
+      <h1>Academic & Clinical Portal</h1>
+      <p>High-yield lecture notes, OSPE clinical checklists, and practice quizzes tailored for 4th-semester nursing modules.</p>
       
       <div class="stats-bar">
         <div class="stat-item">
-          <div class="stat-val">7</div>
-          <div class="stat-lbl">Subjects</div>
+          <div class="stat-val">19</div>
+          <div class="stat-lbl">Credit Hours</div>
         </div>
         <div class="stat-item">
-          <div class="stat-val">100%</div>
-          <div class="stat-lbl">High-Yield</div>
+          <div class="stat-val">7</div>
+          <div class="stat-lbl">Modules</div>
         </div>
         <div class="stat-item">
           <div class="stat-val">OSPE</div>
@@ -283,7 +279,7 @@
       </div>
     </div>
 
-    <div class="section-title">Core Academic Modules</div>
+    <div class="section-title">Academic & Clinical Modules</div>
 
     <!-- Pediatric Health Nursing-I -->
     <div class="subject-card">
@@ -294,19 +290,19 @@
       <ul class="resource-list">
         <li class="resource-item">
           <a href="./pediatric/unit1.md">
-            <span class="link-info"><span class="link-icon">📖</span> Unit 1: Introduction to Child Health</span>
-            <span class="tag tag-note">Notes</span>
+            <span class="link-info"><span class="link-icon">📖</span> Unit 1: Child Health & Growth Notes</span>
+            <span class="tag tag-note">Theory</span>
           </a>
         </li>
         <li class="resource-item">
           <a href="./pediatric/ospe.md">
             <span class="link-info"><span class="link-icon">🩺</span> Pediatric Clinical OSPE Checklist</span>
-            <span class="tag tag-ospe">OSPE</span>
+            <span class="tag tag-ospe">Clinical</span>
           </a>
         </li>
         <li class="resource-item">
           <a href="https://forms.google.com" target="_blank">
-            <span class="link-info"><span class="link-icon">📝</span> Unit 1 Practice Quiz</span>
+            <span class="link-info"><span class="link-icon">📝</span> Pediatric Practice Quiz</span>
             <span class="tag tag-quiz">Quiz</span>
           </a>
         </li>
@@ -322,8 +318,14 @@
       <ul class="resource-list">
         <li class="resource-item">
           <a href="./chn/unit1.md">
-            <span class="link-info"><span class="link-icon">📖</span> Unit 1: Epidemiology & Community Care</span>
-            <span class="tag tag-note">Notes</span>
+            <span class="link-info"><span class="link-icon">📖</span> Epidemiology & Primary Care Notes</span>
+            <span class="tag tag-note">Theory</span>
+          </a>
+        </li>
+        <li class="resource-item">
+          <a href="./chn/clinical.md">
+            <span class="link-info"><span class="link-icon">🩺</span> CHN Clinical Logbook & Field Work</span>
+            <span class="tag tag-ospe">Clinical</span>
           </a>
         </li>
         <li class="resource-item">
@@ -344,43 +346,90 @@
       <ul class="resource-list">
         <li class="resource-item">
           <a href="./reproductive/unit1.md">
-            <span class="link-info"><span class="link-icon">📖</span> Unit 1: Maternal & Reproductive Health</span>
-            <span class="tag tag-note">Notes</span>
+            <span class="link-info"><span class="link-icon">📖</span> Antenatal Care & Maternal Health</span>
+            <span class="tag tag-note">Theory</span>
           </a>
         </li>
         <li class="resource-item">
           <a href="./reproductive/ospe.md">
             <span class="link-info"><span class="link-icon">🩺</span> Labor Room Clinical OSPE Checklist</span>
-            <span class="tag tag-ospe">OSPE</span>
+            <span class="tag tag-ospe">Clinical</span>
           </a>
         </li>
       </ul>
     </div>
 
-    <!-- Teaching, Ethics & Professional Skills -->
+    <!-- Teaching/Learning: Principles & Practices -->
     <div class="subject-card">
       <div class="card-head">
-        <div class="icon-box bg-ethics">📖</div>
-        <h2>Teaching, Ethics & Skills</h2>
+        <div class="icon-box bg-teaching">🎓</div>
+        <h2>Teaching & Learning Practices</h2>
+      </div>
+      <ul class="resource-list">
+        <li class="resource-item">
+          <a href="./teaching-learning/notes.md">
+            <span class="link-info"><span class="link-icon">📖</span> Educational Principles & Patient Teaching</span>
+            <span class="tag tag-note">Theory</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Nursing Ethics -->
+    <div class="subject-card">
+      <div class="card-head">
+        <div class="icon-box bg-ethics">⚖️</div>
+        <h2>Nursing Ethics</h2>
       </div>
       <ul class="resource-list">
         <li class="resource-item">
           <a href="./ethics/notes.md">
-            <span class="link-info"><span class="link-icon">⚖️</span> Nursing Ethics & Teaching Principles</span>
-            <span class="tag tag-note">Notes</span>
+            <span class="link-info"><span class="link-icon">📜</span> Code of Ethics & Legal Guidelines</span>
+            <span class="tag tag-note">Theory</span>
           </a>
         </li>
       </ul>
     </div>
 
-    <!-- Single User License Notice -->
+    <!-- English Proficiency Course-3 (EPC 3) -->
+    <div class="subject-card">
+      <div class="card-head">
+        <div class="icon-box bg-english">✍️</div>
+        <h2>English Proficiency Course-3 (EPC 3)</h2>
+      </div>
+      <ul class="resource-list">
+        <li class="resource-item">
+          <a href="./english/notes.md">
+            <span class="link-info"><span class="link-icon">📝</span> Academic Writing & Presentation Skills</span>
+            <span class="tag tag-note">Theory</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- PERLS 05 -->
+    <div class="subject-card">
+      <div class="card-head">
+        <div class="icon-box bg-perls">🌟</div>
+        <h2>PERLS 05</h2>
+      </div>
+      <ul class="resource-list">
+        <li class="resource-item">
+          <a href="./perls/notes.md">
+            <span class="link-info"><span class="link-icon">💡</span> Professionalism, Leadership & Research</span>
+            <span class="tag tag-note">Theory</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
     <div class="security-notice">
-      <strong>🔒 Authorized Access Only</strong>
-      This study portal is registered for individual student revision. Unlawful distribution or link sharing will result in immediate access termination.
+      <strong>🔒 Authorized Student Access</strong>
+      BS Nursing Semester IV Portal. Strictly for personal student revision and clinical preparation.
     </div>
 
     <footer>
-      © 2026 BSN 5th Semester Portal • Powered by GitHub Pages
+      © 2026 BSN Semester IV Portal • Powered by GitHub Pages
     </footer>
 
   </div>
