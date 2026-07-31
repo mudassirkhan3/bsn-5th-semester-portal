@@ -872,6 +872,62 @@
       document.getElementById("paymentModal").style.display = "none";
     }
   </script>
+  <script>
+  // 1. Set your WhatsApp number & Secret Passcode here
+  const MY_WHATSAPP_NUMBER = "923XXXXXXXXX"; 
+  const SECRET_PASSCODE = "BSN2026VIP"; // 👈 Give this code to paid students!
+
+  function toggleCard(headerElement) {
+    const parentCard = headerElement.parentElement;
+    parentCard.classList.toggle('active');
+  }
+
+  function openPaywall(subjectName) {
+    // Check if student has ALREADY unlocked the site
+    if (localStorage.getItem("bsn_unlocked") === "true") {
+      alert("✅ Access Granted! Opening " + subjectName + "...");
+      // Here, redirect them to the actual notes file or link!
+      // Example: window.location.href = "./pediatric/notes.md";
+      return;
+    }
+
+    // Check if they want to enter a passcode right now
+    let userCode = prompt("🔐 Enter your Secret Access Code (or press Cancel to buy access):");
+    
+    if (userCode === SECRET_PASSCODE) {
+      localStorage.setItem("bsn_unlocked", "true");
+      alert("🎉 Passcode Accepted! All 10 subjects are now fully unlocked for you.");
+      location.reload(); // Refreshes page to show unlocked state
+    } else if (userCode !== null) {
+      alert("❌ Invalid Access Code. If you haven't purchased access yet, complete payment via WhatsApp.");
+      showModal(subjectName);
+    } else {
+      showModal(subjectName);
+    }
+  }
+
+  function showModal(subjectName) {
+    const text = encodeURIComponent(`Hi Mudassir, I want to buy access for: ${subjectName}. Here is my payment screenshot:`);
+    document.getElementById("whatsappBtn").href = `https://wa.me/${MY_WHATSAPP_NUMBER}?text=${text}`;
+    document.getElementById("paymentModal").style.display = "flex";
+  }
+
+  function closeModal() {
+    document.getElementById("paymentModal").style.display = "none";
+  }
+
+  // Auto-check if user is already unlocked when page loads
+  window.onload = function() {
+    if (localStorage.getItem("bsn_unlocked") === "true") {
+      const lockBadges = document.querySelectorAll(".tag-lock");
+      lockBadges.forEach(badge => {
+        badge.textContent = "Unlocked";
+        badge.style.background = "#dcfce7";
+        badge.style.color = "#15803d";
+      });
+    }
+  };
+</script>
 
 </body>
 </html>
