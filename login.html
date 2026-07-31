@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Access | BSN Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background: #f8fafc; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+    .auth-card { background: #fff; width: 100%; max-width: 420px; border-radius: 20px; padding: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }
+    .tabs { display: flex; background: #f1f5f9; padding: 4px; border-radius: 12px; margin-bottom: 24px; }
+    .tab-btn { flex: 1; border: none; padding: 10px; border-radius: 8px; font-weight: 700; cursor: pointer; background: transparent; color: #64748b; }
+    .tab-btn.active { background: #fff; color: #0284c7; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .form-group { margin-bottom: 16px; }
+    label { font-size: 0.82rem; font-weight: 700; color: #334155; display: block; margin-bottom: 6px; }
+    input, select { width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; font-size: 0.9rem; }
+    input:focus { border-color: #0284c7; box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); }
+    .submit-btn { width: 100%; padding: 14px; background: #0284c7; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; }
+    .submit-btn:hover { background: #0369a1; }
+  </style>
+</head>
+<body>
+
+<div class="auth-card">
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" id="loginTab" onclick="showForm('login')">Login</button>
+    <button class="tab-btn" id="regTab" onclick="showForm('register')">Register Student</button>
+  </div>
+
+  <!-- LOGIN FORM -->
+  <form id="loginForm" onsubmit="handleLogin(event)">
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" id="loginEmail" placeholder="student@example.com" required>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="loginPassword" placeholder="••••••••" required>
+    </div>
+    <button type="submit" class="submit-btn">Login to Dashboard</button>
+  </form>
+
+  <!-- REGISTRATION FORM -->
+  <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" id="regName" placeholder="e.g. Student Name" required>
+    </div>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" id="regEmail" placeholder="student@example.com" required>
+    </div>
+    <div class="form-group">
+      <label>Semester</label>
+      <select id="regSemester">
+        <option>BSN Semester 4</option>
+        <option>BSN Semester 5</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Create Password</label>
+      <input type="password" id="regPassword" placeholder="At least 6 characters" required>
+    </div>
+    <button type="submit" class="submit-btn">Create Account</button>
+  </form>
+</div>
+
+<script>
+  function showForm(type) {
+    if (type === 'login') {
+      document.getElementById('loginForm').style.display = 'block';
+      document.getElementById('registerForm').style.display = 'none';
+      document.getElementById('loginTab').classList.add('active');
+      document.getElementById('regTab').classList.remove('active');
+    } else {
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('registerForm').style.display = 'block';
+      document.getElementById('loginTab').classList.remove('active');
+      document.getElementById('regTab').classList.add('active');
+    }
+  }
+
+  function handleRegister(e) {
+    e.preventDefault();
+    const user = {
+      name: document.getElementById('regName').value,
+      email: document.getElementById('regEmail').value,
+      semester: document.getElementById('regSemester').value,
+      password: document.getElementById('regPassword').value,
+      progress: 0
+    };
+    localStorage.setItem('bsn_user_' + user.email, JSON.stringify(user));
+    localStorage.setItem('bsn_current_user', user.email);
+    alert('🎉 Account created successfully!');
+    window.location.href = 'dashboard.html';
+  }
+
+  function handleLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    const pass = document.getElementById('loginPassword').value;
+    const savedUser = localStorage.getItem('bsn_user_' + email);
+
+    if (savedUser) {
+      const user = JSON.parse(savedUser);
+      if (user.password === pass) {
+        localStorage.setItem('bsn_current_user', email);
+        window.location.href = 'dashboard.html';
+      } else {
+        alert('❌ Incorrect password.');
+      }
+    } else {
+      alert('❌ No student account found with this email. Please register first.');
+    }
+  }
+</script>
+
+</body>
+</html>
