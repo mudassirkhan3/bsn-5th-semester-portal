@@ -191,6 +191,16 @@
 
     .banner-head h3 { font-size: 1.1rem; font-weight: 800; color: #0f172a; }
 
+    .device-info-badge {
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: #0369a1;
+      margin-top: 8px;
+    }
+
     .code-input-group {
       display: flex;
       gap: 10px;
@@ -293,8 +303,6 @@
       transition: max-height 0.35s ease-out;
       background: #ffffff;
     }
-
-    .subject-card.active .card-body { max-height: 240px; }
 
     .card-content {
       padding: 16px 24px 20px 24px;
@@ -401,7 +409,7 @@
       </a>
       <div class="nav-actions">
         <a href="login.html" class="login-btn">👤 Student Login</a>
-        <button class="pay-menu-btn" onclick="showModal('General Access')">💳 Buy Access</button>
+        <button class="pay-menu-btn" onclick="showModal('ALL')">💳 Buy Access</button>
       </div>
     </div>
   </header>
@@ -421,13 +429,17 @@
     <div class="access-banner">
       <div class="banner-head">
         <div>
-          <h3>🔑 Already have an Access Code?</h3>
-          <p style="font-size: 0.85rem; color: #64748b;">Enter your code below to instantly unlock all modules.</p>
+          <h3>🔑 Device-Locked Access Portal</h3>
+          <p style="font-size: 0.85rem; color: #64748b;">Enter your unique single-device unlock code below.</p>
         </div>
+      </div>
+
+      <div class="device-info-badge">
+        📱 Your Unique Device ID: <strong id="displayDeviceId">...</strong>
       </div>
       
       <div class="code-input-group">
-        <input type="text" id="passcodeInput" placeholder="Enter Access Code (e.g. BSN2026VIP)">
+        <input type="text" id="passcodeInput" placeholder="Enter Access Key (e.g. KEY-XXXXXX)" onkeypress="handleKeyPress(event)">
         <button class="apply-btn" onclick="verifyCodeInput()">Unlock Portal</button>
       </div>
     </div>
@@ -444,7 +456,7 @@
           <div class="head-left">
             <div class="icon-box bg-peds">👶</div>
             <div class="card-title-wrap">
-              <h2>Pediatric Health Nursing</h2>
+              <h2 id="title-pediatric">Pediatric Health Nursing 🔒</h2>
             </div>
           </div>
           <div class="chevron">▼</div>
@@ -453,9 +465,9 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./pediatric/index.html" onclick="checkAccess(event)">
-                  <span class="res-title">🔒 Pediatric Notes & Units</span>
-                  <span class="tag tag-lock">Unlock (Paid)</span>
+                <a href="./pediatric/index.html" onclick="checkSubjectAccess(event, 'pediatric')">
+                  <span class="res-title">Pediatric Notes & Units</span>
+                  <span class="tag tag-lock" id="tag-pediatric">Unlock (Paid)</span>
                 </a>
               </li>
             </ul>
@@ -469,7 +481,7 @@
           <div class="head-left">
             <div class="icon-box bg-repo">🤰</div>
             <div class="card-title-wrap">
-              <h2>Reproductive Health</h2>
+              <h2 id="title-reproductive">Reproductive Health 🔒</h2>
             </div>
           </div>
           <div class="chevron">▼</div>
@@ -478,9 +490,9 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./reproductive/index.html" onclick="checkAccess(event)">
-                  <span class="res-title">🔒 Reproductive Health Notes & Units</span>
-                  <span class="tag tag-lock">Unlock (Paid)</span>
+                <a href="./reproductive/index.html" onclick="checkSubjectAccess(event, 'reproductive')">
+                  <span class="res-title">Reproductive Health Notes & Units</span>
+                  <span class="tag tag-lock" id="tag-reproductive">Unlock (Paid)</span>
                 </a>
               </li>
             </ul>
@@ -494,7 +506,7 @@
           <div class="head-left">
             <div class="icon-box bg-english">📚</div>
             <div class="card-title-wrap">
-              <h2>English</h2>
+              <h2 id="title-english">English 🔒</h2>
             </div>
           </div>
           <div class="chevron">▼</div>
@@ -503,9 +515,9 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./english/index.html" onclick="checkAccess(event)">
-                  <span class="res-title">🔒 English Notes & Course Material</span>
-                  <span class="tag tag-lock">Unlock (Paid)</span>
+                <a href="./english/index.html" onclick="checkSubjectAccess(event, 'english')">
+                  <span class="res-title">English Notes & Course Material</span>
+                  <span class="tag tag-lock" id="tag-english">Unlock (Paid)</span>
                 </a>
               </li>
             </ul>
@@ -519,7 +531,7 @@
           <div class="head-left">
             <div class="icon-box bg-perls">💡</div>
             <div class="card-title-wrap">
-              <h2>PERLS</h2>
+              <h2 id="title-perls">PERLS 🔒</h2>
             </div>
           </div>
           <div class="chevron">▼</div>
@@ -528,9 +540,9 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./perls/index.html" onclick="checkAccess(event)">
-                  <span class="res-title">🔒 PERLS Notes & Modules</span>
-                  <span class="tag tag-lock">Unlock (Paid)</span>
+                <a href="./perls/index.html" onclick="checkSubjectAccess(event, 'perls')">
+                  <span class="res-title">PERLS Notes & Modules</span>
+                  <span class="tag tag-lock" id="tag-perls">Unlock (Paid)</span>
                 </a>
               </li>
             </ul>
@@ -554,7 +566,7 @@
             <ul class="resource-list">
               <li class="resource-item">
                 <a href="./nursing-ethics.html">
-                  <span>📖 Nursing Ethics Notes (Free Demo)</span>
+                  <span>Nursing Ethics Notes (Free Demo)</span>
                   <span class="tag tag-free">Free Access</span>
                 </a>
               </li>
@@ -572,10 +584,10 @@
     <div class="modal-box">
       <button class="close-btn" onclick="closeModal()">×</button>
       <h2>Unlock BSN Study Portal</h2>
-      <p style="font-size:0.85rem; color:#64748b; margin-top:6px;">Get full access to all course notes & materials.</p>
+      <p style="font-size:0.85rem; color:#64748b; margin-top:6px;">Get single-device access to course notes.</p>
       
       <div class="price-tag">
-        <span style="font-size:1rem;">PKR</span> 570
+        <span style="font-size:1rem;">PKR</span> <span id="modalPrice">570</span>
       </div>
 
       <div class="payment-methods">
@@ -585,7 +597,7 @@
       </div>
 
       <a id="whatsappBtn" href="#" target="_blank" class="wa-btn">
-        💬 Send Screenshot to Receive Code
+        💬 Send Device ID & Screenshot
       </a>
     </div>
   </div>
@@ -595,43 +607,123 @@
     <p>© 2026 Academic Portal • Prepared by Mudassir Khan</p>
   </footer>
 
-  <!-- JAVASCRIPT LOGIC -->
+  <!-- JAVASCRIPT LOGIC (METHOD 1 IMPLEMENTATION) -->
   <script>
     const MY_WHATSAPP_NUMBER = "923241064487"; 
-    const SECRET_PASSCODE = "BSN2026VIP"; 
+    // Your secret master key - keep this secret!
+    const MASTER_KEY = "MUDASSIR_BSN_SECRET"; 
+
+    // 1. Retrieve or generate unique Device ID for this browser
+    function getDeviceId() {
+      let deviceId = localStorage.getItem("bsn_device_id");
+      if (!deviceId) {
+        deviceId = "BSN-" + Math.floor(100000 + Math.random() * 900000);
+        localStorage.setItem("bsn_device_id", deviceId);
+      }
+      return deviceId;
+    }
+
+    // 2. Generate mathematically expected unlock code for device + subject
+    function generateExpectedCode(deviceId, subjectKey) {
+      let str = deviceId + subjectKey + MASTER_KEY;
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+        hash = (hash << 5) - hash + str.charCodeAt(i);
+        hash |= 0;
+      }
+      return "KEY-" + Math.abs(hash).toString(36).toUpperCase();
+    }
 
     function toggleCard(headerElement) {
       const parentCard = headerElement.parentElement;
+      const body = parentCard.querySelector('.card-body');
+      
       parentCard.classList.toggle('active');
+      
+      if (parentCard.classList.contains('active')) {
+        body.style.maxHeight = body.scrollHeight + "px";
+      } else {
+        body.style.maxHeight = "0px";
+      }
     }
 
+    function handleKeyPress(event) {
+      if (event.key === "Enter") {
+        verifyCodeInput();
+      }
+    }
+
+    function getUnlockedSubjects() {
+      const data = localStorage.getItem("bsn_unlocked_list");
+      return data ? JSON.parse(data) : [];
+    }
+
+    // 3. Verify user code specifically for THIS Device ID
     function verifyCodeInput() {
-      const code = document.getElementById("passcodeInput").value.trim();
-      if (!code) {
-        alert("Please enter a code first.");
+      const userCode = document.getElementById("passcodeInput").value.trim().toUpperCase();
+      const deviceId = getDeviceId();
+
+      if (!userCode) {
+        alert("Please enter your key first.");
         return;
       }
 
-      if (code === SECRET_PASSCODE) {
-        localStorage.setItem("bsn_unlocked", "true");
-        alert("🎉 Code Accepted! All BSN resources are now unlocked.");
+      const subjects = ["pediatric", "reproductive", "english", "perls", "ALL"];
+      let matchedSubject = null;
+
+      for (let sub of subjects) {
+        if (userCode === generateExpectedCode(deviceId, sub)) {
+          matchedSubject = sub;
+          break;
+        }
+      }
+
+      if (matchedSubject) {
+        let currentUnlocked = getUnlockedSubjects();
+        if (matchedSubject === "ALL") {
+          currentUnlocked = ["ALL"];
+        } else if (!currentUnlocked.includes(matchedSubject)) {
+          currentUnlocked.push(matchedSubject);
+        }
+        localStorage.setItem("bsn_unlocked_list", JSON.stringify(currentUnlocked));
+        alert("🎉 Code Accepted! Unlocked for this device.");
+        document.getElementById("passcodeInput").value = "";
         applyUnlockedState();
       } else {
-        alert("❌ Invalid Access Code. Please check the code or make payment via JazzCash.");
+        alert("❌ Invalid key! This key was either typed incorrectly or generated for a different device.");
       }
     }
 
-    // Prevents link navigation if NOT unlocked
-    function checkAccess(event) {
-      if (localStorage.getItem("bsn_unlocked") !== "true") {
-        event.preventDefault();
-        showModal('Subject Notes');
+    // 4. Check access per subject
+    function checkSubjectAccess(event, subjectKey) {
+      const unlocked = getUnlockedSubjects();
+      if (unlocked.includes("ALL") || unlocked.includes(subjectKey)) {
+        return true; // Access granted
       }
+      event.preventDefault();
+      showModal(subjectKey);
     }
 
-    function showModal(subjectName) {
-      const text = encodeURIComponent(`Hi Mudassir, I want access for: ${subjectName}. Here is my JazzCash payment screenshot:`);
-      document.getElementById("whatsappBtn").href = `https://wa.me/${MY_WHATSAPP_NUMBER}?text=${text}`;
+    function showModal(subjectKey) {
+      const deviceId = getDeviceId();
+      let title = "Full VIP Portal Access";
+      let price = "570";
+
+      if (subjectKey === "pediatric") { title = "Pediatric Health Nursing"; price = "350"; }
+      else if (subjectKey === "reproductive") { title = "Reproductive Health"; price = "350"; }
+      else if (subjectKey === "english") { title = "English Module"; price = "250"; }
+      else if (subjectKey === "perls") { title = "PERLS Module"; price = "250"; }
+
+      document.getElementById("modalPrice").innerText = price;
+
+      const msg = encodeURIComponent(
+        `Hi Mudassir, I want to buy access for: ${title}.\n` +
+        `My Device ID: ${deviceId}\n` +
+        `Subject Code: ${subjectKey}\n` +
+        `Here is my JazzCash payment screenshot:`
+      );
+
+      document.getElementById("whatsappBtn").href = `https://wa.me/${MY_WHATSAPP_NUMBER}?text=${msg}`;
       document.getElementById("paymentModal").style.display = "flex";
     }
 
@@ -639,157 +731,37 @@
       document.getElementById("paymentModal").style.display = "none";
     }
 
+    // 5. Dynamic UI Updates
     function applyUnlockedState() {
-      if (localStorage.getItem("bsn_unlocked") === "true") {
-        const lockBadges = document.querySelectorAll(".tag-lock");
-        lockBadges.forEach(badge => {
-          badge.textContent = "Unlocked";
-          badge.style.background = "#dcfce7";
-          badge.style.color = "#15803d";
-        });
+      const unlocked = getUnlockedSubjects();
+      const isAll = unlocked.includes("ALL");
+      const subjectKeys = ["pediatric", "reproductive", "english", "perls"];
 
-        const resourceTitles = document.querySelectorAll(".res-title");
-        resourceTitles.forEach(title => {
-          title.textContent = title.textContent.replace("🔒 ", "📖 ");
-        });
-        
-        const inputGroup = document.querySelector(".access-banner");
-        if(inputGroup) {
-          inputGroup.innerHTML = `
-            <div style="color: #15803d; font-weight: 700; font-size: 0.95rem;">
-              ✅ You have active VIP Access to all BSN Portal Materials.
-            </div>`;
+      subjectKeys.forEach(key => {
+        if (isAll || unlocked.includes(key)) {
+          const badge = document.getElementById(`tag-${key}`);
+          const title = document.getElementById(`title-${key}`);
+          if (badge) { 
+            badge.textContent = "Unlocked"; 
+            badge.className = "tag tag-free"; 
+          }
+          if (title) { 
+            title.textContent = title.textContent.replace("🔒", "📖"); 
+          }
         }
-      }
+      });
     }
 
     window.onload = function() {
+      const deviceId = getDeviceId();
+      document.getElementById("displayDeviceId").innerText = deviceId;
       applyUnlockedState();
+
+      document.querySelectorAll('.subject-card.active .card-body').forEach(body => {
+        body.style.maxHeight = body.scrollHeight + "px";
+      });
     };
   </script>
-  <script>
-  const MY_WHATSAPP_NUMBER = "923241064487"; 
-
-  // 1. DEFINE YOUR ACCESS CODES HERE
-  const ACCESS_CODES = {
-    "PEDS2026": "pediatric",
-    "REPO2026": "reproductive",
-    "ENG2026":  "english",
-    "PERLS2026": "perls",
-    "BSN2026VIP": "ALL" // Full Portal Pass
-  };
-
-  function toggleCard(headerElement) {
-    const parentCard = headerElement.parentElement;
-    parentCard.classList.toggle('active');
-  }
-
-  // Helper function to check stored access
-  function getUnlockedSubjects() {
-    const data = localStorage.getItem("bsn_unlocked_list");
-    return data ? JSON.parse(data) : [];
-  }
-
-  // 2. VERIFY INPUT CODE
-  function verifyCodeInput() {
-    const code = document.getElementById("passcodeInput").value.trim().toUpperCase();
-    if (!code) {
-      alert("Please enter an access code first.");
-      return;
-    }
-
-    if (ACCESS_CODES[code]) {
-      const subjectKey = ACCESS_CODES[code];
-      let currentUnlocked = getUnlockedSubjects();
-
-      if (subjectKey === "ALL") {
-        currentUnlocked = ["ALL"];
-      } else {
-        if (!currentUnlocked.includes(subjectKey)) {
-          currentUnlocked.push(subjectKey);
-        }
-      }
-
-      localStorage.setItem("bsn_unlocked_list", JSON.stringify(currentUnlocked));
-      alert("🎉 Access Code Accepted! Your content is unlocked.");
-      applyUnlockedState();
-    } else {
-      alert("❌ Invalid Code. Contact Mudassir via WhatsApp to purchase a key.");
-    }
-  }
-
-  // 3. CHECK PERMISSION WHEN CLICKING A SUBJECT
-  function checkSubjectAccess(event, subjectKey) {
-    const unlocked = getUnlockedSubjects();
-    
-    // If user bought "ALL" or bought this specific subject, allow access
-    if (unlocked.includes("ALL") || unlocked.includes(subjectKey)) {
-      return true; // Let link open normally
-    }
-
-    // Otherwise block access and show payment modal
-    event.preventDefault();
-    showModal(subjectKey);
-  }
-
-  // 4. DISPLAY MODAL WITH SPECIFIC SUBJECT PRICE
-  function showModal(subjectKey) {
-    let title = "Full Portal VIP Access";
-    let price = "1,499";
-
-    if (subjectKey === "pediatric") { title = "Pediatric Health Nursing"; price = "499"; }
-    else if (subjectKey === "reproductive") { title = "Reproductive Health"; price = "499"; }
-    else if (subjectKey === "english") { title = "English Module"; price = "350"; }
-    else if (subjectKey === "perls") { title = "PERLS Module"; price = "350"; }
-
-    document.getElementById("modalSubjectTitle").textContent = title;
-    document.getElementById("modalPrice").textContent = price;
-
-    const msg = encodeURIComponent(`Hi Mudassir, I want access for: ${title} (PKR ${price}). Here is my JazzCash payment screenshot:`);
-    document.getElementById("whatsappBtn").href = `https://wa.me/${MY_WHATSAPP_NUMBER}?text=${msg}`;
-    document.getElementById("paymentModal").style.display = "flex";
-  }
-
-  function closeModal() {
-    document.getElementById("paymentModal").style.display = "none";
-  }
-
-  // 5. UPDATE UI CARDS (Change Locks to Unlocked Badges)
-  function applyUnlockedState() {
-    const unlocked = getUnlockedSubjects();
-    const isAll = unlocked.includes("ALL");
-
-    const subjectKeys = ["pediatric", "reproductive", "english", "perls"];
-
-    subjectKeys.forEach(key => {
-      if (isAll || unlocked.includes(key)) {
-        const badge = document.getElementById(`tag-${key}`);
-        const title = document.getElementById(`title-${key}`);
-
-        if (badge) {
-          badge.textContent = "Unlocked";
-          badge.className = "tag tag-free";
-        }
-        if (title) {
-          title.textContent = title.textContent.replace("🔒", "📖");
-        }
-      }
-    });
-
-    if (isAll) {
-      const banner = document.querySelector(".access-banner");
-      if (banner) {
-        banner.innerHTML = `<div style="color: #15803d; font-weight: 700; font-size: 0.95rem; text-align: center;">
-          ✅ Full VIP Portal Pass Active! All course modules are unlocked.
-        </div>`;
-      }
-    }
-  }
-
-  window.onload = function() {
-    applyUnlockedState();
-  };
-</script>
 
 </body>
 </html>
