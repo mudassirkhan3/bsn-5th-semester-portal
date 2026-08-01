@@ -667,6 +667,129 @@
       applyUnlockedState();
     };
   </script>
+  <script>
+  const MY_WHATSAPP_NUMBER = "923241064487"; 
+
+  // 1. DEFINE YOUR ACCESS CODES HERE
+  const ACCESS_CODES = {
+    "PEDS2026": "pediatric",
+    "REPO2026": "reproductive",
+    "ENG2026":  "english",
+    "PERLS2026": "perls",
+    "BSN2026VIP": "ALL" // Full Portal Pass
+  };
+
+  function toggleCard(headerElement) {
+    const parentCard = headerElement.parentElement;
+    parentCard.classList.toggle('active');
+  }
+
+  // Helper function to check stored access
+  function getUnlockedSubjects() {
+    const data = localStorage.getItem("bsn_unlocked_list");
+    return data ? JSON.parse(data) : [];
+  }
+
+  // 2. VERIFY INPUT CODE
+  function verifyCodeInput() {
+    const code = document.getElementById("passcodeInput").value.trim().toUpperCase();
+    if (!code) {
+      alert("Please enter an access code first.");
+      return;
+    }
+
+    if (ACCESS_CODES[code]) {
+      const subjectKey = ACCESS_CODES[code];
+      let currentUnlocked = getUnlockedSubjects();
+
+      if (subjectKey === "ALL") {
+        currentUnlocked = ["ALL"];
+      } else {
+        if (!currentUnlocked.includes(subjectKey)) {
+          currentUnlocked.push(subjectKey);
+        }
+      }
+
+      localStorage.setItem("bsn_unlocked_list", JSON.stringify(currentUnlocked));
+      alert("🎉 Access Code Accepted! Your content is unlocked.");
+      applyUnlockedState();
+    } else {
+      alert("❌ Invalid Code. Contact Mudassir via WhatsApp to purchase a key.");
+    }
+  }
+
+  // 3. CHECK PERMISSION WHEN CLICKING A SUBJECT
+  function checkSubjectAccess(event, subjectKey) {
+    const unlocked = getUnlockedSubjects();
+    
+    // If user bought "ALL" or bought this specific subject, allow access
+    if (unlocked.includes("ALL") || unlocked.includes(subjectKey)) {
+      return true; // Let link open normally
+    }
+
+    // Otherwise block access and show payment modal
+    event.preventDefault();
+    showModal(subjectKey);
+  }
+
+  // 4. DISPLAY MODAL WITH SPECIFIC SUBJECT PRICE
+  function showModal(subjectKey) {
+    let title = "Full Portal VIP Access";
+    let price = "1,499";
+
+    if (subjectKey === "pediatric") { title = "Pediatric Health Nursing"; price = "499"; }
+    else if (subjectKey === "reproductive") { title = "Reproductive Health"; price = "499"; }
+    else if (subjectKey === "english") { title = "English Module"; price = "350"; }
+    else if (subjectKey === "perls") { title = "PERLS Module"; price = "350"; }
+
+    document.getElementById("modalSubjectTitle").textContent = title;
+    document.getElementById("modalPrice").textContent = price;
+
+    const msg = encodeURIComponent(`Hi Mudassir, I want access for: ${title} (PKR ${price}). Here is my JazzCash payment screenshot:`);
+    document.getElementById("whatsappBtn").href = `https://wa.me/${MY_WHATSAPP_NUMBER}?text=${msg}`;
+    document.getElementById("paymentModal").style.display = "flex";
+  }
+
+  function closeModal() {
+    document.getElementById("paymentModal").style.display = "none";
+  }
+
+  // 5. UPDATE UI CARDS (Change Locks to Unlocked Badges)
+  function applyUnlockedState() {
+    const unlocked = getUnlockedSubjects();
+    const isAll = unlocked.includes("ALL");
+
+    const subjectKeys = ["pediatric", "reproductive", "english", "perls"];
+
+    subjectKeys.forEach(key => {
+      if (isAll || unlocked.includes(key)) {
+        const badge = document.getElementById(`tag-${key}`);
+        const title = document.getElementById(`title-${key}`);
+
+        if (badge) {
+          badge.textContent = "Unlocked";
+          badge.className = "tag tag-free";
+        }
+        if (title) {
+          title.textContent = title.textContent.replace("🔒", "📖");
+        }
+      }
+    });
+
+    if (isAll) {
+      const banner = document.querySelector(".access-banner");
+      if (banner) {
+        banner.innerHTML = `<div style="color: #15803d; font-weight: 700; font-size: 0.95rem; text-align: center;">
+          ✅ Full VIP Portal Pass Active! All course modules are unlocked.
+        </div>`;
+      }
+    }
+  }
+
+  window.onload = function() {
+    applyUnlockedState();
+  };
+</script>
 
 </body>
 </html>
