@@ -24,65 +24,18 @@
       --shadow: 0 10px 30px -5px rgba(2, 132, 199, 0.08);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: var(--bg-main);
-      color: var(--text-dark);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; scroll-behavior: smooth; }
+    body { background-color: var(--bg-main); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
     /* NAVBAR */
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-      padding: 14px 24px;
-    }
-
-    .nav-container {
-      max-width: 860px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 800;
-      font-size: 1.15rem;
-    }
+    .navbar { position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); padding: 14px 24px; }
+    .nav-container { max-width: 860px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-dark); font-weight: 800; font-size: 1.15rem; }
 
     .pulse-box {
       background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
-      animation: heartbeat 2s infinite ease-in-out;
+      color: white; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); animation: heartbeat 2s infinite ease-in-out;
     }
 
     @keyframes heartbeat {
@@ -93,188 +46,43 @@
       70% { transform: scale(1); }
     }
 
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .pay-menu-btn {
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
-      transition: transform 0.2s;
-    }
-
-    .login-btn {
-      background: #0284c7;
-      color: white;
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: transform 0.2s;
-    }
-
-    .pay-menu-btn:hover, .login-btn:hover { transform: translateY(-2px); }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .pay-menu-btn { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); transition: transform 0.2s; }
+    .pay-menu-btn:hover { transform: translateY(-2px); }
 
     /* MAIN CONTENT */
-    .main-wrapper {
-      flex: 1;
-      width: 100%;
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 32px 16px;
-    }
+    .main-wrapper { flex: 1; width: 100%; max-width: 860px; margin: 0 auto; padding: 32px 16px; }
 
     .hero-card {
       background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
-      color: white;
-      border-radius: 24px;
-      padding: 40px 32px;
-      margin-bottom: 24px;
-      box-shadow: 0 20px 40px -10px rgba(2, 132, 199, 0.3);
+      color: white; border-radius: 24px; padding: 40px 32px; margin-bottom: 24px; box-shadow: 0 20px 40px -10px rgba(2, 132, 199, 0.3);
     }
-
-    .hero-tag {
-      background: rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(8px);
-      color: #e0f2fe;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 5px 14px;
-      border-radius: 20px;
-      display: inline-block;
-      margin-bottom: 14px;
-      text-transform: uppercase;
-    }
-
+    .hero-tag { background: rgba(255, 255, 255, 0.18); backdrop-filter: blur(8px); color: #e0f2fe; font-size: 0.75rem; font-weight: 700; padding: 5px 14px; border-radius: 20px; display: inline-block; margin-bottom: 14px; text-transform: uppercase; }
     .hero-card h1 { font-size: 1.9rem; font-weight: 800; margin-bottom: 10px; }
     .hero-card p { color: #bae6fd; font-size: 0.95rem; }
-
-    .author-bar {
-      margin-top: 24px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255, 255, 255, 0.15);
-      font-size: 0.85rem;
-      color: #e0f2fe;
-    }
+    .author-bar { margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 0.85rem; color: #e0f2fe; }
 
     /* ACCESS BANNER */
-    .access-banner {
-      background: #ffffff;
-      border: 2px dashed #0284c7;
-      border-radius: var(--radius);
-      padding: 24px;
-      margin-bottom: 32px;
-      box-shadow: var(--shadow);
-    }
-
-    .banner-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
+    .access-banner { background: #ffffff; border: 2px dashed #0284c7; border-radius: var(--radius); padding: 24px; margin-bottom: 32px; box-shadow: var(--shadow); }
     .banner-head h3 { font-size: 1.1rem; font-weight: 800; color: #0f172a; }
-
-    .device-info-badge {
-      background: #f0f9ff;
-      border: 1px solid #bae6fd;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      color: #0369a1;
-      margin-top: 8px;
-    }
-
-    .code-input-group {
-      display: flex;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .code-input-group input {
-      flex: 1;
-      padding: 12px 16px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      outline: none;
-      text-transform: uppercase;
-    }
-
-    .code-input-group input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
-    }
-
-    .apply-btn {
-      background: var(--primary-dark);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
+    .device-info-badge { background: #f0f9ff; border: 1px solid #bae6fd; padding: 10px 14px; border-radius: 10px; font-size: 0.85rem; color: #0369a1; margin-top: 10px; font-weight: 600; }
+    
+    .code-input-group { display: flex; gap: 10px; margin-top: 12px; }
+    .code-input-group input { flex: 1; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; font-size: 0.9rem; font-weight: 600; outline: none; text-transform: uppercase; }
+    .code-input-group input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); }
+    .apply-btn { background: var(--primary-dark); color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
     .apply-btn:hover { background: var(--primary); }
 
-    .section-title {
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
+    .section-title { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 16px; }
 
     /* SUBJECT CARDS */
     .subjects-grid { display: flex; flex-direction: column; gap: 16px; }
-
-    .subject-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .card-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 24px;
-      cursor: pointer;
-      user-select: none;
-    }
-
+    .subject-card { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; transition: all 0.3s ease; }
+    .card-head { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; cursor: pointer; user-select: none; }
     .card-head:hover { background: #f8fafc; }
     .head-left { display: flex; align-items: center; gap: 16px; }
 
-    .icon-box {
-      width: 48px; height: 48px;
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; flex-shrink: 0;
-    }
-
+    .icon-box { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
     .bg-peds { background: #f0fdf4; }
     .bg-repo { background: #fdf2f8; }
     .bg-ethics { background: #fef2f2; }
@@ -282,120 +90,32 @@
     .bg-perls { background: #f0fdfa; }
 
     .card-title-wrap h2 { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); }
+    .chevron { width: 28px; height: 28px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--text-muted); transition: transform 0.3s ease; }
+    .subject-card.active .chevron { transform: rotate(180deg); background: #e0f2fe; color: var(--primary-dark); }
 
-    .chevron {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: #f1f5f9;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.8rem; color: var(--text-muted);
-      transition: transform 0.3s ease;
-    }
-
-    .subject-card.active .chevron {
-      transform: rotate(180deg);
-      background: #e0f2fe; color: var(--primary-dark);
-    }
-
-    .card-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s ease-out;
-      background: #ffffff;
-    }
-
-    .card-content {
-      padding: 16px 24px 20px 24px;
-      border-top: 1px dashed var(--border);
-    }
-
+    .card-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease-out; background: #ffffff; }
+    .card-content { padding: 16px 24px 20px 24px; border-top: 1px dashed var(--border); }
     .resource-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 
-    .resource-item a {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      text-decoration: none;
-      color: var(--text-dark);
-      font-size: 0.88rem;
-      font-weight: 600;
-      transition: all 0.2s ease;
-    }
+    .resource-item a { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: var(--text-dark); font-size: 0.88rem; font-weight: 600; transition: all 0.2s ease; }
+    .resource-item a:hover { background: #f0f9ff; border-color: #bae6fd; color: var(--primary-dark); transform: translateX(6px); }
 
-    .resource-item a:hover {
-      background: #f0f9ff;
-      border-color: #bae6fd;
-      color: var(--primary-dark);
-      transform: translateX(6px);
-    }
-
-    .tag { font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; }
+    .tag { font-size: 0.72rem; font-weight: 700; padding: 6px 12px; border-radius: 8px; text-transform: uppercase; }
     .tag-lock { background: #fef3c7; color: #b45309; }
-    .tag-free { background: #dcfce7; color: #15803d; }
+    .tag-unlocked { background: #dcfce7; color: #15803d; }
 
     /* MODAL */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(6px);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(6px); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 16px; }
+    .modal-box { background: #ffffff; border-radius: 20px; padding: 32px 24px; max-width: 440px; width: 100%; text-align: center; position: relative; }
+    .close-btn { position: absolute; top: 14px; right: 18px; background: none; border: none; font-size: 1.5rem; color: #64748b; cursor: pointer; }
+    
+    .price-tag { background: #f0f9ff; color: #0369a1; border: 1px solid #bae6fd; padding: 12px; border-radius: 12px; font-size: 1.6rem; font-weight: 800; margin: 16px 0; }
+    .payment-methods { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; text-align: left; font-size: 0.88rem; margin-bottom: 20px; color: #334155; }
+    .payment-methods code { background: #e2e8f0; padding: 4px 8px; border-radius: 6px; font-weight: 800; font-family: monospace; color: #0369a1; font-size: 1rem; }
+    
+    .wa-btn { display: block; background: #25d366; color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem; padding: 14px; border-radius: 12px; }
 
-    .modal-box {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 32px 24px;
-      max-width: 440px;
-      width: 100%;
-      text-align: center;
-      position: relative;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 14px; right: 18px;
-      background: none; border: none;
-      font-size: 1.5rem; color: #64748b; cursor: pointer;
-    }
-
-    .price-tag {
-      background: #f0f9ff; color: #0369a1;
-      border: 1px solid #bae6fd;
-      padding: 12px; border-radius: 12px;
-      font-size: 1.6rem; font-weight: 800; margin: 16px 0;
-    }
-
-    .payment-methods {
-      background: #f8fafc; border: 1px solid #e2e8f0;
-      border-radius: 12px; padding: 16px; text-align: left;
-      font-size: 0.88rem; margin-bottom: 20px; color: #334155;
-    }
-
-    .payment-methods code {
-      background: #e2e8f0; padding: 4px 8px; border-radius: 6px; font-weight: 800; font-family: monospace; color: #0369a1; font-size: 1rem;
-    }
-
-    .wa-btn {
-      display: block; background: #25d366; color: white;
-      text-decoration: none; font-weight: 700; font-size: 0.9rem;
-      padding: 14px; border-radius: 12px;
-    }
-
-    footer {
-      background: #0f172a; color: #94a3b8;
-      border-top: 1px solid #1e293b;
-      padding: 40px 24px; margin-top: 50px;
-      text-align: center; font-size: 0.85rem;
-    }
+    footer { background: #0f172a; color: #94a3b8; border-top: 1px solid #1e293b; padding: 40px 24px; margin-top: 50px; text-align: center; font-size: 0.85rem; }
   </style>
 </head>
 <body>
@@ -408,7 +128,6 @@
         <span>BSN Portal</span>
       </a>
       <div class="nav-actions">
-        <a href="login.html" class="login-btn">👤 Student Login</a>
         <button class="pay-menu-btn" onclick="showModal('ALL')">💳 Buy Access</button>
       </div>
     </div>
@@ -422,25 +141,25 @@
       <span class="hero-tag">BS Nursing • Official Curriculum</span>
       <h1>Academic & Clinical Portal</h1>
       <p>Interactive study materials, lecture summaries, and clinical guides.</p>
-      <div class="author-bar">👤 Curated & Maintained by <strong>Mudassir Khan</strong></div>
+      <div class="author-bar">👤 Curated & Maintained by <strong>Mudassir Hussain Khan</strong></div>
     </div>
 
     <!-- ACCESS CODE BANNER -->
     <div class="access-banner">
       <div class="banner-head">
         <div>
-          <h3>🔑 Device-Locked Access Portal</h3>
-          <p style="font-size: 0.85rem; color: #64748b;">Enter your unique single-device unlock code below.</p>
+          <h3>🔑 Enter Unlock Key</h3>
+          <p style="font-size: 0.85rem; color: #64748b;">Paste the key sent to you on WhatsApp to activate your notes.</p>
         </div>
       </div>
 
       <div class="device-info-badge">
-        📱 Your Unique Device ID: <strong id="displayDeviceId">...</strong>
+        📱 Your Device ID: <strong id="displayDeviceId">Loading...</strong>
       </div>
       
       <div class="code-input-group">
-        <input type="text" id="passcodeInput" placeholder="Enter Access Key (e.g. KEY-XXXXXX)" onkeypress="handleKeyPress(event)">
-        <button class="apply-btn" onclick="verifyCodeInput()">Unlock Portal</button>
+        <input type="text" id="passcodeInput" placeholder="e.g. KEY-XXXXXX" onkeypress="handleKeyPress(event)">
+        <button class="apply-btn" onclick="verifyCodeInput()">Unlock Now</button>
       </div>
     </div>
 
@@ -467,7 +186,7 @@
               <li class="resource-item">
                 <a href="./pediatric/index.html" onclick="checkSubjectAccess(event, 'pediatric')">
                   <span class="res-title">Pediatric Notes & Units</span>
-                  <span class="tag tag-lock" id="tag-pediatric">Unlock (Paid)</span>
+                  <span class="tag tag-lock" id="tag-pediatric">🔒 Locked (Click to Buy)</span>
                 </a>
               </li>
             </ul>
@@ -492,7 +211,7 @@
               <li class="resource-item">
                 <a href="./reproductive/index.html" onclick="checkSubjectAccess(event, 'reproductive')">
                   <span class="res-title">Reproductive Health Notes & Units</span>
-                  <span class="tag tag-lock" id="tag-reproductive">Unlock (Paid)</span>
+                  <span class="tag tag-lock" id="tag-reproductive">🔒 Locked (Click to Buy)</span>
                 </a>
               </li>
             </ul>
@@ -517,7 +236,7 @@
               <li class="resource-item">
                 <a href="./english/index.html" onclick="checkSubjectAccess(event, 'english')">
                   <span class="res-title">English Notes & Course Material</span>
-                  <span class="tag tag-lock" id="tag-english">Unlock (Paid)</span>
+                  <span class="tag tag-lock" id="tag-english">🔒 Locked (Click to Buy)</span>
                 </a>
               </li>
             </ul>
@@ -542,7 +261,7 @@
               <li class="resource-item">
                 <a href="./perls/index.html" onclick="checkSubjectAccess(event, 'perls')">
                   <span class="res-title">PERLS Notes & Modules</span>
-                  <span class="tag tag-lock" id="tag-perls">Unlock (Paid)</span>
+                  <span class="tag tag-lock" id="tag-perls">🔒 Locked (Click to Buy)</span>
                 </a>
               </li>
             </ul>
@@ -567,7 +286,7 @@
               <li class="resource-item">
                 <a href="./nursing-ethics.html">
                   <span>Nursing Ethics Notes (Free Demo)</span>
-                  <span class="tag tag-free">Free Access</span>
+                  <span class="tag tag-unlocked">✅ Free Access</span>
                 </a>
               </li>
             </ul>
@@ -604,16 +323,15 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2026 Academic Portal • Prepared by Mudassir Khan</p>
+    <p>© 2026 Academic Portal • Prepared by Mudassir Hussain Khan</p>
   </footer>
 
-  <!-- JAVASCRIPT LOGIC (METHOD 1 IMPLEMENTATION) -->
+  <!-- JAVASCRIPT ENGINE -->
   <script>
     const MY_WHATSAPP_NUMBER = "923241064487"; 
-    // Your secret master key - keep this secret!
     const MASTER_KEY = "MUDASSIR_BSN_SECRET"; 
 
-    // 1. Retrieve or generate unique Device ID for this browser
+    // 1. Assign or load persistent Device ID
     function getDeviceId() {
       let deviceId = localStorage.getItem("bsn_device_id");
       if (!deviceId) {
@@ -623,9 +341,9 @@
       return deviceId;
     }
 
-    // 2. Generate mathematically expected unlock code for device + subject
+    // 2. Hash mathematical verification formula
     function generateExpectedCode(deviceId, subjectKey) {
-      let str = deviceId + subjectKey + MASTER_KEY;
+      let str = deviceId.trim().toUpperCase() + subjectKey.trim() + MASTER_KEY;
       let hash = 0;
       for (let i = 0; i < str.length; i++) {
         hash = (hash << 5) - hash + str.charCodeAt(i);
@@ -637,9 +355,7 @@
     function toggleCard(headerElement) {
       const parentCard = headerElement.parentElement;
       const body = parentCard.querySelector('.card-body');
-      
       parentCard.classList.toggle('active');
-      
       if (parentCard.classList.contains('active')) {
         body.style.maxHeight = body.scrollHeight + "px";
       } else {
@@ -648,9 +364,7 @@
     }
 
     function handleKeyPress(event) {
-      if (event.key === "Enter") {
-        verifyCodeInput();
-      }
+      if (event.key === "Enter") { verifyCodeInput(); }
     }
 
     function getUnlockedSubjects() {
@@ -658,15 +372,12 @@
       return data ? JSON.parse(data) : [];
     }
 
-    // 3. Verify user code specifically for THIS Device ID
+    // 3. Key Verification Algorithm
     function verifyCodeInput() {
       const userCode = document.getElementById("passcodeInput").value.trim().toUpperCase();
       const deviceId = getDeviceId();
 
-      if (!userCode) {
-        alert("Please enter your key first.");
-        return;
-      }
+      if (!userCode) { alert("Please enter your key first."); return; }
 
       const subjects = ["pediatric", "reproductive", "english", "perls", "ALL"];
       let matchedSubject = null;
@@ -681,24 +392,24 @@
       if (matchedSubject) {
         let currentUnlocked = getUnlockedSubjects();
         if (matchedSubject === "ALL") {
-          currentUnlocked = ["ALL"];
+          currentUnlocked = ["pediatric", "reproductive", "english", "perls", "ALL"];
         } else if (!currentUnlocked.includes(matchedSubject)) {
           currentUnlocked.push(matchedSubject);
         }
         localStorage.setItem("bsn_unlocked_list", JSON.stringify(currentUnlocked));
-        alert("🎉 Code Accepted! Unlocked for this device.");
+        alert("🎉 Code Accepted! Your subject is now unlocked forever on this device.");
         document.getElementById("passcodeInput").value = "";
         applyUnlockedState();
       } else {
-        alert("❌ Invalid key! This key was either typed incorrectly or generated for a different device.");
+        alert("❌ Invalid key! Check for typos or ensure you gave Mudassir your exact Device ID (" + deviceId + ").");
       }
     }
 
-    // 4. Check access per subject
+    // 4. Access Guard on Note Links
     function checkSubjectAccess(event, subjectKey) {
       const unlocked = getUnlockedSubjects();
       if (unlocked.includes("ALL") || unlocked.includes(subjectKey)) {
-        return true; // Access granted
+        return true; // Allow navigation
       }
       event.preventDefault();
       showModal(subjectKey);
@@ -731,7 +442,7 @@
       document.getElementById("paymentModal").style.display = "none";
     }
 
-    // 5. Dynamic UI Updates
+    // 5. Update UI Buttons & Locks
     function applyUnlockedState() {
       const unlocked = getUnlockedSubjects();
       const isAll = unlocked.includes("ALL");
@@ -742,11 +453,11 @@
           const badge = document.getElementById(`tag-${key}`);
           const title = document.getElementById(`title-${key}`);
           if (badge) { 
-            badge.textContent = "Unlocked"; 
-            badge.className = "tag tag-free"; 
+            badge.textContent = "📖 Open Notes ➔"; 
+            badge.className = "tag tag-unlocked"; 
           }
           if (title) { 
-            title.textContent = title.textContent.replace("🔒", "📖"); 
+            title.textContent = title.textContent.replace("🔒", "✅"); 
           }
         }
       });
