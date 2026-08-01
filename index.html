@@ -28,7 +28,7 @@
     body { background-color: var(--bg-main); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
     /* NAVBAR */
-    .navbar { position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); padding: 14px 24px; }
+    .navbar { position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); padding: 14px 24px; }
     .nav-container { max-width: 860px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
     .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-dark); font-weight: 800; font-size: 1.15rem; }
 
@@ -47,6 +47,24 @@
     }
 
     .nav-actions { display: flex; align-items: center; gap: 10px; }
+    
+    .login-btn {
+      background: #f1f5f9;
+      color: #0369a1;
+      border: 1px solid #cbd5e1;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .login-btn:hover { background: #e0f2fe; border-color: #0284c7; }
+
     .pay-menu-btn { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); transition: transform 0.2s; }
     .pay-menu-btn:hover { transform: translateY(-2px); }
 
@@ -90,9 +108,11 @@
 
     .card-title-wrap h2 { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); }
     .chevron { width: 28px; height: 28px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--text-muted); transition: transform 0.3s ease; }
+    
     .subject-card.active .chevron { transform: rotate(180deg); background: #e0f2fe; color: var(--primary-dark); }
-
     .card-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease-out; background: #ffffff; }
+    .subject-card.active .card-body { max-height: 200px; }
+    
     .card-content { padding: 16px 24px 20px 24px; border-top: 1px dashed var(--border); }
     .resource-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 
@@ -127,7 +147,8 @@
         <span>BSN Portal</span>
       </a>
       <div class="nav-actions">
-        <button class="pay-menu-btn" onclick="showModal('ALL')">💳 Buy Full Access (PKR 993)</button>
+        <a href="dashboard.html" class="login-btn">🎓 Student Login</a>
+        <button class="pay-menu-btn" onclick="showModal('ALL')">💳 Buy Access (PKR 993)</button>
       </div>
     </div>
   </header>
@@ -310,7 +331,7 @@
         <p style="margin-top:4px;">Account Name: <strong>Mudassir Hussain Khan</strong></p>
       </div>
 
-      <a id="whatsappBtn" href="#" target="_blank" class="wa-btn">
+      <a id="whatsappBtn" href="https://wa.me/923241064487?text=Hi%20Mudassir,%20I%20have%20sent%20the%20payment%20for%20BSN%20Access" target="_blank" class="wa-btn">
         💬 Send Screenshot on WhatsApp
       </a>
     </div>
@@ -321,8 +342,108 @@
     <p>© 2026 Academic Portal • Prepared by Mudassir Hussain Khan</p>
   </footer>
 
-  <!-- SIMPLE KEY LOGIC -->
+  <!-- SCRIPT LOGIC -->
   <script>
-    <!-- Place this right before </body> -->
+    // Access Keys Data Configuration
+    const MASTER_KEY = "BSN993";
+    const SUBJECT_KEYS = {
+      'pediatric': 'PEDS350',
+      'reproductive': 'REPO350',
+      'english': 'ENG250',
+      'perls': 'PERLS250'
+    };
+
+    // Card Accordion Toggle
+    function toggleCard(cardHeader) {
+      const card = cardHeader.parentElement;
+      card.classList.toggle('active');
+    }
+
+    // Modal Control
+    function showModal(subject) {
+      const modal = document.getElementById('paymentModal');
+      const priceElement = document.getElementById('modalPrice');
+      
+      if(subject === 'ALL') {
+        priceElement.innerText = "993";
+      }
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('paymentModal').style.display = 'none';
+    }
+
+    // Access Verification Logic
+    function verifyCodeInput() {
+      const input = document.getElementById('passcodeInput').value.trim().toUpperCase();
+      
+      if(!input) {
+        alert("Please enter a valid access code.");
+        return;
+      }
+
+      if (input === MASTER_KEY) {
+        Object.keys(SUBJECT_KEYS).forEach(subj => {
+          localStorage.setItem('access_' + subj, 'true');
+        });
+        alert("🎉 Master Code Applied! All subjects unlocked.");
+        updateAccessUI();
+      } else {
+        let matchedSubj = null;
+        for (let [subj, code] of Object.entries(SUBJECT_KEYS)) {
+          if (input === code) {
+            matchedSubj = subj;
+            break;
+          }
+        }
+
+        if (matchedSubj) {
+          localStorage.setItem('access_' + matchedSubj, 'true');
+          alert(`🎉 Success! ${matchedSubj.toUpperCase()} course unlocked.`);
+          updateAccessUI();
+        } else {
+          alert("❌ Invalid Code. Please check your payment key or contact WhatsApp.");
+        }
+      }
+      document.getElementById('passcodeInput').value = '';
+    }
+
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        verifyCodeInput();
+      }
+    }
+
+    // Check click access
+    function checkSubjectAccess(event, subjectKey) {
+      const hasAccess = localStorage.getItem('access_' + subjectKey) === 'true';
+      if (!hasAccess) {
+        event.preventDefault();
+        alert("🔒 Subject Locked! Please enter your access code or buy access.");
+        showModal(subjectKey);
+      }
+    }
+
+    // Update UI Badges based on unlock status
+    function updateAccessUI() {
+      const subjects = ['pediatric', 'reproductive', 'english', 'perls'];
+      
+      subjects.forEach(subj => {
+        const isUnlocked = localStorage.getItem('access_' + subj) === 'true';
+        const tag = document.getElementById('tag-' + subj);
+        const title = document.getElementById('title-' + subj);
+        
+        if (isUnlocked && tag && title) {
+          tag.className = 'tag tag-unlocked';
+          tag.innerText = '✅ Unlocked';
+          title.innerText = title.innerText.replace(' 🔒', '');
+        }
+      });
+    }
+
+    // Init UI check on load
+    window.addEventListener('DOMContentLoaded', updateAccessUI);
+  </script>
 </body>
 </html>
