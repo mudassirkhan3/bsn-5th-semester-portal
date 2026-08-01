@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- 
-</html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nursing Ethics | BSN Comprehensive Exam Masterclass Mudassir khan</title>
@@ -25,12 +23,14 @@
     
     /* Sticky Unit Navigation Bar */
     .sticky-unit-nav { position: sticky; top: 10px; z-index: 100; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 10px 14px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); margin-bottom: 30px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: thin; }
-    .unit-pill { background: #f1f5f9; color: #0369a1; text-decoration: none; padding: 8px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; whitespace: nowrap; transition: 0.2s; border: 1px solid #e2e8f0; }
+    .unit-pill { background: #f1f5f9; color: #0369a1; text-decoration: none; padding: 8px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; whitespace: nowrap; transition: 0.2s; border: 1px solid #e2e8f0; position: relative; }
     .unit-pill:hover, .unit-pill.active { background: #0284c7; color: white; border-color: #0284c7; }
+    .unit-pill.locked-pill { color: #94a3b8; background: #f8fafc; }
 
     /* Content Sections */
-    .section-card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 36px; margin-bottom: 32px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); scroll-margin-top: 70px; }
+    .section-card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 36px; margin-bottom: 32px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); scroll-margin-top: 70px; position: relative; }
     .unit-header-tag { display: inline-block; background: #e0f2fe; color: #0369a1; font-weight: 800; font-size: 0.78rem; text-transform: uppercase; padding: 4px 12px; border-radius: 6px; margin-bottom: 10px; }
+    .sample-tag { background: #dcfce7; color: #15803d; }
     .section-title { font-size: 1.5rem; font-weight: 800; color: #0f172a; border-left: 5px solid #0284c7; padding-left: 12px; margin-bottom: 22px; }
     
     /* Typography & Content Elements */
@@ -63,12 +63,81 @@
     .custom-table th { background-color: #e0f2fe; color: #0369a1; font-weight: 700; }
     .custom-table tr:nth-child(even) { background-color: #f8fafc; }
 
-    /* Interactive Quiz Box */
-    .quiz-box { background: #f1f5f9; border-radius: 12px; padding: 22px; margin-top: 24px; }
-    .quiz-option { background: white; border: 1px solid #cbd5e1; padding: 12px 16px; border-radius: 8px; margin: 8px 0; cursor: pointer; transition: 0.2s; font-size: 0.92rem; font-weight: 500; }
-    .quiz-option:hover { border-color: #0284c7; background: #e0f2fe; }
+    /* ====================================================
+       NEW STYLES: Blur & Lock Overlay Controls
+       ==================================================== */
+    .section-card.locked-card {
+      overflow: hidden;
+      min-height: 280px;
+    }
+    
+    .locked-card .blur-content {
+      filter: blur(6px);
+      user-select: none;
+      pointer-events: none;
+      opacity: 0.6;
+    }
 
-    /* Footer */
+    .lock-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(248, 250, 252, 0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      text-align: center;
+      padding: 20px;
+      backdrop-filter: blur(2px);
+    }
+
+    .lock-icon {
+      width: 48px;
+      height: 48px;
+      background: #0284c7;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);
+    }
+
+    .lock-overlay h3 {
+      font-size: 1.25rem;
+      color: #0f172a;
+      border: none;
+      margin: 0 0 6px 0;
+      padding: 0;
+    }
+
+    .lock-overlay p {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 16px;
+      max-width: 380px;
+    }
+
+    .unlock-btn {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      text-decoration: none;
+    }
+
+    .unlock-btn:hover {
+      background: #0369a1;
+    }
+
     footer { text-align: center; font-size: 0.85rem; color: #64748b; margin-top: 40px; }
   </style>
 </head>
@@ -91,248 +160,62 @@
 
     <!-- Sticky 8-Unit Navigation Header Bar -->
     <nav class="sticky-unit-nav">
-      <a href="#unit1" class="unit-pill">Unit I: Intro</a>
-      <a href="#unit2" class="unit-pill">Unit II: Values</a>
-      <a href="#unit3" class="unit-pill">Unit III: Principles</a>
-      <a href="#unit4" class="unit-pill">Unit IV: Consent</a>
-      <a href="#unit5" class="unit-pill">Unit V: Rights</a>
-      <a href="#unit6" class="unit-pill">Unit VI: Codes</a>
-      <a href="#unit7" class="unit-pill">Unit VII: Autonomy</a>
-      <a href="#unit8" class="unit-pill">Unit VIII: Practice Dilemmas</a>
+      <a href="#unit1" class="unit-pill locked-pill">🔒 Unit I</a>
+      <a href="#unit2" class="unit-pill locked-pill">🔒 Unit II</a>
+      <a href="#unit3" class="unit-pill active">Unit III (Free Sample)</a>
+      <a href="#unit4" class="unit-pill locked-pill">🔒 Unit IV</a>
+      <a href="#unit5" class="unit-pill locked-pill">🔒 Unit V</a>
+      <a href="#unit6" class="unit-pill locked-pill">🔒 Unit VI</a>
+      <a href="#unit7" class="unit-pill locked-pill">🔒 Unit VII</a>
+      <a href="#unit8" class="unit-pill locked-pill">🔒 Unit VIII</a>
     </nav>
 
-    <!-- ==================== UNIT I ==================== -->
-    <section id="unit1" class="section-card">
-      <span class="unit-header-tag">Unit I • Weightage: 1 MCQ | 0 SEQ</span>
-      <h2 class="section-title">Unit I: Introduction to Nursing Ethics</h2>
-
-      <h3>1. Core Ethical Terminology (Definitions)</h3>
-      <div class="grid-2">
-        <div class="grid-card">
-          <h4>Ethics</h4>
-          <p>The formal systematic study of moral beliefs, principles, and conduct; distinguishing right from wrong behavior in human actions.</p>
-        </div>
-        <div class="grid-card">
-          <h4>Nursing Ethics</h4>
-          <p>A specialized branch of bioethics that governs moral decisions, professional duties, and values specifically within the nurse-patient-system relationship.</p>
-        </div>
-        <div class="grid-card">
-          <h4>Bio-Ethics</h4>
-          <p>The broader study of ethical issues arising from advances in biology, medicine, and life sciences (e.g., organ transplantation, gene editing, end-of-life care).</p>
-        </div>
-        <div class="grid-card">
-          <h4>Values</h4>
-          <p>Enduring personal or professional beliefs about the worth, desirability, or importance of an idea, object, or behavior that guide decision-making.</p>
-        </div>
-        <div class="grid-card">
-          <h4>Beliefs</h4>
-          <p>Intellectual or emotional acceptance of something as true or real, with or without empirical evidence.</p>
-        </div>
-        <div class="grid-card">
-          <h4>Morals</h4>
-          <p>Personal or societal standards of right and wrong behavior deeply rooted in culture, religion, and family tradition.</p>
-        </div>
-        <div class="grid-card">
-          <h4>Attitude</h4>
-          <p>A mental position, feelings, or disposition toward a person, object, or situation that influences one's response.</p>
-        </div>
-        <div class="grid-card">
-          <h4>Conflict</h4>
-          <p>A struggle or clash resulting from incompatible or opposing needs, drives, values, or external demands.</p>
-        </div>
-        <div class="grid-card">
-          <h4>Dilemma</h4>
-          <p>A difficult situation in which a choice must be made between two options, both of which have undesirable consequences.</p>
-        </div>
-        <div class="grid-card">
-          <h4>Ethical Dilemma</h4>
-          <p>A complex situation where two or more moral principles conflict, and choosing one option forces the nurse to compromise another valid ethical duty.</p>
-        </div>
+    <!-- ==================== UNIT I (LOCKED) ==================== -->
+    <section id="unit1" class="section-card locked-card">
+      <div class="lock-overlay">
+        <div class="lock-icon">🔒</div>
+        <h3>Unit I Content Locked</h3>
+        <p>Unlock full access to view all study notes, diagrams, and exam tips.</p>
+        <button class="unlock-btn" onclick="alert('Enroll or subscribe to unlock full access!')">Unlock All Units</button>
       </div>
 
-      <h3>2. Importance of Ethics in Nursing</h3>
-      <ul>
-        <li><strong>Protects Vulnerable Patients:</strong> Safeguards patient autonomy and dignity when clients are incapacitated or at their most vulnerable.</li>
-        <li><strong>Guides Clinical Decision-Making:</strong> Provides a structured standard for resolving complex healthcare situations without depending purely on emotional reactions.</li>
-        <li><strong>Fosters Interprofessional Trust:</strong> Builds a culture of integrity, accountability, and respect between nurses, physicians, clients, and society.</li>
-        <li><strong>Upholds Professional Boundaries:</strong> Defines legal and ethical parameters that prevent abuse of power, exploitation, and medical negligence.</li>
-      </ul>
-
-      <!-- SVG Visual: Concept Hierarchy -->
-      <div class="visual-box">
-        <svg width="650" height="150" viewBox="0 0 650 150" xmlns="http://www.w3.org/2000/svg">
-          <rect x="20" y="50" width="170" height="50" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
-          <text x="105" y="72" fill="#0369a1" font-weight="800" font-size="12" text-anchor="middle">1. PERSONAL MORALS</text>
-          <text x="105" y="88" fill="#334155" font-size="10" text-anchor="middle">Family, Religion &amp; Culture</text>
-
-          <line x1="190" y1="75" x2="240" y2="75" stroke="#0284c7" stroke-width="3" />
-
-          <rect x="240" y="50" width="170" height="50" rx="8" fill="#0284c7"/>
-          <text x="325" y="72" fill="white" font-weight="800" font-size="12" text-anchor="middle">2. NURSING ETHICS</text>
-          <text x="325" y="88" fill="white" font-size="10" text-anchor="middle">Professional Codes &amp; Duties</text>
-
-          <line x1="410" y1="75" x2="460" y2="75" stroke="#0284c7" stroke-width="3" />
-
-          <rect x="460" y="50" width="170" height="50" rx="8" fill="#0369a1"/>
-          <text x="545" y="72" fill="white" font-weight="800" font-size="12" text-anchor="middle">3. BIOETHICS</text>
-          <text x="545" y="88" fill="white" font-size="10" text-anchor="middle">Broader Healthcare Policy</text>
-        </svg>
-        <div class="visual-caption">Figure 1.1: Hierarchy of Ethics from Personal Foundations to Healthcare Systems</div>
-      </div>
-
-      <h3>3. Flexner's Criteria of a Profession Applied to Nursing</h3>
-      <p>According to Flexner &amp; Bixler, a true profession must satisfy distinct criteria:</p>
-      <ol>
-        <li><strong>Well-Defined Body of Specialized Knowledge:</strong> Rooted in scientific theories, evidence-based nursing research, and clinical sciences.</li>
-        <li><strong>Specialized Higher Education:</strong> Academic training delivered in universities/institutions (e.g., BSN, MSN, PhD) rather than informal apprenticeships.</li>
-        <li><strong>Service Orientation &amp; Altruism:</strong> Focuses on service to humanity and public welfare rather than financial gain alone.</li>
-        <li><strong>Autonomy and Self-Regulation:</strong> Maintains independent practice standards, licensing procedures, and professional regulatory boards (e.g., PNC).</li>
-        <li><strong>Code of Ethics:</strong> Guided by explicit moral codes (e.g., PNC &amp; ICN Codes) that govern practitioner behaviors.</li>
-        <li><strong>Professional Organization:</strong> Represented by strong professional bodies that set policy and advance practice.</li>
-      </ol>
-
-      <h3>4. Characteristics of a Professional Nurse</h3>
-      <div class="grid-2">
-        <div class="grid-card">
-          <h4>Clinical Competence</h4>
-          <p>Demonstrates mastery of clinical skills, critical thinking, and evidence-based practice to ensure client safety.</p>
+      <div class="blur-content">
+        <span class="unit-header-tag">Unit I • Weightage: 1 MCQ | 0 SEQ</span>
+        <h2 class="section-title">Unit I: Introduction to Nursing Ethics</h2>
+        <h3>1. Core Ethical Terminology (Definitions)</h3>
+        <div class="grid-2">
+          <div class="grid-card">
+            <h4>Ethics</h4>
+            <p>The formal systematic study of moral beliefs, principles, and conduct; distinguishing right from wrong behavior in human actions.</p>
+          </div>
+          <div class="grid-card">
+            <h4>Nursing Ethics</h4>
+            <p>A specialized branch of bioethics that governs moral decisions, professional duties, and values specifically within the nurse-patient-system relationship.</p>
+          </div>
         </div>
-        <div class="grid-card">
-          <h4>Compassion &amp; Empathy</h4>
-          <p>Delivers holistic, empathetic, and respectful care without discrimination or bias.</p>
-        </div>
-        <div class="grid-card">
-          <h4>Accountability</h4>
-          <p>Takes direct personal and legal responsibility for clinical actions, omissions, and decisions.</p>
-        </div>
-        <div class="grid-card">
-          <h4>Integrity &amp; Veracity</h4>
-          <p>Upholds absolute honesty, maintains patient confidentiality, and remains transparent with healthcare teams.</p>
-        </div>
-      </div>
-
-      <div class="exam-tip">
-        <strong>💡 High-Yield Exam Tip:</strong> Remember for MCQs: Ethics is formal, system-level, and theoretical; Morals are personal, individual, and culturally acquired.
       </div>
     </section>
 
-    <!-- ==================== UNIT II ==================== -->
-    <section id="unit2" class="section-card">
-      <span class="unit-header-tag">Unit II • Weightage: 1 MCQ | 0.5 SEQ</span>
-      <h2 class="section-title">Unit II: Value Set &amp; Value Clarification</h2>
-
-      <h3>1. Definition of Values &amp; Value Clarification</h3>
-      <p><strong>Value:</strong> An enduring belief about the worth or importance of a particular idea, standard, or behavior that directs decision-making.</p>
-      <p><strong>Value Clarification:</strong> A reflective process by which individuals examine, identify, and understand their own personal values, how those values were formed, and how they influence daily behavior and professional practice.</p>
-
-      <h3>2. Categorization / Types of Values</h3>
-      <table class="custom-table">
-        <thead>
-          <tr>
-            <th>Value Category</th>
-            <th>Definition</th>
-            <th>Clinical Example</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Personal Values</strong></td>
-            <td>Beliefs adopted from family, culture, and life experiences.</td>
-            <td>Personal religious beliefs regarding end-of-life care.</td>
-          </tr>
-          <tr>
-            <td><strong>Societal Values</strong></td>
-            <td>Values held by the broader community or society.</td>
-            <td>Public right to equal, accessible healthcare access.</td>
-          </tr>
-          <tr>
-            <td><strong>Organizational Values</strong></td>
-            <td>Mission, vision, and operational ethos of a health institution.</td>
-            <td>Hospital policy emphasizing patient-centered excellence.</td>
-          </tr>
-          <tr>
-            <td><strong>Professional Values</strong></td>
-            <td>Standards endorsed by professional nursing bodies (e.g., AACN).</td>
-            <td>Altruism, Autonomy, Human Dignity, Integrity, Social Justice.</td>
-          </tr>
-          <tr>
-            <td><strong>Moral Values</strong></td>
-            <td>Beliefs regarding basic principles of right vs. wrong.</td>
-            <td>Honesty, non-harm, and truthfulness with clients.</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>3. Modes of Value Transmission</h3>
-      <div class="grid-2">
-        <div class="grid-card">
-          <h4>1. Modeling</h4>
-          <p>Children/students learn values by observing role models (parents, senior nursing mentors).</p>
-        </div>
-        <div class="grid-card">
-          <h4>2. Moralizing</h4>
-          <p>Teaching a strict value set directly, leaving no room for the individual to question or evaluate options.</p>
-        </div>
-        <div class="grid-card">
-          <h4>3. Laissez-Faire</h4>
-          <p>Unguided exploration of values where individuals pick values with zero guidance, leading to potential value confusion.</p>
-        </div>
-        <div class="grid-card">
-          <h4>4. Reward and Punishment</h4>
-          <p>Values are reinforced through rewards for acceptable behaviors and punishment/rebuke for unacceptable ones.</p>
-        </div>
-        <div class="grid-card" style="grid-column: 1 / -1;">
-          <h4>5. Responsible Choice (Preferred Method)</h4>
-          <p>Encourages individuals to explore multiple choices, evaluate potential consequences, and independently choose values with adult guidance.</p>
-        </div>
+    <!-- ==================== UNIT II (LOCKED) ==================== -->
+    <section id="unit2" class="section-card locked-card">
+      <div class="lock-overlay">
+        <div class="lock-icon">🔒</div>
+        <h3>Unit II Content Locked</h3>
+        <p>Unlock full access to view all study notes, diagrams, and exam tips.</p>
+        <button class="unlock-btn" onclick="alert('Enroll or subscribe to unlock full access!')">Unlock All Units</button>
       </div>
 
-      <!-- SVG Visual: Raths Value Clarification Process -->
-      <div class="visual-box">
-        <svg width="600" height="160" viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg">
-          <g transform="translate(10, 30)">
-            <rect x="0" y="0" width="170" height="60" rx="8" fill="#0284c7"/>
-            <text x="85" y="25" fill="white" font-weight="800" font-size="12" text-anchor="middle">1. CHOOSING</text>
-            <text x="85" y="42" fill="white" font-size="10" text-anchor="middle">Freely from alternatives</text>
-
-            <path d="M 175 30 L 205 30" stroke="#0284c7" stroke-width="3" />
-
-            <rect x="210" y="0" width="170" height="60" rx="8" fill="#0369a1"/>
-            <text x="295" y="25" fill="white" font-weight="800" font-size="12" text-anchor="middle">2. PRIZING</text>
-            <text x="295" y="42" fill="white" font-size="10" text-anchor="middle">Cherishing &amp; affirming</text>
-
-            <path d="M 385 30 L 415 30" stroke="#0284c7" stroke-width="3" />
-
-            <rect x="420" y="0" width="160" height="60" rx="8" fill="#0d9488"/>
-            <text x="500" y="25" fill="white" font-weight="800" font-size="12" text-anchor="middle">3. ACTING</text>
-            <text x="500" y="42" fill="white" font-size="10" text-anchor="middle">Consistently in practice</text>
-          </g>
-        </svg>
-        <div class="visual-caption">Figure 2.1: Raths, Harmin &amp; Simon’s 3-Step Process of Value Clarification</div>
+      <div class="blur-content">
+        <span class="unit-header-tag">Unit II • Weightage: 1 MCQ | 0.5 SEQ</span>
+        <h2 class="section-title">Unit II: Value Set &amp; Value Clarification</h2>
+        <h3>1. Definition of Values &amp; Value Clarification</h3>
+        <p><strong>Value:</strong> An enduring belief about the worth or importance of a particular idea, standard, or behavior that directs decision-making.</p>
       </div>
-
-      <h3>4. Value Conflicts and Implications to Nursing Practice</h3>
-      <p>A <strong>value conflict</strong> occurs when a nurse's personal values clash with a patient's choices, institutional policies, or physician directives (e.g., personal religious objection to blood transfusions or terminal sedation).</p>
-      <div class="imp-note">
-        <strong>⚠️ Clinical Implication:</strong> Unresolved value conflicts lead to moral distress, personal burnout, clinical errors, and compromised patient care. Nurses must separate personal values from professional duties to deliver non-judgmental client care.
-      </div>
-
-      <h3>5. Essential AACN Professional Nursing Values</h3>
-      <ul>
-        <li><strong>Altruism:</strong> Unselfish concern for the welfare and well-being of clients and communities.</li>
-        <li><strong>Autonomy:</strong> Respecting patient rights to self-determination and independent healthcare decisions.</li>
-        <li><strong>Human Dignity:</strong> Respecting the inherent worth and uniqueness of every individual client.</li>
-        <li><strong>Integrity:</strong> Acting in accordance with an appropriate code of ethics and accepted standards of practice.</li>
-        <li><strong>Social Justice:</strong> Upholding moral, legal, and humanistic principles of equal treatment and fairness in healthcare access.</li>
-      </ul>
-
-      <h3>6. Implications of Care Ethics in a Diverse Society</h3>
-      <p>In multicultural healthcare environments, nurses must practice <strong>cultural humility</strong> and <strong>transcultural care ethics</strong> by respecting varying spiritual preferences, family involvement patterns, and decision-making styles without imposing personal cultural biases.</p>
     </section>
 
-    <!-- ==================== UNIT III ==================== -->
+    <!-- ==================== UNIT III (OPEN SAMPLE) ==================== -->
     <section id="unit3" class="section-card">
-      <span class="unit-header-tag">Unit III • Weightage: 2 MCQs | 0.5 SEQ</span>
+      <span class="unit-header-tag sample-tag">Unit III • FREE SAMPLE UNIT</span>
       <h2 class="section-title">Unit III: Ethical Principles &amp; Theories</h2>
 
       <h3>1. Ethical Theories in Healthcare</h3>
@@ -444,347 +327,45 @@
       </div>
     </section>
 
-    <!-- ==================== UNIT IV ==================== -->
-    <section id="unit4" class="section-card">
-      <span class="unit-header-tag">Unit IV • Weightage: 2 MCQs | 0.5 SEQ</span>
-      <h2 class="section-title">Unit IV: Confidentiality &amp; Informed Consent</h2>
-
-      <h3>1. Definitions &amp; Clinical Importance</h3>
-      <p><strong>Confidentiality:</strong> The ethical and legal duty to protect private client information from unauthorized disclosure.</p>
-      <p><strong>Informed Consent:</strong> The voluntary, legal agreement given by a competent patient to undergo a specific medical procedure or research intervention after receiving full disclosure of facts, risks, benefits, and alternatives.</p>
-
-      <h3>2. Essential Elements of Informed Consent</h3>
-      <div class="grid-2">
-        <div class="grid-card">
-          <h4>1. Disclosure</h4>
-          <p>Providing full disclosure of diagnosis, treatment nature, risks, potential benefits, and viable alternatives.</p>
-        </div>
-        <div class="grid-card">
-          <h4>2. Comprehension</h4>
-          <p>Ensuring the patient understands the information provided (using appropriate language, free of heavy jargon).</p>
-        </div>
-        <div class="grid-card">
-          <h4>3. Voluntariness</h4>
-          <p>Assuring the consent is granted freely without coercion, force, undue influence, or manipulation.</p>
-        </div>
-        <div class="grid-card">
-          <h4>4. Competence / Capacity</h4>
-          <p>Verifying the legal and mental capacity of the client to make informed choices (adult, coherent, alert).</p>
-        </div>
+    <!-- ==================== UNIT IV (LOCKED) ==================== -->
+    <section id="unit4" class="section-card locked-card">
+      <div class="lock-overlay">
+        <div class="lock-icon">🔒</div>
+        <h3>Unit IV Content Locked</h3>
+        <p>Unlock full access to view all study notes, diagrams, and exam tips.</p>
+        <button class="unlock-btn" onclick="alert('Enroll or subscribe to unlock full access!')">Unlock All Units</button>
       </div>
 
-      <!-- SVG Visual: Informed Consent Roles -->
-      <div class="visual-box">
-        <svg width="600" height="150" viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
-          <rect x="30" y="35" width="230" height="80" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
-          <text x="145" y="60" fill="#0369a1" font-weight="800" font-size="13" text-anchor="middle">PHYSICIAN / SURGEON</text>
-          <text x="145" y="80" fill="#334155" font-size="11" text-anchor="middle">• Explains procedure &amp; risks</text>
-          <text x="145" y="96" fill="#334155" font-size="11" text-anchor="middle">• Answers complex questions</text>
-
-          <rect x="340" y="35" width="230" height="80" rx="10" fill="#0284c7"/>
-          <text x="455" y="60" fill="white" font-weight="800" font-size="13" text-anchor="middle">PROFESSIONAL NURSE</text>
-          <text x="455" y="80" fill="white" font-size="11" text-anchor="middle">• Witnesses client's signature</text>
-          <text x="455" y="96" fill="white" font-size="11" text-anchor="middle">• Confirms capacity &amp; voluntariness</text>
-        </svg>
-        <div class="visual-caption">Figure 4.1: Distinct Roles of Provider vs. Nurse in Informed Consent</div>
-      </div>
-
-      <h3>3. Nurse’s Roles and Legal Responsibilities in Consent</h3>
-      <div class="imp-note">
-        <strong>📌 Crucial MCQ Point:</strong> The physician/surgeon is legally responsible for explaining the procedure and obtaining consent. The nurse acts as a <strong>witness to the signature</strong>, verifying that:
-        <ul style="margin-top: 8px; margin-bottom: 0;">
-          <li>The client signed the form voluntarily.</li>
-          <li>The signature is authentic.</li>
-          <li>The client appears mentally competent to sign.</li>
-        </ul>
-        <em>If a patient expresses confusion or lack of understanding, the nurse MUST hold the form and notify the surgeon immediately.</em>
-      </div>
-
-      <h3>4. Exceptions to Informed Consent &amp; Confidentiality</h3>
-      <ul>
-        <li><strong>Emergency Exception:</strong> Life-threatening emergency when the client is unconscious and no surrogate is available (Implied Consent applies).</li>
-        <li><strong>Mandatory Disclosure / Duty to Warn:</strong> Confidentiality may be legally breached in cases of child/elder abuse, communicable disease reporting to public health authorities, or clear threats to harm oneself or others (Tarasoff rule).</li>
-      </ul>
-    </section>
-
-    <!-- ==================== UNIT V ==================== -->
-    <section id="unit5" class="section-card">
-      <span class="unit-header-tag">Unit V • Weightage: 2 MCQs | 0.5 SEQ</span>
-      <h2 class="section-title">Unit V: Bills of Rights</h2>
-
-      <h3>1. Definition of Rights &amp; Patient's Bill of Rights</h3>
-      <p><strong>Rights:</strong> Justifiable claims, entitlements, or legal protections guaranteed to individuals by law, ethics, or societal standards.</p>
-      <p><strong>Patient’s Bill of Rights:</strong> A formal document outlining the entitlements, guarantees, and responsibilities that clients possess while receiving care within a healthcare facility.</p>
-
-      <h3>2. Classifications of Rights</h3>
-      <div class="grid-2">
-        <div class="grid-card">
-          <h4>Legal Rights</h4>
-          <p>Entitlements backed and enforced by national or state laws (e.g., Right to Privacy, Medical Records access).</p>
-        </div>
-        <div class="grid-card">
-          <h4>Moral / Ethical Rights</h4>
-          <p>Entitlements rooted in ethical principles and human dignity, regardless of explicit legal statutes.</p>
-        </div>
-        <div class="grid-card">
-          <h4>Option / Choice Rights</h4>
-          <p>Rights that grant individuals freedom to make personal choices (e.g., choosing healthcare providers or refusing care).</p>
-        </div>
-        <div class="grid-card">
-          <h4>Welfare Rights</h4>
-          <p>Entitlements to basic life-sustaining resources (e.g., right to emergency stabilization and clean water).</p>
-        </div>
-      </div>
-
-      <h3>3. Core Elements of Patient Rights in Tertiary Care</h3>
-      <ol>
-        <li><strong>Right to Respectful and Equal Care:</strong> Access to compassionate, non-discriminatory care regardless of gender, race, or socio-economic status.</li>
-        <li><strong>Right to Complete Information:</strong> Clear information regarding diagnosis, prognosis, and planned treatments in understandable language.</li>
-        <li><strong>Right to Privacy and Confidentiality:</strong> Complete protection of medical discussions, examination privacy, and health records.</li>
-        <li><strong>Right to Refuse Treatment:</strong> The right to decline medical care or leave Against Medical Advice (AMA) after understanding consequences.</li>
-        <li><strong>Right to Continuity of Care:</strong> Clear discharge planning, follow-up instructions, and care coordination.</li>
-        <li><strong>Right to Review Billing &amp; Invoices:</strong> Transparent breakdown of costs and financial obligations.</li>
-      </ol>
-
-      <h3>4. The Nurse's Role in Upholding Rights</h3>
-      <p>Nurses act as primary <strong>Patient Advocates</strong> by ensuring clients understand their rights, protecting patient privacy (curtains, secure electronic records), preventing coercion, and speaking up when patient rights are threatened by hospital procedures or care teams.</p>
-    </section>
-
-    <!-- ==================== UNIT VI ==================== -->
-    <section id="unit6" class="section-card">
-      <span class="unit-header-tag">Unit VI • Weightage: 2 MCQs | 0.5 SEQ</span>
-      <h2 class="section-title">Unit VI: Code of Ethics</h2>
-
-      <h3>1. Definition and Functions of a Code of Ethics</h3>
-      <p>A <strong>Code of Ethics</strong> is a formal, written statement of a profession's values, moral standards, and expectations of conduct that serves as a guide for ethical clinical practice and self-regulation.</p>
-      
-      <h4>Key Functions:</h4>
-      <ul>
-        <li>Informs the public about minimum standards of nursing conduct.</li>
-        <li>Provides a framework for ethical decision-making and practice.</li>
-        <li>Outlines the nursing profession's commitment to society.</li>
-        <li>Serves as a benchmark for professional self-regulation and disciplinary review.</li>
-      </ul>
-
-      <h3>2. Comparison: ICN Code vs. Pakistan Nursing Council (PNC) Code</h3>
-      <table class="custom-table">
-        <thead>
-          <tr>
-            <th>Feature</th>
-            <th>International Council of Nurses (ICN) Code</th>
-            <th>Pakistan Nursing Council (PNC) Code</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Scope</strong></td>
-            <td>Global international guidelines for nurses worldwide.</td>
-            <td>National legal and professional standards within Pakistan.</td>
-          </tr>
-          <tr>
-            <td><strong>Core Elements</strong></td>
-            <td>4 Elements: Nurses &amp; People, Practice, Profession, Co-workers.</td>
-            <td>National professional standards, cultural values, and statutory regulation.</td>
-          </tr>
-          <tr>
-            <td><strong>Cultural Context</strong></td>
-            <td>Broad, secular, applicable across all nations.</td>
-            <td>Aligned with national laws, socio-cultural, and Islamic ethical values.</td>
-          </tr>
-          <tr>
-            <td><strong>Legal Authority</strong></td>
-            <td>Ethical guideline framework (non-statutory).</td>
-            <td>Statutory licensing body with power to revoke registration for violations.</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>3. The 4 Fundamental Elements of the ICN Code</h3>
-      <div class="grid-2">
-        <div class="grid-card">
-          <h4>1. Nurses and People</h4>
-          <p>Primary responsibility is to people requiring care; respecting human rights, values, customs, and spiritual beliefs.</p>
-        </div>
-        <div class="grid-card">
-          <h4>2. Nurses and Practice</h4>
-          <p>Maintains personal responsibility for practice, ongoing competence, and continuous learning.</p>
-        </div>
-        <div class="grid-card">
-          <h4>3. Nurses and the Profession</h4>
-          <p>Determines and implements professional standards, research-based practice, and policy development.</p>
-        </div>
-        <div class="grid-card">
-          <h4>4. Nurses and Co-Workers</h4>
-          <p>Sustains collaborative relationships with co-workers and takes appropriate action to safeguard clients when care is endangered.</p>
-        </div>
-      </div>
-
-      <h3>4. The Nightingale Pledge &amp; Modern Nursing Pledge</h3>
-      <p>The <strong>Nightingale Pledge</strong> (and modern nursing pledges) reflects a solemn oath taken upon graduation. It reinforces commitment to practice faithfully, abstain from harmful practices, maintain confidentiality, and elevate professional standards.</p>
-    </section>
-
-    <!-- ==================== UNIT VII ==================== -->
-    <section id="unit7" class="section-card">
-      <span class="unit-header-tag">Unit VII • Weightage: 2 MCQs | 0.5 SEQ</span>
-      <h2 class="section-title">Unit VII: Professional Autonomy &amp; Ethics</h2>
-
-      <h3>1. Core Professional Concepts</h3>
-      <div class="grid-2">
-        <div class="grid-card">
-          <h4>Profession</h4>
-          <p>A calling requiring specialized knowledge, extensive academic preparation, and ongoing adherence to ethical standards.</p>
-        </div>
-        <div class="grid-card">
-          <h4>Professional Autonomy</h4>
-          <p>The freedom, authority, and independence of nurses to make clinical decisions and carry out interventions within their legal scope of practice.</p>
-        </div>
-        <div class="grid-card">
-          <h4>Accountability</h4>
-          <p>Being answerable to oneself, patients, the nursing council, and society for one's professional judgments, actions, and omissions.</p>
-        </div>
-        <div class="grid-card">
-          <h4>Professional Unity</h4>
-          <p>Solidarity and collective collaboration among nurses through professional organizations to advance rights, standards, and health policy.</p>
-        </div>
-      </div>
-
-      <!-- SVG Visual: Autonomy & Accountability Balance -->
-      <div class="visual-box">
-        <svg width="600" height="140" viewBox="0 0 600 140" xmlns="http://www.w3.org/2000/svg">
-          <rect x="50" y="35" width="220" height="70" rx="10" fill="#0284c7"/>
-          <text x="160" y="65" fill="white" font-weight="800" font-size="13" text-anchor="middle">PROFESSIONAL AUTONOMY</text>
-          <text x="160" y="85" fill="white" font-size="11" text-anchor="middle">Independent Clinical Decision Power</text>
-
-          <line x1="270" y1="70" x2="330" y2="70" stroke="#0369a1" stroke-width="4" stroke-dasharray="6,6"/>
-
-          <rect x="330" y="35" width="220" height="70" rx="10" fill="#0369a1"/>
-          <text x="440" y="65" fill="white" font-weight="800" font-size="13" text-anchor="middle">ACCOUNTABILITY</text>
-          <text x="440" y="85" fill="white" font-size="11" text-anchor="middle">Answerable for Clinical Outcomes</text>
-        </svg>
-        <div class="visual-caption">Figure 7.1: Professional Autonomy is Inseparably Linked to Individual Accountability</div>
-      </div>
-
-      <h3>2. Relationship Between Ethics, Standards, and Professional Status</h3>
-      <ul>
-        <li><strong>Standards of Nursing Practice:</strong> Authoritative statements describing the responsibilities and quality level expected of competent nurses (ADPIE model).</li>
-        <li><strong>Connecting Ethics to Standards:</strong> Ethics dictates <em>why</em> we care (moral duty); Standards dictate <em>how</em> we deliver care safely (technical competency).</li>
-        <li><strong>Accountability to Regulatory Bodies:</strong> Failure to meet standards or violation of ethical codes results in professional disciplinary action, suspension, or revocation of PNC registration.</li>
-      </ul>
-    </section>
-
-    <!-- ==================== UNIT VIII ==================== -->
-    <section id="unit8" class="section-card">
-      <span class="unit-header-tag">Unit VIII • Weightage: 3 MCQs | 0 SEQ</span>
-      <h2 class="section-title">Unit VIII: Ethical Dilemmas in Professional Practice</h2>
-
-      <h3>1. Legal Concepts &amp; Nurses' Liabilities</h3>
-      <p><strong>Negligence:</strong> Failure to act as a reasonably prudent nurse would act under similar circumstances, resulting in unintentional harm.</p>
-      <p><strong>Malpractice:</strong> Professional negligence—specifically when a nurse fails to meet standard professional skills, resulting in injury, loss, or damage to a patient.</p>
-
-      <h4>The Four Elements of Nursing Malpractice (Must All Be Proven):</h4>
-      <ol>
-        <li><strong>Duty of Care:</strong> The nurse had a legal obligation to care for the patient.</li>
-        <li><strong>Breach of Duty:</strong> The nurse failed to meet standard nursing care protocols.</li>
-        <li><strong>Causation:</strong> The nurse’s failure directly caused the injury or outcome.</li>
-        <li><strong>Damages / Injury:</strong> Actual physical, psychological, or financial damage resulted to the client.</li>
-      </ol>
-
-      <h3>2. Common Areas of Nursing Liability</h3>
-      <table class="custom-table">
-        <thead>
-          <tr>
-            <th>Area of Negligence</th>
-            <th>Clinical Scenario</th>
-            <th>Preventative Nursing Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Medication Errors</strong></td>
-            <td>Administering wrong dose or wrong drug due to missed checks.</td>
-            <td>Strictly follow the 10 Rights of Medication Administration.</td>
-          </tr>
-          <tr>
-            <td><strong>Patient Falls</strong></td>
-            <td>Failing to raise bed side-rails or maintain fall-risk assessment.</td>
-            <td>Conduct Morse Fall Risk score checks; keep bed low and locked.</td>
-          </tr>
-          <tr>
-            <td><strong>Documentation Failure</strong></td>
-            <td>Failing to record deterioration in vital signs or physician notifications.</td>
-            <td>Maintain timely, accurate, factual clinical documentation ("If not written, it wasn't done").</td>
-          </tr>
-          <tr>
-            <td><strong>Defective Equipment</strong></td>
-            <td>Using a malfunctioning IV pump that causes fluid overload.</td>
-            <td>Inspect biomedical devices before use; tag and report faulty equipment.</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>3. Advocacy Scenarios in Clinical Cases</h3>
-      <div class="grid-2">
-        <div class="grid-card">
-          <h4>A) Life Support Equipment</h4>
-          <p>Navigating DNR (Do Not Resuscitate) orders and ventilator withdrawal. Nurse acts as advocate ensuring patient's advance directives are respected over family conflict.</p>
-        </div>
-        <div class="grid-card">
-          <h4>B) Selling Body Parts / Organ Procurement</h4>
-          <p>Commercial organ trade is illegal and unethical. Nurses ensure organ donation follows strictly voluntary, non-coerced, brain-death protocol pathways.</p>
-        </div>
-        <div class="grid-card">
-          <h4>C) Occupational Hazards &amp; Risk Management</h4>
-          <p>Balancing personal safety (needle-stick injuries, infectious diseases like COVID/TB) with duty to care. Utilizing PPE and reporting hazards immediately.</p>
-        </div>
-        <div class="grid-card">
-          <h4>D) Employment Issues &amp; Whistleblowing</h4>
-          <p>Addressing unsafe nurse-to-patient staffing ratios, substance abuse among peers, and reporting unsafe institutional practices through formal channels.</p>
-        </div>
-      </div>
-
-      <div class="exam-tip">
-        <strong>💡 Exam Golden Rule:</strong> Documentation in nursing is a legal document. In court, the legal rule applies: <em>"If it was not documented, it was not done."</em> Never document advance care before performing it.
+      <div class="blur-content">
+        <span class="unit-header-tag">Unit IV • Weightage: 2 MCQs | 0.5 SEQ</span>
+        <h2 class="section-title">Unit IV: Confidentiality &amp; Informed Consent</h2>
+        <h3>1. Definitions &amp; Clinical Importance</h3>
+        <p><strong>Confidentiality:</strong> The ethical and legal duty to protect private client information from unauthorized disclosure.</p>
       </div>
     </section>
 
-    <!-- INTERACTIVE QUIZ -->
-    <section class="section-card">
-      <h2 class="section-title">🧪 Comprehensive Course Exam Practice</h2>
-      <div class="quiz-box">
-        <p><strong>Q1: A surgeon asks a nurse to obtain consent for a complex procedure. The client states, "I don't understand what the doctor explained." What is the correct nursing action?</strong></p>
-        <div class="quiz-option" onclick="checkQuiz(this, false)">A) Re-explain the surgical procedure to the client and sign the consent.</div>
-        <div class="quiz-option" onclick="checkQuiz(this, true)">B) Notify the surgeon immediately and withhold signature until the surgeon clarifies.</div>
-        <div class="quiz-option" onclick="checkQuiz(this, false)">C) Instruct the client's family member to sign the consent form instead.</div>
-        <div class="quiz-option" onclick="checkQuiz(this, false)">D) Ask the patient to sign now and promise the doctor will explain again later.</div>
-        <div id="quizResult" style="margin-top: 12px; font-weight: 700; font-size: 0.92rem;"></div>
+    <!-- ==================== UNIT V (LOCKED) ==================== -->
+    <section id="unit5" class="section-card locked-card">
+      <div class="lock-overlay">
+        <div class="lock-icon">🔒</div>
+        <h3>Unit V Content Locked</h3>
+        <p>Unlock full access to view all study notes, diagrams, and exam tips.</p>
+        <button class="unlock-btn" onclick="alert('Enroll or subscribe to unlock full access!')">Unlock All Units</button>
+      </div>
+
+      <div class="blur-content">
+        <span class="unit-header-tag">Unit V • Weightage: 2 MCQs | 0.5 SEQ</span>
+        <h2 class="section-title">Unit V: Bills of Rights</h2>
+        <h3>1. Definition of Rights</h3>
+        <p>Justifiable claims, entitlements, or legal protections guaranteed to individuals by law.</p>
       </div>
     </section>
 
   </div>
 
   <footer>
-    © 2026 Academic Portal • Comprehensive Study Material for BSN Nursing Ethics
+    <p>© BSN Nursing Ethics Masterclass • Prepared for Academic Excellence</p>
   </footer>
-
-  <script>
-    function checkQuiz(element, isCorrect) {
-      const options = element.parentElement.querySelectorAll('.quiz-option');
-      options.forEach(opt => opt.style.background = 'white');
-      
-      const resultDiv = document.getElementById('quizResult');
-      if (isCorrect) {
-        element.style.background = '#dcfce7';
-        element.style.borderColor = '#16a34a';
-        resultDiv.innerText = '✅ Correct! The nurse acts as a witness to signature. The provider/surgeon holds primary responsibility for explaining the procedure.';
-        resultDiv.style.color = '#15803d';
-      } else {
-        element.style.background = '#fee2e2';
-        element.style.borderColor = '#dc2626';
-        resultDiv.innerText = '❌ Incorrect. The nurse cannot perform primary surgical disclosure; the provider must be called back!';
-        resultDiv.style.color = '#b91c1c';
-      }
-    }
-  </script>
 
 </body>
 </html>
