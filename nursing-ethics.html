@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nursing Ethics | BSN Comprehensive Exam Masterclass Mudassir khan</title>
+  <title>Nursing Ethics | BSN Comprehensive Exam Masterclass</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -46,9 +46,6 @@
     .visual-caption { font-size: 0.85rem; color: #0369a1; font-weight: 700; margin-top: 10px; }
 
     /* Highlights & Exam Boxes */
-    .imp-note { background: #fffbebf5; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 8px; margin: 18px 0; font-size: 0.93rem; color: #78350f; }
-    .imp-note strong { color: #b45309; }
-
     .exam-tip { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 16px; border-radius: 8px; margin: 18px 0; font-size: 0.93rem; color: #14532d; }
     .exam-tip strong { color: #15803d; }
 
@@ -63,80 +60,15 @@
     .custom-table th { background-color: #e0f2fe; color: #0369a1; font-weight: 700; }
     .custom-table tr:nth-child(even) { background-color: #f8fafc; }
 
-    /* ====================================================
-       NEW STYLES: Blur & Lock Overlay Controls
-       ==================================================== */
-    .section-card.locked-card {
-      overflow: hidden;
-      min-height: 280px;
-    }
-    
-    .locked-card .blur-content {
-      filter: blur(6px);
-      user-select: none;
-      pointer-events: none;
-      opacity: 0.6;
-    }
-
-    .lock-overlay {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(248, 250, 252, 0.7);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 20;
-      text-align: center;
-      padding: 20px;
-      backdrop-filter: blur(2px);
-    }
-
-    .lock-icon {
-      width: 48px;
-      height: 48px;
-      background: #0284c7;
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 12px;
-      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);
-    }
-
-    .lock-overlay h3 {
-      font-size: 1.25rem;
-      color: #0f172a;
-      border: none;
-      margin: 0 0 6px 0;
-      padding: 0;
-    }
-
-    .lock-overlay p {
-      font-size: 0.9rem;
-      color: #64748b;
-      margin-bottom: 16px;
-      max-width: 380px;
-    }
-
-    .unlock-btn {
-      background: #0284c7;
-      color: white;
-      border: none;
-      padding: 10px 22px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: background 0.2s ease;
-      text-decoration: none;
-    }
-
-    .unlock-btn:hover {
-      background: #0369a1;
-    }
+    /* Blur & Lock Overlay Controls */
+    .section-card.locked-card { overflow: hidden; min-height: 280px; }
+    .locked-card .blur-content { filter: blur(6px); user-select: none; pointer-events: none; opacity: 0.6; }
+    .lock-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(248, 250, 252, 0.7); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 20; text-align: center; padding: 20px; backdrop-filter: blur(2px); }
+    .lock-icon { width: 48px; height: 48px; background: #0284c7; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3); }
+    .lock-overlay h3 { font-size: 1.25rem; color: #0f172a; border: none; margin: 0 0 6px 0; padding: 0; }
+    .lock-overlay p { font-size: 0.9rem; color: #64748b; margin-bottom: 16px; max-width: 380px; }
+    .unlock-btn { background: #0284c7; color: white; border: none; padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: background 0.2s ease; }
+    .unlock-btn:hover { background: #0369a1; }
 
     footer { text-align: center; font-size: 0.85rem; color: #64748b; margin-top: 40px; }
   </style>
@@ -160,14 +92,14 @@
 
     <!-- Sticky 8-Unit Navigation Header Bar -->
     <nav class="sticky-unit-nav">
-      <a href="#unit1" class="unit-pill locked-pill">🔒 Unit I</a>
-      <a href="#unit2" class="unit-pill locked-pill">🔒 Unit II</a>
+      <a href="#unit1" class="unit-pill locked-pill" id="pill-unit1">🔒 Unit I</a>
+      <a href="#unit2" class="unit-pill locked-pill" id="pill-unit2">🔒 Unit II</a>
       <a href="#unit3" class="unit-pill active">Unit III (Free Sample)</a>
-      <a href="#unit4" class="unit-pill locked-pill">🔒 Unit IV</a>
-      <a href="#unit5" class="unit-pill locked-pill">🔒 Unit V</a>
-      <a href="#unit6" class="unit-pill locked-pill">🔒 Unit VI</a>
-      <a href="#unit7" class="unit-pill locked-pill">🔒 Unit VII</a>
-      <a href="#unit8" class="unit-pill locked-pill">🔒 Unit VIII</a>
+      <a href="#unit4" class="unit-pill locked-pill" id="pill-unit4">🔒 Unit IV</a>
+      <a href="#unit5" class="unit-pill locked-pill" id="pill-unit5">🔒 Unit V</a>
+      <a href="#unit6" class="unit-pill locked-pill" id="pill-unit6">🔒 Unit VI</a>
+      <a href="#unit7" class="unit-pill locked-pill" id="pill-unit7">🔒 Unit VII</a>
+      <a href="#unit8" class="unit-pill locked-pill" id="pill-unit8">🔒 Unit VIII</a>
     </nav>
 
     <!-- ==================== UNIT I (LOCKED) ==================== -->
@@ -175,8 +107,8 @@
       <div class="lock-overlay">
         <div class="lock-icon">🔒</div>
         <h3>Unit I Content Locked</h3>
-        <p>Unlock full access to view all study notes, diagrams, and exam tips.</p>
-        <button class="unlock-btn" onclick="alert('Enroll or subscribe to unlock full access!')">Unlock All Units</button>
+        <p>Enter the student access code to unlock all units.</p>
+        <button class="unlock-btn" onclick="promptAccessCode()">Enter Access Code</button>
       </div>
 
       <div class="blur-content">
@@ -201,8 +133,8 @@
       <div class="lock-overlay">
         <div class="lock-icon">🔒</div>
         <h3>Unit II Content Locked</h3>
-        <p>Unlock full access to view all study notes, diagrams, and exam tips.</p>
-        <button class="unlock-btn" onclick="alert('Enroll or subscribe to unlock full access!')">Unlock All Units</button>
+        <p>Enter the student access code to unlock all units.</p>
+        <button class="unlock-btn" onclick="promptAccessCode()">Enter Access Code</button>
       </div>
 
       <div class="blur-content">
@@ -222,23 +154,15 @@
       <div class="grid-2">
         <div class="grid-card">
           <h4>Deontology (Kantian Ethics)</h4>
-          <p>Proposed by Immanuel Kant. Asserts that actions are intrinsically right or wrong based on moral duties, regardless of outcomes. Focuses on rules, rights, and absolute duties.</p>
+          <p>Proposed by Immanuel Kant. Asserts that actions are intrinsically right or wrong based on moral duties, regardless of outcomes.</p>
         </div>
         <div class="grid-card">
           <h4>Utilitarianism (Consequentialism)</h4>
-          <p>Proposed by Bentham &amp; Mill. Focuses on outcomes: an action is right if it produces the "greatest good for the greatest number of people" (utility maximization).</p>
-        </div>
-        <div class="grid-card">
-          <h4>Virtue Ethics</h4>
-          <p>Traced to Aristotle. Focuses on the internal character and moral virtue of the care provider (e.g., honesty, compassion, integrity) rather than specific rules.</p>
-        </div>
-        <div class="grid-card">
-          <h4>Feminist / Care Ethics</h4>
-          <p>Focuses on relationships, empathy, contextual care, and responsiveness rather than rigid abstract rules or individualistic rights.</p>
+          <p>Proposed by Bentham &amp; Mill. Focuses on outcomes: an action is right if it produces the "greatest good for the greatest number of people".</p>
         </div>
       </div>
 
-      <!-- SVG Visual: Beauchamp & Childress Principles -->
+      <!-- SVG Visual -->
       <div class="visual-box">
         <svg width="600" height="180" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg">
           <circle cx="300" cy="90" r="45" fill="#0284c7" />
@@ -277,54 +201,16 @@
         <tbody>
           <tr>
             <td><strong>Autonomy</strong></td>
-            <td>Respecting a patient's right to self-determination and personal choices.</td>
+            <td>Respecting a patient's right to self-determination.</td>
             <td>Obtaining informed consent; respecting refusal of treatment.</td>
           </tr>
           <tr>
             <td><strong>Non-Maleficence</strong></td>
-            <td><em>Primum non-nocere</em> — Above all, do no intentional or avoidable harm.</td>
-            <td>Double-checking high-alert medication doses before administration.</td>
-          </tr>
-          <tr>
-            <td><strong>Beneficence</strong></td>
-            <td>Actions performed for the benefit, safety, and well-being of others.</td>
-            <td>Providing pain relief and turning immobile clients to prevent ulcers.</td>
-          </tr>
-          <tr>
-            <td><strong>Justice</strong></td>
-            <td>Fairness in resource distribution and non-discriminatory care.</td>
-            <td>Triage in emergency departments based on medical need, not wealth.</td>
-          </tr>
-          <tr>
-            <td><strong>Fidelity</strong></td>
-            <td>Faithfulness, honoring promises, and maintaining professional loyalty.</td>
-            <td>Returning to evaluate a patient's pain 30 minutes after medication as promised.</td>
-          </tr>
-          <tr>
-            <td><strong>Veracity</strong></td>
-            <td>Absolute obligation to tell the truth without deception.</td>
-            <td>Honestly informing clients about procedure risks and medical errors.</td>
-          </tr>
-          <tr>
-            <td><strong>Confidentiality</strong></td>
-            <td>Respecting privacy and safeguarding protected health information.</td>
-            <td>Discussing client details only in private clinical areas with authorized staff.</td>
+            <td>Above all, do no intentional or avoidable harm.</td>
+            <td>Double-checking high-alert medication doses.</td>
           </tr>
         </tbody>
       </table>
-
-      <h3>3. Steps of the Systematic Ethical Decision-Making Model</h3>
-      <ol>
-        <li><strong>Step 1: Assessment / Data Gathering:</strong> Collect medical facts, patient values, decision-making capacity, family perspectives, and legal boundaries.</li>
-        <li><strong>Step 2: Identify the Ethical Dilemma:</strong> State the moral conflict clearly (e.g., Autonomy vs. Beneficence).</li>
-        <li><strong>Step 3: Explore Courses of Action (Options):</strong> Brainstorm all viable alternatives, evaluating risks and benefits for each choice.</li>
-        <li><strong>Step 4: Select and Implement Action:</strong> Choose the most ethically justifiable solution and execute it with interprofessional collaboration.</li>
-        <li><strong>Step 5: Evaluate Outcomes:</strong> Assess the results, address moral distress, and gather insights for future clinical cases.</li>
-      </ol>
-
-      <div class="exam-tip">
-        <strong>💡 SEQ Exam Key:</strong> Beauchamp &amp; Childress describe these principles as <em>Prima Facie</em> duties—meaning binding obligations unless overridden by a stronger, competing moral duty in a specific scenario.
-      </div>
     </section>
 
     <!-- ==================== UNIT IV (LOCKED) ==================== -->
@@ -332,8 +218,8 @@
       <div class="lock-overlay">
         <div class="lock-icon">🔒</div>
         <h3>Unit IV Content Locked</h3>
-        <p>Unlock full access to view all study notes, diagrams, and exam tips.</p>
-        <button class="unlock-btn" onclick="alert('Enroll or subscribe to unlock full access!')">Unlock All Units</button>
+        <p>Enter the student access code to unlock all units.</p>
+        <button class="unlock-btn" onclick="promptAccessCode()">Enter Access Code</button>
       </div>
 
       <div class="blur-content">
@@ -349,8 +235,8 @@
       <div class="lock-overlay">
         <div class="lock-icon">🔒</div>
         <h3>Unit V Content Locked</h3>
-        <p>Unlock full access to view all study notes, diagrams, and exam tips.</p>
-        <button class="unlock-btn" onclick="alert('Enroll or subscribe to unlock full access!')">Unlock All Units</button>
+        <p>Enter the student access code to unlock all units.</p>
+        <button class="unlock-btn" onclick="promptAccessCode()">Enter Access Code</button>
       </div>
 
       <div class="blur-content">
@@ -367,5 +253,42 @@
     <p>© BSN Nursing Ethics Masterclass • Prepared for Academic Excellence</p>
   </footer>
 
+  <!-- ACCESS CODE JAVASCRIPT LOGIC -->
+  <script>
+    // Access code configuration
+    const ACCESS_CODE = "BSN2026"; 
+
+    // Function to unlock all units on page
+    function applyUnlockState() {
+      document.querySelectorAll('.locked-card').forEach(card => card.classList.remove('locked-card'));
+      document.querySelectorAll('.blur-content').forEach(content => content.classList.remove('blur-content'));
+      document.querySelectorAll('.lock-overlay').forEach(overlay => overlay.style.display = 'none');
+
+      document.querySelectorAll('.locked-pill').forEach(pill => {
+        pill.classList.remove('locked-pill');
+        pill.textContent = pill.textContent.replace('🔒 ', '');
+      });
+    }
+
+    // Function triggered when user clicks any "Enter Access Code" button
+    function promptAccessCode() {
+      const userInput = prompt("Enter Student Access Code to unlock all units:");
+      
+      if (userInput === ACCESS_CODE) {
+        localStorage.setItem("ethics_units_unlocked", "true");
+        applyUnlockState();
+        alert("Access Granted! All units are now unlocked.");
+      } else if (userInput !== null) {
+        alert("Incorrect Access Code. Please check with your Class Representative.");
+      }
+    }
+
+    // Auto-check on page load if code was previously saved
+    window.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("ethics_units_unlocked") === "true") {
+        applyUnlockState();
+      }
+    });
+  </script>
 </body>
 </html>
