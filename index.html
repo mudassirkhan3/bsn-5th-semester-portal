@@ -93,6 +93,12 @@
       70% { transform: scale(1); }
     }
 
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .pay-menu-btn {
       background: linear-gradient(135deg, #10b981, #059669);
       color: white;
@@ -106,7 +112,21 @@
       transition: transform 0.2s;
     }
 
-    .pay-menu-btn:hover { transform: translateY(-2px); }
+    .login-btn {
+      background: #0284c7;
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.2s;
+    }
+
+    .pay-menu-btn:hover, .login-btn:hover { transform: translateY(-2px); }
 
     /* MAIN CONTENT */
     .main-wrapper {
@@ -373,16 +393,16 @@
 <body>
 
   <!-- NAVBAR -->
-  <a href="login.html" class="pay-menu-btn" style="background:#0284c7; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
-  👤 Student Login
-</a>
   <header class="navbar">
     <div class="nav-container">
       <a href="#" class="brand">
         <div class="pulse-box">🩺</div>
         <span>BSN Portal</span>
       </a>
-      <button class="pay-menu-btn" onclick="showModal('General Access')">💳 Buy Access</button>
+      <div class="nav-actions">
+        <a href="login.html" class="login-btn">👤 Student Login</a>
+        <button class="pay-menu-btn" onclick="showModal('General Access')">💳 Buy Access</button>
+      </div>
     </div>
   </header>
 
@@ -433,8 +453,8 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./pediatric/README.md" onclick="checkAccess(event)">
-                  <span class="res-title">🔒 Pediatric Notes</span>
+                <a href="./pediatric/index.html" onclick="checkAccess(event)">
+                  <span class="res-title">🔒 Pediatric Notes & Units</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -458,8 +478,8 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./reproductive/README.md" onclick="checkAccess(event)">
-                  <span class="res-title">🔒 Reproductive Health Notes</span>
+                <a href="./reproductive/index.html" onclick="checkAccess(event)">
+                  <span class="res-title">🔒 Reproductive Health Notes & Units</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -483,8 +503,8 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./english/README.md" onclick="checkAccess(event)">
-                  <span class="res-title">🔒 English Notes</span>
+                <a href="./english/index.html" onclick="checkAccess(event)">
+                  <span class="res-title">🔒 English Notes & Course Material</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -508,8 +528,8 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./perls/README.md" onclick="checkAccess(event)">
-                  <span class="res-title">🔒 PERLS Notes</span>
+                <a href="./perls/index.html" onclick="checkAccess(event)">
+                  <span class="res-title">🔒 PERLS Notes & Modules</span>
                   <span class="tag tag-lock">Unlock (Paid)</span>
                 </a>
               </li>
@@ -519,90 +539,6 @@
       </div>
 
       <!-- 5. ETHICS (FREE PREVIEW) -->
-      <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Nursing Ethics Module</title>
-
-  <!-- PASTE THE CSS / STYLE BLOCK HERE -->
-  <style>
-    .unit-card {
-      border: 1px solid #e0e0e0;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    .locked {
-      position: relative;
-      overflow: hidden;
-    }
-    .blur-content {
-      filter: blur(5px);
-      pointer-events: none;
-      user-select: none;
-    }
-    .lock-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.85);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-    }
-    .unlock-btn {
-      background-color: #2563eb;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- PASTE THE HTML BLOCK HERE -->
-  
-  <!-- Unit 3: Unlocked & Visible -->
-  <section class="unit-card unlocked">
-    <h2>🔓 Unit 3: Bioethics & Nursing Practice</h2>
-    <p><strong>Status:</strong> Free Preview</p>
-    <ul>
-      <li>Principles of Autonomy, Beneficence, and Non-Maleficence</li>
-      <li>Informed Consent & Patient Rights</li>
-      <li>Ethical Decision-Making Models</li>
-    </ul>
-  </section>
-
-  <!-- Locked Units Container -->
-  <section class="unit-card locked">
-    <div class="lock-overlay">
-      <span class="lock-icon" style="font-size: 2rem;">🔒</span>
-      <h3>Full Ethics Module Locked</h3>
-      <p>Get full access to Units 1, 2, 4, 5 & Exam Review Notes</p>
-      <button onclick="alert('Contact administrator to get full access key!')" class="unlock-btn">
-        Unlock Full Access
-      </button>
-    </div>
-
-    <!-- Content beneath the overlay is blurred -->
-    <div class="blur-content">
-      <h2>Unit 1: Introduction to Nursing Ethics</h2>
-      <h2>Unit 2: Ethical Theories & Code of Conduct</h2>
-      <h2>Unit 4: Legal Responsibilities in Nursing</h2>
-      <h2>Unit 5: Accountability & Advocacy</h2>
-    </div>
-  </section>
-
-</body>
-</html>
       <div class="subject-card">
         <div class="card-head" onclick="toggleCard(this)">
           <div class="head-left">
@@ -617,7 +553,7 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./ethics/README.md">
+                <a href="./ethics/index.html">
                   <span>📖 Nursing Ethics Notes (Free Demo)</span>
                   <span class="tag tag-free">Free Access</span>
                 </a>
@@ -639,7 +575,7 @@
       <p style="font-size:0.85rem; color:#64748b; margin-top:6px;">Get full access to all course notes & materials.</p>
       
       <div class="price-tag">
-        <span style="font-size:1rem;">PKR</span> 497
+        <span style="font-size:1rem;">PKR</span> 570
       </div>
 
       <div class="payment-methods">
