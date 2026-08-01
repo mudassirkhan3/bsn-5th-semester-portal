@@ -323,6 +323,36 @@
 
   <!-- SIMPLE KEY LOGIC -->
   <script>
+    <!-- Place this right before </body> -->
+<script>
+  function unlockAllUnits() {
+    // Prompt the user for an unlock code (e.g., 1234)
+    const code = prompt("Enter Passcode to Unlock All Units (Default Code: 1234):");
+    
+    if (code === "1234") {
+      // 1. Remove blur and lock overlays
+      document.querySelectorAll('.locked-card').forEach(card => {
+        card.classList.remove('locked-card');
+      });
+      document.querySelectorAll('.blur-content').forEach(content => {
+        content.classList.remove('blur-content');
+      });
+      document.querySelectorAll('.lock-overlay').forEach(overlay => {
+        overlay.style.display = 'none';
+      });
+
+      // 2. Update navigation pills
+      document.querySelectorAll('.locked-pill').forEach(pill => {
+        pill.classList.remove('locked-pill');
+        pill.textContent = pill.textContent.replace('🔒 ', '');
+      });
+
+      alert("Success! All Nursing Ethics Units are now unlocked.");
+    } else if (code !== null) {
+      alert("Incorrect Passcode. Please try again or contact your Class Representative.");
+    }
+  }
+</script>
     const MY_WHATSAPP_NUMBER = "923241064487"; 
 
     // YOUR PASSWORDS - YOU CAN CHANGE THESE TO ANYTHING YOU WANT!
