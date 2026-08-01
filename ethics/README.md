@@ -1,1 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit III: Ethical Principles & Theories | Nursing Ethics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background: #f8fafc; color: #0f172a; line-height: 1.6; padding-bottom: 60px; }
 
+    /* Top Header */
+    .header { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: white; padding: 40px 24px; text-align: center; }
+    .header-badge { background: rgba(255, 255, 255, 0.2); padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; margin-bottom: 12px; }
+    .header h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; }
+    .header p { opacity: 0.95; font-size: 1rem; max-width: 700px; margin: 0 auto; }
+
+    /* Container & Navigation */
+    .container { max-width: 1000px; margin: -20px auto 0; padding: 0 20px; }
+    .nav-bar { background: white; padding: 12px 20px; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 30px; }
+    .nav-btn { color: #0284c7; text-decoration: none; font-weight: 700; font-size: 0.9rem; }
+    
+    /* Content Sections */
+    .section-card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 32px; margin-bottom: 28px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .section-title { font-size: 1.4rem; font-weight: 800; color: #0f172a; border-left: 5px solid #0284c7; padding-left: 12px; margin-bottom: 20px; }
+    
+    /* Typography & Lists */
+    h3 { font-size: 1.15rem; font-weight: 700; color: #0369a1; margin: 20px 0 10px; }
+    p { color: #334155; margin-bottom: 12px; font-size: 0.96rem; }
+    ul, ol { margin-left: 20px; margin-bottom: 16px; color: #334155; }
+    li { margin-bottom: 8px; font-size: 0.95rem; }
+
+    /* Visual Diagram Container */
+    .visual-box { background: #f0f9ff; border: 1px dashed #0284c7; border-radius: 12px; padding: 20px; margin: 20px 0; text-align: center; }
+    .visual-box svg { max-width: 100%; height: auto; }
+    .visual-caption { font-size: 0.85rem; color: #0369a1; font-weight: 600; margin-top: 8px; }
+
+    /* Highlights & Callouts */
+    .imp-note { background: #fffbebf5; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 8px; margin: 16px 0; font-size: 0.92rem; color: #78350f; }
+    .imp-note strong { color: #b45309; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0; }
+    .grid-card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 16px; }
+    .grid-card h4 { color: #0284c7; font-size: 1rem; margin-bottom: 6px; }
+
+    /* Interactive Quiz Box */
+    .quiz-box { background: #f1f5f9; border-radius: 12px; padding: 20px; margin-top: 20px; }
+    .quiz-option { background: white; border: 1px solid #cbd5e1; padding: 10px 14px; border-radius: 8px; margin: 8px 0; cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
+    .quiz-option:hover { border-color: #0284c7; background: #e0f2fe; }
+
+    /* Footer */
+    footer { text-align: center; font-size: 0.85rem; color: #64748b; margin-top: 40px; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="header">
+    <span class="header-badge">BSN Semester 5 • Nursing Ethics</span>
+    <h1>Unit III: Ethical Principles and Theories</h1>
+    <p>Comprehensive Study Guide based on <em>Principles of Biomedical Ethics</em> (8th ed.) by Beauchamp & Childress</p>
+  </header>
+
+  <div class="container">
+    
+    <!-- Top Nav -->
+    <div class="nav-bar">
+      <a href="dashboard.html" class="nav-btn">← Back to Dashboard</a>
+      <span style="font-size: 0.85rem; font-weight: 600; color: #64748b;">Curriculum: BSN Official</span>
+    </div>
+
+    <!-- OBJECTIVE 1 -->
+    <section class="section-card">
+      <h2 class="section-title">1. Ethical Principles in Healthcare vs. Ethical Theories</h2>
+      <p>In biomedical ethics, <strong>ethical theories</strong> provide the underlying foundational philosophies, while <strong>ethical principles</strong> act as practical, framework-based guidelines applied in direct clinical nursing care.</p>
+
+      <!-- SVG Visual 1: Principles Diagram -->
+      <div class="visual-box">
+        <svg width="600" height="180" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg">
+          <!-- Central Hub -->
+          <circle cx="300" cy="90" r="45" fill="#0284c7" />
+          <text x="300" y="86" fill="white" font-weight="800" font-size="12" text-anchor="middle">BEAUCHAMP &amp;</text>
+          <text x="300" y="100" fill="white" font-weight="800" font-size="12" text-anchor="middle">CHILDRESS</text>
+          <!-- Nodes -->
+          <rect x="20" y="20" width="130" height="45" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+          <text x="85" y="47" fill="#0369a1" font-weight="700" font-size="12" text-anchor="middle">1. Autonomy</text>
+
+          <rect x="450" y="20" width="130" height="45" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+          <text x="515" y="47" fill="#0369a1" font-weight="700" font-size="12" text-anchor="middle">2. Non-Maleficence</text>
+
+          <rect x="20" y="115" width="130" height="45" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+          <text x="85" y="142" fill="#0369a1" font-weight="700" font-size="12" text-anchor="middle">3. Beneficence</text>
+
+          <rect x="450" y="115" width="130" height="45" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+          <text x="515" y="142" fill="#0369a1" font-weight="700" font-size="12" text-anchor="middle">4. Justice</text>
+          <!-- Lines -->
+          <line x1="150" y1="42" x2="258" y2="75" stroke="#0284c7" stroke-width="2"/>
+          <line x1="450" y1="42" x2="342" y2="75" stroke="#0284c7" stroke-width="2"/>
+          <line x1="150" y1="137" x2="258" y2="105" stroke="#0284c7" stroke-width="2"/>
+          <line x1="450" y1="137" x2="342" y2="105" stroke="#0284c7" stroke-width="2"/>
+        </svg>
+        <div class="visual-caption">Figure 1.1: The Four Core Biomedical Principles (Beauchamp &amp; Childress, 2019)</div>
+      </div>
+
+      <h3>The Four Core Principles</h3>
+      <div class="grid-2">
+        <div class="grid-card">
+          <h4>1. Autonomy</h4>
+          <p>Respecting the self-determination of competent patients to make their own choices regarding healthcare decisions (e.g., Informed Consent, Refusal of Treatment).</p>
+        </div>
+        <div class="grid-card">
+          <h4>2. Non-Maleficence</h4>
+          <p><em>"Primum non-nocere"</em> — Above all, do no harm. Avoiding deliberate harm, risk of harm, or injury during medical interventions.</p>
+        </div>
+        <div class="grid-card">
+          <h4>3. Beneficence</h4>
+          <p>Actions done for the benefit of others. Balancing benefits against risks and costs to promote the well-being of the patient.</p>
+        </div>
+        <div class="grid-card">
+          <h4>4. Justice</h4>
+          <p>Fairness in the distribution of healthcare resources, equal treatment under similar medical circumstances, and non-discrimination.</p>
+        </div>
+      </div>
+
+      <h3>Connecting Principles to Ethical Theories</h3>
+      <ul>
+        <li><strong>Deontology (Kantian Ethics):</strong> Asserts that actions are intrinsically right or wrong, regardless of consequences. Directly aligns with <em>Autonomy</em> and <em>Justice</em> through duty-bound respect for personhood.</li>
+        <li><strong>Utilitarianism (Consequentialism):</strong> Focuses on the "greatest good for the greatest number." Directly underlies <em>Beneficence</em> and <em>Non-Maleficence</em> by maximizing utility and minimizing overall harm.</li>
+        <li><strong>Virtue Ethics:</strong> Emphasizes internal moral character traits (compassion, honesty, fidelity) in healthcare providers.</li>
+      </ul>
+
+      <div class="imp-note">
+        <strong>📌 Key Exam Point:</strong> Beauchamp & Childress define these 4 principles as <em>Prima Facie</em> duties—meaning they are binding unless they conflict with an equal or stronger moral obligation in a specific situation.
+      </div>
+    </section>
+
+    <!-- OBJECTIVE 2 -->
+    <section class="section-card">
+      <h2 class="section-title">2. Ethical Dilemmas Faced by Nurses and Clients</h2>
+      <p>An <strong>ethical dilemma</strong> occurs when a nurse is faced with two or more morally justifiable options, but choosing one inevitably results in violating another moral principle.</p>
+
+      <h3>Common Clinical Dilemmas</h3>
+      <ul>
+        <li><strong>Autonomy vs. Paternalism:</strong> A competent client refuses a life-saving blood transfusion (e.g., Jehovah's Witness), but the care team wants to save their life.</li>
+        <li><strong>Truth-Telling (Veracity) vs. Non-Maleficence:</strong> Family requests withholding a terminal cancer diagnosis from an elderly patient to avoid psychological distress.</li>
+        <li><strong>Resource Allocation (Justice):</strong> Allocating limited ICU beds or ventilator access during public health surges or high patient density.</li>
+        <li><strong>Moral Distress in Nurses:</strong> When nurses know the morally correct action to take but are hindered from doing so by institutional policy or physician orders.</li>
+      </ul>
+
+      <div class="visual-box">
+        <svg width="500" height="120" viewBox="0 0 500 120" xmlns="http://www.w3.org/2000/svg">
+          <!-- Scale Illustration -->
+          <rect x="235" y="10" width="30" height="100" fill="#94a3b8"/>
+          <rect x="180" y="105" width="140" height="10" rx="4" fill="#64748b"/>
+          <path d="M 100 40 L 400 40" stroke="#0284c7" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="100" cy="75" r="25" fill="#ef4444" opacity="0.8"/>
+          <text x="100" y="80" fill="white" font-weight="700" font-size="10" text-anchor="middle">Beneficence</text>
+          <circle cx="400" cy="75" r="25" fill="#3b82f6" opacity="0.8"/>
+          <text x="400" y="80" fill="white" font-weight="700" font-size="10" text-anchor="middle">Autonomy</text>
+        </svg>
+        <div class="visual-caption">Figure 3.2: Ethical Dilemma - Balancing Competing Moral Duties</div>
+      </div>
+    </section>
+
+    <!-- OBJECTIVE 3 -->
+    <section class="section-card">
+      <h2 class="section-title">3. Strategies to Resolve Ethical Dilemmas in Daily Practice</h2>
+      <p>To systematically address and resolve ethical dilemmas without relying purely on subjective emotion, nurses employ structured resolution strategies:</p>
+
+      <ol>
+        <li><strong>Institutional Ethics Committees (IEC):</strong> Interdisciplinary boards (nurses, physicians, ethicists, legal counsel) that review complex cases, provide consultations, and support family-team consensus.</li>
+        <li><strong>Ethics Rounds and Debriefs:</strong> Scheduled clinical meetings to discuss ongoing moral concerns, reduce moral distress, and improve interprofessional communication.</li>
+        <li><strong>Use of Professional Codes of Ethics:</strong> Referring to standard professional frameworks (ICN Code of Ethics / ANA Code) to guide boundaries and duties.</li>
+        <li><strong>Value Clarification:</strong> Assisting clients and family members to identify and articulate their personal values, religious beliefs, and preferences.</li>
+        <li><strong>Open Interprofessional Communication:</strong> Establishing shared goals of care early through family conferences and clear document reviews.</li>
+      </ol>
+    </section>
+
+    <!-- OBJECTIVE 4 -->
+    <section class="section-card">
+      <h2 class="section-title">4. Steps of the Ethical Decision-Making Model</h2>
+      <p>Beauchamp & Childress highlight a structured step-by-step framework adapted for nursing practice, closely mirroring the Nursing Process (ADPIE):</p>
+
+      <!-- SVG Visual 3: Step-by-Step Model -->
+      <div class="visual-box">
+        <svg width="650" height="120" viewBox="0 0 650 120" xmlns="http://www.w3.org/2000/svg">
+          <!-- 5 Step Arrow Process -->
+          <g transform="translate(10, 35)">
+            <rect x="0" y="0" width="110" height="50" rx="6" fill="#0284c7"/>
+            <text x="55" y="22" fill="white" font-weight="700" font-size="11" text-anchor="middle">Step 1</text>
+            <text x="55" y="36" fill="white" font-size="10" text-anchor="middle">Assess Data</text>
+
+            <path d="M 115 25 L 130 25" stroke="#0284c7" stroke-width="3" marker-end="url(#arrow)"/>
+
+            <rect x="135" y="0" width="110" height="50" rx="6" fill="#0284c7"/>
+            <text x="190" y="22" fill="white" font-weight="700" font-size="11" text-anchor="middle">Step 2</text>
+            <text x="190" y="36" fill="white" font-size="10" text-anchor="middle">Identify Dilemma</text>
+
+            <rect x="270" y="0" width="110" height="50" rx="6" fill="#0284c7"/>
+            <text x="325" y="22" fill="white" font-weight="700" font-size="11" text-anchor="middle">Step 3</text>
+            <text x="325" y="36" fill="white" font-size="10" text-anchor="middle">Explore Options</text>
+
+            <rect x="405" y="0" width="110" height="50" rx="6" fill="#0284c7"/>
+            <text x="460" y="22" fill="white" font-weight="700" font-size="11" text-anchor="middle">Step 4</text>
+            <text x="460" y="36" fill="white" font-size="10" text-anchor="middle">Implement Action</text>
+
+            <rect x="540" y="0" width="100" height="50" rx="6" fill="#0d9488"/>
+            <text x="590" y="22" fill="white" font-weight="700" font-size="11" text-anchor="middle">Step 5</text>
+            <text x="590" y="36" fill="white" font-size="10" text-anchor="middle">Evaluate Result</text>
+          </g>
+        </svg>
+        <div class="visual-caption">Figure 3.3: Systematic Ethical Decision-Making Flowchart</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="grid-card">
+          <h4>Step 1: Assessment (Gather Information)</h4>
+          <p>Collect clinical facts, medical diagnosis, patient mental capacity, family wishes, cultural values, and legal parameters.</p>
+        </div>
+        <div class="grid-card">
+          <h4>Step 2: Identify the Ethical Issue</h4>
+          <p>Clearly state the conflict (e.g., Autonomy vs. Beneficence) and determine which principles are in opposition.</p>
+        </div>
+        <div class="grid-card">
+          <h4>Step 3: Consider Courses of Action</h4>
+          <p>Brainstorm all possible interventions, analyzing potential outcomes, benefits, and risks for each choice.</p>
+        </div>
+        <div class="grid-card">
+          <h4>Step 4: Select and Implement</h4>
+          <p>Choose the most ethically justifiable action plan, collaborate with the healthcare team, and carry it out with empathy.</p>
+        </div>
+      </div>
+      <div class="grid-card" style="margin-top: 16px;">
+        <h4>Step 5: Evaluate the Outcome</h4>
+        <p>Review the consequences of the decision, assess client/family adaptation, and identify lesson learned for future clinical cases.</p>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE QUIZ -->
+    <section class="section-card">
+      <h2 class="section-title">🧪 Quick Self-Assessment Quiz</h2>
+      <div class="quiz-box">
+        <p><strong>Q1: According to Beauchamp &amp; Childress, a nurse upholding a patient's right to refuse medication is practicing which principle?</strong></p>
+        <div class="quiz-option" onclick="checkQuiz(this, false)">A) Beneficence</div>
+        <div class="quiz-option" onclick="checkQuiz(this, true)">B) Autonomy</div>
+        <div class="quiz-option" onclick="checkQuiz(this, false)">C) Justice</div>
+        <div class="quiz-option" onclick="checkQuiz(this, false)">D) Non-Maleficence</div>
+        <div id="quizResult" style="margin-top: 10px; font-weight: 700; font-size: 0.9rem;"></div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    © 2026 Academic Portal • Prepared for BSN Semester 5 Curriculum
+  </footer>
+
+  <script>
+    function checkQuiz(element, isCorrect) {
+      const options = element.parentElement.querySelectorAll('.quiz-option');
+      options.forEach(opt => opt.style.background = 'white');
+      
+      const resultDiv = document.getElementById('quizResult');
+      if (isCorrect) {
+        element.style.background = '#dcfce7';
+        element.style.borderColor = '#16a34a';
+        resultDiv.innerText = '✅ Correct! Autonomy protects the patient\'s right to self-determination.';
+        resultDiv.style.color = '#15803d';
+      } else {
+        element.style.background = '#fee2e2';
+        element.style.borderColor = '#dc2626';
+        resultDiv.innerText = '❌ Incorrect. Try again!';
+        resultDiv.style.color = '#b91c1c';
+      }
+    }
+  </script>
+
+</body>
+</html>
