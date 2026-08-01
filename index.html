@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BSN Academic Curriculum Portal | Mudassir Khan</title>
+  <title>BSN Academic Curriculum Portal | Mudassir Hussain Khan</title>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,7 +65,6 @@
     /* ACCESS BANNER */
     .access-banner { background: #ffffff; border: 2px dashed #0284c7; border-radius: var(--radius); padding: 24px; margin-bottom: 32px; box-shadow: var(--shadow); }
     .banner-head h3 { font-size: 1.1rem; font-weight: 800; color: #0f172a; }
-    .device-info-badge { background: #f0f9ff; border: 1px solid #bae6fd; padding: 10px 14px; border-radius: 10px; font-size: 0.85rem; color: #0369a1; margin-top: 10px; font-weight: 600; }
     
     .code-input-group { display: flex; gap: 10px; margin-top: 12px; }
     .code-input-group input { flex: 1; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; font-size: 0.9rem; font-weight: 600; outline: none; text-transform: uppercase; }
@@ -128,7 +127,7 @@
         <span>BSN Portal</span>
       </a>
       <div class="nav-actions">
-        <button class="pay-menu-btn" onclick="showModal('ALL')">💳 Buy Access</button>
+        <button class="pay-menu-btn" onclick="showModal('ALL')">💳 Buy Full Access (PKR 993)</button>
       </div>
     </div>
   </header>
@@ -148,18 +147,14 @@
     <div class="access-banner">
       <div class="banner-head">
         <div>
-          <h3>🔑 Enter Unlock Key</h3>
-          <p style="font-size: 0.85rem; color: #64748b;">Paste the key sent to you on WhatsApp to activate your notes.</p>
+          <h3>🔑 Enter Access Key</h3>
+          <p style="font-size: 0.85rem; color: #64748b;">Enter the key provided to you after payment on WhatsApp to unlock notes.</p>
         </div>
-      </div>
-
-      <div class="device-info-badge">
-        📱 Your Device ID: <strong id="displayDeviceId">Loading...</strong>
       </div>
       
       <div class="code-input-group">
-        <input type="text" id="passcodeInput" placeholder="e.g. KEY-XXXXXX" onkeypress="handleKeyPress(event)">
-        <button class="apply-btn" onclick="verifyCodeInput()">Unlock Now</button>
+        <input type="text" id="passcodeInput" placeholder="Enter Access Key (e.g. BSN993)" onkeypress="handleKeyPress(event)">
+        <button class="apply-btn" onclick="verifyCodeInput()">Unlock</button>
       </div>
     </div>
 
@@ -186,7 +181,7 @@
               <li class="resource-item">
                 <a href="./pediatric/index.html" onclick="checkSubjectAccess(event, 'pediatric')">
                   <span class="res-title">Pediatric Notes & Units</span>
-                  <span class="tag tag-lock" id="tag-pediatric">🔒 Locked (Click to Buy)</span>
+                  <span class="tag tag-lock" id="tag-pediatric">🔒 Locked (PKR 350)</span>
                 </a>
               </li>
             </ul>
@@ -211,7 +206,7 @@
               <li class="resource-item">
                 <a href="./reproductive/index.html" onclick="checkSubjectAccess(event, 'reproductive')">
                   <span class="res-title">Reproductive Health Notes & Units</span>
-                  <span class="tag tag-lock" id="tag-reproductive">🔒 Locked (Click to Buy)</span>
+                  <span class="tag tag-lock" id="tag-reproductive">🔒 Locked (PKR 350)</span>
                 </a>
               </li>
             </ul>
@@ -236,7 +231,7 @@
               <li class="resource-item">
                 <a href="./english/index.html" onclick="checkSubjectAccess(event, 'english')">
                   <span class="res-title">English Notes & Course Material</span>
-                  <span class="tag tag-lock" id="tag-english">🔒 Locked (Click to Buy)</span>
+                  <span class="tag tag-lock" id="tag-english">🔒 Locked (PKR 250)</span>
                 </a>
               </li>
             </ul>
@@ -261,7 +256,7 @@
               <li class="resource-item">
                 <a href="./perls/index.html" onclick="checkSubjectAccess(event, 'perls')">
                   <span class="res-title">PERLS Notes & Modules</span>
-                  <span class="tag tag-lock" id="tag-perls">🔒 Locked (Click to Buy)</span>
+                  <span class="tag tag-lock" id="tag-perls">🔒 Locked (PKR 250)</span>
                 </a>
               </li>
             </ul>
@@ -303,7 +298,7 @@
     <div class="modal-box">
       <button class="close-btn" onclick="closeModal()">×</button>
       <h2>Unlock BSN Study Portal</h2>
-      <p style="font-size:0.85rem; color:#64748b; margin-top:6px;">Get single-device access to course notes.</p>
+      <p style="font-size:0.85rem; color:#64748b; margin-top:6px;">Send payment to get your access key instantly.</p>
       
       <div class="price-tag">
         <span style="font-size:1rem;">PKR</span> <span id="modalPrice">993</span>
@@ -316,7 +311,7 @@
       </div>
 
       <a id="whatsappBtn" href="#" target="_blank" class="wa-btn">
-        💬 Send Device ID & Screenshot
+        💬 Send Screenshot on WhatsApp
       </a>
     </div>
   </div>
@@ -326,31 +321,18 @@
     <p>© 2026 Academic Portal • Prepared by Mudassir Hussain Khan</p>
   </footer>
 
-  <!-- JAVASCRIPT ENGINE -->
+  <!-- SIMPLE KEY LOGIC -->
   <script>
     const MY_WHATSAPP_NUMBER = "923241064487"; 
-    const MASTER_KEY = "MUDASSIR_BSN_SECRET"; 
 
-    // 1. Assign or load persistent Device ID
-    function getDeviceId() {
-      let deviceId = localStorage.getItem("bsn_device_id");
-      if (!deviceId) {
-        deviceId = "BSN-" + Math.floor(100000 + Math.random() * 900000);
-        localStorage.setItem("bsn_device_id", deviceId);
-      }
-      return deviceId;
-    }
-
-    // 2. Hash mathematical verification formula
-    function generateExpectedCode(deviceId, subjectKey) {
-      let str = deviceId.trim().toUpperCase() + subjectKey.trim() + MASTER_KEY;
-      let hash = 0;
-      for (let i = 0; i < str.length; i++) {
-        hash = (hash << 5) - hash + str.charCodeAt(i);
-        hash |= 0;
-      }
-      return "KEY-" + Math.abs(hash).toString(36).toUpperCase();
-    }
+    // YOUR PASSWORDS - YOU CAN CHANGE THESE TO ANYTHING YOU WANT!
+    const KEYS = {
+      "BSN993": "ALL",          // Full Portal Access (PKR 993)
+      "PEDS350": "pediatric",    // Pediatric Access Only (PKR 350)
+      "REPO350": "reproductive", // Reproductive Access Only (PKR 350)
+      "ENG250": "english",       // English Access Only (PKR 250)
+      "PERLS250": "perls"        // PERLS Access Only (PKR 250)
+    };
 
     function toggleCard(headerElement) {
       const parentCard = headerElement.parentElement;
@@ -372,51 +354,48 @@
       return data ? JSON.parse(data) : [];
     }
 
-    // 3. Key Verification Algorithm
+    // Verify key typed by student
     function verifyCodeInput() {
-      const userCode = document.getElementById("passcodeInput").value.trim().toUpperCase();
-      const deviceId = getDeviceId();
+      const userInput = document.getElementById("passcodeInput").value.trim().toUpperCase();
 
-      if (!userCode) { alert("Please enter your key first."); return; }
-
-      const subjects = ["pediatric", "reproductive", "english", "perls", "ALL"];
-      let matchedSubject = null;
-
-      for (let sub of subjects) {
-        if (userCode === generateExpectedCode(deviceId, sub)) {
-          matchedSubject = sub;
-          break;
-        }
+      if (!userInput) { 
+        alert("Please enter your key first."); 
+        return; 
       }
 
-      if (matchedSubject) {
+      if (KEYS[userInput]) {
+        const grantedAccess = KEYS[userInput];
         let currentUnlocked = getUnlockedSubjects();
-        if (matchedSubject === "ALL") {
+
+        if (grantedAccess === "ALL") {
           currentUnlocked = ["pediatric", "reproductive", "english", "perls", "ALL"];
-        } else if (!currentUnlocked.includes(matchedSubject)) {
-          currentUnlocked.push(matchedSubject);
+          alert("🎉 FULL PORTAL UNLOCKED! You now have access to all subjects.");
+        } else {
+          if (!currentUnlocked.includes(grantedAccess)) {
+            currentUnlocked.push(grantedAccess);
+          }
+          alert(`🎉 SUCCESS! Access unlocked for ${grantedAccess.toUpperCase()}.`);
         }
+
         localStorage.setItem("bsn_unlocked_list", JSON.stringify(currentUnlocked));
-        alert("🎉 Code Accepted! Your subject is now unlocked forever on this device.");
         document.getElementById("passcodeInput").value = "";
         applyUnlockedState();
       } else {
-        alert("❌ Invalid key! Check for typos or ensure you gave Mudassir your exact Device ID (" + deviceId + ").");
+        alert("❌ Invalid Access Key! Please check the key Mudassir gave you on WhatsApp.");
       }
     }
 
-    // 4. Access Guard on Note Links
+    // Guard links
     function checkSubjectAccess(event, subjectKey) {
       const unlocked = getUnlockedSubjects();
       if (unlocked.includes("ALL") || unlocked.includes(subjectKey)) {
-        return true; // Allow navigation
+        return true; // Allow opening page
       }
       event.preventDefault();
       showModal(subjectKey);
     }
 
     function showModal(subjectKey) {
-      const deviceId = getDeviceId();
       let title = "Full VIP Portal Access";
       let price = "993";
 
@@ -428,9 +407,7 @@
       document.getElementById("modalPrice").innerText = price;
 
       const msg = encodeURIComponent(
-        `Hi Mudassir, I want to buy access for: ${title}.\n` +
-        `My Device ID: ${deviceId}\n` +
-        `Subject Code: ${subjectKey}\n` +
+        `Hi Mudassir, I want to buy access for: ${title} (PKR ${price}).\n` +
         `Here is my JazzCash payment screenshot:`
       );
 
@@ -442,7 +419,7 @@
       document.getElementById("paymentModal").style.display = "none";
     }
 
-    // 5. Update UI Buttons & Locks
+    // Dynamic UI Update
     function applyUnlockedState() {
       const unlocked = getUnlockedSubjects();
       const isAll = unlocked.includes("ALL");
@@ -464,10 +441,7 @@
     }
 
     window.onload = function() {
-      const deviceId = getDeviceId();
-      document.getElementById("displayDeviceId").innerText = deviceId;
       applyUnlockedState();
-
       document.querySelectorAll('.subject-card.active .card-body').forEach(body => {
         body.style.maxHeight = body.scrollHeight + "px";
       });
