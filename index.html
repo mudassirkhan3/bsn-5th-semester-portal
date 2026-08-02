@@ -208,19 +208,17 @@
       display: flex; 
       gap: 8px; 
       margin-top: 12px; 
-      flex-direction: row;
+      flex-direction: column;
     }
 
     .code-input-group input { 
-      flex: 1; 
+      width: 100%; 
       padding: 12px 14px; 
       border: 1px solid var(--border); 
       border-radius: 12px; 
       font-size: 0.88rem; 
       font-weight: 600; 
       outline: none; 
-      text-transform: uppercase; 
-      min-width: 0;
     }
 
     .code-input-group input:focus { 
@@ -239,8 +237,19 @@
       cursor: pointer; 
       transition: background 0.2s; 
       white-space: nowrap;
-      flex-shrink: 0;
+      width: 100%;
     }
+
+    .status-badge {
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-top: 10px;
+      text-align: center;
+    }
+    .status-locked { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+    .status-approved { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
 
     .section-title { 
       font-size: 0.8rem; 
@@ -489,24 +498,11 @@
       font-size: 0.8rem; 
     }
 
-    /* SMALL MOBILE BREAKPOINT (Under 400px) */
     @media (max-width: 400px) {
-      .nav-container {
-        justify-content: center;
-      }
-      .brand {
-        margin-bottom: 4px;
-      }
-      .code-input-group {
-        flex-direction: column;
-      }
-      .apply-btn {
-        width: 100%;
-      }
-      .resource-item a {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .nav-container { justify-content: center; }
+      .brand { margin-bottom: 4px; }
+      .apply-btn { width: 100%; }
+      .resource-item a { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -520,7 +516,7 @@
         <span>BSN Portal</span>
       </a>
       <div class="nav-actions">
-        <a href="dashboard.html" class="login-btn">🎓 Login</a>
+        <a href="dashboard.html" class="login-btn">🎓 Account</a>
         <button class="pay-menu-btn" onclick="showModal('ALL')">💳 Buy Access (PKR 993)</button>
       </div>
     </div>
@@ -537,19 +533,22 @@
       <div class="author-bar">👤 Curated & Maintained by <strong>Mudassir Hussain Khan</strong></div>
     </div>
 
-    <!-- ACCESS CODE BANNER -->
+    <!-- REGISTER / CHECK ACCESS BANNER -->
     <div class="access-banner">
       <div class="banner-head">
         <div>
-          <h3>🔑 Enter Access Key</h3>
-          <p style="font-size: 0.82rem; color: #64748b; margin-top: 2px;">Enter key provided on WhatsApp after payment.</p>
+          <h3>👤 Student Account Access</h3>
+          <p style="font-size: 0.82rem; color: #64748b; margin-top: 2px;">Enter your details to request approval or check status.</p>
         </div>
       </div>
       
-      <div class="code-input-group">
-        <input type="text" id="passcodeInput" placeholder="Enter Access Key (e.g. BSN993)" onkeypress="handleKeyPress(event)">
-        <button class="apply-btn" onclick="verifyCodeInput()">Unlock</button>
+      <div class="code-input-group" id="regForm">
+        <input type="text" id="studentName" placeholder="Your Full Name">
+        <input type="email" id="studentEmail" placeholder="Your Email Address">
+        <button class="apply-btn" onclick="handleStudentRegister()">Register / Login</button>
       </div>
+
+      <div id="statusNotice"></div>
     </div>
 
     <!-- SECTION TITLE -->
@@ -692,7 +691,7 @@
     <div class="modal-box">
       <button class="close-btn" onclick="closeModal()">×</button>
       <h2 style="font-size:1.25rem;">Unlock BSN Study Portal</h2>
-      <p style="font-size:0.82rem; color:#64748b; margin-top:4px;">Send payment to get your access key instantly.</p>
+      <p style="font-size:0.82rem; color:#64748b; margin-top:4px;">Send payment to get your access approved.</p>
       
       <div class="price-tag">
         <span style="font-size:0.95rem;">PKR</span> <span id="modalPrice">993</span>
@@ -727,58 +726,13 @@
       'perls': '250'
     };
 
-    const APPROVED_KEYS = {
-      'BSN993': ALL_SUBJECTS,
-      'BSN4821': ALL_SUBJECTS,
-      'BSN9104': ALL_SUBJECTS,
-      'BSN3357': ALL_SUBJECTS,
-      'BSN7209': ALL_SUBJECTS,
-      'BSN1584': ALL_SUBJECTS,
-      'BSN6692': ALL_SUBJECTS,
-      'BSN8031': ALL_SUBJECTS,
-      'BSN2415': ALL_SUBJECTS,
-      'BSN5973': ALL_SUBJECTS,
-
-      'PEDS350': ['pediatric'],
-      'PEDS1942': ['pediatric'],
-      'PEDS8831': ['pediatric'],
-      'PEDS4059': ['pediatric'],
-      'PEDS6270': ['pediatric'],
-
-      'REPO350': ['reproductive'],
-      'REPO7143': ['reproductive'],
-      'REPO2980': ['reproductive'],
-      'REPO5516': ['reproductive'],
-      'REPO9304': ['reproductive'],
-
-      'ENG250': ['english'],
-      'ENG8319': ['english'],
-      'ENG4702': ['english'],
-      'ENG1658': ['english'],
-      'ENG9034': ['english'],
-
-      'PERLS250': ['perls'],
-      'PERLS3912': ['perls'],
-      'PERLS6048': ['perls'],
-      'PERLS8471': ['perls'],
-      'PERLS2190': ['perls']
-    };
-
-    // Accordion Toggle with Dynamic Height Calculation for Mobile Smoothness
     function toggleCard(cardHeader) {
       const card = cardHeader.parentElement;
       const body = card.querySelector('.card-body');
-      
       card.classList.toggle('active');
-      
-      if (card.classList.contains('active')) {
-        body.style.maxHeight = body.scrollHeight + "px";
-      } else {
-        body.style.maxHeight = "0px";
-      }
+      body.style.maxHeight = card.classList.contains('active') ? body.scrollHeight + "px" : "0px";
     }
 
-    // Dynamic Modal Handlers
     function showModal(subject) {
       const modal = document.getElementById('paymentModal');
       const priceElement = document.getElementById('modalPrice');
@@ -788,7 +742,7 @@
       priceElement.innerText = price;
 
       const subName = subject === 'ALL' ? 'Full BSN Portal Access' : subject.toUpperCase() + ' Course Notes';
-      const defaultText = `Hi Mudassir, I have sent payment (PKR ${price}) for ${subName}. Please send my access key.`;
+      const defaultText = `Hi Mudassir, I have registered and sent payment (PKR ${price}) for ${subName}. Please approve my account.`;
       
       whatsappBtn.href = `https://wa.me/923241064487?text=${encodeURIComponent(defaultText)}`;
       modal.style.display = 'flex';
@@ -799,89 +753,91 @@
     }
 
     function handleOverlayClick(e) {
-      if (e.target.id === 'paymentModal') {
-        closeModal();
-      }
+      if (e.target.id === 'paymentModal') closeModal();
     }
 
-    function evaluateKey(inputKey) {
-      const key = inputKey.trim().toUpperCase();
-      if (APPROVED_KEYS.hasOwnProperty(key)) {
-        return { valid: true, subjects: APPROVED_KEYS[key] };
-      }
-      return { valid: false };
-    }
+    // STUDENT REGISTRATION & APPROVAL SYSTEM
+    function handleStudentRegister() {
+      const name = document.getElementById('studentName').value.trim();
+      const email = document.getElementById('studentEmail').value.trim().toLowerCase();
 
-    function verifyCodeInput(providedCode) {
-      const input = (providedCode || document.getElementById('passcodeInput').value).trim();
-      
-      if (!input) {
-        alert("Please enter a valid access code.");
+      if (!name || !email) {
+        alert("Please enter both Name and Email!");
         return;
       }
 
-      const result = evaluateKey(input);
+      let userData = localStorage.getItem('user_' + email);
 
-      if (result.valid) {
-        result.subjects.forEach(subj => {
-          localStorage.setItem('access_' + subj, 'true');
-        });
-        alert(`🎉 Success! Unlocked course access.`);
-        updateAccessUI();
+      if (!userData) {
+        // Register new student - DEFAULT LOCKED 🔒
+        const newUser = { name: name, email: email, status: 'locked', access: [] };
+        localStorage.setItem('user_' + email, JSON.stringify(newUser));
+        localStorage.setItem('current_student', email);
+        alert("Registration submitted! Account is pending CR approval.");
       } else {
-        alert("❌ Invalid or Unapproved Key! Access Denied.");
+        localStorage.setItem('current_student', email);
       }
-      
-      if (document.getElementById('passcodeInput')) {
-        document.getElementById('passcodeInput').value = '';
-      }
-    }
 
-    function handleKeyPress(event) {
-      if (event.key === 'Enter') {
-        verifyCodeInput();
-      }
+      updateAccessUI();
     }
 
     function checkSubjectAccess(event, subjectKey) {
-      const hasAccess = localStorage.getItem('access_' + subjectKey) === 'true';
+      const currentEmail = localStorage.getItem('current_student');
+      if (!currentEmail) {
+        event.preventDefault();
+        alert("🔒 Please enter your Name and Email first to request access.");
+        return;
+      }
+
+      const user = JSON.parse(localStorage.getItem('user_' + currentEmail));
+      const hasAccess = user && user.status === 'approved' && (user.access.includes('ALL') || user.access.includes(subjectKey));
+
       if (!hasAccess) {
         event.preventDefault();
-        alert("🔒 Subject Locked! Please enter your access code or purchase access.");
+        alert("🔒 Subject Locked! Account is pending approval or purchase.");
         showModal(subjectKey);
       }
     }
 
     function updateAccessUI() {
-      ALL_SUBJECTS.forEach(subj => {
-        const isUnlocked = localStorage.getItem('access_' + subj) === 'true';
-        const tag = document.getElementById('tag-' + subj);
-        const title = document.getElementById('title-' + subj);
-        
-        if (isUnlocked && tag && title) {
-          tag.className = 'tag tag-unlocked';
-          tag.innerText = '✅ Unlocked';
-          title.innerText = title.innerText.replace(' 🔒', '');
-        }
-      });
+      const currentEmail = localStorage.getItem('current_student');
+      const statusNotice = document.getElementById('statusNotice');
+
+      if (!currentEmail) {
+        statusNotice.innerHTML = '';
+        return;
+      }
+
+      const user = JSON.parse(localStorage.getItem('user_' + currentEmail));
+
+      if (!user) return;
+
+      if (user.status === 'approved') {
+        statusNotice.className = 'status-badge status-approved';
+        statusNotice.innerHTML = `🔓 Welcome, ${user.name}! Your account is APPROVED.`;
+
+        ALL_SUBJECTS.forEach(subj => {
+          if (user.access.includes('ALL') || user.access.includes(subj)) {
+            const tag = document.getElementById('tag-' + subj);
+            const title = document.getElementById('title-' + subj);
+            if (tag && title) {
+              tag.className = 'tag tag-unlocked';
+              tag.innerText = '✅ Unlocked';
+              title.innerText = title.innerText.replace(' 🔒', '');
+            }
+          }
+        });
+      } else {
+        statusNotice.className = 'status-badge status-locked';
+        statusNotice.innerHTML = `🔒 Welcome, ${user.name}! Your account is PENDING approval from Mudassir.`;
+      }
     }
 
     window.addEventListener('DOMContentLoaded', () => {
       updateAccessUI();
-
-      // Recalculate expanded card height on load for active cards
       document.querySelectorAll('.subject-card.active .card-body').forEach(body => {
         body.style.maxHeight = body.scrollHeight + "px";
       });
-
-      const hash = window.location.hash;
-      if (hash.startsWith('#key=')) {
-        const keyFromUrl = hash.replace('#key=', '').trim();
-        if (keyFromUrl) {
-          verifyCodeInput(keyFromUrl);
-          history.replaceState(null, null, ' ');
-        }
-      }
     });
   </script>
 </body>
