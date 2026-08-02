@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BSN Student Portal | Mudassir Hussain Khan</title>
+  <title>BSN Student Academic Portal | Mudassir Hussain Khan</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +19,8 @@
       --text-muted: #64748b;
       --border: #e2e8f0;
       --radius: 16px;
+      --success: #16a34a;
+      --warning: #d97706;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -31,11 +33,11 @@
     }
 
     .container {
-      max-width: 800px;
+      max-width: 850px;
       margin: 0 auto;
     }
 
-    /* HEADER */
+    /* HEADER DASHBOARD CARD */
     .header-card {
       background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
       color: white;
@@ -43,46 +45,71 @@
       border-radius: var(--radius);
       margin-bottom: 24px;
       box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.25);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     .header-card h1 { font-size: 1.6rem; font-weight: 800; }
     .header-card p { color: #bae6fd; font-size: 0.9rem; margin-top: 6px; }
 
-    /* AUTH & REGISTRATION SECTION */
+    .admin-link-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.2s;
+    }
+
+    .admin-link-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* AUTHENTICATION / REGISTRATION CARD */
     .auth-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 20px;
+      padding: 24px;
       margin-bottom: 24px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
     }
 
     .auth-card h2 {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 700;
       margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .auth-card p {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr auto;
-      gap: 10px;
+      gap: 12px;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
       .form-grid { grid-template-columns: 1fr; }
     }
 
     .input-field {
       width: 100%;
-      padding: 10px 14px;
+      padding: 12px 16px;
       border: 1px solid var(--border);
       border-radius: 10px;
       font-size: 0.9rem;
@@ -98,7 +125,7 @@
       background: var(--primary);
       color: white;
       border: none;
-      padding: 10px 20px;
+      padding: 12px 22px;
       border-radius: 10px;
       font-weight: 700;
       font-size: 0.9rem;
@@ -113,8 +140,8 @@
 
     /* STATUS BADGE */
     .status-badge {
-      margin-top: 14px;
-      padding: 12px 16px;
+      margin-top: 16px;
+      padding: 14px 18px;
       border-radius: 10px;
       font-size: 0.88rem;
       font-weight: 600;
@@ -135,7 +162,7 @@
       display: block;
     }
 
-    /* SUBJECT CARDS */
+    /* SUBJECT ACCORDION CARDS */
     .subject-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -146,7 +173,7 @@
     }
 
     .card-header {
-      padding: 18px 20px;
+      padding: 20px 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -155,14 +182,14 @@
     }
 
     .card-title {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 700;
     }
 
     .tag {
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 20px;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 700;
     }
 
@@ -178,7 +205,7 @@
     }
 
     .card-content {
-      padding: 20px;
+      padding: 22px;
     }
 
     .resource-link {
@@ -188,17 +215,17 @@
       background: var(--primary);
       color: white;
       text-decoration: none;
-      padding: 10px 16px;
+      padding: 10px 18px;
       border-radius: 8px;
       font-weight: 600;
-      font-size: 0.85rem;
-      margin-top: 10px;
+      font-size: 0.88rem;
+      margin-top: 12px;
     }
 
-    /* MODAL */
+    /* MODAL POPUP */
     .modal-overlay {
       position: fixed;
-      top:0; left:0; right:0; bottom:0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(15, 23, 42, 0.6);
       display: none;
       align-items: center;
@@ -210,16 +237,16 @@
 
     .modal-content {
       background: white;
-      padding: 24px;
+      padding: 28px;
       border-radius: var(--radius);
-      max-width: 420px;
+      max-width: 440px;
       width: 100%;
       text-align: center;
       box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
     }
 
-    .modal-content h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; }
-    .modal-content p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; }
+    .modal-content h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 8px; }
+    .modal-content p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 22px; }
 
     .btn-whatsapp {
       display: block;
@@ -249,19 +276,22 @@
 
   <div class="container">
     
-    <!-- HEADER -->
+    <!-- HEADER DASHBOARD -->
     <div class="header-card">
-      <h1>📚 BSN Nursing Academic Portal</h1>
-      <p>Curated & Managed by <strong>Mudassir Hussain Khan</strong> • Class Representative</p>
+      <div>
+        <h1>📚 BSN Academic Student Dashboard</h1>
+        <p>Curated & Managed by <strong>Mudassir Hussain Khan</strong> • Class Representative</p>
+      </div>
+      <a href="admin.html" class="admin-link-btn">🔑 CR Admin Login</a>
     </div>
 
-    <!-- STUDENT REGISTRATION / ACCESS CHECK -->
+    <!-- STUDENT REGISTRATION & ACCESS PORTAL -->
     <div class="auth-card">
-      <h2>👤 Student Account Access</h2>
-      <p>Enter your full name and email to request approval from CR or check status.</p>
+      <h2>👤 Student Account Registration</h2>
+      <p>Enter your Full Name and Email address to register or check your account status.</p>
       
       <div class="form-grid">
-        <input type="text" id="studentName" class="input-field" placeholder="Full Name">
+        <input type="text" id="studentName" class="input-field" placeholder="Full Name (e.g., Ali Raza)">
         <input type="email" id="studentEmail" class="input-field" placeholder="Email Address">
         <button onclick="handleStudentRegister()" class="btn-submit">Register / Login</button>
       </div>
@@ -291,7 +321,7 @@
       </div>
       <div class="card-body">
         <div class="card-content">
-          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 12px;">Complete course lecture notes, child growth/development, and clinical study guides.</p>
+          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 12px;">Complete course lecture notes, child growth & development guides, and clinical slides.</p>
           <a href="#" onclick="checkSubjectAccess(event, 'pediatric')" class="resource-link">📥 Access Course Materials</a>
         </div>
       </div>
@@ -305,7 +335,7 @@
       </div>
       <div class="card-body">
         <div class="card-content">
-          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 12px;">Maternal health, reproductive modules, clinical guidelines, and exam preparation notes.</p>
+          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 12px;">Maternal health modules, clinical guidelines, and high-yield exam notes.</p>
           <a href="#" onclick="checkSubjectAccess(event, 'reproductive')" class="resource-link">📥 Access Course Materials</a>
         </div>
       </div>
@@ -319,7 +349,7 @@
       </div>
       <div class="card-body">
         <div class="card-content">
-          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 12px;">Academic writing guides, nursing communication templates, and course slide decks.</p>
+          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 12px;">Academic writing guides, nursing communication templates, and course presentation decks.</p>
           <a href="#" onclick="checkSubjectAccess(event, 'english')" class="resource-link">📥 Access Course Materials</a>
         </div>
       </div>
@@ -341,12 +371,12 @@
 
   </div>
 
-  <!-- APPROVAL MODAL -->
+  <!-- MODAL POPUP FOR APPROVAL REQUEST -->
   <div class="modal-overlay" id="paymentModal" onclick="handleOverlayClick(event)">
     <div class="modal-content">
       <h3>🔒 Access Required</h3>
-      <p>This module requires approval from Mudassir. Click below to request instant activation on WhatsApp.</p>
-      <a href="#" id="whatsappBtn" target="_blank" class="btn-whatsapp">💬 Message CR on WhatsApp</a>
+      <p>This course module is currently locked. Request approval directly from Mudassir on WhatsApp to activate your access instantly.</p>
+      <a href="#" id="whatsappBtn" target="_blank" class="btn-whatsapp">💬 Request Access on WhatsApp</a>
       <button class="btn-close" onclick="closeModal()">Close</button>
     </div>
   </div>
@@ -354,6 +384,7 @@
   <script>
     const ALL_SUBJECTS = ['ethics', 'pediatric', 'reproductive', 'english', 'perls'];
 
+    // 1. Accordion Card Expand / Collapse
     function toggleCard(cardHeader) {
       const card = cardHeader.parentElement;
       const body = card.querySelector('.card-body');
@@ -370,14 +401,15 @@
       }
     }
 
+    // 2. WhatsApp Modal Controls
     function showModal(subject) {
       const modal = document.getElementById('paymentModal');
       const whatsappBtn = document.getElementById('whatsappBtn');
       const currentEmail = localStorage.getItem('current_student') || '';
 
-      const defaultText = `Hi Mudassir, I registered on the BSN portal (${currentEmail}) for ${subject.toUpperCase()}. Please approve my access.`;
+      const msgText = `Hi Mudassir, I registered on the BSN portal (${currentEmail}) for ${subject.toUpperCase()}. Please approve my access.`;
       
-      whatsappBtn.href = `https://wa.me/923241064487?text=${encodeURIComponent(defaultText)}`;
+      whatsappBtn.href = `https://wa.me/923241064487?text=${encodeURIComponent(msgText)}`;
       modal.style.display = 'flex';
     }
 
@@ -389,6 +421,7 @@
       if (e.target.id === 'paymentModal') closeModal();
     }
 
+    // 3. Register / Login Handler
     function handleStudentRegister() {
       const nameInput = document.getElementById('studentName').value.trim();
       const emailInput = document.getElementById('studentEmail').value.trim().toLowerCase();
@@ -410,13 +443,14 @@
           date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
         };
         localStorage.setItem(userKey, JSON.stringify(newStudent));
-        alert("✅ Submitted successfully! CR Mudassir can now approve your account.");
+        alert("✅ Submitted successfully! CR Mudassir can now approve your account in the Admin Dashboard.");
       }
 
       localStorage.setItem('current_student', emailInput);
       updateAccessUI();
     }
 
+    // 4. Dynamic Access UI Updater
     function updateAccessUI() {
       const currentEmail = localStorage.getItem('current_student');
       const statusNotice = document.getElementById('statusNotice');
@@ -457,6 +491,7 @@
       }
     }
 
+    // 5. Protected Content Checker
     function checkSubjectAccess(event, subjectKey) {
       const currentEmail = localStorage.getItem('current_student');
       if (!currentEmail) {
@@ -474,7 +509,7 @@
         event.preventDefault();
         showModal(subjectKey);
       } else {
-        alert(`🎉 Accessing ${subjectKey.toUpperCase()} Course Materials!`);
+        alert(`🎉 Opening ${subjectKey.toUpperCase()} Course Materials!`);
       }
     }
 
