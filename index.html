@@ -174,7 +174,7 @@
       </div>
       
       <div class="code-input-group">
-        <input type="text" id="passcodeInput" placeholder="Enter Access Key (e.g. BSN993)" onkeypress="handleKeyPress(event)">
+        <input type="text" id="passcodeInput" placeholder="Enter Access Key (e.g. BSN4567)" onkeypress="handleKeyPress(event)">
         <button class="apply-btn" onclick="verifyCodeInput()">Unlock</button>
       </div>
     </div>
@@ -342,16 +342,9 @@
     <p>© 2026 Academic Portal • Prepared by Mudassir Hussain Khan</p>
   </footer>
 
-  <!-- SCRIPT LOGIC (SERVERLESS & LIGHTWEIGHT) -->
+  <!-- SCRIPT LOGIC -->
   <script>
-    // Access Keys & Prices Setup
-    const MASTER_KEY = "BSN993";
-    const SUBJECT_KEYS = {
-      'pediatric': 'PEDS350',
-      'reproductive': 'REPO350',
-      'english': 'ENG250',
-      'perls': 'PERLS250'
-    };
+    const ALL_SUBJECTS = ['pediatric', 'reproductive', 'english', 'perls'];
 
     const SUBJECT_PRICES = {
       'ALL': '993',
@@ -361,13 +354,13 @@
       'perls': '250'
     };
 
-    // Accordion Toggle Function
+    // Accordion Toggle
     function toggleCard(cardHeader) {
       const card = cardHeader.parentElement;
       card.classList.toggle('active');
     }
 
-    // Modal Control with Price & Pre-filled WhatsApp Text Update
+    // Modal Control with Price & Pre-filled WhatsApp Text
     function showModal(subject) {
       const modal = document.getElementById('paymentModal');
       const priceElement = document.getElementById('modalPrice');
@@ -387,37 +380,57 @@
       document.getElementById('paymentModal').style.display = 'none';
     }
 
+    // KEY EVALUATOR: Matches fixed keys OR dynamic student keys
+    function evaluateKey(inputKey) {
+      const key = inputKey.trim().toUpperCase();
+
+      // 1. Full Access: "BSN" + 4 digits (e.g., BSN4567, BSN1029) or legacy "BSN993"
+      if (/^BSN\d{4}$/.test(key) || key === "BSN993") {
+        return { valid: true, subjects: ALL_SUBJECTS, label: "Full BSN Portal" };
+      }
+
+      // 2. Pediatrics: "PEDS" + 4 digits (e.g., PEDS4567) or legacy "PEDS350"
+      if (/^PEDS\d{4}$/.test(key) || key === "PEDS350") {
+        return { valid: true, subjects: ['pediatric'], label: "Pediatric Health Nursing" };
+      }
+
+      // 3. Reproductive: "REPO" + 4 digits (e.g., REPO4567) or legacy "REPO350"
+      if (/^REPO\d{4}$/.test(key) || key === "REPO350") {
+        return { valid: true, subjects: ['reproductive'], label: "Reproductive Health" };
+      }
+
+      // 4. English: "ENG" + 4 digits (e.g., ENG4567) or legacy "ENG250"
+      if (/^ENG\d{4}$/.test(key) || key === "ENG250") {
+        return { valid: true, subjects: ['english'], label: "English" };
+      }
+
+      // 5. PERLS: "PERLS" + 4 digits (e.g., PERLS4567) or legacy "PERLS250"
+      if (/^PERLS\d{4}$/.test(key) || key === "PERLS250") {
+        return { valid: true, subjects: ['perls'], label: "PERLS" };
+      }
+
+      return { valid: false };
+    }
+
     // Access Code Verification Logic
     function verifyCodeInput(providedCode) {
-      const input = (providedCode || document.getElementById('passcodeInput').value).trim().toUpperCase();
+      const input = (providedCode || document.getElementById('passcodeInput').value).trim();
       
       if (!input) {
         alert("Please enter a valid access code.");
         return;
       }
 
-      if (input === MASTER_KEY) {
-        Object.keys(SUBJECT_KEYS).forEach(subj => {
+      const result = evaluateKey(input);
+
+      if (result.valid) {
+        result.subjects.forEach(subj => {
           localStorage.setItem('access_' + subj, 'true');
         });
-        alert("🎉 Master Access Applied! All courses unlocked.");
+        alert(`🎉 Success! Access granted for: ${result.label}`);
         updateAccessUI();
       } else {
-        let matchedSubj = null;
-        for (let [subj, code] of Object.entries(SUBJECT_KEYS)) {
-          if (input === code) {
-            matchedSubj = subj;
-            break;
-          }
-        }
-
-        if (matchedSubj) {
-          localStorage.setItem('access_' + matchedSubj, 'true');
-          alert(`🎉 Success! ${matchedSubj.toUpperCase()} course unlocked.`);
-          updateAccessUI();
-        } else {
-          alert("❌ Invalid Code. Please check your payment key or contact WhatsApp.");
-        }
+        alert("❌ Invalid Code. Keys use format BSNXXXX, PEDSXXXX, REPOXXXX, ENGXXXX, or PERLSXXXX (where XXXX is 4 digits).");
       }
       
       if (document.getElementById('passcodeInput')) {
@@ -431,7 +444,7 @@
       }
     }
 
-    // Direct Access Link Interceptor
+    // Direct Link Guard
     function checkSubjectAccess(event, subjectKey) {
       const hasAccess = localStorage.getItem('access_' + subjectKey) === 'true';
       if (!hasAccess) {
@@ -443,9 +456,7 @@
 
     // Dynamic UI Badges & Locks Update
     function updateAccessUI() {
-      const subjects = ['pediatric', 'reproductive', 'english', 'perls'];
-      
-      subjects.forEach(subj => {
+      ALL_SUBJECTS.forEach(subj => {
         const isUnlocked = localStorage.getItem('access_' + subj) === 'true';
         const tag = document.getElementById('tag-' + subj);
         const title = document.getElementById('title-' + subj);
@@ -458,18 +469,17 @@
       });
     }
 
-    // Run Initial Checks on Page Load
+    // Page Load Setup
     window.addEventListener('DOMContentLoaded', () => {
-      // 1. Update UI based on previous local access
+      // 1. Refresh lock state based on browser storage
       updateAccessUI();
 
-      // 2. Check for URL hash auto-unlock (e.g., #key=BSN993 or #key=PEDS350)
+      // 2. Auto-unlock if user opens a direct key URL (#key=BSN4567)
       const hash = window.location.hash;
       if (hash.startsWith('#key=')) {
         const keyFromUrl = hash.replace('#key=', '').trim();
         if (keyFromUrl) {
           verifyCodeInput(keyFromUrl);
-          // Clean hash from browser address bar after unlock
           history.replaceState(null, null, ' ');
         }
       }
