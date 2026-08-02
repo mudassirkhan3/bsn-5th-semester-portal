@@ -252,6 +252,7 @@
       font-weight: 700;
       margin-top: 10px;
       text-align: center;
+      line-height: 1.4;
     }
     .status-locked { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
     .status-approved { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
@@ -722,7 +723,7 @@
 
   <!-- SCRIPT LOGIC -->
   <script>
-    // ⚠️ REPLACE THIS URL WITH YOUR ACTUAL GOOGLE APPS SCRIPT WEB APP DEPLOYMENT URL
+    // ⚠️ PASTE YOUR GOOGLE APPS SCRIPT WEB APP DEPLOYMENT URL HERE
     const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
 
     const ALL_SUBJECTS = ['pediatric', 'reproductive', 'english', 'perls', 'ethics'];
@@ -808,7 +809,7 @@
       } catch (err) {
         console.error(err);
         statusNotice.className = 'status-badge status-locked';
-        statusNotice.innerHTML = `⚠️ Connection error. Please make sure SCRIPT_URL is properly configured.`;
+        statusNotice.innerHTML = `⚠️ <strong>Unable to connect right now.</strong> Please check your internet connection or contact <strong>Mudassir (CR)</strong> on WhatsApp for approval.`;
       } finally {
         regBtn.disabled = false;
       }
@@ -887,7 +888,7 @@
         });
       } else {
         statusNotice.className = 'status-badge status-locked';
-        statusNotice.innerHTML = `🔒 Welcome, <strong>${user.name || 'Student'}</strong>! Registration recorded. Pending CR approval from Mudassir.`;
+        statusNotice.innerHTML = `🔒 Welcome, <strong>${user.name || 'Student'}</strong>! Your registration is recorded (Pending CR approval from Mudassir).`;
       }
     }
 
