@@ -35,6 +35,7 @@
     
     .submit-btn { width: 100%; padding: 14px; background: #0284c7; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; font-size: 0.9rem; transition: background 0.2s; }
     .submit-btn:hover { background: #0369a1; }
+    .submit-btn:disabled { background: #94a3b8; cursor: not-allowed; }
     
     .forgot-link { font-size: 0.8rem; color: #0284c7; font-weight: 600; text-decoration: none; cursor: pointer; float: right; margin-bottom: 12px; }
     .forgot-link:hover { text-decoration: underline; }
@@ -70,14 +71,14 @@
       </label>
       <input type="password" id="loginPassword" placeholder="••••••••" required>
     </div>
-    <button type="submit" class="submit-btn">Login to Dashboard</button>
+    <button type="submit" class="submit-btn" id="loginBtn">Login to Dashboard</button>
   </form>
 
   <!-- REGISTRATION FORM -->
   <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
     <div class="form-group">
       <label>Full Name</label>
-      <input type="text" id="regName" placeholder="e.g. Mudassir Hussain Khan" required>
+      <input type="text" id="regName" placeholder="e.g. Student Name" required>
     </div>
     
     <div class="form-group">
@@ -107,7 +108,7 @@
       <input type="password" id="regPassword" placeholder="At least 6 characters" minlength="6" required>
     </div>
 
-    <button type="submit" class="submit-btn">Create Account</button>
+    <button type="submit" class="submit-btn" id="regBtn">Create Account</button>
   </form>
 
   <!-- FORGOT PASSWORD FORM -->
@@ -127,7 +128,7 @@
 </div>
 
 <script>
-  // Paste your Google Web App URL between the quotes below
+  // Paste your Google Web App Deployment URL inside the quotes below
   const GOOGLE_SCRIPT_URL = 'PASTE_YOUR_WEB_APP_URL_HERE';
 
   function showForm(type) {
@@ -158,8 +159,11 @@
     }
   }
 
-  function handleRegister(e) {
+  async function handleRegister(e) {
     e.preventDefault();
+    const btn = document.getElementById('regBtn');
+    btn.disabled = true;
+    btn.innerText = 'Creating Account...';
 
     const user = {
       name: document.getElementById('regName').value.trim(),
@@ -169,18 +173,22 @@
       password: document.getElementById('regPassword').value
     };
 
-    // 1. Save locally for instant login redirect
+    // 1. Save locally for instant session access
     localStorage.setItem('bsn_user_' + user.email, JSON.stringify(user));
     localStorage.setItem('bsn_current_user', user.email);
 
-    // 2. Send registration data to Google Sheet
-    if (GOOGLE_SCRIPT_URL !== 'PASTE_YOUR_WEB_APP_URL_HERE') {
-      fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-      }).catch(err => console.error('Sheet Sync Error:', err));
+    // 2. Send registration data to Google Sheets safely
+    if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'PASTE_YOUR_WEB_APP_URL_HERE') {
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(user)
+        });
+      } catch (err) {
+        console.error('Sheet Sync Error:', err);
+      }
     }
 
     alert('🎉 Registration successful!');
