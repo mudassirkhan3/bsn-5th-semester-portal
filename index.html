@@ -19,8 +19,6 @@
       --text-muted: #64748b;
       --border: #e2e8f0;
       --radius: 16px;
-      --success: #16a34a;
-      --warning: #d97706;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -64,9 +62,6 @@
       font-size: 1.1rem;
       font-weight: 700;
       margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
     .auth-card p {
@@ -263,10 +258,10 @@
     <!-- STUDENT REGISTRATION / ACCESS CHECK -->
     <div class="auth-card">
       <h2>👤 Student Account Access</h2>
-      <p>Enter your details to request approval or check your status.</p>
+      <p>Enter your full name and email to request approval from CR or check status.</p>
       
       <div class="form-grid">
-        <input type="text" id="studentName" class="input-field" placeholder="Full Name (e.g., Ali Raza)">
+        <input type="text" id="studentName" class="input-field" placeholder="Full Name">
         <input type="email" id="studentEmail" class="input-field" placeholder="Email Address">
         <button onclick="handleStudentRegister()" class="btn-submit">Register / Login</button>
       </div>
@@ -274,7 +269,21 @@
       <div id="statusNotice" class="status-badge"></div>
     </div>
 
-    <!-- SUBJECT 1: PEDIATRIC -->
+    <!-- SUBJECT 1: NURSING ETHICS -->
+    <div class="subject-card" id="card-ethics">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title" id="title-ethics">⚖️ Nursing Ethics 🔒</div>
+        <span class="tag tag-locked" id="tag-ethics">Locked</span>
+      </div>
+      <div class="card-body">
+        <div class="card-content">
+          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 12px;">Ethical principles, legal responsibilities, patient rights, and professional codes of conduct.</p>
+          <a href="#" onclick="checkSubjectAccess(event, 'ethics')" class="resource-link">📥 Access Course Materials</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBJECT 2: PEDIATRIC HEALTH -->
     <div class="subject-card" id="card-pediatric">
       <div class="card-header" onclick="toggleCard(this)">
         <div class="card-title" id="title-pediatric">👶 Pediatric Health Nursing 🔒</div>
@@ -282,13 +291,13 @@
       </div>
       <div class="card-body">
         <div class="card-content">
-          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 12px;">Complete course lecture notes, presentation slides, and exam study guides for Pediatric Nursing.</p>
+          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 12px;">Complete course lecture notes, child growth/development, and clinical study guides.</p>
           <a href="#" onclick="checkSubjectAccess(event, 'pediatric')" class="resource-link">📥 Access Course Materials</a>
         </div>
       </div>
     </div>
 
-    <!-- SUBJECT 2: REPRODUCTIVE -->
+    <!-- SUBJECT 3: REPRODUCTIVE HEALTH -->
     <div class="subject-card" id="card-reproductive">
       <div class="card-header" onclick="toggleCard(this)">
         <div class="card-title" id="title-reproductive">🧬 Reproductive Health Nursing 🔒</div>
@@ -296,13 +305,13 @@
       </div>
       <div class="card-body">
         <div class="card-content">
-          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 12px;">Reproductive health modules, clinical guidelines, and high-yield notes for exams.</p>
+          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 12px;">Maternal health, reproductive modules, clinical guidelines, and exam preparation notes.</p>
           <a href="#" onclick="checkSubjectAccess(event, 'reproductive')" class="resource-link">📥 Access Course Materials</a>
         </div>
       </div>
     </div>
 
-    <!-- SUBJECT 3: ENGLISH -->
+    <!-- SUBJECT 4: ENGLISH -->
     <div class="subject-card" id="card-english">
       <div class="card-header" onclick="toggleCard(this)">
         <div class="card-title" id="title-english">📖 English Academic Writing 🔒</div>
@@ -316,7 +325,7 @@
       </div>
     </div>
 
-    <!-- SUBJECT 4: PERLS -->
+    <!-- SUBJECT 5: PERLS -->
     <div class="subject-card" id="card-perls">
       <div class="card-header" onclick="toggleCard(this)">
         <div class="card-title" id="title-perls">💡 PERLS Module 🔒</div>
@@ -332,20 +341,19 @@
 
   </div>
 
-  <!-- PAYMENT / APPROVAL MODAL -->
+  <!-- APPROVAL MODAL -->
   <div class="modal-overlay" id="paymentModal" onclick="handleOverlayClick(event)">
     <div class="modal-content">
       <h3>🔒 Access Required</h3>
-      <p>This module requires approval or payment. Click below to inform Mudassir on WhatsApp to activate your access instantly.</p>
+      <p>This module requires approval from Mudassir. Click below to request instant activation on WhatsApp.</p>
       <a href="#" id="whatsappBtn" target="_blank" class="btn-whatsapp">💬 Message CR on WhatsApp</a>
       <button class="btn-close" onclick="closeModal()">Close</button>
     </div>
   </div>
 
   <script>
-    const ALL_SUBJECTS = ['pediatric', 'reproductive', 'english', 'perls'];
+    const ALL_SUBJECTS = ['ethics', 'pediatric', 'reproductive', 'english', 'perls'];
 
-    // Accordion Animation
     function toggleCard(cardHeader) {
       const card = cardHeader.parentElement;
       const body = card.querySelector('.card-body');
@@ -362,13 +370,12 @@
       }
     }
 
-    // Modal Control
     function showModal(subject) {
       const modal = document.getElementById('paymentModal');
       const whatsappBtn = document.getElementById('whatsappBtn');
       const currentEmail = localStorage.getItem('current_student') || '';
 
-      const defaultText = `Hi Mudassir, I have registered on the BSN portal with email (${currentEmail}) for ${subject.toUpperCase()}. Please approve my access.`;
+      const defaultText = `Hi Mudassir, I registered on the BSN portal (${currentEmail}) for ${subject.toUpperCase()}. Please approve my access.`;
       
       whatsappBtn.href = `https://wa.me/923241064487?text=${encodeURIComponent(defaultText)}`;
       modal.style.display = 'flex';
@@ -382,13 +389,12 @@
       if (e.target.id === 'paymentModal') closeModal();
     }
 
-    // 1. REGISTER / LOGIN STUDENT
     function handleStudentRegister() {
       const nameInput = document.getElementById('studentName').value.trim();
       const emailInput = document.getElementById('studentEmail').value.trim().toLowerCase();
 
       if (!nameInput || !emailInput) {
-        alert("⚠️ Please enter both your Full Name and Email.");
+        alert("⚠️ Please enter both your Full Name and Email Address.");
         return;
       }
 
@@ -396,7 +402,6 @@
       let existingUser = JSON.parse(localStorage.getItem(userKey));
 
       if (!existingUser) {
-        // Create new record with date stamp for Admin Dashboard
         const newStudent = {
           name: nameInput,
           email: emailInput,
@@ -405,15 +410,13 @@
           date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
         };
         localStorage.setItem(userKey, JSON.stringify(newStudent));
-        alert("✅ Registration details submitted! Waiting for CR approval.");
+        alert("✅ Submitted successfully! CR Mudassir can now approve your account.");
       }
 
-      // Store current logged in email session
       localStorage.setItem('current_student', emailInput);
       updateAccessUI();
     }
 
-    // 2. CHECK STATUS AND UNLOCK UI
     function updateAccessUI() {
       const currentEmail = localStorage.getItem('current_student');
       const statusNotice = document.getElementById('statusNotice');
@@ -428,7 +431,6 @@
 
       if (!user) return;
 
-      // Populate input fields if user is logged in
       document.getElementById('studentName').value = user.name || '';
       document.getElementById('studentEmail').value = user.email || '';
 
@@ -436,7 +438,6 @@
         statusNotice.className = 'status-badge status-approved';
         statusNotice.innerHTML = `🔓 Welcome, <strong>${escapeHtml(user.name)}</strong>! Your account is APPROVED.`;
 
-        // Unlock designated modules
         ALL_SUBJECTS.forEach(subj => {
           if (user.access.includes('ALL') || user.access.includes(subj)) {
             const tag = document.getElementById('tag-' + subj);
@@ -452,11 +453,10 @@
         });
       } else {
         statusNotice.className = 'status-badge status-pending';
-        statusNotice.innerHTML = `⏳ Welcome, <strong>${escapeHtml(user.name)}</strong>! Your account is PENDING approval from Mudassir.`;
+        statusNotice.innerHTML = `⏳ Welcome, <strong>${escapeHtml(user.name)}</strong>! Your account is PENDING approval from CR Mudassir.`;
       }
     }
 
-    // 3. SUBJECT LINK CLICK PROTECTOR
     function checkSubjectAccess(event, subjectKey) {
       const currentEmail = localStorage.getItem('current_student');
       if (!currentEmail) {
@@ -474,7 +474,7 @@
         event.preventDefault();
         showModal(subjectKey);
       } else {
-        alert(`🎉 Opening ${subjectKey.toUpperCase()} Course Materials!`);
+        alert(`🎉 Accessing ${subjectKey.toUpperCase()} Course Materials!`);
       }
     }
 
