@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Student Dashboard | BSN Portal</title>
+  <title>Student Dashboard | BSN Academic Portal</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,12 +21,13 @@
       --border: #e2e8f0;
       --radius: 16px;
       --shadow: 0 10px 30px -5px rgba(2, 132, 199, 0.08);
+      --warning: #f59e0b;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
     body { background-color: var(--bg-main); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; }
 
-    /* NAVBAR */
+    /* NAVBAR & HAMBURGER MENU */
     .navbar { 
       position: sticky; top: 0; z-index: 100; 
       background: rgba(255, 255, 255, 0.92); 
@@ -35,48 +36,95 @@
       padding: 12px 16px; 
     }
     .nav-container { 
-      max-width: 860px; margin: 0 auto; 
+      max-width: 900px; margin: 0 auto; 
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
     }
-    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-dark); font-weight: 800; font-size: 1.1rem; }
-    .pulse-box { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-dark); font-weight: 800; font-size: 1.05rem; }
+    .pulse-box { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    
+    .menu-toggle {
+      background: #f1f5f9; border: 1px solid var(--border); padding: 8px 12px; border-radius: 10px;
+      font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+
+    /* SLIDE-OUT DRAWER MENU */
+    .drawer-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(4px);
+      z-index: 200; display: none; opacity: 0; transition: opacity 0.3s ease;
+    }
+    .drawer {
+      position: fixed; top: 0; right: -280px; width: 280px; height: 100%;
+      background: #ffffff; z-index: 201; transition: right 0.3s ease;
+      padding: 24px 20px; display: flex; flex-direction: column; justify-content: space-between;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    }
+    .drawer.open { right: 0; }
+    .drawer-overlay.open { display: block; opacity: 1; }
+    
+    .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .drawer-menu { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .drawer-menu a {
+      text-decoration: none; color: var(--text-dark); font-weight: 700; font-size: 0.95rem;
+      display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 10px;
+    }
+    .drawer-menu a:hover, .drawer-menu a.active { background: #f0f9ff; color: var(--primary-dark); }
     
     .logout-btn {
       background: #fef2f2; color: #dc2626; border: 1px solid #fecaca;
-      padding: 8px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;
-      cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 6px;
+      padding: 12px; border-radius: 12px; font-size: 0.88rem; font-weight: 700;
+      cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
     }
 
-    .main-wrapper { max-width: 860px; margin: 0 auto; padding: 20px 16px; width: 100%; flex: 1; }
+    .main-wrapper { max-width: 900px; margin: 0 auto; padding: 20px 16px; width: 100%; flex: 1; }
 
-    /* PROFILE BANNER */
+    /* PROFILE BANNER & QUICK STATS */
     .profile-card {
       background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
-      color: white; border-radius: var(--radius); padding: 24px; margin-bottom: 24px;
-      display: flex; align-items: center; gap: 16px; box-shadow: var(--shadow);
+      color: white; border-radius: var(--radius); padding: 24px 20px; margin-bottom: 20px;
+      box-shadow: var(--shadow);
     }
+    .profile-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
     .avatar {
-      width: 56px; height: 56px; border-radius: 50%; background: #bae6fd; color: #0369a1;
-      display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: 800;
+      width: 54px; height: 54px; border-radius: 50%; background: #bae6fd; color: #0369a1;
+      display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800;
       flex-shrink: 0;
     }
-    .profile-info h1 { font-size: 1.25rem; font-weight: 800; }
-    .profile-info p { color: #bae6fd; font-size: 0.85rem; margin-top: 2px; }
+    .profile-info h1 { font-size: 1.2rem; font-weight: 800; line-height: 1.2; }
+    .profile-info p { color: #bae6fd; font-size: 0.82rem; margin-top: 2px; }
 
-    /* SECTION */
+    .stats-bar {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+      background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px);
+      padding: 12px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.15);
+      text-align: center;
+    }
+    .stat-item span { display: block; font-size: 0.7rem; color: #cbd5e1; text-transform: uppercase; font-weight: 700; }
+    .stat-item strong { font-size: 0.95rem; color: #ffffff; font-weight: 800; }
+
+    /* NOTIFICATION / NOTICE ALERT */
+    .notice-card {
+      background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius);
+      padding: 14px 16px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px;
+    }
+    .notice-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .notice-text h4 { font-size: 0.88rem; font-weight: 800; color: #b45309; }
+    .notice-text p { font-size: 0.8rem; color: #92400e; margin-top: 2px; line-height: 1.35; }
+
     .section-title { font-size: 0.8rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.5px; }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+    /* GRID LAYOUTS */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-bottom: 24px; }
     .card {
       background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
       padding: 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between;
     }
-    .card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-    .card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
     .card h3 { font-size: 0.95rem; font-weight: 700; }
     
     .status-badge {
-      display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
     }
     .badge-locked { background: #fef3c7; color: #b45309; }
     .badge-active { background: #dcfce7; color: #15803d; }
@@ -87,6 +135,20 @@
     }
     .btn-active { background: var(--primary); color: white; }
     .btn-locked { background: #f1f5f9; color: #94a3b8; pointer-events: none; }
+
+    /* CLINICAL REFERENCE VALUES SECTION */
+    .reference-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px 16px; margin-bottom: 24px; box-shadow: var(--shadow);
+    }
+    .ref-header { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+    .ref-header h3 { font-size: 0.95rem; font-weight: 800; color: var(--text-dark); }
+    
+    .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+    .val-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px; text-align: center; }
+    .val-label { font-size: 0.7rem; color: var(--text-muted); font-weight: 700; display: block; }
+    .val-num { font-size: 0.9rem; font-weight: 800; color: #0369a1; margin-top: 2px; display: block; }
+    .val-unit { font-size: 0.68rem; color: #64748b; }
 
     /* AUTH MODAL */
     .modal-overlay {
@@ -113,57 +175,164 @@
 </head>
 <body>
 
-  <!-- AUTH POPUP MODAL (Shows if not logged in) -->
+  <!-- AUTH POPUP MODAL (Appears if user is not logged in) -->
   <div id="authModal" class="modal-overlay" style="display: flex;">
     <div class="modal-card">
       <div class="pulse-box" style="margin: 0 auto 14px auto;">🔑</div>
-      <h2>Student Login</h2>
-      <p>Enter your BSN Access Key to view your personalized dashboard.</p>
+      <h2>Student Portal Login</h2>
+      <p>Enter your Access Key to unlock your custom dashboard.</p>
       
-      <input type="text" id="userKeyInput" class="auth-input" placeholder="Enter Access Key (e.g. BSN993)" onkeypress="handleEnter(event)">
+      <input type="text" id="userKeyInput" class="auth-input" placeholder="Enter Key (e.g. BSN993)" onkeypress="handleEnter(event)">
       <button class="auth-btn" onclick="attemptLogin()">Login to Dashboard</button>
       
       <div>
-        <a href="index.html" class="back-home">← Back to Main Portal</a>
+        <a href="index.html" class="back-home">← Back to Main Home</a>
       </div>
     </div>
   </div>
 
-  <!-- DASHBOARD CONTENT (Hidden until authenticated) -->
+  <!-- DRAWER OVERLAY -->
+  <div id="drawerOverlay" class="drawer-overlay" onclick="toggleMenu()"></div>
+
+  <!-- SLIDE-OUT MENU DRAWER -->
+  <div id="drawer" class="drawer">
+    <div>
+      <div class="drawer-header">
+        <div class="brand">
+          <div class="pulse-box">🩺</div>
+          <span>Navigation Menu</span>
+        </div>
+        <button class="menu-toggle" onclick="toggleMenu()">✕</button>
+      </div>
+      <ul class="drawer-menu">
+        <li><a href="index.html">🏠 Main Home</a></li>
+        <li><a href="#enrolled-section" class="active" onclick="toggleMenu()">📚 Enrolled Courses</a></li>
+        <li><a href="#vitals-section" onclick="toggleMenu()">🩸 Lab & Clinical Values</a></li>
+        <li><a href="./nursing-ethics.html">⚖️ Free Ethics Notes</a></li>
+      </ul>
+    </div>
+    <button class="logout-btn" onclick="logout()">🚪 Exit / Logout</button>
+  </div>
+
+  <!-- MAIN DASHBOARD WRAPPER -->
   <div id="dashboardContent" style="display: none; width: 100%;">
+    <!-- TOP NAVBAR -->
     <header class="navbar">
       <div class="nav-container">
         <a href="index.html" class="brand">
           <div class="pulse-box">🩺</div>
-          <span>BSN Portal</span>
+          <span>BSN Dashboard</span>
         </a>
-        <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu">☰</button>
       </div>
     </header>
 
     <main class="main-wrapper">
+      
+      <!-- PROFILE & ACADEMIC STATS BANNER -->
       <div class="profile-card">
-        <div class="avatar" id="avatarLetter">S</div>
-        <div class="profile-info">
-          <h1 id="welcomeUser">Welcome, Student</h1>
-          <p id="accessLevel">BSN Academic Dashboard</p>
+        <div class="profile-header">
+          <div class="avatar" id="avatarLetter">M</div>
+          <div class="profile-info">
+            <h1 id="welcomeUser">Mudassir Hussain Khan</h1>
+            <p id="accessLevel">BS Nursing • Class Representative (CR)</p>
+          </div>
+        </div>
+        
+        <div class="stats-bar">
+          <div class="stat-item">
+            <span>Semester</span>
+            <strong>4th Semester</strong>
+          </div>
+          <div class="stat-item">
+            <span>Institute</span>
+            <strong>NLIN Multan</strong>
+          </div>
+          <div class="stat-item">
+            <span>Status</span>
+            <strong style="color: #4ade80;">Active Student</strong>
+          </div>
         </div>
       </div>
 
-      <div class="section-title">Your Enrolled Courses</div>
-      <div class="grid" id="courseGrid">
-        <!-- Courses will be populated via JavaScript -->
+      <!-- IMPORTANT NOTICE ALERT -->
+      <div class="notice-card">
+        <div class="notice-icon">📢</div>
+        <div class="notice-text">
+          <h4>Academic Announcement</h4>
+          <p>Practical Viva Examinations ongoing. Ensure all clinical logs and course revision files are downloaded.</p>
+        </div>
       </div>
+
+      <!-- ENROLLED COURSES -->
+      <div class="section-title" id="enrolled-section">Enrolled Course Curriculum</div>
+      <div class="grid" id="courseGrid">
+        <!-- Generated via JS -->
+      </div>
+
+      <!-- ESSENTIAL CLINICAL REFERENCE VALUES -->
+      <div class="section-title" id="vitals-section">Essential Clinical & Lab Reference Values</div>
+      <div class="reference-card">
+        <div class="ref-header">
+          <span>💉</span>
+          <h3>Normal Adult Vital Signs & Critical Lab Values</h3>
+        </div>
+        
+        <div class="values-grid">
+          <div class="val-box">
+            <span class="val-label">Blood Pressure</span>
+            <span class="val-num">120 / 80</span>
+            <span class="val-unit">mmHg</span>
+          </div>
+          <div class="val-box">
+            <span class="val-label">Pulse / HR</span>
+            <span class="val-num">60 - 100</span>
+            <span class="val-unit">bpm</span>
+          </div>
+          <div class="val-box">
+            <span class="val-label">Resp. Rate</span>
+            <span class="val-num">12 - 20</span>
+            <span class="val-unit">breaths/min</span>
+          </div>
+          <div class="val-box">
+            <span class="val-label">SpO2 Level</span>
+            <span class="val-num">95 - 100%</span>
+            <span class="val-unit">Room Air</span>
+          </div>
+          <div class="val-box">
+            <span class="val-label">Temperature</span>
+            <span class="val-num">98.6°F</span>
+            <span class="val-unit">37.0°C</span>
+          </div>
+          <div class="val-box">
+            <span class="val-label">Fast. Blood Sugar</span>
+            <span class="val-num">70 - 99</span>
+            <span class="val-unit">mg/dL</span>
+          </div>
+          <div class="val-box">
+            <span class="val-label">Hemoglobin (Hb)</span>
+            <span class="val-num">12 - 16.5</span>
+            <span class="val-unit">g/dL</span>
+          </div>
+          <div class="val-box">
+            <span class="val-label">WBC Count</span>
+            <span class="val-num">4.5 - 11.0</span>
+            <span class="val-unit">x 10³/µL</span>
+          </div>
+        </div>
+      </div>
+
     </main>
   </div>
 
+  <!-- SCRIPT LOGIC -->
   <script>
     const KEYS_DATABASE = {
-      'BSN993': { name: 'Full Access Student', courses: ['pediatric', 'reproductive', 'english', 'perls'] },
-      'PEDS350': { name: 'Pediatric Student', courses: ['pediatric'] },
-      'REPO350': { name: 'Reproductive Student', courses: ['reproductive'] },
-      'ENG250': { name: 'English Student', courses: ['english'] },
-      'PERLS250': { name: 'PERLS Student', courses: ['perls'] }
+      'BSN993': { name: 'Mudassir Hussain Khan', role: 'CR • Full Access Student', courses: ['pediatric', 'reproductive', 'english', 'perls'] },
+      'PEDS350': { name: 'BSN Student', role: 'Pediatric Nursing Student', courses: ['pediatric'] },
+      'REPO350': { name: 'BSN Student', role: 'Reproductive Health Student', courses: ['reproductive'] },
+      'ENG250': { name: 'BSN Student', role: 'English Module Student', courses: ['english'] },
+      'PERLS250': { name: 'BSN Student', role: 'PERLS Module Student', courses: ['perls'] }
     };
 
     const COURSE_DETAILS = {
@@ -173,6 +342,13 @@
       'perls': { title: 'PERLS', icon: '💡', bg: '#f0fdfa', link: './perls/index.html' }
     };
 
+    function toggleMenu() {
+      const drawer = document.getElementById('drawer');
+      const overlay = document.getElementById('drawerOverlay');
+      drawer.classList.toggle('open');
+      overlay.classList.toggle('open');
+    }
+
     function attemptLogin() {
       const input = document.getElementById('userKeyInput').value.trim().toUpperCase();
       if (!input) {
@@ -181,16 +357,14 @@
       }
 
       if (KEYS_DATABASE[input]) {
-        // Save session
         localStorage.setItem('bsn_user_session', input);
         KEYS_DATABASE[input].courses.forEach(c => localStorage.setItem('access_' + c, 'true'));
         renderDashboard(input);
       } else if (input.startsWith('BSN') || input.startsWith('PEDS') || input.startsWith('REPO') || input.startsWith('ENG') || input.startsWith('PERLS')) {
-        // Fallback for custom keys from main portal
         localStorage.setItem('bsn_user_session', input);
         renderDashboard(input);
       } else {
-        alert('❌ Invalid Access Key! Please check your code and try again.');
+        alert('❌ Invalid Access Key! Please verify your key.');
       }
     }
 
@@ -207,8 +381,9 @@
       document.getElementById('authModal').style.display = 'none';
       document.getElementById('dashboardContent').style.display = 'block';
 
-      const userInfo = KEYS_DATABASE[key] || { name: 'BSN Nursing Student', courses: [] };
-      document.getElementById('welcomeUser').innerText = `Welcome, ${userInfo.name}`;
+      const userInfo = KEYS_DATABASE[key] || { name: 'BSN Nursing Student', role: 'Student Dashboard', courses: [] };
+      document.getElementById('welcomeUser').innerText = userInfo.name;
+      document.getElementById('accessLevel').innerText = userInfo.role;
       document.getElementById('avatarLetter').innerText = userInfo.name.charAt(0);
 
       const grid = document.getElementById('courseGrid');
@@ -227,20 +402,19 @@
               <div>
                 <h3>${course.title}</h3>
                 <span class="status-badge ${isUnlocked ? 'badge-active' : 'badge-locked'}">
-                  ${isUnlocked ? '✅ Enrolled' : '🔒 Locked'}
+                  ${isUnlocked ? '✅ Unlocked' : '🔒 Locked'}
                 </span>
               </div>
             </div>
           </div>
           <a href="${course.link}" class="action-link ${isUnlocked ? 'btn-active' : 'btn-locked'}">
-            ${isUnlocked ? 'Open Course Notes →' : 'Access Restricted'}
+            ${isUnlocked ? 'Open Notes & Modules →' : 'Access Restricted'}
           </a>
         `;
         grid.appendChild(card);
       });
     }
 
-    // Check existing login on page load
     window.addEventListener('DOMContentLoaded', () => {
       const activeSession = localStorage.getItem('bsn_user_session');
       if (activeSession) {
