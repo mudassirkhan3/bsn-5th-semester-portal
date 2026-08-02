@@ -537,7 +537,7 @@
           type="text" 
           id="accessKeyInput" 
           class="input-field"
-          placeholder="Enter Access Key (e.g. BSN-8F2A)"
+          placeholder="Enter Access Key (e.g. BSN-123)"
         >
         <button id="redeemKeyBtn" class="apply-btn" style="background: var(--accent);" onclick="redeemUniqueKey()">Redeem Access Key</button>
       </div>
@@ -861,7 +861,10 @@
         });
 
         if (rollNo) {
-          await db.collection("students").doc(rollNo.toLowerCase()).set(session, { merge: true });
+          await db.collection("students").doc(rollNo.toLowerCase()).set({
+            status: 'approved',
+            access: session.access
+          }, { merge: true });
         }
 
         statusNotice.className = 'status-badge status-approved';
