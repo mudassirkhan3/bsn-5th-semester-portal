@@ -569,7 +569,7 @@
           <div class="head-left">
             <div class="icon-box bg-peds">👶</div>
             <div class="card-title-wrap">
-              <h2 id="title-pediatric">Pediatric Health Nursing 🔒</h2>
+              <h2 id="title-pediatric">Pediatric Health Nursing <span class="lock-icon">🔒</span></h2>
             </div>
           </div>
           <div class="chevron">▼</div>
@@ -594,7 +594,7 @@
           <div class="head-left">
             <div class="icon-box bg-repo">🤰</div>
             <div class="card-title-wrap">
-              <h2 id="title-reproductive">Reproductive Health 🔒</h2>
+              <h2 id="title-reproductive">Reproductive Health <span class="lock-icon">🔒</span></h2>
             </div>
           </div>
           <div class="chevron">▼</div>
@@ -619,7 +619,7 @@
           <div class="head-left">
             <div class="icon-box bg-english">📚</div>
             <div class="card-title-wrap">
-              <h2 id="title-english">English 🔒</h2>
+              <h2 id="title-english">English <span class="lock-icon">🔒</span></h2>
             </div>
           </div>
           <div class="chevron">▼</div>
@@ -644,7 +644,7 @@
           <div class="head-left">
             <div class="icon-box bg-perls">💡</div>
             <div class="card-title-wrap">
-              <h2 id="title-perls">PERLS 🔒</h2>
+              <h2 id="title-perls">PERLS <span class="lock-icon">🔒</span></h2>
             </div>
           </div>
           <div class="chevron">▼</div>
@@ -669,7 +669,7 @@
           <div class="head-left">
             <div class="icon-box bg-ethics">⚖️</div>
             <div class="card-title-wrap">
-              <h2 id="title-ethics">Nursing Ethics 🔒</h2>
+              <h2 id="title-ethics">Nursing Ethics <span class="lock-icon">🔒</span></h2>
             </div>
           </div>
           <div class="chevron">▼</div>
@@ -722,7 +722,7 @@
 
   <!-- SCRIPT LOGIC -->
   <script>
-    // ⚠️ REPLACE THIS URL WITH YOUR ACTUAL GOOGLE APPS SCRIPT WEB APP URL
+    // ⚠️ REPLACE THIS URL WITH YOUR ACTUAL GOOGLE APPS SCRIPT WEB APP DEPLOYMENT URL
     const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
 
     const ALL_SUBJECTS = ['pediatric', 'reproductive', 'english', 'perls', 'ethics'];
@@ -789,6 +789,10 @@
         const response = await fetch(`${SCRIPT_URL}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}`);
         const data = await response.json();
 
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
         localStorage.setItem('current_student', email);
         localStorage.setItem('user_' + email, JSON.stringify(data));
 
@@ -804,7 +808,7 @@
       } catch (err) {
         console.error(err);
         statusNotice.className = 'status-badge status-locked';
-        statusNotice.innerHTML = `⚠️ Network error. Retrying offline profile...`;
+        statusNotice.innerHTML = `⚠️ Error connecting to database. Updating offline profile...`;
         updateAccessUI();
       } finally {
         regBtn.disabled = false;
@@ -847,13 +851,16 @@
         statusNotice.innerHTML = `🔓 Welcome, ${user.name}! Your account is APPROVED.`;
 
         ALL_SUBJECTS.forEach(subj => {
-          if (user.access.includes('ALL') || user.access.includes(subj)) {
+          if (user.access && (user.access.includes('ALL') || user.access.includes(subj))) {
             const tag = document.getElementById('tag-' + subj);
             const title = document.getElementById('title-' + subj);
-            if (tag && title) {
+            if (tag) {
               tag.className = 'tag tag-unlocked';
               tag.innerText = '✅ Unlocked';
-              title.innerText = title.innerText.replace(' 🔒', '');
+            }
+            if (title) {
+              const lockSpan = title.querySelector('.lock-icon');
+              if (lockSpan) lockSpan.remove();
             }
           }
         });
