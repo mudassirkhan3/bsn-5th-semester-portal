@@ -14,7 +14,6 @@
     :root {
       --primary: #0284c7;
       --primary-dark: #0369a1;
-      --primary-hover: #0284c7;
       --accent: #0d9488;
       --bg-main: #f8fafc;
       --card-bg: #ffffff;
@@ -259,16 +258,12 @@
       width: 100%;
     }
 
-    .apply-btn:hover {
-      background: var(--primary-hover);
-    }
-
     .apply-btn:disabled {
       background: #94a3b8;
       cursor: not-allowed;
     }
 
-    /* STATUS BADGE / MESSAGE BOX */
+    /* STATUS BADGE / ERROR MESSAGE BOX */
     .status-badge {
       padding: 12px;
       border-radius: 10px;
@@ -757,7 +752,7 @@
 
   <!-- SCRIPT LOGIC -->
   <script>
-    // ⚠️ REPLACE THIS URL WITH YOUR ACTUAL GOOGLE APPS SCRIPT WEB APP DEPLOYMENT URL
+    // ⚠️ REPLACE THIS URL WITH YOUR ACTUAL GOOGLE APPS SCRIPT DEPLOYMENT URL
     const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
 
     const ALL_SUBJECTS = ['pediatric', 'reproductive', 'english', 'perls', 'ethics'];
