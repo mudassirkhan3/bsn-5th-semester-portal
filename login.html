@@ -128,8 +128,8 @@
 </div>
 
 <script>
-  // Paste your Google Web App Deployment URL inside the quotes below
-  const GOOGLE_SCRIPT_URL = 'PASTE_YOUR_WEB_APP_URL_HERE';
+  // Your Google Web App Executable URL
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyMadxOTU_9Uys1xrQC8g7t8CGoKQkBM6aLlOEM4KdAvL0Qqate0nXSHuUUKp3F4Nx7/exec';
 
   function showForm(type) {
     const loginForm = document.getElementById('loginForm');
@@ -163,7 +163,7 @@
     e.preventDefault();
     const btn = document.getElementById('regBtn');
     btn.disabled = true;
-    btn.innerText = 'Creating Account...';
+    btn.innerText = 'Syncing to Sheet...';
 
     const user = {
       name: document.getElementById('regName').value.trim(),
@@ -177,21 +177,19 @@
     localStorage.setItem('bsn_user_' + user.email, JSON.stringify(user));
     localStorage.setItem('bsn_current_user', user.email);
 
-    // 2. Send registration data to Google Sheets safely
-    if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'PASTE_YOUR_WEB_APP_URL_HERE') {
-      try {
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(user)
-        });
-      } catch (err) {
-        console.error('Sheet Sync Error:', err);
-      }
+    // 2. Transmit student registration payload directly to your Google Sheet
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+      });
+    } catch (err) {
+      console.error('Google Sheet Sync Error:', err);
     }
 
-    alert('🎉 Registration successful!');
+    alert('🎉 Student registered successfully!');
     window.location.href = 'dashboard.html';
   }
 
