@@ -117,12 +117,19 @@
     .card {
       background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
       padding: 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between;
+      transition: all 0.3s ease;
     }
     .card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
     .card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
     .card h3 { font-size: 0.95rem; font-weight: 700; }
     
+    /* UNLOCKED BADGE */
     .status-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; background: #dcfce7; color: #15803d; }
+    
+    /* LOCKED STYLES */
+    .card.locked { opacity: 0.55; background: #f8fafc; filter: grayscale(0.2); }
+    .card.locked .status-badge { background: #fee2e2; color: #991b1b; }
+    .card.locked .action-link { background: #94a3b8; pointer-events: none; cursor: not-allowed; }
 
     .action-link {
       margin-top: 14px; text-decoration: none; text-align: center; padding: 10px; border-radius: 10px;
@@ -204,8 +211,8 @@
             <strong id="userInstitute">Institute -</strong>
           </div>
           <div class="stat-item">
-            <span>Status</span>
-            <strong style="color: #4ade80;">Active Account</strong>
+            <span>Access Type</span>
+            <strong id="userAccessBadge" style="color: #4ade80;">Checking...</strong>
           </div>
         </div>
       </div>
@@ -219,10 +226,68 @@
         </div>
       </div>
 
-      <!-- COURSE MODULES -->
+      <!-- COURSE MODULES WITH DATA-SUBJECT-CODE -->
       <div class="section-title" id="courses-section">BSN Academic Courses</div>
       <div class="grid">
-        <div class="card">
+
+        <!-- Adult Health Nursing II (AHN) -->
+        <div class="card subject-card" data-subject-code="AHN">
+          <div>
+            <div class="card-top">
+              <div class="card-icon" style="background:#e0f2fe;">🩺</div>
+              <div>
+                <h3>Adult Health Nursing II</h3>
+                <span class="status-badge">Unlocked</span>
+              </div>
+            </div>
+          </div>
+          <a href="./ahn/index.html" class="action-link">Open Notes & Modules →</a>
+        </div>
+
+        <!-- Pharmacology (PHARM) -->
+        <div class="card subject-card" data-subject-code="PHARM">
+          <div>
+            <div class="card-top">
+              <div class="card-icon" style="background:#fef3c7;">💊</div>
+              <div>
+                <h3>Pharmacology</h3>
+                <span class="status-badge">Unlocked</span>
+              </div>
+            </div>
+          </div>
+          <a href="./pharmacology/index.html" class="action-link">Open Notes & Modules →</a>
+        </div>
+
+        <!-- Microbiology (MICRO) -->
+        <div class="card subject-card" data-subject-code="MICRO">
+          <div>
+            <div class="card-top">
+              <div class="card-icon" style="background:#f0fdf4;">🧫</div>
+              <div>
+                <h3>Microbiology</h3>
+                <span class="status-badge">Unlocked</span>
+              </div>
+            </div>
+          </div>
+          <a href="./microbiology/index.html" class="action-link">Open Notes & Modules →</a>
+        </div>
+
+        <!-- Developmental Psychology (PSYCH) -->
+        <div class="card subject-card" data-subject-code="PSYCH">
+          <div>
+            <div class="card-top">
+              <div class="card-icon" style="background:#f5f3ff;">🧠</div>
+              <div>
+                <h3>Dev. Psychology</h3>
+                <span class="status-badge">Unlocked</span>
+              </div>
+            </div>
+          </div>
+          <a href="./psychology/index.html" class="action-link">Open Notes & Modules →</a>
+        </div>
+
+        <!-- Pediatric Nursing -->
+        <div class="card subject-card" data-subject-code="PEDS">
           <div>
             <div class="card-top">
               <div class="card-icon" style="background:#f0fdf4;">👶</div>
@@ -235,7 +300,8 @@
           <a href="./pediatric/index.html" class="action-link">Open Notes & Modules →</a>
         </div>
 
-        <div class="card">
+        <!-- Reproductive Health -->
+        <div class="card subject-card" data-subject-code="REPO">
           <div>
             <div class="card-top">
               <div class="card-icon" style="background:#fdf2f8;">🤰</div>
@@ -248,7 +314,8 @@
           <a href="./reproductive/index.html" class="action-link">Open Notes & Modules →</a>
         </div>
 
-        <div class="card">
+        <!-- English Academic -->
+        <div class="card subject-card" data-subject-code="ENG">
           <div>
             <div class="card-top">
               <div class="card-icon" style="background:#f5f3ff;">📚</div>
@@ -261,7 +328,8 @@
           <a href="./english/index.html" class="action-link">Open Notes & Modules →</a>
         </div>
 
-        <div class="card">
+        <!-- PERLS Module -->
+        <div class="card subject-card" data-subject-code="PERLS">
           <div>
             <div class="card-top">
               <div class="card-icon" style="background:#f0fdfa;">💡</div>
@@ -273,6 +341,7 @@
           </div>
           <a href="./perls/index.html" class="action-link">Open Notes & Modules →</a>
         </div>
+
       </div>
 
       <!-- ESSENTIAL CLINICAL REFERENCE VALUES -->
@@ -360,6 +429,46 @@
         document.getElementById('userSemester').innerText = user.semester || 'BSN Semester';
         document.getElementById('userInstitute').innerText = user.institute || 'Nursing Institute';
         document.getElementById('avatarLetter').innerText = (user.name ? user.name.charAt(0) : 'S').toUpperCase();
+
+        // --- SUBJECT ACCESS / UNLOCKING LOGIC ---
+        const userAccess = user.accessSubject || 'ALL'; // Default to ALL if not specified
+        const accessBadge = document.getElementById('userAccessBadge');
+        
+        if (userAccess === 'ALL') {
+          accessBadge.innerText = 'FULL ACCESS';
+          accessBadge.style.color = '#4ade80';
+        } else {
+          accessBadge.innerText = userAccess + ' ONLY';
+          accessBadge.style.color = '#fde047';
+        }
+
+        // Lock / Unlock Cards based on user's access entitlement
+        const subjectCards = document.querySelectorAll('.subject-card');
+        subjectCards.forEach(card => {
+          const cardSubject = card.getAttribute('data-subject-code');
+          const badge = card.querySelector('.status-badge');
+          const link = card.querySelector('.action-link');
+
+          if (userAccess === 'ALL' || userAccess === cardSubject) {
+            // UNLOCKED STATE
+            card.classList.remove('locked');
+            if (badge) {
+              badge.innerText = 'Unlocked';
+            }
+            if (link) {
+              link.innerText = 'Open Notes & Modules →';
+            }
+          } else {
+            // LOCKED STATE
+            card.classList.add('locked');
+            if (badge) {
+              badge.innerText = 'Locked 🔒';
+            }
+            if (link) {
+              link.innerText = 'Fee Required to Unlock';
+            }
+          }
+        });
       }
     });
   </script>
