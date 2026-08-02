@@ -342,29 +342,9 @@
     <p>© 2026 Academic Portal • Prepared by Mudassir Hussain Khan</p>
   </footer>
 
-  <!-- SCRIPT LOGIC (FIREBASE FREE) -->
+  <!-- SCRIPT LOGIC (SERVERLESS & LIGHTWEIGHT) -->
   <script>
-    // Run as soon as the page loads
-window.addEventListener('DOMContentLoaded', () => {
-    // Read the link hash (e.g., #key=BSN993 or #key=PEDS350)
-    const hash = window.location.hash;
-    
-    if (hash.startsWith('#key=')) {
-        const keyFromUrl = hash.replace('#key=', '').trim();
-        
-        // Pass it to your existing unlock/validation function
-        if (typeof checkPasscode === 'function') {
-            checkPasscode(keyFromUrl);
-        } else {
-            // Or store directly in localStorage
-            localStorage.setItem('user_access_key', keyFromUrl);
-            alert('🎉 Access automatically unlocked! Welcome.');
-            location.hash = ''; // Clear hash from address bar
-            location.reload();  // Refresh to update locked/unlocked UI
-        }
-    }
-});
-    // Access Keys Setup
+    // Access Keys & Prices Setup
     const MASTER_KEY = "BSN993";
     const SUBJECT_KEYS = {
       'pediatric': 'PEDS350',
@@ -387,7 +367,7 @@ window.addEventListener('DOMContentLoaded', () => {
       card.classList.toggle('active');
     }
 
-    // Modal Control with Price Update
+    // Modal Control with Price & Pre-filled WhatsApp Text Update
     function showModal(subject) {
       const modal = document.getElementById('paymentModal');
       const priceElement = document.getElementById('modalPrice');
@@ -396,9 +376,10 @@ window.addEventListener('DOMContentLoaded', () => {
       const price = SUBJECT_PRICES[subject] || '993';
       priceElement.innerText = price;
 
-      const subName = subject === 'ALL' ? 'Full BSN Portal Access' : subject.toUpperCase() + ' Course';
-      whatsappBtn.href = `https://wa.me/923241064487?text=${encodeURIComponent('Hi Mudassir, I have sent payment (PKR ' + price + ') for ' + subName)}`;
+      const subName = subject === 'ALL' ? 'Full BSN Portal Access' : subject.toUpperCase() + ' Course Notes';
+      const defaultText = `Hi Mudassir, I have sent payment (PKR ${price}) for ${subName}. Please send my access key.`;
       
+      whatsappBtn.href = `https://wa.me/923241064487?text=${encodeURIComponent(defaultText)}`;
       modal.style.display = 'flex';
     }
 
@@ -406,9 +387,9 @@ window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('paymentModal').style.display = 'none';
     }
 
-    // Access Code Verification
-    function verifyCodeInput() {
-      const input = document.getElementById('passcodeInput').value.trim().toUpperCase();
+    // Access Code Verification Logic
+    function verifyCodeInput(providedCode) {
+      const input = (providedCode || document.getElementById('passcodeInput').value).trim().toUpperCase();
       
       if (!input) {
         alert("Please enter a valid access code.");
@@ -419,7 +400,7 @@ window.addEventListener('DOMContentLoaded', () => {
         Object.keys(SUBJECT_KEYS).forEach(subj => {
           localStorage.setItem('access_' + subj, 'true');
         });
-        alert("🎉 Master Code Applied! All subjects unlocked.");
+        alert("🎉 Master Access Applied! All courses unlocked.");
         updateAccessUI();
       } else {
         let matchedSubj = null;
@@ -438,7 +419,10 @@ window.addEventListener('DOMContentLoaded', () => {
           alert("❌ Invalid Code. Please check your payment key or contact WhatsApp.");
         }
       }
-      document.getElementById('passcodeInput').value = '';
+      
+      if (document.getElementById('passcodeInput')) {
+        document.getElementById('passcodeInput').value = '';
+      }
     }
 
     function handleKeyPress(event) {
@@ -452,12 +436,12 @@ window.addEventListener('DOMContentLoaded', () => {
       const hasAccess = localStorage.getItem('access_' + subjectKey) === 'true';
       if (!hasAccess) {
         event.preventDefault();
-        alert("🔒 Subject Locked! Please enter your access code or buy access.");
+        alert("🔒 Subject Locked! Please enter your access code or purchase access.");
         showModal(subjectKey);
       }
     }
 
-    // Dynamic UI Badges Update
+    // Dynamic UI Badges & Locks Update
     function updateAccessUI() {
       const subjects = ['pediatric', 'reproductive', 'english', 'perls'];
       
@@ -474,8 +458,22 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Run badge check on page render
-    window.addEventListener('DOMContentLoaded', updateAccessUI);
+    // Run Initial Checks on Page Load
+    window.addEventListener('DOMContentLoaded', () => {
+      // 1. Update UI based on previous local access
+      updateAccessUI();
+
+      // 2. Check for URL hash auto-unlock (e.g., #key=BSN993 or #key=PEDS350)
+      const hash = window.location.hash;
+      if (hash.startsWith('#key=')) {
+        const keyFromUrl = hash.replace('#key=', '').trim();
+        if (keyFromUrl) {
+          verifyCodeInput(keyFromUrl);
+          // Clean hash from browser address bar after unlock
+          history.replaceState(null, null, ' ');
+        }
+      }
+    });
   </script>
 </body>
 </html>
