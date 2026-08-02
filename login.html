@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Access | BSN Portal</title>
+  <title>Student Portal | Login & Registration</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
     body { background: #f8fafc; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
     
     .auth-card { 
-      background: #fff; 
+      background: #ffffff; 
       width: 100%; 
       max-width: 440px; 
       border-radius: 20px; 
@@ -19,26 +19,14 @@
       border: 1px solid #e2e8f0; 
     }
 
-    .brand-header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .brand-header h2 {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #0f172a;
-    }
-
-    .brand-header p {
-      font-size: 0.82rem;
-      color: #64748b;
-      margin-top: 4px;
-    }
+    .brand-header { text-align: center; margin-bottom: 24px; }
+    .brand-icon { background: linear-gradient(135deg, #0284c7, #0d9488); color: white; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 12px auto; }
+    .brand-header h2 { font-size: 1.35rem; font-weight: 800; color: #0f172a; }
+    .brand-header p { font-size: 0.85rem; color: #64748b; margin-top: 4px; }
 
     .tabs { display: flex; background: #f1f5f9; padding: 4px; border-radius: 12px; margin-bottom: 24px; }
-    .tab-btn { flex: 1; border: none; padding: 10px; border-radius: 8px; font-weight: 700; cursor: pointer; background: transparent; color: #64748b; font-size: 0.85rem; }
-    .tab-btn.active { background: #fff; color: #0284c7; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .tab-btn { flex: 1; border: none; padding: 10px; border-radius: 8px; font-weight: 700; cursor: pointer; background: transparent; color: #64748b; font-size: 0.85rem; transition: all 0.2s; }
+    .tab-btn.active { background: #ffffff; color: #0284c7; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
     
     .form-group { margin-bottom: 16px; }
     label { font-size: 0.82rem; font-weight: 700; color: #334155; display: block; margin-bottom: 6px; }
@@ -58,8 +46,9 @@
 
 <div class="auth-card">
   <div class="brand-header">
-    <h2>🩺 BSN Academic Portal</h2>
-    <p>Sign in or register to access student materials</p>
+    <div class="brand-icon">🩺</div>
+    <h2>BSN Student Portal</h2>
+    <p>Sign in or register to access study modules</p>
   </div>
 
   <!-- Navigation Tabs -->
@@ -88,7 +77,7 @@
   <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
     <div class="form-group">
       <label>Full Name</label>
-      <input type="text" id="regName" placeholder="e.g. Student Name" required>
+      <input type="text" id="regName" placeholder="e.g. Mudassir Hussain Khan" required>
     </div>
     
     <div class="form-group">
@@ -176,11 +165,10 @@
       password: document.getElementById('regPassword').value
     };
 
-    // Store user data in browser localStorage
     localStorage.setItem('bsn_user_' + user.email, JSON.stringify(user));
     localStorage.setItem('bsn_current_user', user.email);
 
-    alert('🎉 Account created successfully!');
+    alert('🎉 Registration successful!');
     window.location.href = 'dashboard.html';
   }
 
@@ -199,7 +187,7 @@
         alert('❌ Incorrect password.');
       }
     } else {
-      alert('❌ No account found with this email address. Please register first.');
+      alert('❌ Account not found. Please register first.');
     }
   }
 
@@ -213,10 +201,10 @@
       let user = JSON.parse(savedUser);
       user.password = newPass;
       localStorage.setItem('bsn_user_' + email, JSON.stringify(user));
-      alert('✅ Password updated successfully! Log in using your new password.');
+      alert('✅ Password updated successfully!');
       showForm('login');
     } else {
-      alert('❌ Email not found. Please verify your registered email address.');
+      alert('❌ Registered email not found.');
     }
   }
 </script>
