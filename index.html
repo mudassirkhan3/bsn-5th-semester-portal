@@ -766,7 +766,7 @@
       if (e.target.id === 'paymentModal') closeModal();
     }
 
-    // STUDENT REGISTRATION & APPROVAL SYSTEM VIA GOOGLE SHEETS
+    // STUDENT REGISTRATION & ACCESS SYSTEM VIA GOOGLE SHEETS
     async function handleStudentRegister() {
       const nameInput = document.getElementById('studentName');
       const emailInput = document.getElementById('studentEmail');
@@ -786,30 +786,29 @@
       statusNotice.innerHTML = '⏳ Connecting to portal database...';
 
       try {
-        const response = await fetch(`${SCRIPT_URL}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}`);
+        const fetchUrl = `${SCRIPT_URL}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}`;
+        const response = await fetch(fetchUrl);
         const data = await response.json();
 
         if (data.error) {
           throw new Error(data.error);
         }
 
+        // Format access string safely into an array
+        if (typeof data.access === 'string') {
+          data.accessList = data.access.toLowerCase().split(',').map(s => s.trim());
+        } else {
+          data.accessList = [];
+        }
+
         localStorage.setItem('current_student', email);
         localStorage.setItem('user_' + email, JSON.stringify(data));
-
-        if (data.status === 'approved') {
-          statusNotice.className = 'status-badge status-approved';
-          statusNotice.innerHTML = `🔓 Welcome back, ${data.name || name}! Your account is APPROVED.`;
-        } else {
-          statusNotice.className = 'status-badge status-locked';
-          statusNotice.innerHTML = `🔒 Welcome, ${data.name || name}! Your registration is recorded. Pending CR approval from Mudassir.`;
-        }
 
         updateAccessUI();
       } catch (err) {
         console.error(err);
         statusNotice.className = 'status-badge status-locked';
-        statusNotice.innerHTML = `⚠️ Error connecting to database. Updating offline profile...`;
-        updateAccessUI();
+        statusNotice.innerHTML = `⚠️ Connection error. Please make sure SCRIPT_URL is properly configured.`;
       } finally {
         regBtn.disabled = false;
       }
@@ -819,16 +818,28 @@
       const currentEmail = localStorage.getItem('current_student');
       if (!currentEmail) {
         event.preventDefault();
-        alert("🔒 Please enter your Name and Email first to request access.");
+        alert("🔒 Please enter your Name and Email first to register/check access.");
         return;
       }
 
       const user = JSON.parse(localStorage.getItem('user_' + currentEmail));
-      const hasAccess = user && user.status === 'approved' && (user.access.includes('ALL') || user.access.includes(subjectKey));
+      if (!user) {
+        event.preventDefault();
+        alert("🔒 User session not found. Please re-enter your details.");
+        return;
+      }
+
+      const accessList = user.accessList || (user.access ? user.access.toLowerCase().split(',').map(s => s.trim()) : []);
+      const isApproved = user.status === 'approved';
+      const hasAccess = isApproved && (accessList.includes('all') || accessList.includes(subjectKey.toLowerCase()));
 
       if (!hasAccess) {
         event.preventDefault();
-        alert("🔒 Subject Locked! Account is pending approval or purchase.");
+        if (!isApproved) {
+          alert("🔒 Your account is registered, but pending CR approval from Mudassir.");
+        } else {
+          alert("🔒 Subject Locked! You do not have access to this course yet.");
+        }
         showModal(subjectKey);
       }
     }
@@ -843,30 +854,40 @@
       }
 
       const user = JSON.parse(localStorage.getItem('user_' + currentEmail));
-
       if (!user) return;
+
+      const accessList = user.accessList || (user.access ? user.access.toLowerCase().split(',').map(s => s.trim()) : []);
 
       if (user.status === 'approved') {
         statusNotice.className = 'status-badge status-approved';
-        statusNotice.innerHTML = `🔓 Welcome, ${user.name}! Your account is APPROVED.`;
+        statusNotice.innerHTML = `🔓 Welcome back, <strong>${user.name || 'Student'}</strong>! Your account is <strong>APPROVED</strong>.`;
 
         ALL_SUBJECTS.forEach(subj => {
-          if (user.access && (user.access.includes('ALL') || user.access.includes(subj))) {
-            const tag = document.getElementById('tag-' + subj);
-            const title = document.getElementById('title-' + subj);
+          const tag = document.getElementById('tag-' + subj);
+          const title = document.getElementById('title-' + subj);
+          const lockSpan = title ? title.querySelector('.lock-icon') : null;
+
+          if (accessList.includes('all') || accessList.includes(subj)) {
             if (tag) {
               tag.className = 'tag tag-unlocked';
               tag.innerText = '✅ Unlocked';
             }
-            if (title) {
-              const lockSpan = title.querySelector('.lock-icon');
-              if (lockSpan) lockSpan.remove();
+            if (lockSpan) {
+              lockSpan.style.display = 'none';
+            }
+          } else {
+            if (tag) {
+              tag.className = 'tag tag-lock';
+              tag.innerText = `🔒 Locked (PKR ${SUBJECT_PRICES[subj]})`;
+            }
+            if (lockSpan) {
+              lockSpan.style.display = 'inline';
             }
           }
         });
       } else {
         statusNotice.className = 'status-badge status-locked';
-        statusNotice.innerHTML = `🔒 Welcome, ${user.name}! Your account is PENDING approval from Mudassir.`;
+        statusNotice.innerHTML = `🔒 Welcome, <strong>${user.name || 'Student'}</strong>! Registration recorded. Pending CR approval from Mudassir.`;
       }
     }
 
@@ -880,6 +901,7 @@
         }
       }
       updateAccessUI();
+
       document.querySelectorAll('.subject-card.active .card-body').forEach(body => {
         body.style.maxHeight = body.scrollHeight + "px";
       });
