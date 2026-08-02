@@ -657,13 +657,13 @@
         </div>
       </div>
 
-      <!-- 5. ETHICS (FREE PREVIEW) -->
+      <!-- 5. NURSING ETHICS -->
       <div class="subject-card">
         <div class="card-head" onclick="toggleCard(this)">
           <div class="head-left">
             <div class="icon-box bg-ethics">⚖️</div>
             <div class="card-title-wrap">
-              <h2>Nursing Ethics (Free Preview)</h2>
+              <h2 id="title-ethics">Nursing Ethics 🔒</h2>
             </div>
           </div>
           <div class="chevron">▼</div>
@@ -672,9 +672,9 @@
           <div class="card-content">
             <ul class="resource-list">
               <li class="resource-item">
-                <a href="./nursing-ethics.html">
-                  <span class="res-title">Nursing Ethics Notes (Free Demo)</span>
-                  <span class="tag tag-unlocked">✅ Free Access</span>
+                <a href="./ethics/index.html" onclick="checkSubjectAccess(event, 'ethics')">
+                  <span class="res-title">Nursing Ethics Notes & Units</span>
+                  <span class="tag tag-lock" id="tag-ethics">🔒 Locked (PKR 250)</span>
                 </a>
               </li>
             </ul>
@@ -716,14 +716,15 @@
 
   <!-- SCRIPT LOGIC -->
   <script>
-    const ALL_SUBJECTS = ['pediatric', 'reproductive', 'english', 'perls'];
+    const ALL_SUBJECTS = ['pediatric', 'reproductive', 'english', 'perls', 'ethics'];
 
     const SUBJECT_PRICES = {
       'ALL': '993',
       'pediatric': '350',
       'reproductive': '350',
       'english': '250',
-      'perls': '250'
+      'perls': '250',
+      'ethics': '250'
     };
 
     function toggleCard(cardHeader) {
