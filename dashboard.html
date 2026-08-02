@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Student Dashboard | BSN Academic Portal</title>
+  <title>Student Dashboard | BSN Portal</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,6 @@
       --border: #e2e8f0;
       --radius: 16px;
       --shadow: 0 10px 30px -5px rgba(2, 132, 199, 0.08);
-      --warning: #f59e0b;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -78,7 +77,7 @@
 
     .main-wrapper { max-width: 900px; margin: 0 auto; padding: 20px 16px; width: 100%; flex: 1; }
 
-    /* PROFILE BANNER & QUICK STATS */
+    /* PROFILE BANNER & ACADEMIC STATS */
     .profile-card {
       background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
       color: white; border-radius: var(--radius); padding: 24px 20px; margin-bottom: 20px;
@@ -100,9 +99,9 @@
       text-align: center;
     }
     .stat-item span { display: block; font-size: 0.7rem; color: #cbd5e1; text-transform: uppercase; font-weight: 700; }
-    .stat-item strong { font-size: 0.95rem; color: #ffffff; font-weight: 800; }
+    .stat-item strong { font-size: 0.85rem; color: #ffffff; font-weight: 800; }
 
-    /* NOTIFICATION / NOTICE ALERT */
+    /* NOTICE ALERT */
     .notice-card {
       background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius);
       padding: 14px 16px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px;
@@ -123,20 +122,15 @@
     .card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
     .card h3 { font-size: 0.95rem; font-weight: 700; }
     
-    .status-badge {
-      display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
-    }
-    .badge-locked { background: #fef3c7; color: #b45309; }
-    .badge-active { background: #dcfce7; color: #15803d; }
+    .status-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; background: #dcfce7; color: #15803d; }
 
     .action-link {
       margin-top: 14px; text-decoration: none; text-align: center; padding: 10px; border-radius: 10px;
-      font-size: 0.85rem; font-weight: 700; display: block; transition: all 0.2s;
+      font-size: 0.85rem; font-weight: 700; display: block; transition: all 0.2s; background: var(--primary); color: white;
     }
-    .btn-active { background: var(--primary); color: white; }
-    .btn-locked { background: #f1f5f9; color: #94a3b8; pointer-events: none; }
+    .action-link:hover { background: var(--primary-dark); }
 
-    /* CLINICAL REFERENCE VALUES SECTION */
+    /* CLINICAL REFERENCE VALUES */
     .reference-card {
       background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
       padding: 18px 16px; margin-bottom: 24px; box-shadow: var(--shadow);
@@ -149,47 +143,9 @@
     .val-label { font-size: 0.7rem; color: var(--text-muted); font-weight: 700; display: block; }
     .val-num { font-size: 0.9rem; font-weight: 800; color: #0369a1; margin-top: 2px; display: block; }
     .val-unit { font-size: 0.68rem; color: #64748b; }
-
-    /* AUTH MODAL */
-    .modal-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px);
-      z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 16px;
-    }
-    .modal-card {
-      background: white; border-radius: 20px; padding: 28px 22px; width: 100%; max-width: 380px; text-align: center;
-    }
-    .modal-card h2 { font-size: 1.3rem; margin-bottom: 6px; }
-    .modal-card p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; }
-    .auth-input {
-      width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px;
-      font-size: 0.9rem; margin-bottom: 12px; outline: none; text-transform: uppercase; font-weight: 700;
-    }
-    .auth-input:focus { border-color: var(--primary); }
-    .auth-btn {
-      width: 100%; padding: 12px; background: var(--primary-dark); color: white; border: none;
-      border-radius: 12px; font-weight: 700; font-size: 0.9rem; cursor: pointer;
-    }
-    .back-home { display: inline-block; margin-top: 14px; font-size: 0.8rem; color: var(--text-muted); text-decoration: none; }
   </style>
 </head>
 <body>
-
-  <!-- AUTH POPUP MODAL (Appears if user is not logged in) -->
-  <div id="authModal" class="modal-overlay" style="display: flex;">
-    <div class="modal-card">
-      <div class="pulse-box" style="margin: 0 auto 14px auto;">🔑</div>
-      <h2>Student Portal Login</h2>
-      <p>Enter your Access Key to unlock your custom dashboard.</p>
-      
-      <input type="text" id="userKeyInput" class="auth-input" placeholder="Enter Key (e.g. BSN993)" onkeypress="handleEnter(event)">
-      <button class="auth-btn" onclick="attemptLogin()">Login to Dashboard</button>
-      
-      <div>
-        <a href="index.html" class="back-home">← Back to Main Home</a>
-      </div>
-    </div>
-  </div>
 
   <!-- DRAWER OVERLAY -->
   <div id="drawerOverlay" class="drawer-overlay" onclick="toggleMenu()"></div>
@@ -205,23 +161,22 @@
         <button class="menu-toggle" onclick="toggleMenu()">✕</button>
       </div>
       <ul class="drawer-menu">
-        <li><a href="index.html">🏠 Main Home</a></li>
-        <li><a href="#enrolled-section" class="active" onclick="toggleMenu()">📚 Enrolled Courses</a></li>
-        <li><a href="#vitals-section" onclick="toggleMenu()">🩸 Lab & Clinical Values</a></li>
-        <li><a href="./nursing-ethics.html">⚖️ Free Ethics Notes</a></li>
+        <li><a href="dashboard.html" class="active">🏠 Dashboard Home</a></li>
+        <li><a href="#courses-section" onclick="toggleMenu()">📚 Course Modules</a></li>
+        <li><a href="#vitals-section" onclick="toggleMenu()">🩸 Lab Reference Values</a></li>
       </ul>
     </div>
-    <button class="logout-btn" onclick="logout()">🚪 Exit / Logout</button>
+    <button class="logout-btn" onclick="logout()">🚪 Logout / Exit</button>
   </div>
 
-  <!-- MAIN DASHBOARD WRAPPER -->
-  <div id="dashboardContent" style="display: none; width: 100%;">
+  <!-- MAIN DASHBOARD CONTENT -->
+  <div style="width: 100%;">
     <!-- TOP NAVBAR -->
     <header class="navbar">
       <div class="nav-container">
-        <a href="index.html" class="brand">
+        <a href="dashboard.html" class="brand">
           <div class="pulse-box">🩺</div>
-          <span>BSN Dashboard</span>
+          <span>BSN Student Portal</span>
         </a>
         <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu">☰</button>
       </div>
@@ -232,50 +187,100 @@
       <!-- PROFILE & ACADEMIC STATS BANNER -->
       <div class="profile-card">
         <div class="profile-header">
-          <div class="avatar" id="avatarLetter">M</div>
+          <div class="avatar" id="avatarLetter">S</div>
           <div class="profile-info">
-            <h1 id="welcomeUser">Mudassir Hussain Khan</h1>
-            <p id="accessLevel">BS Nursing • Class Representative (CR)</p>
+            <h1 id="userName">Loading Student Profile...</h1>
+            <p id="userEmail">student@example.com</p>
           </div>
         </div>
         
         <div class="stats-bar">
           <div class="stat-item">
             <span>Semester</span>
-            <strong>4th Semester</strong>
+            <strong id="userSemester">Semester -</strong>
           </div>
           <div class="stat-item">
             <span>Institute</span>
-            <strong>NLIN Multan</strong>
+            <strong id="userInstitute">Institute -</strong>
           </div>
           <div class="stat-item">
             <span>Status</span>
-            <strong style="color: #4ade80;">Active Student</strong>
+            <strong style="color: #4ade80;">Active Account</strong>
           </div>
         </div>
       </div>
 
-      <!-- IMPORTANT NOTICE ALERT -->
+      <!-- ACADEMIC ANNOUNCEMENT NOTICE -->
       <div class="notice-card">
         <div class="notice-icon">📢</div>
         <div class="notice-text">
           <h4>Academic Announcement</h4>
-          <p>Practical Viva Examinations ongoing. Ensure all clinical logs and course revision files are downloaded.</p>
+          <p>Please complete your registered semester practical logs and study modules before upcoming viva assessments.</p>
         </div>
       </div>
 
-      <!-- ENROLLED COURSES -->
-      <div class="section-title" id="enrolled-section">Enrolled Course Curriculum</div>
-      <div class="grid" id="courseGrid">
-        <!-- Generated via JS -->
+      <!-- COURSE MODULES -->
+      <div class="section-title" id="courses-section">BSN Academic Courses</div>
+      <div class="grid">
+        <div class="card">
+          <div>
+            <div class="card-top">
+              <div class="card-icon" style="background:#f0fdf4;">👶</div>
+              <div>
+                <h3>Pediatric Nursing</h3>
+                <span class="status-badge">Unlocked</span>
+              </div>
+            </div>
+          </div>
+          <a href="./pediatric/index.html" class="action-link">Open Notes & Modules →</a>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-top">
+              <div class="card-icon" style="background:#fdf2f8;">🤰</div>
+              <div>
+                <h3>Reproductive Health</h3>
+                <span class="status-badge">Unlocked</span>
+              </div>
+            </div>
+          </div>
+          <a href="./reproductive/index.html" class="action-link">Open Notes & Modules →</a>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-top">
+              <div class="card-icon" style="background:#f5f3ff;">📚</div>
+              <div>
+                <h3>English Academic</h3>
+                <span class="status-badge">Unlocked</span>
+              </div>
+            </div>
+          </div>
+          <a href="./english/index.html" class="action-link">Open Notes & Modules →</a>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="card-top">
+              <div class="card-icon" style="background:#f0fdfa;">💡</div>
+              <div>
+                <h3>PERLS Module</h3>
+                <span class="status-badge">Unlocked</span>
+              </div>
+            </div>
+          </div>
+          <a href="./perls/index.html" class="action-link">Open Notes & Modules →</a>
+        </div>
       </div>
 
       <!-- ESSENTIAL CLINICAL REFERENCE VALUES -->
-      <div class="section-title" id="vitals-section">Essential Clinical & Lab Reference Values</div>
+      <div class="section-title" id="vitals-section">Essential Clinical Reference Values</div>
       <div class="reference-card">
         <div class="ref-header">
           <span>💉</span>
-          <h3>Normal Adult Vital Signs & Critical Lab Values</h3>
+          <h3>Normal Adult Vital Signs & Lab Ranges</h3>
         </div>
         
         <div class="values-grid">
@@ -325,23 +330,7 @@
     </main>
   </div>
 
-  <!-- SCRIPT LOGIC -->
   <script>
-    const KEYS_DATABASE = {
-      'BSN993': { name: 'Mudassir Hussain Khan', role: 'CR • Full Access Student', courses: ['pediatric', 'reproductive', 'english', 'perls'] },
-      'PEDS350': { name: 'BSN Student', role: 'Pediatric Nursing Student', courses: ['pediatric'] },
-      'REPO350': { name: 'BSN Student', role: 'Reproductive Health Student', courses: ['reproductive'] },
-      'ENG250': { name: 'BSN Student', role: 'English Module Student', courses: ['english'] },
-      'PERLS250': { name: 'BSN Student', role: 'PERLS Module Student', courses: ['perls'] }
-    };
-
-    const COURSE_DETAILS = {
-      'pediatric': { title: 'Pediatric Health Nursing', icon: '👶', bg: '#f0fdf4', link: './pediatric/index.html' },
-      'reproductive': { title: 'Reproductive Health', icon: '🤰', bg: '#fdf2f8', link: './reproductive/index.html' },
-      'english': { title: 'English', icon: '📚', bg: '#f5f3ff', link: './english/index.html' },
-      'perls': { title: 'PERLS', icon: '💡', bg: '#f0fdfa', link: './perls/index.html' }
-    };
-
     function toggleMenu() {
       const drawer = document.getElementById('drawer');
       const overlay = document.getElementById('drawerOverlay');
@@ -349,76 +338,28 @@
       overlay.classList.toggle('open');
     }
 
-    function attemptLogin() {
-      const input = document.getElementById('userKeyInput').value.trim().toUpperCase();
-      if (!input) {
-        alert('Please enter your access key.');
-        return;
-      }
-
-      if (KEYS_DATABASE[input]) {
-        localStorage.setItem('bsn_user_session', input);
-        KEYS_DATABASE[input].courses.forEach(c => localStorage.setItem('access_' + c, 'true'));
-        renderDashboard(input);
-      } else if (input.startsWith('BSN') || input.startsWith('PEDS') || input.startsWith('REPO') || input.startsWith('ENG') || input.startsWith('PERLS')) {
-        localStorage.setItem('bsn_user_session', input);
-        renderDashboard(input);
-      } else {
-        alert('❌ Invalid Access Key! Please verify your key.');
-      }
-    }
-
-    function handleEnter(e) {
-      if (e.key === 'Enter') attemptLogin();
-    }
-
     function logout() {
-      localStorage.removeItem('bsn_user_session');
-      location.reload();
-    }
-
-    function renderDashboard(key) {
-      document.getElementById('authModal').style.display = 'none';
-      document.getElementById('dashboardContent').style.display = 'block';
-
-      const userInfo = KEYS_DATABASE[key] || { name: 'BSN Nursing Student', role: 'Student Dashboard', courses: [] };
-      document.getElementById('welcomeUser').innerText = userInfo.name;
-      document.getElementById('accessLevel').innerText = userInfo.role;
-      document.getElementById('avatarLetter').innerText = userInfo.name.charAt(0);
-
-      const grid = document.getElementById('courseGrid');
-      grid.innerHTML = '';
-
-      Object.keys(COURSE_DETAILS).forEach(courseKey => {
-        const course = COURSE_DETAILS[courseKey];
-        const isUnlocked = localStorage.getItem('access_' + courseKey) === 'true';
-
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <div>
-            <div class="card-top">
-              <div class="card-icon" style="background:${course.bg}">${course.icon}</div>
-              <div>
-                <h3>${course.title}</h3>
-                <span class="status-badge ${isUnlocked ? 'badge-active' : 'badge-locked'}">
-                  ${isUnlocked ? '✅ Unlocked' : '🔒 Locked'}
-                </span>
-              </div>
-            </div>
-          </div>
-          <a href="${course.link}" class="action-link ${isUnlocked ? 'btn-active' : 'btn-locked'}">
-            ${isUnlocked ? 'Open Notes & Modules →' : 'Access Restricted'}
-          </a>
-        `;
-        grid.appendChild(card);
-      });
+      localStorage.removeItem('bsn_current_user');
+      window.location.href = 'login.html';
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      const activeSession = localStorage.getItem('bsn_user_session');
-      if (activeSession) {
-        renderDashboard(activeSession);
+      const currentUserEmail = localStorage.getItem('bsn_current_user');
+
+      // Redirect to login if user isn't logged in
+      if (!currentUserEmail) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      const userDataStr = localStorage.getItem('bsn_user_' + currentUserEmail);
+      if (userDataStr) {
+        const user = JSON.parse(userDataStr);
+        document.getElementById('userName').innerText = user.name || 'BSN Student';
+        document.getElementById('userEmail').innerText = user.email;
+        document.getElementById('userSemester').innerText = user.semester || 'BSN Semester';
+        document.getElementById('userInstitute').innerText = user.institute || 'Nursing Institute';
+        document.getElementById('avatarLetter').innerText = (user.name ? user.name.charAt(0) : 'S').toUpperCase();
       }
     });
   </script>
