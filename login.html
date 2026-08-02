@@ -1,213 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Portal | Login & Registration</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background: #f8fafc; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-    
-    .auth-card { 
-      background: #ffffff; 
-      width: 100%; 
-      max-width: 440px; 
-      border-radius: 20px; 
-      padding: 32px; 
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
-      border: 1px solid #e2e8f0; 
-    }
+// Replace with your actual Web App URL from Step 3
+const GOOGLE_SCRIPT_URL = 'PASTE_YOUR_WEB_APP_URL_HERE';
 
-    .brand-header { text-align: center; margin-bottom: 24px; }
-    .brand-icon { background: linear-gradient(135deg, #0284c7, #0d9488); color: white; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 12px auto; }
-    .brand-header h2 { font-size: 1.35rem; font-weight: 800; color: #0f172a; }
-    .brand-header p { font-size: 0.85rem; color: #64748b; margin-top: 4px; }
+function handleRegister(e) {
+  e.preventDefault();
 
-    .tabs { display: flex; background: #f1f5f9; padding: 4px; border-radius: 12px; margin-bottom: 24px; }
-    .tab-btn { flex: 1; border: none; padding: 10px; border-radius: 8px; font-weight: 700; cursor: pointer; background: transparent; color: #64748b; font-size: 0.85rem; transition: all 0.2s; }
-    .tab-btn.active { background: #ffffff; color: #0284c7; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-    
-    .form-group { margin-bottom: 16px; }
-    label { font-size: 0.82rem; font-weight: 700; color: #334155; display: block; margin-bottom: 6px; }
-    input, select { width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; font-size: 0.9rem; background: #ffffff; }
-    input:focus, select:focus { border-color: #0284c7; box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); }
-    
-    .submit-btn { width: 100%; padding: 14px; background: #0284c7; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; font-size: 0.9rem; transition: background 0.2s; }
-    .submit-btn:hover { background: #0369a1; }
-    
-    .forgot-link { font-size: 0.8rem; color: #0284c7; font-weight: 600; text-decoration: none; cursor: pointer; float: right; margin-bottom: 12px; }
-    .forgot-link:hover { text-decoration: underline; }
-    
-    .back-btn { font-size: 0.82rem; color: #64748b; font-weight: 700; background: none; border: none; cursor: pointer; margin-bottom: 16px; display: inline-flex; align-items: center; gap: 4px; }
-  </style>
-</head>
-<body>
+  const user = {
+    name: document.getElementById('regName').value.trim(),
+    institute: document.getElementById('regInstitute').value.trim(),
+    email: document.getElementById('regEmail').value.toLowerCase().trim(),
+    semester: document.getElementById('regSemester').value,
+    password: document.getElementById('regPassword').value
+  };
 
-<div class="auth-card">
-  <div class="brand-header">
-    <div class="brand-icon">🩺</div>
-    <h2>BSN Student Portal</h2>
-    <p>Sign in or register to access study modules</p>
-  </div>
+  // 1. Save locally for instant login redirect
+  localStorage.setItem('bsn_user_' + user.email, JSON.stringify(user));
+  localStorage.setItem('bsn_current_user', user.email);
 
-  <!-- Navigation Tabs -->
-  <div class="tabs" id="authTabs">
-    <button class="tab-btn active" id="loginTab" onclick="showForm('login')">Login</button>
-    <button class="tab-btn" id="regTab" onclick="showForm('register')">Register Student</button>
-  </div>
+  // 2. Send registration data to your Google Sheet
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors', // Bypasses browser CORS restrictions
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user)
+  }).catch(err => console.error('Sheet Sync Error:', err));
 
-  <!-- LOGIN FORM -->
-  <form id="loginForm" onsubmit="handleLogin(event)">
-    <div class="form-group">
-      <label>Email Address</label>
-      <input type="email" id="loginEmail" placeholder="student@example.com" required>
-    </div>
-    <div class="form-group">
-      <label>
-        Password 
-        <span class="forgot-link" onclick="showForm('forgot')">Forgot Password?</span>
-      </label>
-      <input type="password" id="loginPassword" placeholder="••••••••" required>
-    </div>
-    <button type="submit" class="submit-btn">Login to Dashboard</button>
-  </form>
-
-  <!-- REGISTRATION FORM -->
-  <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
-    <div class="form-group">
-      <label>Full Name</label>
-      <input type="text" id="regName" placeholder="e.g. Mudassir Khan" required>
-    </div>
-    
-    <div class="form-group">
-      <label>Institute Name</label>
-      <input type="text" id="regInstitute" placeholder="e.g. COLLEGE OF NURSING DHQ ETC" required>
-    </div>
-
-    <div class="form-group">
-      <label>Email Address</label>
-      <input type="email" id="regEmail" placeholder="student@example.com" required>
-    </div>
-
-    <div class="form-group">
-      <label>Semester</label>
-      <select id="regSemester" required>
-        <option value="" disabled selected>Select your current semester</option>
-        <option value="BSN Semester 1">BSN Semester 1</option>
-        <option value="BSN Semester 2">BSN Semester 2</option>
-        <option value="BSN Semester 3">BSN Semester 3</option>
-        <option value="BSN Semester 4">BSN Semester 4</option>
-        <option value="BSN Semester 5">BSN Semester 5</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Create Password</label>
-      <input type="password" id="regPassword" placeholder="At least 6 characters" minlength="6" required>
-    </div>
-
-    <button type="submit" class="submit-btn">Create Account</button>
-  </form>
-
-  <!-- FORGOT PASSWORD FORM -->
-  <form id="forgotForm" style="display: none;" onsubmit="handleResetPassword(event)">
-    <button type="button" class="back-btn" onclick="showForm('login')">← Back to Login</button>
-    <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 12px;">Reset Password</h3>
-    <div class="form-group">
-      <label>Your Registered Email</label>
-      <input type="email" id="resetEmail" placeholder="student@example.com" required>
-    </div>
-    <div class="form-group">
-      <label>New Password</label>
-      <input type="password" id="newPassword" placeholder="Enter new password" minlength="6" required>
-    </div>
-    <button type="submit" class="submit-btn" style="background:#0d9488;">Update Password</button>
-  </form>
-</div>
-
-<script>
-  function showForm(type) {
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-    const forgotForm = document.getElementById('forgotForm');
-    const authTabs = document.getElementById('authTabs');
-
-    if (type === 'login') {
-      authTabs.style.display = 'flex';
-      loginForm.style.display = 'block';
-      registerForm.style.display = 'none';
-      forgotForm.style.display = 'none';
-      document.getElementById('loginTab').classList.add('active');
-      document.getElementById('regTab').classList.remove('active');
-    } else if (type === 'register') {
-      authTabs.style.display = 'flex';
-      loginForm.style.display = 'none';
-      registerForm.style.display = 'block';
-      forgotForm.style.display = 'none';
-      document.getElementById('loginTab').classList.remove('active');
-      document.getElementById('regTab').classList.add('active');
-    } else if (type === 'forgot') {
-      authTabs.style.display = 'none';
-      loginForm.style.display = 'none';
-      registerForm.style.display = 'none';
-      forgotForm.style.display = 'block';
-    }
-  }
-
-  function handleRegister(e) {
-    e.preventDefault();
-    const user = {
-      name: document.getElementById('regName').value.trim(),
-      institute: document.getElementById('regInstitute').value.trim(),
-      email: document.getElementById('regEmail').value.toLowerCase().trim(),
-      semester: document.getElementById('regSemester').value,
-      password: document.getElementById('regPassword').value
-    };
-
-    localStorage.setItem('bsn_user_' + user.email, JSON.stringify(user));
-    localStorage.setItem('bsn_current_user', user.email);
-
-    alert('🎉 Registration successful!');
-    window.location.href = 'dashboard.html';
-  }
-
-  function handleLogin(e) {
-    e.preventDefault();
-    const email = document.getElementById('loginEmail').value.toLowerCase().trim();
-    const pass = document.getElementById('loginPassword').value;
-    const savedUser = localStorage.getItem('bsn_user_' + email);
-
-    if (savedUser) {
-      const user = JSON.parse(savedUser);
-      if (user.password === pass) {
-        localStorage.setItem('bsn_current_user', email);
-        window.location.href = 'dashboard.html';
-      } else {
-        alert('❌ Incorrect password.');
-      }
-    } else {
-      alert('❌ Account not found. Please register first.');
-    }
-  }
-
-  function handleResetPassword(e) {
-    e.preventDefault();
-    const email = document.getElementById('resetEmail').value.toLowerCase().trim();
-    const newPass = document.getElementById('newPassword').value;
-    const savedUser = localStorage.getItem('bsn_user_' + email);
-
-    if (savedUser) {
-      let user = JSON.parse(savedUser);
-      user.password = newPass;
-      localStorage.setItem('bsn_user_' + email, JSON.stringify(user));
-      alert('✅ Password updated successfully!');
-      showForm('login');
-    } else {
-      alert('❌ Registered email not found.');
-    }
-  }
-</script>
-
-</body>
-</html>
+  alert('🎉 Registration successful!');
+  window.location.href = 'dashboard.html';
+}
