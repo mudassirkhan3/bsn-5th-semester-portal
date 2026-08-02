@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BSN 5th Semester - Nursing Ethics Master Quiz</title>
+  <title>BSN 5th Semester • 100-MCQ Nursing Ethics Exam</title>
   <style>
     :root {
       --bg: #0f172a;
@@ -22,7 +22,7 @@
     body { background-color: var(--bg); color: var(--text); padding: 20px 12px; min-height: 100vh; }
     .quiz-container { max-width: 900px; margin: 0 auto; }
 
-    /* Header & Dashboard Navigation */
+    /* Header & Navigation */
     .header-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -41,7 +41,7 @@
     .title-area h1 { font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
     .subtitle { color: var(--text-sub); font-size: 0.9rem; }
 
-    /* Exam Stats Bar */
+    /* Exam Dashboard Bar */
     .exam-bar {
       display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
       background: #090d16; border: 1px solid var(--border); border-radius: 12px;
@@ -80,7 +80,7 @@
     .q-num { font-size: 0.85rem; color: var(--text-sub); font-weight: 700; }
     .q-text { font-size: 1.05rem; font-weight: 600; line-height: 1.5; margin-bottom: 18px; color: #fff; }
 
-    /* Options List */
+    /* Options Grid */
     .options-grid { display: flex; flex-direction: column; gap: 10px; }
     .opt-btn {
       background: #0f172a; border: 1px solid var(--border); border-radius: 10px;
@@ -95,13 +95,13 @@
     .opt-btn.selected { border-color: var(--accent); background: var(--accent-light); color: #fff; }
     .opt-btn.selected .opt-prefix { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-    /* Rationale Box (Review Mode) */
+    /* Rationale Box */
     .rationale {
       margin-top: 16px; padding: 12px 16px; background: rgba(15, 23, 42, 0.8);
       border-left: 4px solid var(--accent); border-radius: 6px; font-size: 0.85rem; color: #cbd5e1; display: none;
     }
 
-    /* Action Footer */
+    /* Controls */
     .controls { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; }
     .btn-action {
       background: var(--accent); color: #fff; border: none; padding: 12px 28px;
@@ -109,15 +109,15 @@
     }
     .btn-action:hover { background: var(--accent-hover); }
 
-    /* Results Screen */
+    /* Results */
     .results-card {
       background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px;
       padding: 32px; text-align: center; display: none;
     }
     .score-circle {
-      width: 130px; height: 130px; border-radius: 50%; border: 6px solid var(--accent);
+      width: 140px; height: 140px; border-radius: 50%; border: 6px solid var(--accent);
       margin: 20px auto; display: flex; flex-direction: column; align-items: center;
-      justify-content: center; font-weight: 800; font-size: 1.8rem; color: #fff;
+      justify-content: center; font-weight: 800; font-size: 2rem; color: #fff;
       background: var(--accent-light);
     }
 
@@ -132,23 +132,21 @@
 
 <div class="quiz-container">
   
-  <!-- Header Card -->
   <div class="header-card">
-    <a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/index.html" class="back-btn">← Back to Dashboard</a>
+    <a href="index.html" class="back-btn">← Back to Dashboard</a>
     <div class="title-area">
-      <h1>BSN 5th Semester • Nursing Ethics Quiz</h1>
-      <p class="subtitle">Interactive Practice Exam covering 50 High-Yield MCQs across all 8 Syllabus Units.</p>
+      <h1>BSN 5th Semester • 100 MCQs Nursing Ethics Exam</h1>
+      <p class="subtitle">Comprehensive practice test with 60-minute time limit & detailed rationales across all 8 units.</p>
     </div>
 
     <div class="exam-bar">
-      <div class="timer-badge">⏱️ <span id="timer-display">45:00</span></div>
-      <div class="progress-text" id="progress-text">Question 1 of 50</div>
+      <div class="timer-badge">⏱️ <span id="timer-display">60:00</span></div>
+      <div class="progress-text" id="progress-text">Question 1 of 100</div>
     </div>
   </div>
 
-  <!-- Unit Filter Buttons -->
   <div class="filter-scroll">
-    <button class="filter-btn active" onclick="filterUnit('All')">All Units</button>
+    <button class="filter-btn active" onclick="filterUnit('All')">All 100 Questions</button>
     <button class="filter-btn" onclick="filterUnit('Unit I')">Unit I</button>
     <button class="filter-btn" onclick="filterUnit('Unit II')">Unit II</button>
     <button class="filter-btn" onclick="filterUnit('Unit III')">Unit III</button>
@@ -159,12 +157,11 @@
     <button class="filter-btn" onclick="filterUnit('Unit VIII')">Unit VIII</button>
   </div>
 
-  <!-- Quiz Screen -->
   <div id="quiz-area">
     <div class="q-card" id="question-card">
       <div class="q-meta">
-        <span class="q-badge" id="q-unit">Unit I: Intro</span>
-        <span class="q-num" id="q-count">1/50</span>
+        <span class="q-badge" id="q-unit">Unit I</span>
+        <span class="q-num" id="q-count">1/100</span>
       </div>
       <div class="q-text" id="q-text">Loading question...</div>
       <div class="options-grid" id="options-container"></div>
@@ -177,14 +174,13 @@
     </div>
   </div>
 
-  <!-- Results Screen -->
   <div class="results-card" id="results-screen">
-    <h2 style="font-size:1.8rem;">Exam Completed! 🎉</h2>
+    <h2 style="font-size:1.8rem;">Final Exam Submitted! 🎉</h2>
     <p style="color:var(--text-sub); margin-top:6px;">Here is your performance summary for Nursing Ethics:</p>
     
     <div class="score-circle" id="score-circle">
       <span id="score-percent">0%</span>
-      <span style="font-size:0.75rem; color:var(--text-sub); font-weight:normal;">Score</span>
+      <span style="font-size:0.75rem; color:var(--text-sub); font-weight:normal;">Final Score</span>
     </div>
 
     <p id="score-details" style="font-size:1.1rem; font-weight:700; margin-bottom:20px;"></p>
@@ -198,78 +194,133 @@
 </div>
 
 <script>
-// 50 High-Yield MCQs across 8 Syllabus Units
 const rawQuestions = [
-  // Unit I
-  { unit: "Unit I", q: "The formal, systematic study of moral beliefs, principles, and conduct distinguishing right from wrong is termed:", opts: ["Morals", "Ethics", "Values", "Attitude"], ans: 1, rat: "Ethics is the formal, theoretical study of moral beliefs, whereas morals are personal or societal standards." },
-  { unit: "Unit I", q: "Which branch of ethics specifically governs moral decisions within the nurse-patient relationship?", opts: ["Bio-Ethics", "Societal Ethics", "Nursing Ethics", "Deontology"], ans: 2, rat: "Nursing ethics is a specialized branch of bioethics governing nurses' moral duties and patient care." },
-  { unit: "Unit I", q: "Enduring personal or professional beliefs about the worth or desirability of an idea or behavior are called:", opts: ["Beliefs", "Attitudes", "Values", "Dilemmas"], ans: 2, rat: "Values direct decision-making based on personal/professional ideals." },
-  { unit: "Unit I", q: "A complex situation where two or more moral principles conflict, forcing a choice between competing duties, is a/an:", opts: ["Ethical Conflict", "Ethical Dilemma", "Moral Distress", "Negligence"], ans: 1, rat: "An ethical dilemma involves conflicting moral principles where choosing one compromises another." },
-  { unit: "Unit I", q: "According to Flexner’s criteria, a key characteristic of a profession applied to nursing is:", opts: ["Informal apprenticeship", "Autonomy & self-regulation", "Individual financial gain", "Unregulated practice"], ans: 1, rat: "Professions maintain self-regulation, independent standards, and licensing bodies like the PNC." },
-  { unit: "Unit I", q: "Which trait ensures a nurse takes direct responsibility for clinical actions, omissions, and decisions?", opts: ["Compassion", "Altruism", "Accountability", "Veracity"], ans: 2, rat: "Accountability means being answerable for outcomes resulting from clinical decisions." },
+  // --- UNIT I: INTRODUCTION TO ETHICS & PROFESSION (12 MCQs) ---
+  { unit: "Unit I", q: "The systematic study of right and wrong conduct, moral duties, and character traits in healthcare is termed:", opts: ["Ethics", "Morals", "Legal Code", "Etiquette"], ans: 0, rat: "Ethics is the formal study of moral behavior and decision-making." },
+  { unit: "Unit I", q: "Personal standard of right and wrong learned through culture, religion, and upbringing is known as:", opts: ["Ethics", "Morals", "Laws", "Statutes"], ans: 1, rat: "Morals refer to internal, personal beliefs formed by upbringing and social background." },
+  { unit: "Unit I", q: "Which characteristic distinguishes a profession from an occupation according to Flexner’s criteria?", opts: ["High monthly salary", "Specialized body of knowledge and self-regulation", "On-the-job informal training", "Standard shift hours"], ans: 1, rat: "Professions require prolonged academic preparation, specialized knowledge, and self-governance." },
+  { unit: "Unit I", q: "A situation where two equally compelling moral principles conflict, forcing a difficult choice, is a/an:", opts: ["Ethical Dilemma", "Moral Distress", "Legal Breach", "Negligence"], ans: 0, rat: "An ethical dilemma occurs when choosing one right course of action causes the breach of another." },
+  { unit: "Unit I", q: "When a nurse knows the ethically correct action but is prevented from taking it by institutional rules, they experience:", opts: ["Moral Dilemma", "Moral Distress", "Moral Blindness", "Legal Liability"], ans: 1, rat: "Moral distress happens when institutional or practical constraints block ethical action." },
+  { unit: "Unit I", q: "A staff nurse takes full responsibility for an incorrect dosage calculated during a shift. This illustrates:", opts: ["Accountability", "Authority", "Deontology", "Altruism"], ans: 0, rat: "Accountability means taking direct ownership of one's professional actions and decisions." },
+  { unit: "Unit I", q: "A nurse explains a home-care plan clearly without judging the patient's lifestyle. Which professional trait is shown?", opts: ["Ethical Sensitivity", "Paternalism", "Subjectivity", "Ethical Egoism"], ans: 0, rat: "Ethical sensitivity involves recognizing and respecting client vulnerability and needs without bias." },
+  { unit: "Unit I", q: "A student nurse asks, 'Why do we study ethics?' The clinical instructor's best response is:", opts: ["To pass institutional licensing exams only", "To guide complex clinical decisions and protect patient safety", "To avoid doctor-nurse arguments", "To replace hospital policies"], ans: 1, rat: "Nursing ethics prepares nurses to solve clinical dilemmas while upholding patient rights." },
+  { unit: "Unit I", q: "Which core duty requires nurses to continuously update clinical knowledge throughout their career?", opts: ["Professional Competence", "Administrative Control", "Social Advocacy", "Institutional Loyalty"], ans: 0, rat: "Maintaining competence ensures safe practice and fulfills the duty of non-maleficence." },
+  { unit: "Unit I", q: "A nurse witnesses a colleague working under the influence of alcohol. What is the nurse's primary ethical responsibility?", opts: ["Ignore it to maintain peer harmony", "Report to the shift supervisor to ensure patient safety", "Post about it on social media", "Wait until an accident happens"], ans: 1, rat: "Patient safety takes absolute priority over peer protection." },
+  { unit: "Unit I", q: "The ultimate goal of professional nursing regulation (such as PNC registration) is to:", opts: ["Limit the number of practicing nurses", "Protect the health, safety, and welfare of the public", "Collect registration fees", "Protect physicians from lawsuits"], ans: 1, rat: "Regulatory bodies exist primarily to safeguard the public from unsafe practice." },
+  { unit: "Unit I", q: "Which statement best describes the relationship between laws and ethics?", opts: ["Laws enforce minimal societal standards, while ethics guides optimal moral conduct", "Laws and ethics are identical", "Ethics is enforced by courts, laws by conscience", "Laws change daily, ethics never changes"], ans: 0, rat: "Laws prescribe baseline requirements; ethics strives for higher standards of moral care." },
 
-  // Unit II
-  { unit: "Unit II", q: "The reflective process by which individuals examine and understand their own values is known as:", opts: ["Moralizing", "Value Clarification", "Laissez-Faire", "Modeling"], ans: 1, rat: "Value clarification allows nurses to recognize personal biases and separate them from clinical care." },
-  { unit: "Unit II", q: "Teaching a strict set of values directly without allowing the individual to question options is:", opts: ["Modeling", "Laissez-Faire", "Moralizing", "Responsible Choice"], ans: 2, rat: "Moralizing dictates values directly, leaving no room for critical evaluation." },
-  { unit: "Unit II", q: "Which mode of value transmission is considered most effective for mature decision-making?", opts: ["Reward and Punishment", "Moralizing", "Responsible Choice", "Laissez-Faire"], ans: 2, rat: "Responsible choice encourages exploring options and evaluating consequences independently." },
-  { unit: "Unit II", q: "Which essential AACN professional value refers to unselfish concern for the welfare of clients?", opts: ["Social Justice", "Altruism", "Human Dignity", "Autonomy"], ans: 1, rat: "Altruism is dedication to the health and well-being of others without self-interest." },
-  { unit: "Unit II", q: "Unresolved value conflicts between personal beliefs and patient care lead primarily to:", opts: ["Clinical autonomy", "Moral distress and burnout", "Improved advocacy", "Legal protection"], ans: 1, rat: "Compromising core values without resolution causes severe moral distress and burnout." },
-  { unit: "Unit II", q: "Respecting the inherent worth and unique value of every individual client reflects which AACN value?", opts: ["Human Dignity", "Integrity", "Altruism", "Justice"], ans: 0, rat: "Human dignity mandates respectful care for all individuals regardless of background." },
+  // --- UNIT II: VALUES & VALUE CLARIFICATION (12 MCQs) ---
+  { unit: "Unit II", q: "Enduring beliefs about the worth of a given idea, person, or object that shape behavior are called:", opts: ["Values", "Attitudes", "Habits", "Rules"], ans: 0, rat: "Values direct choices and ground personal and professional behavior." },
+  { unit: "Unit II", q: "The three-step process of Value Clarification includes:", opts: ["Choosing, Prizing, and Acting", "Thinking, Memorizing, and Repeating", "Observing, Hearing, and Writing", "Accepting, Rejecting, and Forgetting"], ans: 0, rat: "Raths' Value Clarification theory consists of Choosing freely, Prizing choices, and Acting consistently." },
+  { unit: "Unit II", q: "A child adopts healthy habits by watching their parents exercise. Which mode of value transmission is this?", opts: ["Modeling", "Moralizing", "Laissez-faire", "Reward and Punishment"], ans: 0, rat: "Modeling teaches values through example and observation." },
+  { unit: "Unit II", q: "A parent tells a teenager, 'You must obey this rule without question because I said so.' This transmission style is:", opts: ["Moralizing", "Responsible Choice", "Modeling", "Laissez-faire"], ans: 0, rat: "Moralizing forces strict rules without allowing critical evaluation." },
+  { unit: "Unit II", q: "Which AACN professional value is defined as unselfish concern for the well-being of others?", opts: ["Altruism", "Autonomy", "Human Dignity", "Integrity"], ans: 0, rat: "Altruism is placing patient welfare above personal interest." },
+  { unit: "Unit II", q: "A nurse ensures privacy curtains are pulled before performing a bed bath. This upholds:", opts: ["Human Dignity", "Justice", "Social Equality", "Utility"], ans: 0, rat: "Respecting modesty and privacy directly honors human dignity." },
+  { unit: "Unit II", q: "Acting in accordance with an appropriate code of ethics and accepted standards of practice reflects:", opts: ["Integrity", "Altruism", "Paternalism", "Fidelity"], ans: 0, rat: "Integrity means maintaining honest, moral, and consistent ethical behavior." },
+  { unit: "Unit II", q: "A client refuses blood transfusions due to religious beliefs. The nurse respects this choice even if disagreeing. This shows:", opts: ["Value Clarification & Respect for Autonomy", "Moral Distress", "Negligence", "Paternalism"], ans: 0, rat: "Recognizing individual rights while setting aside personal bias is vital for autonomous care." },
+  { unit: "Unit II", q: "What is the primary benefit of value clarification for a practicing nurse?", opts: ["It helps nurses identify personal biases and prevent them from interfering with care", "It allows nurses to change patients' beliefs", "It eliminates clinical mistakes", "It speeds up charting time"], ans: 0, rat: "Awareness of personal values prevents imposing personal opinions on clients." },
+  { unit: "Unit II", q: "Allowing a child to explore life choices with zero guidance or boundaries is known as:", opts: ["Laissez-faire", "Responsible Choice", "Moralizing", "Modeling"], ans: 0, rat: "Laissez-faire provides total freedom without boundaries or values guidance." },
+  { unit: "Unit II", q: "Which value transmission approach encourages individuals to explore alternatives and weigh consequences?", opts: ["Responsible Choice", "Moralizing", "Reward and Punishment", "Modeling"], ans: 0, rat: "Responsible choice empowers autonomous, well-reasoned decision-making." },
+  { unit: "Unit II", q: "A nurse reports a minor medication error immediately even though no one witnessed it. Which value is displayed?", opts: ["Integrity", "Justice", "Social Equality", "Paternalism"], ans: 0, rat: "Honesty when no one is watching defines professional integrity." },
 
-  // Unit III
-  { unit: "Unit III", q: "Kantian ethical theory (Deontology) states that an action is right or wrong based on:", opts: ["Consequences and outcomes", "Intrinsic moral duties and rules", "Personal character traits", "Relational empathy"], ans: 1, rat: "Deontology focuses on strict moral duties rather than the consequences produced." },
-  { unit: "Unit III", q: "Utilitarianism evaluates the morality of an action based on:", opts: ["The greatest good for the greatest number", "Absolute universal rules", "Nurse intuition", "Institutional policy"], ans: 0, rat: "Utilitarianism maximizes utility and positive outcomes for the majority." },
-  { unit: "Unit III", q: "A nurse double-checks high-alert medication doses before administration to prevent harm. This applies:", opts: ["Beneficence", "Non-Maleficence", "Fidelity", "Veracity"], ans: 1, rat: "Non-maleficence means 'above all, do no harm' (Primum non-nocere)." },
-  { unit: "Unit III", q: "Turning an immobile client every 2 hours to prevent pressure ulcers represents which principle?", opts: ["Autonomy", "Beneficence", "Justice", "Veracity"], ans: 1, rat: "Beneficence involves active interventions performed for the well-being of clients." },
-  { unit: "Unit III", q: "Emergency room triage based strictly on clinical priority rather than financial status illustrates:", opts: ["Fidelity", "Justice", "Veracity", "Autonomy"], ans: 1, rat: "Justice mandates fair, non-discriminatory allocation of healthcare resources." },
-  { unit: "Unit III", q: "Evaluating pain 30 minutes after medication administration as promised to the patient upholds:", opts: ["Veracity", "Fidelity", "Autonomy", "Non-Maleficence"], ans: 1, rat: "Fidelity is maintaining loyalty, keeping promises, and honoring commitments." },
-  { unit: "Unit III", q: "Answering a patient's direct question honestly about potential surgical risks demonstrates:", opts: ["Veracity", "Fidelity", "Beneficence", "Justice"], ans: 0, rat: "Veracity is the absolute obligation to tell the truth without deception." },
+  // --- UNIT III: ETHICAL THEORIES & PRINCIPLES (15 MCQs) ---
+  { unit: "Unit III", q: "Which theory (Kantianism/Deontology) asserts that actions are inherently right or wrong, regardless of outcomes?", opts: ["Deontology", "Utilitarianism", "Virtue Ethics", "Feminist Ethics"], ans: 0, rat: "Deontology focuses on moral duty and universal rules rather than consequences." },
+  { unit: "Unit III", q: "Utilitarianism evaluates the moral worth of an action based primarily on:", opts: ["The overall outcome (the greatest good for the greatest number)", "Strict religious commands", "The actor's character", "Institutional policies"], ans: 0, rat: "Utilitarianism (consequentialism) targets maximizing positive outcomes for the majority." },
+  { unit: "Unit III", q: "A nurse provides a competent adult patient with complete information so they can decide on treatment. This respects:", opts: ["Autonomy", "Beneficence", "Paternalism", "Fidelity"], ans: 0, rat: "Autonomy grants individuals self-determination over their bodies and health choices." },
+  { unit: "Unit III", q: "The duty to 'do good' and promote the active well-being of patients is called:", opts: ["Beneficence", "Non-maleficence", "Veracity", "Justice"], ans: 0, rat: "Beneficence requires taking positive actions to help others." },
+  { unit: "Unit III", q: "The obligation to 'do no harm' and prevent accidental injury is:", opts: ["Non-maleficence", "Beneficence", "Veracity", "Fidelity"], ans: 0, rat: "Non-maleficence (Primum non nocere) stresses avoiding harm or risk of harm." },
+  { unit: "Unit III", q: "Triage in a disaster situation, where limited resources go to those most likely to survive, is based on:", opts: ["Utilitarianism", "Deontology", "Virtue Ethics", "Ethical Egoism"], ans: 0, rat: "Disaster triage aims to save the greatest number of lives (Utilitarian principle)." },
+  { unit: "Unit III", q: "A physician decides to withhold a cancer diagnosis from a patient 'to keep them from getting sad.' This is an example of:", opts: ["Paternalism", "Autonomy", "Veracity", "Justice"], ans: 0, rat: "Paternalism overrides a patient's autonomy under the assumption of knowing what is best for them." },
+  { unit: "Unit III", q: "Distributing nursing care and medical supplies fairly based on clinical need rather than wealth reflects:", opts: ["Justice", "Fidelity", "Veracity", "Autonomy"], ans: 0, rat: "Justice involves fairness, equity, and non-discriminatory resource allocation." },
+  { unit: "Unit III", q: "A nurse promises to return in 15 minutes with pain medication and returns exactly on time. This demonstrates:", opts: ["Fidelity", "Veracity", "Autonomy", "Non-maleficence"], ans: 0, rat: "Fidelity means keeping promises, maintaining loyalty, and building trust." },
+  { unit: "Unit III", q: "A nurse lies to a patient, claiming a painful injection 'will not hurt at all.' This directly violates:", opts: ["Veracity", "Fidelity", "Justice", "Beneficence"], ans: 0, rat: "Veracity requires absolute truthfulness and avoiding deception." },
+  { unit: "Unit III", q: "An elderly patient refuses chemotherapy. The nurse supports the decision despite family objections. The nurse honors:", opts: ["Autonomy", "Paternalism", "Beneficence", "Fidelity"], ans: 0, rat: "Respecting a competent patient's refusal of treatment honors autonomy." },
+  { unit: "Unit III", q: "Checking a blood pressure reading before giving an antihypertensive medication prevents hypotension. This applies:", opts: ["Non-maleficence", "Justice", "Veracity", "Paternalism"], ans: 0, rat: "Safety checks prevent harm, directly upholding non-maleficence." },
+  { unit: "Unit III", q: "Virtue ethics focuses primarily on:", opts: ["The moral character and virtues of the decision-maker", "Strict legal punishments", "Calculating numerical utility", "Written contracts"], ans: 0, rat: "Virtue ethics emphasizes developing good character traits like compassion, honesty, and courage." },
+  { unit: "Unit III", q: "A nurse spends equal time caring for an uncooperative patient and a cooperative patient. This fulfills:", opts: ["Justice", "Autonomy", "Paternalism", "Veracity"], ans: 0, rat: "Justice demands equal, non-judgmental care for all patients." },
+  { unit: "Unit III", q: "When a nurse advocates for a patient who cannot speak for themselves, which ethical principle is primarily supported?", opts: ["Beneficence and Autonomy", "Ethical Egoism", "Paternalism", "Strict Utilitarianism"], ans: 0, rat: "Advocacy protects patient autonomy and secures their best interests (beneficence)." },
 
-  // Unit IV
-  { unit: "Unit IV", q: "What is the primary role of the nurse when obtaining informed consent for surgery?", opts: ["Explaining surgical risks and benefits", "Witnessing the client's signature and confirming capacity", "Selecting the surgical intervention", "Obtaining legal power of attorney"], ans: 1, rat: "Physicians explain procedures; nurses act as witnesses to signature and voluntary consent." },
-  { unit: "Unit IV", q: "If a client expresses total confusion regarding a procedure prior to signing consent, the nurse must:", opts: ["Explain the procedure and sign as witness", "Hold the form and notify the surgeon immediately", "Ask a family member to sign", "Proceed assuming implied consent"], ans: 1, rat: "Nurses must ensure client comprehension before witnessing signatures; physicians must re-explain." },
-  { unit: "Unit IV", q: "Informed consent requires four key elements: Disclosure, Voluntariness, Competence, and:", opts: ["Comprehension", "Paternalism", "Negligence", "Coercion"], ans: 0, rat: "Clients must comprehend information free of complex medical jargon." },
-  { unit: "Unit IV", q: "An emergency treatment performed on an unconscious patient without explicit consent falls under:", opts: ["Informed consent", "Implied consent", "Proxy consent", "Breach of autonomy"], ans: 1, rat: "Life-threatening emergencies invoke implied consent when surrogate decision-makers are unavailable." },
-  { unit: "Unit IV", q: "A nurse is legally permitted to breach patient confidentiality under which circumstance?", opts: ["Request from a close neighbor", "Duty to warn regarding explicit threats to harm others", "Hospital financial audit", "Media inquiries"], ans: 1, rat: "Mandatory reporting applies to abuse, communicable diseases, or clear danger to self/others." },
-  { unit: "Unit IV", q: "Discussing protected health information in a public elevator violates which ethical standard?", opts: ["Veracity", "Confidentiality", "Fidelity", "Justice"], ans: 1, rat: "Confidentiality requires protecting private client data from unauthorized disclosure." },
+  // --- UNIT IV: INFORMED CONSENT & CONFIDENTIALITY (15 MCQs) ---
+  { unit: "Unit IV", q: "Who carries the primary legal responsibility to explain surgical risks, alternatives, and benefits for consent?", opts: ["The surgeon performing the procedure", "The staff nurse", "The unit ward boy", "The hospital pharmacist"], ans: 0, rat: "The healthcare provider performing the procedure must explain the details and obtain informed consent." },
+  { unit: "Unit IV", q: "What is the nurse's primary role when witnessing an informed consent form signature?", opts: ["Confirming the signature is authentic and the client appears competent and voluntary", "Explaining the surgical technique", "Guaranteeing zero surgical complications", "Signing on behalf of the family"], ans: 0, rat: "The nurse witnesses the client's signature, voluntariness, and legal capacity." },
+  { unit: "Unit IV", q: "An unconscious patient arrives at the ER following a severe collision. Immediate surgery is performed without consent under:", opts: ["Implied Consent", "Expressed Consent", "Proxy Consent", "Informal Consent"], ans: 0, rat: "Emergency treatment to save life or limb assumes implied consent if the patient cannot speak." },
+  { unit: "Unit IV", q: "Informed consent requires four key elements: Voluntariness, Capacity, Information Disclosure, and:", opts: ["Comprehension", "Payment", "Hospital Approval", "Police NOC"], ans: 0, rat: "The client must fully understand the information presented to give valid consent." },
+  { unit: "Unit IV", q: "A nurse posts a photo of a rare wound on social media without revealing the patient's name. Is this ethical?", opts: ["No, it violates confidentiality and patient privacy standards", "Yes, as long as the name is omitted", "Yes, if posted for educational purposes", "Yes, if the patient is discharged"], ans: 0, rat: "Posting patient photos on social media breaches privacy and confidentiality regardless of naming." },
+  { unit: "Unit IV", q: "Under which condition can a nurse legally break patient confidentiality without consent?", opts: ["Suspected child abuse or explicit threat of harm to self/others", "When a family member asks nicely", "When a neighbor inquires", "When news reporters call"], ans: 0, rat: "Mandatory reporting applies to cases of abuse, dangerous communicable diseases, or clear threats of violence." },
+  { unit: "Unit IV", q: "A client who is fully conscious, competent, and oriented refuses life-saving surgery. What must the healthcare team do?", opts: ["Respect the client's refusal and document the discussion", "Perform the surgery anyway", "Sedate the patient secretly", "Call the police to force consent"], ans: 0, rat: "Competent adults retain the absolute right to refuse any treatment." },
+  { unit: "Unit IV", q: "A visitor asks the nurse about a patient's diagnosis. The nurse checks the chart and sees no authorization listed. The nurse should:", opts: ["Politely state that information cannot be disclosed without patient authorization", "Share the full medical report", "Tell the visitor to read the chart", "Lie about the diagnosis"], ans: 0, rat: "Confidentiality prohibits sharing health details with unauthorized third parties." },
+  { unit: "Unit IV", q: "A patient signs a consent form but later says, 'I changed my mind. I don't want the operation.' The nurse's first action is:", opts: ["Stop prep and notify the surgeon immediately", "Tell the patient it is too late to change their mind", "Force the patient into the operating room", "Ignore the statement"], ans: 0, rat: "Consent can be withdrawn at any time prior to the procedure." },
+  { unit: "Unit IV", q: "Informed consent given by a parent or legal guardian for a minor child is legally termed:", opts: ["Proxy / Surrogate Consent", "Direct Consent", "Implied Consent", "Coerced Consent"], ans: 0, rat: "Parents give surrogate or proxy consent for minor children." },
+  { unit: "Unit IV", q: "A nurse discusses a patient's medical case in a busy hospital cafeteria. This represents:", opts: ["A breach of confidentiality", "Proper professional inter-consultation", "Utilitarian practice", "Standard handoff communication"], ans: 0, rat: "Discussing private patient information in public areas violates confidentiality laws." },
+  { unit: "Unit IV", q: "Which patient condition renders a signed consent form legally invalid?", opts: ["The patient received heavy preoperative narcotic sedation 10 minutes ago", "The patient is nervous", "The patient is 65 years old", "The patient has a minor fever"], ans: 0, rat: "Sedative medications impair mental capacity, making consent invalid." },
+  { unit: "Unit IV", q: "A nurse accesses the medical records of a famous celebrity admitted to another ward out of curiosity. This is:", opts: ["An illegal and unethical privacy violation", "Acceptable if kept private", "Permitted for learning purposes", "Standard nursing practice"], ans: 0, rat: "Accessing charts without a direct 'need to know' for care delivery violates privacy laws." },
+  { unit: "Unit IV", q: "Which document legally allows a designated person to make healthcare decisions if a patient becomes incapacitated?", opts: ["Durable Power of Attorney for Healthcare", "Hospital Admission Form", "Nightingale Oath", "PNC Registration"], ans: 0, rat: "A Durable Power of Attorney appoints a proxy decision-maker for healthcare." },
+  { unit: "Unit IV", q: "True informed consent requires that choices are made without pressure or manipulation. This element is:", opts: ["Voluntariness", "Competence", "Disclosure", "Paternalism"], ans: 0, rat: "Voluntariness ensures decisions are made freely without coercion." },
 
-  // Unit V
-  { unit: "Unit V", q: "Entitlements backed and directly enforced by national or state laws are classified as:", opts: ["Moral Rights", "Legal Rights", "Welfare Rights", "Option Rights"], ans: 1, rat: "Legal rights are statutory protections enforced by governmental law." },
-  { unit: "Unit V", q: "A patient's entitlement to receive clean water and basic emergency stabilization is a:", opts: ["Legal Right", "Option Right", "Welfare Right", "Moral Right"], ans: 2, rat: "Welfare rights guarantee access to essential life-sustaining resources." },
-  { unit: "Unit V", q: "A mentally competent adult client decides to leave the hospital Against Medical Advice (AMA). This exercises:", opts: ["Welfare Right", "Option/Choice Right", "Paternalistic Right", "Legal Immunity"], ans: 1, rat: "Option rights grant individuals freedom of choice, including refusing care." },
-  { unit: "Unit V", q: "The primary responsibility of a nurse as a Patient Advocate regarding patient rights is to:", opts: ["Make decisions for vulnerable clients", "Ensure clients understand rights and prevent coercion", "Enforce institutional financial policies", "Support physician authority over patient choices"], ans: 1, rat: "Advocacy protects patient autonomy and guarantees informed decision-making." },
-  { unit: "Unit V", q: "Which document formalizes the entitlements and guarantees clients possess within a hospital?", opts: ["Nightingale Pledge", "Patient's Bill of Rights", "Scope of Nursing Practice", "Hospital Invoice"], ans: 1, rat: "The Patient's Bill of Rights defines standards of care and guarantees." },
+  // --- UNIT V: PATIENT RIGHTS & ADVOCACY (12 MCQs) ---
+  { unit: "Unit V", q: "Rights guaranteed and enforced by government legislation and constitutional laws are:", opts: ["Legal Rights", "Moral Rights", "Option Rights", "Customary Rights"], ans: 0, rat: "Legal rights carry statutory backing and judicial enforcement." },
+  { unit: "Unit V", q: "A patient's basic right to clean water, food, and basic emergency care is an example of a:", opts: ["Welfare Right", "Option Right", "Property Right", "Administrative Right"], ans: 0, rat: "Welfare rights guarantee basic essential needs for human survival and health." },
+  { unit: "Unit V", q: "The right of a patient to choose their own doctor or refuse a recommended medication is an example of an:", opts: ["Option / Choice Right", "Welfare Right", "Institutional Right", "Executive Right"], ans: 0, rat: "Option rights grant individuals freedom of personal choice." },
+  { unit: "Unit V", q: "What is the primary role of a nurse serving as a Patient Advocate?", opts: ["Protecting patient rights and supporting their informed choices", "Enforcing hospital administration rules", "Defending doctor's decisions against patient complaints", "Managing hospital finances"], ans: 0, rat: "Advocacy focuses on safeguarding client autonomy, rights, and safety." },
+  { unit: "Unit V", q: "A client wants to leave the hospital Against Medical Advice (AMA). The nurse's correct response is:", opts: ["Inform them of risks, request they sign an AMA form, and facilitate safe discharge", "Lock the ward door", "Call security to restrain the patient", "Refuse to give back their personal belongings"], ans: 0, rat: "Competent adults have the right to leave AMA after being informed of potential health risks." },
+  { unit: "Unit V", q: "Restraining a competent patient who demands to leave the hospital could lead to legal charges of:", opts: ["False Imprisonment and Battery", "Negligence", "Defamation", "Beneficence"], ans: 0, rat: "Detaining a competent patient against their will constitutes false imprisonment." },
+  { unit: "Unit V", q: "The Patient's Bill of Rights guarantees which of the following?", opts: ["Right to respectful care, privacy, and full treatment information", "Guarantee of absolute recovery", "Free private hospital rooms for everyone", "Right to demand inappropriate drugs"], ans: 0, rat: "The Bill of Rights outlines respectful treatment, privacy, consent, and access to records." },
+  { unit: "Unit V", q: "A vulnerable elderly client with mild confusion is pushed by family members to sell property. The nurse should:", opts: ["Report suspected elder exploitation to social services and supervisor", "Ignore family business", "Help the family sign the papers", "Ask for a financial cut"], ans: 0, rat: "Nurses must advocate for vulnerable clients facing coercion or abuse." },
+  { unit: "Unit V", q: "Advocacy requires nurses to remain objective. This means the nurse should:", opts: ["Support the patient's choices even when personal opinions differ", "Force the patient to follow the nurse's moral beliefs", "Always side with the hospital management", "Avoid talking to the patient"], ans: 0, rat: "Objective advocacy centers on patient preferences, not personal values." },
+  { unit: "Unit V", q: "A patient requests a copy of their medical record. According to patient rights guidelines, the hospital should:", opts: ["Provide access or copies according to established institutional policy", "Deny access completely", "Destroy the record", "Charge an excessive penalty fee"], ans: 0, rat: "Patients generally maintain the legal right to inspect and receive copies of their health records." },
+  { unit: "Unit V", q: "A nurse notices a doctor using unsterilized equipment during a minor bedside procedure. The nurse's advocacy step is:", opts: ["Stop the procedure immediately and provide sterile equipment", "Wait until the procedure finishes then complain", "Say nothing to avoid conflict", "Document it quietly later"], ans: 0, rat: "Immediate intervention protects the patient from harm and infection risks." },
+  { unit: "Unit V", q: "Which group of patients requires the highest level of nursing advocacy due to vulnerability?", opts: ["Pediatric, unconscious, or cognitively impaired clients", "Healthy young adults undergoing elective checkups", "Hospital board members", "Outpatient clinic visitors"], ans: 0, rat: "Incapacitated or vulnerable groups cannot self-advocate and rely heavily on nursing protection." },
 
-  // Unit VI
-  { unit: "Unit VI", q: "A Code of Ethics serves primarily as a:", opts: ["Legally binding criminal code", "Formal framework guiding professional ethical conduct", "Financial management guide", "Institutional employment contract"], ans: 1, rat: "Codes of ethics articulate professional values and standards of conduct." },
-  { unit: "Unit VI", q: "Which regulatory body establishes national statutory standards and licensing for nurses in Pakistan?", opts: ["International Council of Nurses (ICN)", "Pakistan Nursing Council (PNC)", "World Health Organization (WHO)", "Ministry of Finance"], ans: 1, rat: "The PNC is the statutory regulatory authority governing nursing licensing in Pakistan." },
-  { unit: "Unit VI", q: "How many fundamental elements structure the International Council of Nurses (ICN) Code?", opts: ["3 Elements", "4 Elements", "6 Elements", "8 Elements"], ans: 1, rat: "The ICN Code covers: Nurses & People, Practice, Profession, and Co-workers." },
-  { unit: "Unit VI", q: "According to the ICN Code, the nurse's primary responsibility is to:", opts: ["The physician", "People requiring care", "The healthcare institution", "Professional associations"], ans: 1, rat: "The patient/people requiring care remain the primary ethical obligation." },
-  { unit: "Unit VI", q: "Violation of the PNC Code of Ethics may result in professional disciplinary action such as:", opts: ["Civil imprisonment", "Suspension or revocation of nursing license", "Financial audit", "Automatic reassignment"], ans: 1, rat: "Regulatory bodies hold statutory power to revoke practice licenses." },
+  // --- UNIT VI: CODE OF ETHICS & REGULATORY BODIES (12 MCQs) ---
+  { unit: "Unit VI", q: "A Code of Ethics for nurses serves primarily as:", opts: ["A formal statement of the profession's values, duties, and ethical standards", "A list of salary rates", "A textbook on anatomy", "A criminal law manual"], ans: 0, rat: "A code of ethics articulates professional expectations and core values." },
+  { unit: "Unit VI", q: "Which regulatory authority in Pakistan governs nursing education, registration, and professional licensing?", opts: ["Pakistan Nursing and Midwifery Council (PNMC / PNC)", "World Health Organization (WHO)", "Ministry of Finance", "College of Physicians and Surgeons"], ans: 0, rat: "The PNC (now PNMC) is the statutory body regulating nursing practice in Pakistan." },
+  { unit: "Unit VI", q: "How many principal elements structure the International Council of Nurses (ICN) Code of Ethics?", opts: ["4 Elements (Nurses & People, Practice, Profession, Co-workers)", "2 Elements", "6 Elements", "10 Elements"], ans: 0, rat: "The ICN Code is structured around four fundamental pillars." },
+  { unit: "Unit VI", q: "According to the ICN Code, the nurse's primary professional responsibility is to:", opts: ["People who require nursing care", "Hospital administrators", "Attending physicians", "Pharmaceutical companies"], ans: 0, rat: "The patient/individual requiring care is the primary focus of nursing ethics." },
+  { unit: "Unit VI", q: "If a registered nurse in Pakistan violates professional ethical codes severe enough to harm a patient, the PNC can:", opts: ["Suspend or revoke the nurse's practice license", "Impose death penalty", "Confiscate personal property", "Close the hospital permanently"], ans: 0, rat: "Regulatory councils hold statutory authority to suspend or cancel practice licenses." },
+  { unit: "Unit VI", q: "The ICN Code states that nurses must maintain personal health to ensure that their ability to provide care is not impaired. This relates to:", opts: ["Nurses and Practice", "Nurses and Co-workers", "Nurses and Society", "Nurses and Politics"], ans: 0, rat: "Maintaining personal fitness and competence falls under the 'Nurses and Practice' element." },
+  { unit: "Unit VI", q: "Which international organization first adopted the global Code of Ethics for Nurses?", opts: ["International Council of Nurses (ICN)", "United Nations (UN)", "Red Cross", "American Medical Association"], ans: 0, rat: "The ICN established the foundational global nursing code of ethics in 1953." },
+  { unit: "Unit VI", q: "A nurse notices a colleague stealing controlled narcotic substances from the ward supply. Under the Code of Ethics, the nurse must:", opts: ["Report the theft through official channels to protect patient care and safety", "Cover up for the colleague", "Keep half the drugs", "Ignore it unless someone dies"], ans: 0, rat: "Ethical codes mandate reporting impaired or illegal practices that endanger care." },
+  { unit: "Unit VI", q: "Which obligation is included in the PNC Code of Conduct regarding professional development?", opts: ["Maintaining continuous professional learning and practice competence", "Working without breaks", "Avoiding further studies", "Following non-evidence-based methods"], ans: 0, rat: "Continuous learning and maintaining competence are core regulatory expectations." },
+  { unit: "Unit VI", q: "Cooperating with co-workers and respecting team members to safeguard patient care represents which ICN element?", opts: ["Nurses and Co-workers", "Nurses and People", "Nurses and Laws", "Nurses and Research"], ans: 0, rat: "The 'Nurses and Co-workers' section governs collaborative interprofessional relationships." },
+  { unit: "Unit VI", q: "Professional self-regulation means that the nursing profession:", opts: ["Establishes its own standards of practice, education, and ethical codes", "Operates without government oversight", "Allows anyone to practice nursing", "Refuses outside audits"], ans: 0, rat: "Self-regulation empowers the profession to define standards and hold members accountable." },
+  { unit: "Unit VI", q: "What is the relation between the PNC Code of Ethics and hospital policy?", opts: ["PNC code sets national baseline professional standards that hospital policies must respect", "Hospital policies override PNC codes completely", "PNC code only applies to students", "Hospital policy replaces national law"], ans: 0, rat: "Statutory council codes establish overarching legal and ethical practice boundaries." },
 
-  // Unit VII
-  { unit: "Unit VII", q: "Professional autonomy in nursing refers to:", opts: ["Practicing without adherence to clinical standards", "Freedom and authority to make independent clinical decisions within scope", "Ignoring interprofessional input", "Formulating hospital policy independently"], ans: 1, rat: "Autonomy grants authority for evidence-based decision making within scope of practice." },
-  { unit: "Unit VII", q: "Being answerable to oneself, patients, society, and regulatory bodies for clinical actions is:", opts: ["Autonomy", "Accountability", "Authority", "Altruism"], ans: 1, rat: "Accountability is inseparable from professional autonomy." },
-  { unit: "Unit VII", q: "Nursing practice standards describe:", opts: ["Minimum technical and ethical competence expected of a competent nurse", "Hospital financial protocols", "Physician directives", "Personal moral preferences"], ans: 0, rat: "Standards establish authoritative levels of quality in patient care." },
-  { unit: "Unit VII", q: "Solidarity among nurses through professional organizations to advance rights and practice standards is:", opts: ["Professional Unity", "Collective bargaining", "Autonomy", "Paternalism"], ans: 0, rat: "Unity consolidates professional impact on public health policy and practice." },
+  // --- UNIT VII: AUTONOMY, ACCOUNTABILITY & PROFESSIONAL STANDARDS (13 MCQs) ---
+  { unit: "Unit VII", q: "Professional autonomy in nursing is best defined as:", opts: ["The independent authority to make clinical judgments within the nursing scope of practice", "Doing whatever the nurse wants without rules", "Practicing without a license", "Refusing doctor orders routine care"], ans: 0, rat: "Autonomy grants authority to make independent clinical decisions within legal scope." },
+  { unit: "Unit VII", q: "Responsibility refers to carrying out duties, whereas Accountability means:", opts: ["Being answerable for the outcomes of those actions and choices", "Blaming others for mistakes", "Receiving a paycheck", "Delegating all tasks"], ans: 0, rat: "Accountability means accepting final responsibility for consequences of decisions." },
+  { unit: "Unit VII", q: "A staff nurse delegates vital sign measurement to an unlicensed nursing assistant (NA). The NA records incorrect data. Who remains legally accountable for evaluating the patient?", opts: ["The registered nurse who delegated the task", "Only the nursing assistant", "The hospital director", "The patient"], ans: 0, rat: "Nurses can delegate tasks, but retain ultimate accountability for assessment and evaluation." },
+  { unit: "Unit VII", q: "Minimum authoritative statements that describe the quality and expectations of nursing care are:", opts: ["Standards of Nursing Practice", "Job Advertisements", "Hospital Marketing Brochures", "Personal Opinions"], ans: 0, rat: "Standards of practice define mandatory professional performance metrics." },
+  { unit: "Unit VII", q: "A nurse refuses to perform a procedure they have never been trained to perform safely. This action reflects:", opts: ["Professional responsibility and commitment to patient safety", "Insubordination", "Laziness", "Lack of care"], ans: 0, rat: "Recognizing personal boundaries prevents harm and aligns with ethical competence." },
+  { unit: "Unit VII", q: "The term 'Scope of Nursing Practice' defines:", opts: ["The legal boundaries, activities, and responsibilities a licensed nurse is authorized to perform", "The hospital floor map", "The number of hours a nurse works", "The nurse's salary scale"], ans: 0, rat: "Scope of practice sets legal boundaries for clinical actions authorized by license." },
+  { unit: "Unit VII", q: "When nurses unite through professional associations to advocate for safe working conditions, they demonstrate:", opts: ["Professional Solidarity and Collective Voice", "Illegal union strikes", "Paternalism", "Negligence"], ans: 0, rat: "Solidarity strengthens the collective impact of the profession on public health and safety." },
+  { unit: "Unit VII", q: "Which step is essential before delegating any nursing care task to an assistant?", opts: ["Assessing the patient's stability and confirming the assistant's competence", "Ensuring the doctor is away", "Asking the patient for permission", "Filing a legal contract"], ans: 0, rat: "Safe delegation requires evaluating task complexity, patient stability, and staff competency." },
+  { unit: "Unit VII", q: "A nurse reviews evidence-based clinical guidelines before dressing a complex surgical wound. This demonstrates:", opts: ["Evidence-Based Practice and Professional Standard Adherence", "Trial-and-error nursing", "Subjective care", "Paternalistic practice"], ans: 0, rat: "Applying research-backed guidelines ensures standard, quality-driven clinical care." },
+  { unit: "Unit VII", q: "Accountability in nursing applies to:", opts: ["Direct patient care, delegation, documentation, and professional conduct", "Only medication administration", "Only shift handovers", "Tasks assigned by doctors only"], ans: 0, rat: "Accountability extends to all domains of professional nursing performance." },
+  { unit: "Unit VII", q: "If a nurse encounters an unclear medication prescription with a dangerously high dose, the nurse must:", opts: ["Withhold the drug and clarify the order directly with the prescribing physician", "Administer half the dose", "Give the drug as written", "Ask another nurse to sign it"], ans: 0, rat: "Nurses are accountable for evaluating orders for safety before administration." },
+  { unit: "Unit VII", q: "What is the primary objective of clinical audits and quality assurance programs in nursing?", opts: ["Evaluating clinical practice against professional standards to improve care quality", "Punishing staff nurses financially", "Reducing nursing staff numbers", "Increasing patient fees"], ans: 0, rat: "Clinical audits assess compliance with standards to elevate safety and quality." },
+  { unit: "Unit VII", q: "An autonomous nurse identifies a change in a post-op patient's condition, initiates elevation of the head of bed, and administers oxygen under standing protocols. This displays:", opts: ["Independent Nursing Judgment", "Unauthorized practice", "Malpractice", "Medical diagnosis"], ans: 0, rat: "Executing independent protocols based on clinical assessment highlights autonomy." },
 
-  // Unit VIII
-  { unit: "Unit VIII", q: "Failure to act as a reasonably prudent nurse would under similar circumstances causing harm is:", opts: ["Malpractice", "Negligence", "Assault", "Battery"], ans: 1, rat: "Negligence is an unintentional failure to exercise reasonable standard care." },
-  { unit: "Unit VIII", q: "Professional negligence that specifically involves failure to meet standard professional skills is:", opts: ["Slander", "Malpractice", "Breach of confidentiality", "Libel"], ans: 1, rat: "Malpractice is specialized professional negligence leading to injury." },
-  { unit: "Unit VIII", q: "How many legal elements must be proven simultaneously to establish nursing malpractice?", opts: ["2 Elements", "3 Elements", "4 Elements", "5 Elements"], ans: 2, rat: "All 4 must be proven: Duty, Breach of Duty, Causation, and Injury/Damages." },
-  { unit: "Unit VIII", q: "In legal proceedings, the golden rule regarding nursing documentation is:", opts: ["Oral communication supersedes notes", "If it was not documented, it was not done", "Documentation can be completed anytime post-shift", "Detailed notes are optional"], ans: 1, rat: "Courts hold that undocumented care legally equates to unperformed care." },
-  { unit: "Unit VIII", q: "Administering a medication without performing standard safety checks resulting in toxicity is a:", opts: ["Medication error due to breach of duty", "Acceptable risk", "System error only", "Non-maleficable act"], ans: 0, rat: "Bypassing safety rights violates standard duty, constituting negligence." },
-  { unit: "Unit VIII", q: "When managing Do Not Resuscitate (DNR) directives, the nurse's primary role is to:", opts: ["Advocate for family preference over patient directives", "Ensure patient advance directives and legal orders are respected", "Decide resuscitation status independently", "Encourage aggressive measures regardless"], ans: 1, rat: "Advocacy ensures patient advance directives are honored." },
-  { unit: "Unit VIII", q: "Commercial organ trade is considered legally and ethically unacceptable because it:", opts: ["Promotes voluntary donation", "Exploits vulnerable populations and violates human dignity", "Supports public health", "Encourages altruism"], ans: 1, rat: "Organ sales exploit poverty and violate bioethical standards." },
-  { unit: "Unit VIII", q: "Reporting unsafe institutional staffing ratios or peer substance abuse through formal channels is:", opts: ["Breach of loyalty", "Whistleblowing / Professional advocacy", "Defamation", "Malpractice"], ans: 1, rat: "Whistleblowing protects patient safety from systemic harm." },
-  { unit: "Unit VIII", q: "Failing to maintain fall risk precautions resulting in a patient fracture directly fulfills which element?", opts: ["Causation and Damages", "Paternalism", "Veracity", "Fidelity"], ans: 0, rat: "Direct cause (failure of guardrails) leading to actual damage (fracture)." },
-  { unit: "Unit VIII", q: "An ethics committee is best utilized in clinical practice to:", opts: ["Impose legal penalties on staff", "Provide interprofessional guidance on complex moral dilemmas", "Overrule patient consent", "Replace physician decisions"], ans: 1, rat: "Ethics committees offer structured interdisciplinary consultation." }
+  // --- UNIT VIII: LEGAL ISSUES, MALPRACTICE & BIOETHICS (14 MCQs) ---
+  { unit: "Unit VIII", q: "Unintentional failure to exercise the standard of care that a reasonably prudent nurse would provide in a similar situation resulting in harm is:", opts: ["Negligence", "Battery", "Assault", "Slander"], ans: 0, rat: "Negligence involves failing to perform standard care, causing unintended injury." },
+  { unit: "Unit VIII", q: "Professional negligence committed by a licensed professional that directly causes injury to a patient is termed:", opts: ["Malpractice", "Libel", "Assault", "False Imprisonment"], ans: 0, rat: "Malpractice is specialized professional negligence involving failure to meet standard skills." },
+  { unit: "Unit VIII", q: "How many legal elements must be proven simultaneously to establish a nursing malpractice claim in court?", opts: ["4 Elements (Duty, Breach of Duty, Causation, Damages)", "2 Elements", "6 Elements", "1 Element"], ans: 0, rat: "All 4 legal elements must be established to prove malpractice." },
+  { unit: "Unit VIII", q: "Threatening to give a patient a sedative injection against their will if they do not stay quiet constitutes legal:", opts: ["Assault", "Battery", "Malpractice", "Slander"], ans: 0, rat: "Assault is an intentional act causing reasonable fear of immediate harmful or offensive contact." },
+  { unit: "Unit VIII", q: "Administering a medication injection to a competent patient who explicitly refused it constitutes legal:", opts: ["Battery", "Assault", "Negligence", "Defamation"], ans: 0, rat: "Battery is the actual non-consensual physical touching or treatment of a person." },
+  { unit: "Unit VIII", q: "Writing false, malicious statements about a colleague or patient in a hospital record is classified as:", opts: ["Libel", "Slander", "Battery", "Negligence"], ans: 0, rat: "Libel is written defamation of character (Slander is spoken defamation)." },
+  { unit: "Unit VIII", q: "Spoken false statements that ruin a professional's reputation are classified as:", opts: ["Slander", "Libel", "Assault", "Breach of Contract"], ans: 0, rat: "Slander refers to verbal defamation." },
+  { unit: "Unit VIII", q: "What is the legal standard regarding clinical documentation in healthcare lawsuits?", opts: ["'If it was not documented, it was not done'", "Verbal reports carry equal weight to written charts", "Documentation is optional during busy shifts", "Notes can be edited anytime later"], ans: 0, rat: "Courts hold that unrecorded interventions are legally presumed to have never occurred." },
+  { unit: "Unit VIII", q: "A patient falls out of bed and fractures a hip because the nurse failed to raise bed side-rails as ordered in the fall-risk plan. Which element of malpractice is satisfied by the fracture?", opts: ["Damages / Injury", "Duty", "Breach", "Veracity"], ans: 0, rat: "The fracture represents actual physical damage resulting from the breach." },
+  { unit: "Unit VIII", q: "A valid 'Do Not Resuscitate' (DNR) order means the healthcare team should:", opts: ["Withhold cardiopulmonary resuscitation (CPR) in the event of cardiac or respiratory arrest", "Withhold all food, water, and pain medications", "Discharge the patient immediately", "Provide full aggressive CPR anyway"], ans: 0, rat: "DNR specifically applies to CPR attempts during cardiac/respiratory arrest." },
+  { unit: "Unit VIII", q: "Reporting unsafe hospital conditions, gross negligence, or illegal acts through official internal/external channels is:", opts: ["Whistleblowing", "Defamation", "Breach of Loyalty", "Malpractice"], ans: 0, rat: "Whistleblowing protects public interest by exposing wrongdoing or dangerous practice." },
+  { unit: "Unit VIII", q: "Buying or selling human organs for financial gain is ethically and legally condemned globally because it:", opts: ["Exploits vulnerable populations and commodifies human life", "Increases transplant success", "Helps hospital profits", "Is painless"], ans: 0, rat: "Commercial organ trading violates human dignity and exploits poverty." },
+  { unit: "Unit VIII", q: "What is the primary function of an Institutional Ethics Committee in a hospital?", opts: ["To provide interprofessional guidance and consultation on complex ethical cases", "To sentence negligent staff to prison", "To handle staff salary complaints", "To manage hospital security"], ans: 0, rat: "Ethics committees offer structured advisory consultation on difficult moral dilemmas." },
+  { unit: "Unit VIII", q: "Active Euthanasia (deliberately administering a lethal substance to end life) remains illegal in Pakistan primarily because it violates:", opts: ["Constitutional laws, Islamic jurisprudence, and medical ethics codes", "Hospital budget plans", "International trade laws", "Nursing documentation guidelines"], ans: 0, rat: "Active euthanasia is legally prohibited and violates the sanctity of life principles in Pakistani law and ethics." }
 ];
 
 let questions = [...rawQuestions];
 let currentIndex = 0;
 let userAnswers = new Array(questions.length).fill(null);
-let timerSeconds = 45 * 60;
+let timerSeconds = 60 * 60; // 60 Minutes Countdown
 let timerInterval = null;
 let isReviewMode = false;
 
@@ -288,6 +339,7 @@ function startTimer() {
   timerInterval = setInterval(() => {
     if (timerSeconds <= 0) {
       clearInterval(timerInterval);
+      alert("Time is up! Submitting your exam automatically.");
       submitQuiz();
     } else {
       timerSeconds--;
@@ -330,7 +382,7 @@ function renderQuestion() {
   let rationaleBox = document.getElementById("rationale-box");
   if (isReviewMode) {
     rationaleBox.style.display = "block";
-    rationaleBox.innerHTML = `<strong>Explanation:</strong> ${q.rat}`;
+    rationaleBox.innerHTML = `<strong>Rationale:</strong> ${q.rat}`;
   } else {
     rationaleBox.style.display = "none";
   }
@@ -350,7 +402,7 @@ function nextQuestion() {
     renderQuestion();
   } else {
     if (!isReviewMode) {
-      if (confirm("Are you sure you want to submit your exam?")) {
+      if (confirm("Are you sure you want to submit your 100-MCQ exam?")) {
         submitQuiz();
       }
     } else {
@@ -405,12 +457,11 @@ function reviewAnswers() {
 }
 
 function restartQuiz() {
-  timerSeconds = 45 * 60;
+  timerSeconds = 60 * 60;
   questions = [...rawQuestions];
   initQuiz();
 }
 
-// Start application on load
 window.onload = initQuiz;
 </script>
 
