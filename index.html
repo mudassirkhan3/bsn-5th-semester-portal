@@ -240,6 +240,11 @@
       width: 100%;
     }
 
+    .apply-btn:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+    }
+
     .status-badge {
       padding: 10px;
       border-radius: 10px;
@@ -250,6 +255,7 @@
     }
     .status-locked { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
     .status-approved { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+    .status-loading { background: #f0f9ff; color: #0369a1; border: 1px solid #bae6fd; }
 
     .section-title { 
       font-size: 0.8rem; 
@@ -545,7 +551,7 @@
       <div class="code-input-group" id="regForm">
         <input type="text" id="studentName" placeholder="Your Full Name">
         <input type="email" id="studentEmail" placeholder="Your Email Address">
-        <button class="apply-btn" onclick="handleStudentRegister()">Register / Login</button>
+        <button class="apply-btn" id="regBtn" onclick="handleStudentRegister()">Register / Login</button>
       </div>
 
       <div id="statusNotice"></div>
@@ -716,6 +722,9 @@
 
   <!-- SCRIPT LOGIC -->
   <script>
+    // ⚠️ REPLACE THIS URL WITH YOUR ACTUAL GOOGLE APPS SCRIPT WEB APP URL
+    const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
+
     const ALL_SUBJECTS = ['pediatric', 'reproductive', 'english', 'perls', 'ethics'];
 
     const SUBJECT_PRICES = {
@@ -757,29 +766,49 @@
       if (e.target.id === 'paymentModal') closeModal();
     }
 
-    // STUDENT REGISTRATION & APPROVAL SYSTEM
-    function handleStudentRegister() {
-      const name = document.getElementById('studentName').value.trim();
-      const email = document.getElementById('studentEmail').value.trim().toLowerCase();
+    // STUDENT REGISTRATION & APPROVAL SYSTEM VIA GOOGLE SHEETS
+    async function handleStudentRegister() {
+      const nameInput = document.getElementById('studentName');
+      const emailInput = document.getElementById('studentEmail');
+      const regBtn = document.getElementById('regBtn');
+      const statusNotice = document.getElementById('statusNotice');
+
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim().toLowerCase();
 
       if (!name || !email) {
         alert("Please enter both Name and Email!");
         return;
       }
 
-      let userData = localStorage.getItem('user_' + email);
+      regBtn.disabled = true;
+      statusNotice.className = 'status-badge status-loading';
+      statusNotice.innerHTML = '⏳ Connecting to portal database...';
 
-      if (!userData) {
-        // Register new student - DEFAULT LOCKED 🔒
-        const newUser = { name: name, email: email, status: 'locked', access: [] };
-        localStorage.setItem('user_' + email, JSON.stringify(newUser));
+      try {
+        const response = await fetch(`${SCRIPT_URL}?email=${encodeURIComponent(email)}&name=${encodeURIComponent(name)}`);
+        const data = await response.json();
+
         localStorage.setItem('current_student', email);
-        alert("Registration submitted! Account is pending CR approval.");
-      } else {
-        localStorage.setItem('current_student', email);
+        localStorage.setItem('user_' + email, JSON.stringify(data));
+
+        if (data.status === 'approved') {
+          statusNotice.className = 'status-badge status-approved';
+          statusNotice.innerHTML = `🔓 Welcome back, ${data.name || name}! Your account is APPROVED.`;
+        } else {
+          statusNotice.className = 'status-badge status-locked';
+          statusNotice.innerHTML = `🔒 Welcome, ${data.name || name}! Your registration is recorded. Pending CR approval from Mudassir.`;
+        }
+
+        updateAccessUI();
+      } catch (err) {
+        console.error(err);
+        statusNotice.className = 'status-badge status-locked';
+        statusNotice.innerHTML = `⚠️ Network error. Retrying offline profile...`;
+        updateAccessUI();
+      } finally {
+        regBtn.disabled = false;
       }
-
-      updateAccessUI();
     }
 
     function checkSubjectAccess(event, subjectKey) {
@@ -835,6 +864,14 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
+      const savedEmail = localStorage.getItem('current_student');
+      if (savedEmail) {
+        const savedUser = JSON.parse(localStorage.getItem('user_' + savedEmail));
+        if (savedUser) {
+          document.getElementById('studentEmail').value = savedUser.email || '';
+          document.getElementById('studentName').value = savedUser.name || '';
+        }
+      }
       updateAccessUI();
       document.querySelectorAll('.subject-card.active .card-body').forEach(body => {
         body.style.maxHeight = body.scrollHeight + "px";
