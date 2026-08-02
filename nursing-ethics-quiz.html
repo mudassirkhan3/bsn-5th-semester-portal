@@ -1,1 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSN 5th Semester - Nursing Ethics Master Quiz</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --accent: #16a34a;
+      --accent-hover: #15803d;
+      --accent-light: rgba(22, 163, 74, 0.15);
+      --text: #f8fafc;
+      --text-sub: #94a3b8;
+      --border: #334155;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+    }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding: 20px 12px; min-height: 100vh; }
+    .quiz-container { max-width: 900px; margin: 0 auto; }
+
+    /* Header & Dashboard Navigation */
+    .header-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-top: 5px solid var(--accent);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: #4ade80; text-decoration: none; font-size: 0.85rem; font-weight: 700;
+      margin-bottom: 12px; transition: transform 0.2s;
+    }
+    .back-btn:hover { transform: translateX(-3px); }
+    .title-area h1 { font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .subtitle { color: var(--text-sub); font-size: 0.9rem; }
+
+    /* Exam Stats Bar */
+    .exam-bar {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+      background: #090d16; border: 1px solid var(--border); border-radius: 12px;
+      padding: 12px 20px; margin-top: 16px; gap: 12px;
+    }
+    .timer-badge {
+      display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 1.1rem;
+      color: #fbbf24; background: rgba(251, 191, 36, 0.1); padding: 6px 14px; border-radius: 20px;
+      border: 1px solid rgba(251, 191, 36, 0.2);
+    }
+    .progress-text { font-size: 0.9rem; color: var(--text-sub); font-weight: 600; }
+
+    /* Unit Filters */
+    .filter-scroll {
+      display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 20px;
+    }
+    .filter-btn {
+      background: var(--card-bg); border: 1px solid var(--border); color: var(--text-sub);
+      padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; white-space: nowrap; transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--accent); color: #fff; border-color: var(--accent);
+    }
+
+    /* MCQ Question Card */
+    .q-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px;
+      padding: 24px; margin-bottom: 20px; transition: border-color 0.2s;
+    }
+    .q-meta { display: flex; justify-content: space-between; margin-bottom: 12px; align-items: center; }
+    .q-badge {
+      background: var(--accent-light); color: #4ade80; font-size: 0.75rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 12px; border: 1px solid rgba(74, 222, 128, 0.3);
+    }
+    .q-num { font-size: 0.85rem; color: var(--text-sub); font-weight: 700; }
+    .q-text { font-size: 1.05rem; font-weight: 600; line-height: 1.5; margin-bottom: 18px; color: #fff; }
+
+    /* Options List */
+    .options-grid { display: flex; flex-direction: column; gap: 10px; }
+    .opt-btn {
+      background: #0f172a; border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px 16px; text-align: left; color: #cbd5e1; font-size: 0.92rem;
+      cursor: pointer; display: flex; align-items: center; gap: 12px; transition: all 0.2s;
+    }
+    .opt-btn:hover { border-color: var(--accent); background: #1a2436; color: #fff; }
+    .opt-prefix {
+      width: 26px; height: 26px; border-radius: 50%; background: #1e293b; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; flex-shrink: 0;
+    }
+    .opt-btn.selected { border-color: var(--accent); background: var(--accent-light); color: #fff; }
+    .opt-btn.selected .opt-prefix { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* Rationale Box (Review Mode) */
+    .rationale {
+      margin-top: 16px; padding: 12px 16px; background: rgba(15, 23, 42, 0.8);
+      border-left: 4px solid var(--accent); border-radius: 6px; font-size: 0.85rem; color: #cbd5e1; display: none;
+    }
+
+    /* Action Footer */
+    .controls { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; }
+    .btn-action {
+      background: var(--accent); color: #fff; border: none; padding: 12px 28px;
+      border-radius: 10px; font-weight: 700; cursor: pointer; transition: background 0.2s;
+    }
+    .btn-action:hover { background: var(--accent-hover); }
+
+    /* Results Screen */
+    .results-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px;
+      padding: 32px; text-align: center; display: none;
+    }
+    .score-circle {
+      width: 130px; height: 130px; border-radius: 50%; border: 6px solid var(--accent);
+      margin: 20px auto; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; font-weight: 800; font-size: 1.8rem; color: #fff;
+      background: var(--accent-light);
+    }
+
+    @media (max-width: 600px) {
+      .header-card { padding: 16px; }
+      .q-card { padding: 16px; }
+      .exam-bar { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="quiz-container">
+  
+  <!-- Header Card -->
+  <div class="header-card">
+    <a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/index.html" class="back-btn">← Back to Dashboard</a>
+    <div class="title-area">
+      <h1>BSN 5th Semester • Nursing Ethics Quiz</h1>
+      <p class="subtitle">Interactive Practice Exam covering 50 High-Yield MCQs across all 8 Syllabus Units.</p>
+    </div>
+
+    <div class="exam-bar">
+      <div class="timer-badge">⏱️ <span id="timer-display">45:00</span></div>
+      <div class="progress-text" id="progress-text">Question 1 of 50</div>
+    </div>
+  </div>
+
+  <!-- Unit Filter Buttons -->
+  <div class="filter-scroll">
+    <button class="filter-btn active" onclick="filterUnit('All')">All Units</button>
+    <button class="filter-btn" onclick="filterUnit('Unit I')">Unit I</button>
+    <button class="filter-btn" onclick="filterUnit('Unit II')">Unit II</button>
+    <button class="filter-btn" onclick="filterUnit('Unit III')">Unit III</button>
+    <button class="filter-btn" onclick="filterUnit('Unit IV')">Unit IV</button>
+    <button class="filter-btn" onclick="filterUnit('Unit V')">Unit V</button>
+    <button class="filter-btn" onclick="filterUnit('Unit VI')">Unit VI</button>
+    <button class="filter-btn" onclick="filterUnit('Unit VII')">Unit VII</button>
+    <button class="filter-btn" onclick="filterUnit('Unit VIII')">Unit VIII</button>
+  </div>
+
+  <!-- Quiz Screen -->
+  <div id="quiz-area">
+    <div class="q-card" id="question-card">
+      <div class="q-meta">
+        <span class="q-badge" id="q-unit">Unit I: Intro</span>
+        <span class="q-num" id="q-count">1/50</span>
+      </div>
+      <div class="q-text" id="q-text">Loading question...</div>
+      <div class="options-grid" id="options-container"></div>
+      <div class="rationale" id="rationale-box"></div>
+    </div>
+
+    <div class="controls">
+      <button class="btn-action" style="background:#334155;" id="prev-btn" onclick="prevQuestion()">Previous</button>
+      <button class="btn-action" id="next-btn" onclick="nextQuestion()">Next Question →</button>
+    </div>
+  </div>
+
+  <!-- Results Screen -->
+  <div class="results-card" id="results-screen">
+    <h2 style="font-size:1.8rem;">Exam Completed! 🎉</h2>
+    <p style="color:var(--text-sub); margin-top:6px;">Here is your performance summary for Nursing Ethics:</p>
+    
+    <div class="score-circle" id="score-circle">
+      <span id="score-percent">0%</span>
+      <span style="font-size:0.75rem; color:var(--text-sub); font-weight:normal;">Score</span>
+    </div>
+
+    <p id="score-details" style="font-size:1.1rem; font-weight:700; margin-bottom:20px;"></p>
+
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <button class="btn-action" onclick="restartQuiz()">🔄 Retake Exam</button>
+      <button class="btn-action" style="background:#334155;" onclick="reviewAnswers()">📖 Review Answers</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// 50 High-Yield MCQs across 8 Syllabus Units
+const rawQuestions = [
+  // Unit I
+  { unit: "Unit I", q: "The formal, systematic study of moral beliefs, principles, and conduct distinguishing right from wrong is termed:", opts: ["Morals", "Ethics", "Values", "Attitude"], ans: 1, rat: "Ethics is the formal, theoretical study of moral beliefs, whereas morals are personal or societal standards." },
+  { unit: "Unit I", q: "Which branch of ethics specifically governs moral decisions within the nurse-patient relationship?", opts: ["Bio-Ethics", "Societal Ethics", "Nursing Ethics", "Deontology"], ans: 2, rat: "Nursing ethics is a specialized branch of bioethics governing nurses' moral duties and patient care." },
+  { unit: "Unit I", q: "Enduring personal or professional beliefs about the worth or desirability of an idea or behavior are called:", opts: ["Beliefs", "Attitudes", "Values", "Dilemmas"], ans: 2, rat: "Values direct decision-making based on personal/professional ideals." },
+  { unit: "Unit I", q: "A complex situation where two or more moral principles conflict, forcing a choice between competing duties, is a/an:", opts: ["Ethical Conflict", "Ethical Dilemma", "Moral Distress", "Negligence"], ans: 1, rat: "An ethical dilemma involves conflicting moral principles where choosing one compromises another." },
+  { unit: "Unit I", q: "According to Flexner’s criteria, a key characteristic of a profession applied to nursing is:", opts: ["Informal apprenticeship", "Autonomy & self-regulation", "Individual financial gain", "Unregulated practice"], ans: 1, rat: "Professions maintain self-regulation, independent standards, and licensing bodies like the PNC." },
+  { unit: "Unit I", q: "Which trait ensures a nurse takes direct responsibility for clinical actions, omissions, and decisions?", opts: ["Compassion", "Altruism", "Accountability", "Veracity"], ans: 2, rat: "Accountability means being answerable for outcomes resulting from clinical decisions." },
+
+  // Unit II
+  { unit: "Unit II", q: "The reflective process by which individuals examine and understand their own values is known as:", opts: ["Moralizing", "Value Clarification", "Laissez-Faire", "Modeling"], ans: 1, rat: "Value clarification allows nurses to recognize personal biases and separate them from clinical care." },
+  { unit: "Unit II", q: "Teaching a strict set of values directly without allowing the individual to question options is:", opts: ["Modeling", "Laissez-Faire", "Moralizing", "Responsible Choice"], ans: 2, rat: "Moralizing dictates values directly, leaving no room for critical evaluation." },
+  { unit: "Unit II", q: "Which mode of value transmission is considered most effective for mature decision-making?", opts: ["Reward and Punishment", "Moralizing", "Responsible Choice", "Laissez-Faire"], ans: 2, rat: "Responsible choice encourages exploring options and evaluating consequences independently." },
+  { unit: "Unit II", q: "Which essential AACN professional value refers to unselfish concern for the welfare of clients?", opts: ["Social Justice", "Altruism", "Human Dignity", "Autonomy"], ans: 1, rat: "Altruism is dedication to the health and well-being of others without self-interest." },
+  { unit: "Unit II", q: "Unresolved value conflicts between personal beliefs and patient care lead primarily to:", opts: ["Clinical autonomy", "Moral distress and burnout", "Improved advocacy", "Legal protection"], ans: 1, rat: "Compromising core values without resolution causes severe moral distress and burnout." },
+  { unit: "Unit II", q: "Respecting the inherent worth and unique value of every individual client reflects which AACN value?", opts: ["Human Dignity", "Integrity", "Altruism", "Justice"], ans: 0, rat: "Human dignity mandates respectful care for all individuals regardless of background." },
+
+  // Unit III
+  { unit: "Unit III", q: "Kantian ethical theory (Deontology) states that an action is right or wrong based on:", opts: ["Consequences and outcomes", "Intrinsic moral duties and rules", "Personal character traits", "Relational empathy"], ans: 1, rat: "Deontology focuses on strict moral duties rather than the consequences produced." },
+  { unit: "Unit III", q: "Utilitarianism evaluates the morality of an action based on:", opts: ["The greatest good for the greatest number", "Absolute universal rules", "Nurse intuition", "Institutional policy"], ans: 0, rat: "Utilitarianism maximizes utility and positive outcomes for the majority." },
+  { unit: "Unit III", q: "A nurse double-checks high-alert medication doses before administration to prevent harm. This applies:", opts: ["Beneficence", "Non-Maleficence", "Fidelity", "Veracity"], ans: 1, rat: "Non-maleficence means 'above all, do no harm' (Primum non-nocere)." },
+  { unit: "Unit III", q: "Turning an immobile client every 2 hours to prevent pressure ulcers represents which principle?", opts: ["Autonomy", "Beneficence", "Justice", "Veracity"], ans: 1, rat: "Beneficence involves active interventions performed for the well-being of clients." },
+  { unit: "Unit III", q: "Emergency room triage based strictly on clinical priority rather than financial status illustrates:", opts: ["Fidelity", "Justice", "Veracity", "Autonomy"], ans: 1, rat: "Justice mandates fair, non-discriminatory allocation of healthcare resources." },
+  { unit: "Unit III", q: "Evaluating pain 30 minutes after medication administration as promised to the patient upholds:", opts: ["Veracity", "Fidelity", "Autonomy", "Non-Maleficence"], ans: 1, rat: "Fidelity is maintaining loyalty, keeping promises, and honoring commitments." },
+  { unit: "Unit III", q: "Answering a patient's direct question honestly about potential surgical risks demonstrates:", opts: ["Veracity", "Fidelity", "Beneficence", "Justice"], ans: 0, rat: "Veracity is the absolute obligation to tell the truth without deception." },
+
+  // Unit IV
+  { unit: "Unit IV", q: "What is the primary role of the nurse when obtaining informed consent for surgery?", opts: ["Explaining surgical risks and benefits", "Witnessing the client's signature and confirming capacity", "Selecting the surgical intervention", "Obtaining legal power of attorney"], ans: 1, rat: "Physicians explain procedures; nurses act as witnesses to signature and voluntary consent." },
+  { unit: "Unit IV", q: "If a client expresses total confusion regarding a procedure prior to signing consent, the nurse must:", opts: ["Explain the procedure and sign as witness", "Hold the form and notify the surgeon immediately", "Ask a family member to sign", "Proceed assuming implied consent"], ans: 1, rat: "Nurses must ensure client comprehension before witnessing signatures; physicians must re-explain." },
+  { unit: "Unit IV", q: "Informed consent requires four key elements: Disclosure, Voluntariness, Competence, and:", opts: ["Comprehension", "Paternalism", "Negligence", "Coercion"], ans: 0, rat: "Clients must comprehend information free of complex medical jargon." },
+  { unit: "Unit IV", q: "An emergency treatment performed on an unconscious patient without explicit consent falls under:", opts: ["Informed consent", "Implied consent", "Proxy consent", "Breach of autonomy"], ans: 1, rat: "Life-threatening emergencies invoke implied consent when surrogate decision-makers are unavailable." },
+  { unit: "Unit IV", q: "A nurse is legally permitted to breach patient confidentiality under which circumstance?", opts: ["Request from a close neighbor", "Duty to warn regarding explicit threats to harm others", "Hospital financial audit", "Media inquiries"], ans: 1, rat: "Mandatory reporting applies to abuse, communicable diseases, or clear danger to self/others." },
+  { unit: "Unit IV", q: "Discussing protected health information in a public elevator violates which ethical standard?", opts: ["Veracity", "Confidentiality", "Fidelity", "Justice"], ans: 1, rat: "Confidentiality requires protecting private client data from unauthorized disclosure." },
+
+  // Unit V
+  { unit: "Unit V", q: "Entitlements backed and directly enforced by national or state laws are classified as:", opts: ["Moral Rights", "Legal Rights", "Welfare Rights", "Option Rights"], ans: 1, rat: "Legal rights are statutory protections enforced by governmental law." },
+  { unit: "Unit V", q: "A patient's entitlement to receive clean water and basic emergency stabilization is a:", opts: ["Legal Right", "Option Right", "Welfare Right", "Moral Right"], ans: 2, rat: "Welfare rights guarantee access to essential life-sustaining resources." },
+  { unit: "Unit V", q: "A mentally competent adult client decides to leave the hospital Against Medical Advice (AMA). This exercises:", opts: ["Welfare Right", "Option/Choice Right", "Paternalistic Right", "Legal Immunity"], ans: 1, rat: "Option rights grant individuals freedom of choice, including refusing care." },
+  { unit: "Unit V", q: "The primary responsibility of a nurse as a Patient Advocate regarding patient rights is to:", opts: ["Make decisions for vulnerable clients", "Ensure clients understand rights and prevent coercion", "Enforce institutional financial policies", "Support physician authority over patient choices"], ans: 1, rat: "Advocacy protects patient autonomy and guarantees informed decision-making." },
+  { unit: "Unit V", q: "Which document formalizes the entitlements and guarantees clients possess within a hospital?", opts: ["Nightingale Pledge", "Patient's Bill of Rights", "Scope of Nursing Practice", "Hospital Invoice"], ans: 1, rat: "The Patient's Bill of Rights defines standards of care and guarantees." },
+
+  // Unit VI
+  { unit: "Unit VI", q: "A Code of Ethics serves primarily as a:", opts: ["Legally binding criminal code", "Formal framework guiding professional ethical conduct", "Financial management guide", "Institutional employment contract"], ans: 1, rat: "Codes of ethics articulate professional values and standards of conduct." },
+  { unit: "Unit VI", q: "Which regulatory body establishes national statutory standards and licensing for nurses in Pakistan?", opts: ["International Council of Nurses (ICN)", "Pakistan Nursing Council (PNC)", "World Health Organization (WHO)", "Ministry of Finance"], ans: 1, rat: "The PNC is the statutory regulatory authority governing nursing licensing in Pakistan." },
+  { unit: "Unit VI", q: "How many fundamental elements structure the International Council of Nurses (ICN) Code?", opts: ["3 Elements", "4 Elements", "6 Elements", "8 Elements"], ans: 1, rat: "The ICN Code covers: Nurses & People, Practice, Profession, and Co-workers." },
+  { unit: "Unit VI", q: "According to the ICN Code, the nurse's primary responsibility is to:", opts: ["The physician", "People requiring care", "The healthcare institution", "Professional associations"], ans: 1, rat: "The patient/people requiring care remain the primary ethical obligation." },
+  { unit: "Unit VI", q: "Violation of the PNC Code of Ethics may result in professional disciplinary action such as:", opts: ["Civil imprisonment", "Suspension or revocation of nursing license", "Financial audit", "Automatic reassignment"], ans: 1, rat: "Regulatory bodies hold statutory power to revoke practice licenses." },
+
+  // Unit VII
+  { unit: "Unit VII", q: "Professional autonomy in nursing refers to:", opts: ["Practicing without adherence to clinical standards", "Freedom and authority to make independent clinical decisions within scope", "Ignoring interprofessional input", "Formulating hospital policy independently"], ans: 1, rat: "Autonomy grants authority for evidence-based decision making within scope of practice." },
+  { unit: "Unit VII", q: "Being answerable to oneself, patients, society, and regulatory bodies for clinical actions is:", opts: ["Autonomy", "Accountability", "Authority", "Altruism"], ans: 1, rat: "Accountability is inseparable from professional autonomy." },
+  { unit: "Unit VII", q: "Nursing practice standards describe:", opts: ["Minimum technical and ethical competence expected of a competent nurse", "Hospital financial protocols", "Physician directives", "Personal moral preferences"], ans: 0, rat: "Standards establish authoritative levels of quality in patient care." },
+  { unit: "Unit VII", q: "Solidarity among nurses through professional organizations to advance rights and practice standards is:", opts: ["Professional Unity", "Collective bargaining", "Autonomy", "Paternalism"], ans: 0, rat: "Unity consolidates professional impact on public health policy and practice." },
+
+  // Unit VIII
+  { unit: "Unit VIII", q: "Failure to act as a reasonably prudent nurse would under similar circumstances causing harm is:", opts: ["Malpractice", "Negligence", "Assault", "Battery"], ans: 1, rat: "Negligence is an unintentional failure to exercise reasonable standard care." },
+  { unit: "Unit VIII", q: "Professional negligence that specifically involves failure to meet standard professional skills is:", opts: ["Slander", "Malpractice", "Breach of confidentiality", "Libel"], ans: 1, rat: "Malpractice is specialized professional negligence leading to injury." },
+  { unit: "Unit VIII", q: "How many legal elements must be proven simultaneously to establish nursing malpractice?", opts: ["2 Elements", "3 Elements", "4 Elements", "5 Elements"], ans: 2, rat: "All 4 must be proven: Duty, Breach of Duty, Causation, and Injury/Damages." },
+  { unit: "Unit VIII", q: "In legal proceedings, the golden rule regarding nursing documentation is:", opts: ["Oral communication supersedes notes", "If it was not documented, it was not done", "Documentation can be completed anytime post-shift", "Detailed notes are optional"], ans: 1, rat: "Courts hold that undocumented care legally equates to unperformed care." },
+  { unit: "Unit VIII", q: "Administering a medication without performing standard safety checks resulting in toxicity is a:", opts: ["Medication error due to breach of duty", "Acceptable risk", "System error only", "Non-maleficable act"], ans: 0, rat: "Bypassing safety rights violates standard duty, constituting negligence." },
+  { unit: "Unit VIII", q: "When managing Do Not Resuscitate (DNR) directives, the nurse's primary role is to:", opts: ["Advocate for family preference over patient directives", "Ensure patient advance directives and legal orders are respected", "Decide resuscitation status independently", "Encourage aggressive measures regardless"], ans: 1, rat: "Advocacy ensures patient advance directives are honored." },
+  { unit: "Unit VIII", q: "Commercial organ trade is considered legally and ethically unacceptable because it:", opts: ["Promotes voluntary donation", "Exploits vulnerable populations and violates human dignity", "Supports public health", "Encourages altruism"], ans: 1, rat: "Organ sales exploit poverty and violate bioethical standards." },
+  { unit: "Unit VIII", q: "Reporting unsafe institutional staffing ratios or peer substance abuse through formal channels is:", opts: ["Breach of loyalty", "Whistleblowing / Professional advocacy", "Defamation", "Malpractice"], ans: 1, rat: "Whistleblowing protects patient safety from systemic harm." },
+  { unit: "Unit VIII", q: "Failing to maintain fall risk precautions resulting in a patient fracture directly fulfills which element?", opts: ["Causation and Damages", "Paternalism", "Veracity", "Fidelity"], ans: 0, rat: "Direct cause (failure of guardrails) leading to actual damage (fracture)." },
+  { unit: "Unit VIII", q: "An ethics committee is best utilized in clinical practice to:", opts: ["Impose legal penalties on staff", "Provide interprofessional guidance on complex moral dilemmas", "Overrule patient consent", "Replace physician decisions"], ans: 1, rat: "Ethics committees offer structured interdisciplinary consultation." }
+];
+
+let questions = [...rawQuestions];
+let currentIndex = 0;
+let userAnswers = new Array(questions.length).fill(null);
+let timerSeconds = 45 * 60;
+let timerInterval = null;
+let isReviewMode = false;
+
+function initQuiz() {
+  currentIndex = 0;
+  userAnswers = new Array(questions.length).fill(null);
+  isReviewMode = false;
+  document.getElementById("results-screen").style.display = "none";
+  document.getElementById("quiz-area").style.display = "block";
+  startTimer();
+  renderQuestion();
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    if (timerSeconds <= 0) {
+      clearInterval(timerInterval);
+      submitQuiz();
+    } else {
+      timerSeconds--;
+      let m = Math.floor(timerSeconds / 60);
+      let s = timerSeconds % 60;
+      document.getElementById("timer-display").innerText = 
+        `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+  }, 1000);
+}
+
+function renderQuestion() {
+  let q = questions[currentIndex];
+  document.getElementById("q-unit").innerText = q.unit;
+  document.getElementById("q-count").innerText = `${currentIndex + 1}/${questions.length}`;
+  document.getElementById("q-text").innerText = q.q;
+  document.getElementById("progress-text").innerText = `Question ${currentIndex + 1} of ${questions.length}`;
+
+  let optionsContainer = document.getElementById("options-container");
+  optionsContainer.innerHTML = "";
+
+  const prefixes = ["A", "B", "C", "D"];
+  q.opts.forEach((opt, idx) => {
+    let btn = document.createElement("button");
+    btn.className = "opt-btn";
+    if (userAnswers[currentIndex] === idx) btn.classList.add("selected");
+    
+    btn.innerHTML = `<span class="opt-prefix">${prefixes[idx]}</span><span>${opt}</span>`;
+    
+    if (!isReviewMode) {
+      btn.onclick = () => selectOption(idx);
+    } else {
+      btn.disabled = true;
+      if (idx === q.ans) btn.style.borderColor = "#16a34a", btn.style.background = "rgba(22, 163, 74, 0.2)";
+      if (userAnswers[currentIndex] === idx && idx !== q.ans) btn.style.borderColor = "#ef4444", btn.style.background = "rgba(239, 68, 68, 0.2)";
+    }
+    optionsContainer.appendChild(btn);
+  });
+
+  let rationaleBox = document.getElementById("rationale-box");
+  if (isReviewMode) {
+    rationaleBox.style.display = "block";
+    rationaleBox.innerHTML = `<strong>Explanation:</strong> ${q.rat}`;
+  } else {
+    rationaleBox.style.display = "none";
+  }
+
+  document.getElementById("prev-btn").style.visibility = currentIndex === 0 ? "hidden" : "visible";
+  document.getElementById("next-btn").innerText = currentIndex === questions.length - 1 ? (isReviewMode ? "Finish Review" : "Submit Exam") : "Next Question →";
+}
+
+function selectOption(index) {
+  userAnswers[currentIndex] = index;
+  renderQuestion();
+}
+
+function nextQuestion() {
+  if (currentIndex < questions.length - 1) {
+    currentIndex++;
+    renderQuestion();
+  } else {
+    if (!isReviewMode) {
+      if (confirm("Are you sure you want to submit your exam?")) {
+        submitQuiz();
+      }
+    } else {
+      document.getElementById("quiz-area").style.display = "none";
+      document.getElementById("results-screen").style.display = "block";
+    }
+  }
+}
+
+function prevQuestion() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    renderQuestion();
+  }
+}
+
+function filterUnit(unitName) {
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  event.target.classList.add("active");
+
+  if (unitName === 'All') {
+    questions = [...rawQuestions];
+  } else {
+    questions = rawQuestions.filter(q => q.unit.startsWith(unitName));
+  }
+  currentIndex = 0;
+  userAnswers = new Array(questions.length).fill(null);
+  renderQuestion();
+}
+
+function submitQuiz() {
+  clearInterval(timerInterval);
+  let score = 0;
+  questions.forEach((q, idx) => {
+    if (userAnswers[idx] === q.ans) score++;
+  });
+
+  let pct = Math.round((score / questions.length) * 100);
+  document.getElementById("score-percent").innerText = `${pct}%`;
+  document.getElementById("score-details").innerText = `You answered ${score} out of ${questions.length} questions correctly.`;
+
+  document.getElementById("quiz-area").style.display = "none";
+  document.getElementById("results-screen").style.display = "block";
+}
+
+function reviewAnswers() {
+  isReviewMode = true;
+  currentIndex = 0;
+  document.getElementById("results-screen").style.display = "none";
+  document.getElementById("quiz-area").style.display = "block";
+  renderQuestion();
+}
+
+function restartQuiz() {
+  timerSeconds = 45 * 60;
+  questions = [...rawQuestions];
+  initQuiz();
+}
+
+// Start application on load
+window.onload = initQuiz;
+</script>
+
+</body>
+</html>
