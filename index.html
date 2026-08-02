@@ -174,7 +174,7 @@
       </div>
       
       <div class="code-input-group">
-        <input type="text" id="passcodeInput" placeholder="Enter Access Key (e.g. BSN4567)" onkeypress="handleKeyPress(event)">
+        <input type="text" id="passcodeInput" placeholder="Enter Access Key (e.g. BSN993)" onkeypress="handleKeyPress(event)">
         <button class="apply-btn" onclick="verifyCodeInput()">Unlock</button>
       </div>
     </div>
@@ -342,7 +342,7 @@
     <p>© 2026 Academic Portal • Prepared by Mudassir Hussain Khan</p>
   </footer>
 
-  <!-- SCRIPT LOGIC -->
+  <!-- SCRIPT LOGIC (STRICT ACCESS CONTROL WITH PRE-APPROVED KEYS) -->
   <script>
     const ALL_SUBJECTS = ['pediatric', 'reproductive', 'english', 'perls'];
 
@@ -354,13 +354,59 @@
       'perls': '250'
     };
 
-    // Accordion Toggle
+    // -------------------------------------------------------------
+    // 🔒 STRICT PRE-APPROVED KEYS DATABASE
+    // Only keys written in this list are valid!
+    // -------------------------------------------------------------
+    const APPROVED_KEYS = {
+      // --- FULL ACCESS BUNDLE KEYS ---
+      'BSN993': ALL_SUBJECTS,
+      'BSN4821': ALL_SUBJECTS,
+      'BSN9104': ALL_SUBJECTS,
+      'BSN3357': ALL_SUBJECTS,
+      'BSN7209': ALL_SUBJECTS,
+      'BSN1584': ALL_SUBJECTS,
+      'BSN6692': ALL_SUBJECTS,
+      'BSN8031': ALL_SUBJECTS,
+      'BSN2415': ALL_SUBJECTS,
+      'BSN5973': ALL_SUBJECTS,
+
+      // --- PEDIATRICS ONLY KEYS ---
+      'PEDS350': ['pediatric'],
+      'PEDS1942': ['pediatric'],
+      'PEDS8831': ['pediatric'],
+      'PEDS4059': ['pediatric'],
+      'PEDS6270': ['pediatric'],
+
+      // --- REPRODUCTIVE HEALTH ONLY KEYS ---
+      'REPO350': ['reproductive'],
+      'REPO7143': ['reproductive'],
+      'REPO2980': ['reproductive'],
+      'REPO5516': ['reproductive'],
+      'REPO9304': ['reproductive'],
+
+      // --- ENGLISH ONLY KEYS ---
+      'ENG250': ['english'],
+      'ENG8319': ['english'],
+      'ENG4702': ['english'],
+      'ENG1658': ['english'],
+      'ENG9034': ['english'],
+
+      // --- PERLS ONLY KEYS ---
+      'PERLS250': ['perls'],
+      'PERLS3912': ['perls'],
+      'PERLS6048': ['perls'],
+      'PERLS8471': ['perls'],
+      'PERLS2190': ['perls']
+    };
+
+    // Accordion Toggle Function
     function toggleCard(cardHeader) {
       const card = cardHeader.parentElement;
       card.classList.toggle('active');
     }
 
-    // Modal Control with Price & Pre-filled WhatsApp Text
+    // Modal Control with Price & Pre-filled WhatsApp Text Update
     function showModal(subject) {
       const modal = document.getElementById('paymentModal');
       const priceElement = document.getElementById('modalPrice');
@@ -380,33 +426,15 @@
       document.getElementById('paymentModal').style.display = 'none';
     }
 
-    // KEY EVALUATOR: Matches fixed keys OR dynamic student keys
+    // KEY EVALUATOR: Checks if key exists in APPROVED_KEYS
     function evaluateKey(inputKey) {
       const key = inputKey.trim().toUpperCase();
 
-      // 1. Full Access: "BSN" + 4 digits (e.g., BSN4567, BSN1029) or legacy "BSN993"
-      if (/^BSN\d{4}$/.test(key) || key === "BSN993") {
-        return { valid: true, subjects: ALL_SUBJECTS, label: "Full BSN Portal" };
-      }
-
-      // 2. Pediatrics: "PEDS" + 4 digits (e.g., PEDS4567) or legacy "PEDS350"
-      if (/^PEDS\d{4}$/.test(key) || key === "PEDS350") {
-        return { valid: true, subjects: ['pediatric'], label: "Pediatric Health Nursing" };
-      }
-
-      // 3. Reproductive: "REPO" + 4 digits (e.g., REPO4567) or legacy "REPO350"
-      if (/^REPO\d{4}$/.test(key) || key === "REPO350") {
-        return { valid: true, subjects: ['reproductive'], label: "Reproductive Health" };
-      }
-
-      // 4. English: "ENG" + 4 digits (e.g., ENG4567) or legacy "ENG250"
-      if (/^ENG\d{4}$/.test(key) || key === "ENG250") {
-        return { valid: true, subjects: ['english'], label: "English" };
-      }
-
-      // 5. PERLS: "PERLS" + 4 digits (e.g., PERLS4567) or legacy "PERLS250"
-      if (/^PERLS\d{4}$/.test(key) || key === "PERLS250") {
-        return { valid: true, subjects: ['perls'], label: "PERLS" };
+      if (APPROVED_KEYS.hasOwnProperty(key)) {
+        return { 
+          valid: true, 
+          subjects: APPROVED_KEYS[key] 
+        };
       }
 
       return { valid: false };
@@ -427,10 +455,10 @@
         result.subjects.forEach(subj => {
           localStorage.setItem('access_' + subj, 'true');
         });
-        alert(`🎉 Success! Access granted for: ${result.label}`);
+        alert(`🎉 Success! Unlocked course access.`);
         updateAccessUI();
       } else {
-        alert("❌ Invalid Code. Keys use format BSNXXXX, PEDSXXXX, REPOXXXX, ENGXXXX, or PERLSXXXX (where XXXX is 4 digits).");
+        alert("❌ Invalid or Unapproved Key! Access Denied.");
       }
       
       if (document.getElementById('passcodeInput')) {
@@ -444,7 +472,7 @@
       }
     }
 
-    // Direct Link Guard
+    // Direct Access Link Interceptor
     function checkSubjectAccess(event, subjectKey) {
       const hasAccess = localStorage.getItem('access_' + subjectKey) === 'true';
       if (!hasAccess) {
@@ -469,12 +497,12 @@
       });
     }
 
-    // Page Load Setup
+    // Run Initial Checks on Page Load
     window.addEventListener('DOMContentLoaded', () => {
-      // 1. Refresh lock state based on browser storage
+      // 1. Update UI based on saved access
       updateAccessUI();
 
-      // 2. Auto-unlock if user opens a direct key URL (#key=BSN4567)
+      // 2. Auto-unlock if URL contains key (e.g., #key=BSN4821)
       const hash = window.location.hash;
       if (hash.startsWith('#key=')) {
         const keyFromUrl = hash.replace('#key=', '').trim();
