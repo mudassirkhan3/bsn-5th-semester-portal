@@ -344,6 +344,26 @@
 
   <!-- SCRIPT LOGIC (FIREBASE FREE) -->
   <script>
+    // Run as soon as the page loads
+window.addEventListener('DOMContentLoaded', () => {
+    // Read the link hash (e.g., #key=BSN993 or #key=PEDS350)
+    const hash = window.location.hash;
+    
+    if (hash.startsWith('#key=')) {
+        const keyFromUrl = hash.replace('#key=', '').trim();
+        
+        // Pass it to your existing unlock/validation function
+        if (typeof checkPasscode === 'function') {
+            checkPasscode(keyFromUrl);
+        } else {
+            // Or store directly in localStorage
+            localStorage.setItem('user_access_key', keyFromUrl);
+            alert('🎉 Access automatically unlocked! Welcome.');
+            location.hash = ''; // Clear hash from address bar
+            location.reload();  // Refresh to update locked/unlocked UI
+        }
+    }
+});
     // Access Keys Setup
     const MASTER_KEY = "BSN993";
     const SUBJECT_KEYS = {
