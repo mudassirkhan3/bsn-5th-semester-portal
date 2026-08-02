@@ -14,56 +14,151 @@
       --muted: #64748b;
       --border: #e2e8f0;
       --success: #16a34a;
-      --warning: #d97706;
       --danger: #dc2626;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    body { background-color: var(--bg); color: var(--text); padding: 20px; line-height: 1.5; }
-    .container { max-width: 700px; margin: 0 auto; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
 
-    header { text-align: center; margin-bottom: 24px; padding: 20px 0; border-bottom: 1px solid var(--border); }
-    header h1 { font-size: 1.75rem; color: var(--primary-dark); margin-bottom: 6px; }
-    header p { color: var(--muted); font-size: 0.95rem; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 20px;
+      line-height: 1.5;
+    }
 
-    .auth-card, .subject-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-    
-    .form-group { margin-bottom: 14px; }
-    label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
-    input { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 1rem; outline: none; }
-    input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); }
-    
-    button { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-    button:hover { background: var(--primary-dark); }
-    button:disabled { background: var(--muted); cursor: not-allowed; }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
 
-    .status-banner { display: none; padding: 12px; border-radius: 6px; margin-top: 12px; font-size: 0.9rem; text-align: center; font-weight: 500; }
-    .status-banner.pending { display: block; background: #fef3c7; color: var(--warning); border: 1px solid #fcd34d; }
-    .status-banner.approved { display: block; background: #dcfce7; color: var(--success); border: 1px solid #86efac; }
-    .status-banner.error { display: block; background: #fee2e2; color: var(--danger); border: 1px solid #fca5a5; }
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
 
-    .card-head { display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
-    .head-left { display: flex; align-items: center; gap: 12px; }
-    .icon-box { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; background: #e0f2fe; }
-    
+    header h1 {
+      font-size: 1.75rem;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .subject-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .head-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icon-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
     .bg-ethics { background: #fef3c7; }
     .bg-peds { background: #e0e7ff; }
     .bg-repro { background: #fce7f3; }
     .bg-eng { background: #dcfce7; }
     .bg-perls { background: #fae8ff; }
 
-    .card-title-wrap h2 { font-size: 1.1rem; }
-    .resource-list { list-style: none; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
-    .resource-item a { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-radius: 6px; text-decoration: none; color: var(--text); background: #f8fafc; border: 1px solid var(--border); transition: all 0.2s; }
-    .resource-item a:hover { border-color: var(--primary); background: #f0f9ff; }
+    .card-title-wrap h2 {
+      font-size: 1.1rem;
+    }
 
-    .tag { font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; font-weight: 600; text-transform: uppercase; }
-    .tag-lock { background: #fee2e2; color: var(--danger); }
-    .tag-unlock { background: #dcfce7; color: var(--success); }
+    .chevron {
+      font-size: 0.8rem;
+      color: var(--muted);
+      transition: transform 0.2s;
+    }
 
-    .user-bar { display: none; justify-content: space-between; align-items: center; background: #f1f5f9; padding: 10px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9rem; }
-    .logout-btn { background: transparent; color: var(--danger); width: auto; padding: 0; font-size: 0.85rem; }
-    .logout-btn:hover { background: transparent; text-decoration: underline; }
+    .subject-card.active .chevron {
+      transform: rotate(180deg);
+    }
+
+    .card-body {
+      display: none;
+    }
+
+    .subject-card.active .card-body {
+      display: block;
+    }
+
+    .resource-list {
+      list-style: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .resource-item {
+      margin-bottom: 8px;
+    }
+
+    .resource-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .resource-item a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--text);
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+
+    .resource-item a:hover {
+      border-color: var(--primary);
+      background: #f0f9ff;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .tag-open {
+      background: #dcfce7;
+      color: var(--success);
+    }
   </style>
 </head>
 <body>
@@ -74,45 +169,25 @@
       <p>Access notes, study materials, and subject resources</p>
     </header>
 
-    <!-- User Logged In Bar -->
-    <div id="userBar" class="user-bar">
-      <div>Logged in as: <strong id="userDisplayName">User</strong> (<span id="userDisplayEmail">email</span>)</div>
-      <button class="logout-btn" onclick="logout()">Switch Student</button>
-    </div>
-
-    <!-- Login / Registration Form -->
-    <div id="authCard" class="auth-card">
-      <div class="form-group">
-        <label for="studentName">Full Name</label>
-        <input type="text" id="studentName" placeholder="e.g. Mudassir Hussain Khan">
-      </div>
-      <div class="form-group">
-        <label for="studentEmail">Email Address</label>
-        <input type="email" id="studentEmail" placeholder="e.g. student@gmail.com">
-      </div>
-      <button id="loginBtn" onclick="verifyStudent()">Check / Request Access</button>
-      <div id="statusBanner" class="status-banner"></div>
-    </div>
-
-    <!-- Subjects Section -->
     <div id="subjectsSection">
 
       <!-- Nursing Ethics Card -->
       <div class="subject-card">
-        <div class="card-head">
+        <div class="card-head" onclick="toggleCard(this)">
           <div class="head-left">
             <div class="icon-box bg-ethics">⚖️</div>
             <div class="card-title-wrap">
-              <h2 id="title-ethics">Nursing Ethics <span id="lock-ethics">🔒</span></h2>
+              <h2>Nursing Ethics</h2>
             </div>
           </div>
+          <div class="chevron">▼</div>
         </div>
         <div class="card-body">
           <ul class="resource-list">
             <li class="resource-item">
-              <a href="./ethics/index.html" onclick="checkAccess(event, 'ethics')">
+              <a href="./ethics/index.html">
                 <span>Nursing Ethics Notes & Units</span>
-                <span class="tag tag-lock" id="tag-ethics">Locked</span>
+                <span class="tag tag-open">Available</span>
               </a>
             </li>
           </ul>
@@ -121,20 +196,21 @@
 
       <!-- Pediatric Health Card -->
       <div class="subject-card">
-        <div class="card-head">
+        <div class="card-head" onclick="toggleCard(this)">
           <div class="head-left">
             <div class="icon-box bg-peds">🧸</div>
             <div class="card-title-wrap">
-              <h2 id="title-pediatric">Pediatric Nursing <span id="lock-pediatric">🔒</span></h2>
+              <h2>Pediatric Nursing</h2>
             </div>
           </div>
+          <div class="chevron">▼</div>
         </div>
         <div class="card-body">
           <ul class="resource-list">
             <li class="resource-item">
-              <a href="./pediatric/index.html" onclick="checkAccess(event, 'pediatric')">
+              <a href="./pediatric/index.html">
                 <span>Pediatric Nursing Materials</span>
-                <span class="tag tag-lock" id="tag-pediatric">Locked</span>
+                <span class="tag tag-open">Available</span>
               </a>
             </li>
           </ul>
@@ -143,20 +219,21 @@
 
       <!-- Reproductive Health Card -->
       <div class="subject-card">
-        <div class="card-head">
+        <div class="card-head" onclick="toggleCard(this)">
           <div class="head-left">
             <div class="icon-box bg-repro">🩺</div>
             <div class="card-title-wrap">
-              <h2 id="title-reproductive">Reproductive Health <span id="lock-reproductive">🔒</span></h2>
+              <h2>Reproductive Health</h2>
             </div>
           </div>
+          <div class="chevron">▼</div>
         </div>
         <div class="card-body">
           <ul class="resource-list">
             <li class="resource-item">
-              <a href="./reproductive/index.html" onclick="checkAccess(event, 'reproductive')">
+              <a href="./reproductive/index.html">
                 <span>Reproductive Health Materials</span>
-                <span class="tag tag-lock" id="tag-reproductive">Locked</span>
+                <span class="tag tag-open">Available</span>
               </a>
             </li>
           </ul>
@@ -165,20 +242,21 @@
 
       <!-- English Card -->
       <div class="subject-card">
-        <div class="card-head">
+        <div class="card-head" onclick="toggleCard(this)">
           <div class="head-left">
             <div class="icon-box bg-eng">📚</div>
             <div class="card-title-wrap">
-              <h2 id="title-english">English <span id="lock-english">🔒</span></h2>
+              <h2>English</h2>
             </div>
           </div>
+          <div class="chevron">▼</div>
         </div>
         <div class="card-body">
           <ul class="resource-list">
             <li class="resource-item">
-              <a href="./english/index.html" onclick="checkAccess(event, 'english')">
+              <a href="./english/index.html">
                 <span>English Language Resources</span>
-                <span class="tag tag-lock" id="tag-english">Locked</span>
+                <span class="tag tag-open">Available</span>
               </a>
             </li>
           </ul>
@@ -187,20 +265,21 @@
 
       <!-- PERLS Card -->
       <div class="subject-card">
-        <div class="card-head">
+        <div class="card-head" onclick="toggleCard(this)">
           <div class="head-left">
             <div class="icon-box bg-perls">💡</div>
             <div class="card-title-wrap">
-              <h2 id="title-perls">PERLS <span id="lock-perls">🔒</span></h2>
+              <h2>PERLS</h2>
             </div>
           </div>
+          <div class="chevron">▼</div>
         </div>
         <div class="card-body">
           <ul class="resource-list">
             <li class="resource-item">
-              <a href="./perls/index.html" onclick="checkAccess(event, 'perls')">
+              <a href="./perls/index.html">
                 <span>PERLS Learning Modules</span>
-                <span class="tag tag-lock" id="tag-perls">Locked</span>
+                <span class="tag tag-open">Available</span>
               </a>
             </li>
           </ul>
@@ -211,154 +290,9 @@
   </div>
 
   <script>
-    // ⚠️ REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
-    const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_EXEC_URL_HERE/exec";
-
-    const ALL_SUBJECTS = ['ethics', 'pediatric', 'reproductive', 'english', 'perls'];
-    let currentUser = null;
-
-    // Load existing session on startup
-    window.addEventListener('DOMContentLoaded', () => {
-      const savedUser = localStorage.getItem('portal_user');
-      if (savedUser) {
-        currentUser = JSON.parse(savedUser);
-        applyUserData(currentUser);
-      }
-    });
-
-    // Send JSONP Request to Google Apps Script
-    function verifyStudent() {
-      const emailInput = document.getElementById('studentEmail').value.trim();
-      const nameInput = document.getElementById('studentName').value.trim();
-      const btn = document.getElementById('loginBtn');
-      const banner = document.getElementById('statusBanner');
-
-      if (!emailInput) {
-        showBanner('Please enter a valid email address.', 'error');
-        return;
-      }
-
-      btn.disabled = true;
-      btn.innerText = "Checking with database...";
-      banner.className = 'status-banner';
-      banner.style.display = 'none';
-
-      // Create unique JSONP callback name
-      const callbackName = 'handleResponse_' + Math.round(Math.random() * 1000000);
-      
-      window[callbackName] = function(response) {
-        // Cleanup script tag
-        delete window[callbackName];
-        document.body.removeChild(script);
-
-        btn.disabled = false;
-        btn.innerText = "Check / Request Access";
-
-        if (response.error) {
-          showBanner(response.error, 'error');
-          return;
-        }
-
-        // Save and apply user data
-        currentUser = response;
-        localStorage.setItem('portal_user', JSON.stringify(currentUser));
-        applyUserData(currentUser);
-      };
-
-      // Append script to document to trigger JSONP
-      const script = document.createElement('script');
-      const encodedEmail = encodeURIComponent(emailInput);
-      const encodedName = encodeURIComponent(nameInput);
-      script.src = `${SCRIPT_URL}?email=${encodedEmail}&name=${encodedName}&callback=${callbackName}`;
-      script.onerror = function() {
-        btn.disabled = false;
-        btn.innerText = "Check / Request Access";
-        showBanner('Connection error. Please check your Web App URL.', 'error');
-        document.body.removeChild(script);
-      };
-
-      document.body.appendChild(script);
-    }
-
-    // Apply User Status and Unlock Cards
-    function applyUserData(user) {
-      document.getElementById('authCard').style.display = 'none';
-      document.getElementById('userBar').style.display = 'flex';
-      document.getElementById('userDisplayName').innerText = user.name || 'Student';
-      document.getElementById('userDisplayEmail').innerText = user.email;
-
-      const userAccess = (user.access || '').toLowerCase();
-      const status = (user.status || 'pending').toLowerCase();
-
-      ALL_SUBJECTS.forEach(subject => {
-        const isApproved = status === 'approved';
-        const hasAccess = isApproved && (userAccess.includes('all') || userAccess.includes(subject));
-
-        const lockIcon = document.getElementById(`lock-${subject}`);
-        const tag = document.getElementById(`tag-${subject}`);
-
-        if (hasAccess) {
-          if (lockIcon) lockIcon.innerText = '✅';
-          if (tag) {
-            tag.innerText = 'Unlocked';
-            tag.className = 'tag tag-unlock';
-          }
-        } else {
-          if (lockIcon) lockIcon.innerText = '🔒';
-          if (tag) {
-            tag.innerText = isApproved ? 'Locked' : 'Pending Approval';
-            tag.className = 'tag tag-lock';
-          }
-        }
-      });
-    }
-
-    // Protect links from unauthorized access
-    function checkAccess(event, subject) {
-      if (!currentUser) {
-        event.preventDefault();
-        alert('Please login with your email first.');
-        logout();
-        return;
-      }
-
-      const status = (currentUser.status || '').toLowerCase();
-      const userAccess = (currentUser.access || '').toLowerCase();
-      const hasAccess = status === 'approved' && (userAccess.includes('all') || userAccess.includes(subject));
-
-      if (!hasAccess) {
-        event.preventDefault();
-        if (status === 'pending') {
-          alert('Your registration is pending approval by the Class Representative.');
-        } else {
-          alert(`Access to ${subject.toUpperCase()} is locked. Please contact your CR to unlock it.`);
-        }
-      }
-    }
-
-    function showBanner(message, type) {
-      const banner = document.getElementById('statusBanner');
-      banner.innerText = message;
-      banner.className = `status-banner ${type}`;
-    }
-
-    function logout() {
-      localStorage.removeItem('portal_user');
-      currentUser = null;
-      document.getElementById('userBar').style.display = 'none';
-      document.getElementById('authCard').style.display = 'block';
-      document.getElementById('studentEmail').value = '';
-      
-      // Lock all cards back
-      ALL_SUBJECTS.forEach(subject => {
-        const lockIcon = document.getElementById(`lock-${subject}`);
-        const tag = document.getElementById(`tag-${subject}`);
-        if (lockIcon) lockIcon.innerText = '🔒';
-        if (tag) {
-          tag.innerText = 'Locked';
-          tag.className = 'tag tag-lock';
-        }
-      });
+    function toggleCard(element) {
+      const card = element.parentElement;
+      card.classList.toggle('active');
     }
   </script>
 </body>
