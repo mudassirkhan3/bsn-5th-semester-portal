@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>BSN Academic Curriculum Portal | Mudassir Hussain Khan</title>
+  <title>BSN Academic Portal | Mudassir Hussain Khan</title>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,6 +31,8 @@
       font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; 
       scroll-behavior: smooth;
       -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     body { 
@@ -104,23 +106,6 @@
       flex-wrap: wrap;
     }
     
-    .login-btn {
-      background: #f1f5f9;
-      color: #0369a1;
-      border: 1px solid #cbd5e1;
-      padding: 8px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      min-height: 38px;
-    }
-
     .pay-menu-btn { 
       background: linear-gradient(135deg, #10b981, #059669); 
       color: white; 
@@ -188,7 +173,7 @@
       color: #e0f2fe; 
     }
 
-    /* ACCESS BANNER */
+    /* ACCESS BANNER & KEY SYSTEM */
     .access-banner { 
       background: #ffffff; 
       border: 2px dashed #0284c7; 
@@ -207,8 +192,21 @@
     .code-input-group { 
       display: flex; 
       gap: 8px; 
-      margin-top: 12px; 
+      margin-top: 10px; 
       flex-direction: column;
+    }
+
+    .input-field {
+      padding: 12px; 
+      border: 1px solid #cbd5e1; 
+      border-radius: 10px; 
+      width: 100%; 
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .input-field:focus {
+      border-color: var(--primary);
     }
 
     .apply-btn { 
@@ -230,12 +228,22 @@
       cursor: not-allowed;
     }
 
+    .divider-text {
+      text-align: center; 
+      margin: 14px 0 6px 0; 
+      font-size: 0.78rem; 
+      color: #64748b; 
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
     .status-badge {
       padding: 10px;
       border-radius: 10px;
       font-size: 0.85rem;
       font-weight: 700;
-      margin-top: 10px;
+      margin-top: 12px;
       text-align: center;
     }
     .status-locked { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
@@ -273,7 +281,6 @@
       justify-content: space-between; 
       padding: 16px 18px; 
       cursor: pointer; 
-      user-select: none; 
       gap: 12px;
     }
 
@@ -365,17 +372,6 @@
       font-weight: 600; 
       transition: all 0.2s ease; 
       gap: 10px;
-    }
-
-    .resource-item a:active { 
-      background: #f0f9ff; 
-      border-color: #bae6fd; 
-      color: var(--primary-dark); 
-    }
-
-    .res-title {
-      flex: 1;
-      min-width: 0;
     }
 
     .tag { 
@@ -488,13 +484,6 @@
       text-align: center; 
       font-size: 0.8rem; 
     }
-
-    @media (max-width: 400px) {
-      .nav-container { justify-content: center; }
-      .brand { margin-bottom: 4px; }
-      .apply-btn { width: 100%; }
-      .resource-item a { flex-direction: column; align-items: flex-start; }
-    }
   </style>
 </head>
 <body>
@@ -503,12 +492,11 @@
   <header class="navbar">
     <div class="nav-container">
       <a href="#" class="brand">
-        <div class="pulse-box">🩺</div>
-        <span>BSN Portal</span>
+        <div class="pulse-box">🔒</div>
+        <span>BSN Secure Portal</span>
       </a>
       <div class="nav-actions">
-        <a href="dashboard.html" class="login-btn">🎓 Account</a>
-        <button class="pay-menu-btn" onclick="showModal('ALL')">💳 Buy Access (PKR 993)</button>
+        <button class="pay-menu-btn" onclick="showModal('ALL')">💳 Access Portal (PKR 993)</button>
       </div>
     </div>
   </header>
@@ -523,6 +511,40 @@
       <p>Interactive study materials, lecture summaries, and clinical guides.</p>
       <div class="author-bar">👤 Curated & Maintained by <strong>Mudassir Hussain Khan</strong></div>
     </div>
+
+    <!-- FIREBASE ACCESS & KEY BANNER -->
+    <div class="access-banner">
+      <div class="banner-head">
+        <h3>🔐 Student Portal Unlock</h3>
+      </div>
+
+      <!-- Option 1: Roll No Check -->
+      <div class="code-input-group">
+        <input 
+          type="text" 
+          id="studentRollNo" 
+          class="input-field"
+          placeholder="Enter Roll No or Phone (e.g. 03241064487)"
+        >
+        <button id="checkAccessBtn" class="apply-btn" onclick="checkFirebaseAccess()">Check Roll No Access</button>
+      </div>
+
+      <div class="divider-text">— OR REDEEM ACCESS KEY —</div>
+
+      <!-- Option 2: Generated Key Redeem -->
+      <div class="code-input-group">
+        <input 
+          type="text" 
+          id="accessKeyInput" 
+          class="input-field"
+          placeholder="Enter Access Key (e.g. BSN-8F2A)"
+        >
+        <button id="redeemKeyBtn" class="apply-btn" style="background: var(--accent);" onclick="redeemUniqueKey()">Redeem Access Key</button>
+      </div>
+
+      <div id="statusNotice" class="status-badge" style="display:none;"></div>
+    </div>
+
     <!-- SECTION TITLE -->
     <div class="section-title">Enrolled Courses & Modules</div>
 
@@ -686,13 +708,44 @@
     <p>© 2026 Academic Portal • Prepared by Mudassir Hussain Khan</p>
   </footer>
 
-  <!-- SCRIPT LOGIC -->
+  <!-- FIREBASE SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
   <script>
-    // ⚠️ REPLACE THIS URL WITH YOUR ACTUAL GOOGLE APPS SCRIPT WEB APP DEPLOYMENT URL
-    const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
+    // ----------------------------------------------------
+    // 1. LOCKED MODE ENFORCER
+    // ----------------------------------------------------
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if (
+        e.keyCode === 123 || 
+        (e.ctrlKey && e.shiftKey && e.keyCode === 73) || 
+        (e.ctrlKey && e.keyCode === 85) ||
+        (e.ctrlKey && e.keyCode === 83)
+      ) {
+        e.preventDefault();
+        return false;
+      }
+    });
+
+    // ----------------------------------------------------
+    // 2. FIREBASE DATABASE CONFIGURATION
+    // ----------------------------------------------------
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
     const ALL_SUBJECTS = ['pediatric', 'reproductive', 'english', 'perls', 'ethics'];
-
     const SUBJECT_PRICES = {
       'ALL': '993',
       'pediatric': '350',
@@ -701,6 +754,172 @@
       'perls': '250',
       'ethics': '250'
     };
+
+    // ----------------------------------------------------
+    // 3. ROLL NUMBER ACCESS CHECK
+    // ----------------------------------------------------
+    async function checkFirebaseAccess() {
+      const rawRoll = document.getElementById('studentRollNo').value.trim();
+      const statusNotice = document.getElementById('statusNotice');
+      const btn = document.getElementById('checkAccessBtn');
+
+      if (!rawRoll) return alert("Please enter your Roll Number or Phone Number.");
+
+      const rollNo = rawRoll.toLowerCase();
+      btn.disabled = true;
+      statusNotice.style.display = 'block';
+      statusNotice.className = 'status-badge status-loading';
+      statusNotice.innerHTML = '⏳ Verifying with database...';
+
+      try {
+        const docRef = db.collection("students").doc(rollNo);
+        const doc = await docRef.get();
+
+        if (doc.exists) {
+          const studentData = doc.data();
+          localStorage.setItem('my_firebase_session', JSON.stringify(studentData));
+          localStorage.setItem('saved_roll_no', rollNo);
+
+          if (studentData.status === 'approved') {
+            statusNotice.className = 'status-badge status-approved';
+            statusNotice.innerHTML = `✅ Account Approved! Active: <strong>${(studentData.access || []).join(', ').toUpperCase()}</strong>`;
+          } else {
+            statusNotice.className = 'status-badge status-locked';
+            statusNotice.innerHTML = '⏳ Payment verification pending approval from Mudassir.';
+          }
+        } else {
+          await docRef.set({
+            status: 'pending',
+            access: [],
+            created_at: new Date().toISOString()
+          });
+
+          localStorage.setItem('saved_roll_no', rollNo);
+          statusNotice.className = 'status-badge status-locked';
+          statusNotice.innerHTML = '📝 Registered! Please send payment screenshot on WhatsApp.';
+        }
+
+        updateAccessUI();
+      } catch (error) {
+        console.error(error);
+        statusNotice.className = 'status-badge status-locked';
+        statusNotice.innerHTML = '❌ Error connecting to database.';
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    // ----------------------------------------------------
+    // 4. REDEEM UNIQUE ACCESS KEY
+    // ----------------------------------------------------
+    async function redeemUniqueKey() {
+      const keyInput = document.getElementById('accessKeyInput').value.trim().toUpperCase();
+      const rollNo = localStorage.getItem('saved_roll_no') || document.getElementById('studentRollNo').value.trim();
+      const statusNotice = document.getElementById('statusNotice');
+      const btn = document.getElementById('redeemKeyBtn');
+
+      if (!keyInput) return alert("Please enter your access key.");
+
+      btn.disabled = true;
+      statusNotice.style.display = 'block';
+      statusNotice.className = 'status-badge status-loading';
+      statusNotice.innerHTML = '⏳ Validating key...';
+
+      try {
+        const keyRef = db.collection("access_keys").doc(keyInput);
+        const keyDoc = await keyRef.get();
+
+        if (!keyDoc.exists) {
+          statusNotice.className = 'status-badge status-locked';
+          statusNotice.innerHTML = '❌ Invalid access key.';
+          return;
+        }
+
+        const keyData = keyDoc.data();
+
+        if (keyData.used) {
+          statusNotice.className = 'status-badge status-locked';
+          statusNotice.innerHTML = '❌ Key has already been redeemed.';
+          return;
+        }
+
+        let session = JSON.parse(localStorage.getItem('my_firebase_session') || '{"status":"approved","access":[]}');
+        session.status = 'approved';
+
+        if (keyData.course === 'all') {
+          session.access = ['all'];
+        } else if (!session.access.includes(keyData.course)) {
+          session.access.push(keyData.course);
+        }
+
+        localStorage.setItem('my_firebase_session', JSON.stringify(session));
+        
+        await keyRef.update({ 
+          used: true, 
+          redeemedBy: rollNo || 'unknown', 
+          redeemedAt: new Date().toISOString() 
+        });
+
+        if (rollNo) {
+          await db.collection("students").doc(rollNo.toLowerCase()).set(session, { merge: true });
+        }
+
+        statusNotice.className = 'status-badge status-approved';
+        statusNotice.innerHTML = `🎉 Key Redeemed! Access Unlocked for: <strong>${keyData.course.toUpperCase()}</strong>`;
+        document.getElementById('accessKeyInput').value = '';
+        updateAccessUI();
+
+      } catch (e) {
+        console.error(e);
+        statusNotice.className = 'status-badge status-locked';
+        statusNotice.innerHTML = '❌ Failed to redeem key.';
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    // ----------------------------------------------------
+    // 5. UI UPDATE & ACCESS CHECK HELPERS
+    // ----------------------------------------------------
+    function updateAccessUI() {
+      const saved = JSON.parse(localStorage.getItem('my_firebase_session') || '{}');
+      const accessList = saved.access || [];
+      const isApproved = saved.status === 'approved';
+
+      ALL_SUBJECTS.forEach(subj => {
+        const tag = document.getElementById('tag-' + subj);
+        const title = document.getElementById('title-' + subj);
+        const lockSpan = title ? title.querySelector('.lock-icon') : null;
+
+        if (isApproved && (accessList.includes('all') || accessList.includes(subj))) {
+          if (tag) {
+            tag.className = 'tag tag-unlocked';
+            tag.innerText = '✅ Unlocked';
+          }
+          if (lockSpan) lockSpan.style.display = 'none';
+        } else {
+          if (tag) {
+            tag.className = 'tag tag-lock';
+            tag.innerText = `🔒 Locked (PKR ${SUBJECT_PRICES[subj]})`;
+          }
+          if (lockSpan) lockSpan.style.display = 'inline';
+        }
+      });
+    }
+
+    function checkSubjectAccess(event, subjectKey) {
+      const saved = JSON.parse(localStorage.getItem('my_firebase_session') || '{}');
+      const accessList = saved.access || [];
+      const isApproved = saved.status === 'approved';
+
+      const hasAccess = isApproved && (accessList.includes('all') || accessList.includes(subjectKey));
+
+      if (!hasAccess) {
+        event.preventDefault();
+        alert("🔒 Subject Locked! Redeem a key or enter your Roll No.");
+        showModal(subjectKey);
+      }
+    }
 
     function toggleCard(cardHeader) {
       const card = cardHeader.parentElement;
@@ -713,12 +932,13 @@
       const modal = document.getElementById('paymentModal');
       const priceElement = document.getElementById('modalPrice');
       const whatsappBtn = document.getElementById('whatsappBtn');
+      const rollNo = localStorage.getItem('saved_roll_no') || 'Not Provided';
       
       const price = SUBJECT_PRICES[subject] || '993';
       priceElement.innerText = price;
 
       const subName = subject === 'ALL' ? 'Full BSN Portal Access' : subject.toUpperCase() + ' Course Notes';
-      const defaultText = `Hi Mudassir, I have registered and sent payment (PKR ${price}) for ${subName}. Please approve my account.`;
+      const defaultText = `Hi Mudassir, I am Roll No: ${rollNo}. I have sent payment (PKR ${price}) for ${subName}. Please approve my account.`;
       
       whatsappBtn.href = `https://wa.me/923241064487?text=${encodeURIComponent(defaultText)}`;
       modal.style.display = 'flex';
@@ -732,124 +952,19 @@
       if (e.target.id === 'paymentModal') closeModal();
     }
 
-    // STUDENT REGISTRATION & ACCESS SYSTEM VIA GOOGLE SHEETS
-    async function handleStudentRegister() {
-      const regBtn = document.getElementById('regBtn');
-      const statusNotice = document.getElementById('statusNotice');
-
-      if (regBtn) regBtn.disabled = true;
-      if (statusNotice) {
-        statusNotice.style.display = 'block';
-        statusNotice.className = 'status-badge status-loading';
-        statusNotice.innerHTML = '⏳ Connecting to portal database...';
-      }
-
-      try {
-        const fetchUrl = `${SCRIPT_URL}`;
-        const response = await fetch(fetchUrl);
-        const data = await response.json();
-
-        if (data.error) {
-          throw new Error(data.error);
-        }
-
-        // Format access string safely into an array
-        if (typeof data.access === 'string') {
-          data.accessList = data.access.toLowerCase().split(',').map(s => s.trim());
-        } else {
-          data.accessList = [];
-        }
-
-        localStorage.setItem('user_session', JSON.stringify(data));
-
-        updateAccessUI();
-      } catch (err) {
-        console.error(err);
-        if (statusNotice) {
-          statusNotice.className = 'status-badge status-locked';
-          statusNotice.innerHTML = `⚠️ Connection error. Please make sure SCRIPT_URL is properly configured.`;
-        }
-      } finally {
-        if (regBtn) regBtn.disabled = false;
-      }
-    }
-
-    function checkSubjectAccess(event, subjectKey) {
-      const userRaw = localStorage.getItem('user_session');
-      if (!userRaw) {
-        event.preventDefault();
-        alert("🔒 Please click 'Sync / Check Access Status' first.");
-        return;
-      }
-
-      const user = JSON.parse(userRaw);
-      const accessList = user.accessList || (user.access ? user.access.toLowerCase().split(',').map(s => s.trim()) : []);
-      const isApproved = user.status === 'approved';
-      const hasAccess = isApproved && (accessList.includes('all') || accessList.includes(subjectKey.toLowerCase()));
-
-      if (!hasAccess) {
-        event.preventDefault();
-        if (!isApproved) {
-          alert("🔒 Your account is registered, but pending CR approval from Mudassir.");
-        } else {
-          alert("🔒 Subject Locked! You do not have access to this course yet.");
-        }
-        showModal(subjectKey);
-      }
-    }
-
-    function updateAccessUI() {
-      const statusNotice = document.getElementById('statusNotice');
-      const userRaw = localStorage.getItem('user_session');
-
-      if (!userRaw) {
-        if (statusNotice) statusNotice.style.display = 'none';
-        return;
-      }
-
-      const user = JSON.parse(userRaw);
-      const accessList = user.accessList || (user.access ? user.access.toLowerCase().split(',').map(s => s.trim()) : []);
-
-      if (statusNotice) statusNotice.style.display = 'block';
-
-      if (user.status === 'approved') {
-        if (statusNotice) {
-          statusNotice.className = 'status-badge status-approved';
-          statusNotice.innerHTML = `🔓 Welcome back! Your account is <strong>APPROVED</strong>.`;
-        }
-
-        ALL_SUBJECTS.forEach(subj => {
-          const tag = document.getElementById('tag-' + subj);
-          const title = document.getElementById('title-' + subj);
-          const lockSpan = title ? title.querySelector('.lock-icon') : null;
-
-          if (accessList.includes('all') || accessList.includes(subj)) {
-            if (tag) {
-              tag.className = 'tag tag-unlocked';
-              tag.innerText = '✅ Unlocked';
-            }
-            if (lockSpan) {
-              lockSpan.style.display = 'none';
-            }
-          } else {
-            if (tag) {
-              tag.className = 'tag tag-lock';
-              tag.innerText = `🔒 Locked (PKR ${SUBJECT_PRICES[subj]})`;
-            }
-            if (lockSpan) {
-              lockSpan.style.display = 'inline';
-            }
+    window.addEventListener('DOMContentLoaded', async () => {
+      const savedRoll = localStorage.getItem('saved_roll_no');
+      if (savedRoll) {
+        document.getElementById('studentRollNo').value = savedRoll;
+        try {
+          const doc = await db.collection("students").doc(savedRoll.toLowerCase()).get();
+          if (doc.exists) {
+            localStorage.setItem('my_firebase_session', JSON.stringify(doc.data()));
           }
-        });
-      } else {
-        if (statusNotice) {
-          statusNotice.className = 'status-badge status-locked';
-          statusNotice.innerHTML = `🔒 Registration recorded. Pending CR approval from Mudassir.`;
+        } catch (e) {
+          console.log("Offline mode or sync failed.");
         }
       }
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
       updateAccessUI();
 
       document.querySelectorAll('.subject-card.active .card-body').forEach(body => {
