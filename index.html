@@ -2,17 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BSN Student Portal</title>
-  <style>
-    :root {
-      --primary: #1a73e8;
-      --primary-hover: #1557b0;
-      --bg-color: #f8f9fa;
-      --card-bg: #ffffff;<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>BSN Academic Curriculum Portal | Mudassir Hussain Khan</title>
   
@@ -25,6 +14,7 @@
     :root {
       --primary: #0284c7;
       --primary-dark: #0369a1;
+      --primary-hover: #0284c7;
       --accent: #0d9488;
       --bg-main: #f8fafc;
       --card-bg: #ffffff;
@@ -33,6 +23,9 @@
       --border: #e2e8f0;
       --radius: 16px;
       --shadow: 0 10px 30px -5px rgba(2, 132, 199, 0.08);
+      --error-bg: #ffebe9;
+      --error-border: #ff8a80;
+      --error-text: #c62828;
     }
 
     * { 
@@ -217,12 +210,25 @@
 
     .code-input-group { 
       display: flex; 
-      gap: 8px; 
+      gap: 10px; 
       margin-top: 12px; 
       flex-direction: column;
     }
 
-    .code-input-group input { 
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .code-input-group input[type="text"],
+    .code-input-group input[type="email"] { 
       width: 100%; 
       padding: 12px 14px; 
       border: 1px solid var(--border); 
@@ -230,6 +236,8 @@
       font-size: 0.88rem; 
       font-weight: 600; 
       outline: none; 
+      box-sizing: border-box;
+      transition: border-color 0.2s;
     }
 
     .code-input-group input:focus { 
@@ -251,26 +259,32 @@
       width: 100%;
     }
 
+    .apply-btn:hover {
+      background: var(--primary-hover);
+    }
+
     .apply-btn:disabled {
       background: #94a3b8;
       cursor: not-allowed;
     }
 
+    /* STATUS BADGE / MESSAGE BOX */
     .status-badge {
-      padding: 10px;
+      padding: 12px;
       border-radius: 10px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-top: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-top: 12px;
       text-align: center;
-      line-height: 1.4;
+      line-height: 1.5;
     }
-    .status-locked { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+    .status-locked { background: var(--error-bg); color: var(--error-text); border: 1px solid var(--error-border); }
     .status-approved { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
     .status-loading { background: #f0f9ff; color: #0369a1; border: 1px solid #bae6fd; }
 
     .status-badge a {
-      color: #0284c7;
+      color: #0369a1;
+      font-weight: 800;
       text-decoration: underline;
     }
 
@@ -556,18 +570,22 @@
       <div class="author-bar">👤 Curated & Maintained by <strong>Mudassir Hussain Khan</strong></div>
     </div>
 
-    <!-- REGISTER / CHECK ACCESS BANNER -->
+    <!-- STUDENT ACCOUNT ACCESS BANNER -->
     <div class="access-banner">
       <div class="banner-head">
-        <div>
-          <h3>👤 Student Account Access</h3>
-          <p style="font-size: 0.82rem; color: #64748b; margin-top: 2px;">Enter your details to request approval or check status.</p>
-        </div>
+        <h3>👤 Student Account Access</h3>
+        <p style="font-size: 0.82rem; color: #64748b; margin-top: 2px;">Enter your details to request approval or check status.</p>
       </div>
       
       <div class="code-input-group" id="regForm">
-        <input type="text" id="studentName" placeholder="Your Full Name">
-        <input type="email" id="studentEmail" placeholder="Your Email Address">
+        <div class="form-group">
+          <label for="studentName">Full Name</label>
+          <input type="text" id="studentName" placeholder="Enter your full name">
+        </div>
+        <div class="form-group">
+          <label for="studentEmail">Email Address</label>
+          <input type="email" id="studentEmail" placeholder="Enter your email address">
+        </div>
         <button class="apply-btn" id="regBtn" onclick="handleStudentRegister()">Register / Login</button>
       </div>
 
@@ -783,7 +801,7 @@
       if (e.target.id === 'paymentModal') closeModal();
     }
 
-    // STUDENT REGISTRATION & ACCESS SYSTEM VIA GOOGLE SHEETS (USING JSONP FOR ZERO CORS ISSUES)
+    // STUDENT REGISTRATION & ACCESS SYSTEM VIA GOOGLE SHEETS
     function handleStudentRegister() {
       const nameInput = document.getElementById('studentName');
       const emailInput = document.getElementById('studentEmail');
@@ -802,7 +820,7 @@
       statusNotice.className = 'status-badge status-loading';
       statusNotice.innerHTML = '⏳ Connecting to portal database...';
 
-      // JSONP Implementation to bypass browser CORS rules completely
+      // JSONP Implementation to bypass CORS
       const callbackName = 'cb_' + Math.round(100000 * Math.random());
 
       window[callbackName] = function(data) {
@@ -816,7 +834,7 @@
           return;
         }
 
-        // Parse access list string safely
+        // Parse access list string
         if (typeof data.access === 'string') {
           data.accessList = data.access.toLowerCase().split(',').map(s => s.trim());
         } else {
@@ -943,237 +961,5 @@
       });
     });
   </script>
-</body>
-</html>
-      --text-color: #202124;
-      --error-bg: #ffebe9;
-      --error-border: #ff8a80;
-      --error-text: #c62828;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 16px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      padding: 32px;
-      width: 100%;
-      max-width: 420px;
-    }
-
-    h2 {
-      margin-top: 0;
-      color: #111;
-      font-size: 1.5rem;
-      text-align: center;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    input[type="text"],
-    input[type="email"] {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      box-sizing: border-box;
-      font-size: 1rem;
-      transition: border-color 0.2s;
-    }
-
-    input:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-
-    button:hover {
-      background-color: var(--primary-hover);
-    }
-
-    button:disabled {
-      background-color: #a0c3ff;
-      cursor: not-allowed;
-    }
-
-    /* Custom Error / Status Box */
-    .message-box {
-      display: none;
-      margin-top: 20px;
-      padding: 14px;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      text-align: center;
-    }
-
-    .message-box.error {
-      display: block;
-      background-color: var(--error-bg);
-      border: 1px solid var(--error-border);
-      color: var(--error-text);
-    }
-
-    .message-box a {
-      color: #0d47a1;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    .loader {
-      display: none;
-      margin: 10px auto;
-      border: 3px solid #f3f3f3;
-      border-top: 3px solid var(--primary);
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="card">
-    <h2>Student Portal Login</h2>
-    
-    <form id="loginForm">
-      <div class="form-group">
-        <label for="studentName">Full Name</label>
-        <input type="text" id="studentName" placeholder="Enter your full name" required>
-      </div>
-
-      <div class="form-group">
-        <label for="studentEmail">Email Address</label>
-        <input type="email" id="studentEmail" placeholder="Enter your email" required>
-      </div>
-
-      <button type="submit" id="submitBtn">Access Portal</button>
-      <div id="loader" class="loader"></div>
-    </form>
-
-    <!-- Error/Notice Display Box -->
-    <div id="statusMessage" class="message-box"></div>
-  </div>
-
-  <script>
-    // ⚠️ REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
-    const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
-
-    // Add your actual WhatsApp phone number below (Include country code, e.g., 923001234567)
-    const CR_WHATSAPP_NUMBER = "923000000000"; 
-
-    const form = document.getElementById('loginForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const loader = document.getElementById('loader');
-    const statusMsg = document.getElementById('statusMessage');
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const name = document.getElementById('studentName').value.trim();
-      const email = document.getElementById('studentEmail').value.trim();
-
-      if (!name || !email) return;
-
-      // Reset state
-      statusMsg.className = 'message-box';
-      statusMsg.style.display = 'none';
-      submitBtn.disabled = true;
-      loader.style.display = 'block';
-
-      // Setup JSONP script request (handles CORS automatically)
-      const callbackName = 'handleResponse_' + Math.round(100000 * Math.random());
-      
-      window[callbackName] = function (data) {
-        // Clean up script tag and global callback
-        delete window[callbackName];
-        const scriptTag = document.getElementById(callbackName);
-        if (scriptTag) scriptTag.remove();
-
-        loader.style.display = 'none';
-        submitBtn.disabled = false;
-
-        if (data.error) {
-          showErrorNotice();
-          return;
-        }
-
-        // Check registration approval status
-        if (data.status === 'approved') {
-          // Store user details in session
-          sessionStorage.setItem('student_email', data.email);
-          sessionStorage.setItem('student_name', data.name);
-          sessionStorage.setItem('student_access', data.access || 'all');
-          
-          // Redirect to dashboard page
-          window.location.href = 'dashboard.html';
-        } else {
-          // If status is pending or not approved, show the error notice with WhatsApp link
-          showErrorNotice();
-        }
-      };
-
-      // Handle network failure or timeouts
-      const script = document.createElement('script');
-      script.id = callbackName;
-      script.src = `${SCRIPT_URL}?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&callback=${callbackName}`;
-      
-      script.onerror = function () {
-        delete window[callbackName];
-        script.remove();
-        loader.style.display = 'none';
-        submitBtn.disabled = false;
-        showErrorNotice();
-      };
-
-      document.body.appendChild(script);
-    });
-
-    function showErrorNotice() {
-      const waLink = `https://wa.me/${CR_WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Mudassir, please approve my BSN portal access.")}`;
-      
-      statusMsg.innerHTML = `⚠️ Unable to connect right now. Please check your internet connection or contact <a href="${waLink}" target="_blank">Mudassir (CR) on WhatsApp</a> for approval.`;
-      statusMsg.className = 'message-box error';
-    }
-  </script>
-
 </body>
 </html>
