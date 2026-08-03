@@ -128,7 +128,6 @@
 </div>
 
 <script>
-  // Your Google Web App Executable URL
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyMadxOTU_9Uys1xrQC8g7t8CGoKQkBM6aLlOEM4KdAvL0Qqate0nXSHuUUKp3F4Nx7/exec';
 
   function showForm(type) {
@@ -162,9 +161,7 @@
   async function handleRegister(e) {
     e.preventDefault();
     const btn = document.getElementById('regBtn');
-    btn.disabled = true;
-    btn.innerText = 'Syncing to Sheet...';
-
+    
     const user = {
       name: document.getElementById('regName').value.trim(),
       institute: document.getElementById('regInstitute').value.trim(),
@@ -173,11 +170,22 @@
       password: document.getElementById('regPassword').value
     };
 
-    // 1. Save locally for instant session access
+    // Check if email already registered locally
+    if (localStorage.getItem('bsn_user_' + user.email)) {
+      alert('❌ This email address is already registered. Please login instead.');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerText = 'Syncing to Sheet...';
+
+    // Save locally for instant session access
     localStorage.setItem('bsn_user_' + user.email, JSON.stringify(user));
     localStorage.setItem('bsn_current_user', user.email);
+    localStorage.setItem('active_session_email', user.email);
+    localStorage.setItem('active_session_name', user.name);
 
-    // 2. Transmit student registration payload directly to your Google Sheet
+    // Transmit student registration payload directly to Google Sheet
     try {
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
@@ -203,6 +211,8 @@
       const user = JSON.parse(savedUser);
       if (user.password === pass) {
         localStorage.setItem('bsn_current_user', email);
+        localStorage.setItem('active_session_email', email);
+        localStorage.setItem('active_session_name', user.name || '');
         window.location.href = 'dashboard.html';
       } else {
         alert('❌ Incorrect password.');
