@@ -176,6 +176,67 @@
       color: #e0f2fe; 
     }
 
+    /* ACCESS CODE BOX BANNER */
+    .access-code-banner {
+      background: linear-gradient(135deg, #f0fdf4 100%, #dcfce7 0%);
+      border: 1px solid #bbf7d0;
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .access-code-banner h3 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #065f46;
+      margin-bottom: 6px;
+    }
+
+    .access-code-banner p {
+      font-size: 0.8rem;
+      color: #047857;
+      margin-bottom: 12px;
+    }
+
+    .access-input-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .access-input-group input {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      outline: none;
+      background: white;
+    }
+
+    .access-input-group input:focus {
+      border-color: #059669;
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+    }
+
+    .access-input-group button {
+      background: #059669;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .access-input-group button:hover {
+      background: #047857;
+    }
+
     .section-title { 
       font-size: 0.8rem; 
       font-weight: 800; 
@@ -473,6 +534,16 @@
       <div class="author-bar">👤 Curated & Maintained by <strong>Mudassir Hussain Khan</strong> • Class Representative</div>
     </div>
 
+    <!-- QUICK ACCESS CODE ENTRY -->
+    <div class="access-code-banner">
+      <h3>🔑 Have an Access Code?</h3>
+      <p>Enter your unique code below to instantly unlock your paid subject materials.</p>
+      <div class="access-input-group">
+        <input type="text" id="directAccessCode" placeholder="e.g. MUDASSIR-ENG-250">
+        <button onclick="redeemAccessCode()">Unlock Content</button>
+      </div>
+    </div>
+
     <!-- SECTION TITLE -->
     <div class="section-title">Enrolled Courses & Modules</div>
 
@@ -617,7 +688,7 @@
     <div class="modal-box">
       <button class="close-btn" onclick="closeModal()">×</button>
       <h2 style="font-size:1.25rem;">Unlock BSN Study Portal</h2>
-      <p style="font-size:0.82rem; color:#64748b; margin-top:4px;">Send payment to get your specific subject access approved.</p>
+      <p style="font-size:0.82rem; color:#64748b; margin-top:4px;">Send payment to get your access code.</p>
       
       <div class="price-tag">
         <span style="font-size:0.95rem;">PKR</span> <span id="modalPrice">250</span>
@@ -675,10 +746,10 @@
       
       const price = SUBJECT_PRICES[subject] || '250';
       priceElement.innerText = price;
-      const currentEmail = localStorage.getItem('current_student') || 'Not Logged In';
+      const currentEmail = localStorage.getItem('current_student') || 'Guest Student';
 
       const subName = subject.toUpperCase() + ' Course Notes';
-      const defaultText = `Hi Mudassir, I have registered with email (${currentEmail}) and sent payment (PKR ${price}) for ${subName}. Please approve my access.`;
+      const defaultText = `Hi Mudassir, I have sent payment (PKR ${price}) for ${subName}. Please send me my access code.`;
 
       whatsappBtn.href = `https://wa.me/923241064487?text=${encodeURIComponent(defaultText)}`;
       modal.style.display = 'flex';
@@ -705,25 +776,47 @@
       if (btnEl) btnEl.style.display = 'none';
     }
 
-    function checkSubjectAccess(event, subject) {
-      const currentEmail = localStorage.getItem('current_student');
-      if (!currentEmail) {
-        event.preventDefault();
-        alert("⚠️ Please log in to your student dashboard first.");
-        window.location.href = 'dashboard.html';
+    // Direct Access Code Redeemer
+    function redeemAccessCode() {
+      const codeInput = document.getElementById('directAccessCode').value.trim().toLowerCase();
+      
+      if (!codeInput) {
+        alert("⚠️ Please enter a valid access code.");
         return;
       }
 
-      const user = JSON.parse(localStorage.getItem('user_' + currentEmail));
-      
-      // Check if user has specific access or full access approval
-      const hasAccess = user && user.status === 'approved' && (
-        user.access === 'ALL' || 
-        (Array.isArray(user.subjects) && user.subjects.includes(subject)) ||
-        user[subject] === true
-      );
+      // Define your unlock codes mapping
+      let unlockedSub = '';
+      if (codeInput.includes('peds') || codeInput.includes('350')) {
+        unlockedSub = 'pediatric';
+      } else if (codeInput.includes('repo') || codeInput.includes('350')) {
+        unlockedSub = 'reproductive';
+      } else if (codeInput.includes('eng') || codeInput.includes('250')) {
+        unlockedSub = 'english';
+      } else if (codeInput.includes('perl') || codeInput.includes('250')) {
+        unlockedSub = 'perls';
+      } else if (codeInput.includes('all') || codeInput.includes('993')) {
+        // Unlock all subjects if they paid full amount
+        ALL_SUBJECTS.forEach(sub => {
+          localStorage.setItem('unlocked_' + sub, 'true');
+          unlockSubjectUI(sub);
+        });
+        alert("🎉 Success! All subjects have been unlocked.");
+        return;
+      } else {
+        alert("❌ Invalid access code. Please check with Mudassir.");
+        return;
+      }
 
-      if (!hasAccess) {
+      // Save specific subject status
+      localStorage.setItem('unlocked_' + unlockedSub, 'true');
+      unlockSubjectUI(unlockedSub);
+      alert(`🎉 Success! ${unlockedSub.toUpperCase()} course has been unlocked.`);
+    }
+
+    function checkSubjectAccess(event, subject) {
+      const isUnlocked = localStorage.getItem('unlocked_' + subject) === 'true';
+      if (!isUnlocked) {
         event.preventDefault();
         showModal(subject);
       }
@@ -731,17 +824,11 @@
 
     // Auto-check stored session on page load
     window.addEventListener('DOMContentLoaded', () => {
-      const savedEmail = localStorage.getItem('current_student');
-      if (savedEmail) {
-        const user = JSON.parse(localStorage.getItem('user_' + savedEmail));
-        if (user && user.status === 'approved') {
-          ALL_SUBJECTS.forEach(sub => {
-            if (user.access === 'ALL' || (user.subjects && user.subjects.includes(sub)) || user[sub] === true) {
-              unlockSubjectUI(sub);
-            }
-          });
+      ALL_SUBJECTS.forEach(sub => {
+        if (localStorage.getItem('unlocked_' + sub) === 'true') {
+          unlockSubjectUI(sub);
         }
-      }
+      });
 
       // Open first accordion by default
       const firstBody = document.querySelector('.subject-card.active .card-body');
