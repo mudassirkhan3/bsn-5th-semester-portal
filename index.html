@@ -103,18 +103,24 @@
       gap: 8px; 
     }
     
-    .pay-menu-btn { 
-      background: linear-gradient(135deg, #10b981, #059669); 
+    .dashboard-nav-btn { 
+      background: linear-gradient(135deg, #059669, #047857); 
       color: white; 
-      border: none; 
-      padding: 8px 14px; 
+      text-decoration: none;
+      padding: 8px 16px; 
       border-radius: 20px; 
       font-size: 0.8rem; 
       font-weight: 700; 
-      cursor: pointer; 
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); 
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25); 
       transition: transform 0.2s; 
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       min-height: 38px;
+    }
+
+    .dashboard-nav-btn:hover {
+      transform: translateY(-1px);
     }
 
     /* MAIN CONTENT */
@@ -168,57 +174,6 @@
       border-top: 1px solid rgba(255, 255, 255, 0.15); 
       font-size: 0.8rem; 
       color: #e0f2fe; 
-    }
-
-    /* IMPRESSIVE QUICK LOGIN / DASHBOARD BANNER */
-    .login-hero-banner {
-      background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
-      border: 1px solid #bbf7d0;
-      border-radius: var(--radius);
-      padding: 22px 20px;
-      margin-bottom: 24px;
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .login-hero-text h3 {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #065f46;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .login-hero-text p {
-      font-size: 0.84rem;
-      color: #047857;
-    }
-
-    .dashboard-action-btn {
-      background: linear-gradient(135deg, #059669, #047857);
-      color: white;
-      text-decoration: none;
-      padding: 12px 22px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      box-shadow: 0 4px 14px rgba(5, 150, 105, 0.25);
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap;
-    }
-
-    .dashboard-action-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(5, 150, 105, 0.35);
     }
 
     .section-title { 
@@ -321,6 +276,9 @@
     .card-content { 
       padding: 12px 16px 16px 16px; 
       border-top: 1px dashed var(--border); 
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .resource-list { 
@@ -368,8 +326,24 @@
     }
 
     .tag-lock { background: #fef3c7; color: #b45309; }
-    .tag-locked { background: #f1f5f9; color: var(--text-muted); }
     .tag-unlocked { background: #dcfce7; color: #15803d; }
+
+    .buy-subject-btn {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background 0.2s;
+    }
+
+    .buy-subject-btn:hover {
+      background: #0369a1;
+    }
 
     /* MODAL */
     .modal-overlay { 
@@ -481,7 +455,9 @@
         <span>BSN Portal</span>
       </a>
       <div class="nav-actions">
-        <button class="pay-menu-btn" onclick="showModal('ALL')">💳 Buy Access (PKR 993)</button>
+        <a href="dashboard.html" class="dashboard-nav-btn">
+          🔐 Dashboard
+        </a>
       </div>
     </div>
   </header>
@@ -495,17 +471,6 @@
       <h1>Academic & Clinical Portal</h1>
       <p>Interactive study materials, lecture summaries, and clinical guides.</p>
       <div class="author-bar">👤 Curated & Maintained by <strong>Mudassir Hussain Khan</strong> • Class Representative</div>
-    </div>
-
-    <!-- IMPRESSIVE LOGIN / DASHBOARD BUTTON BANNER -->
-    <div class="login-hero-banner" id="loginBannerSection">
-      <div class="login-hero-text">
-        <h3>🚀 Student Portal Hub</h3>
-        <p>Already registered? Open your personalized student dashboard to view study access status.</p>
-      </div>
-      <a href="dashboard.html" class="dashboard-action-btn">
-        🔐 Login & Open Dashboard →
-      </a>
     </div>
 
     <!-- SECTION TITLE -->
@@ -535,6 +500,7 @@
                 </a>
               </li>
             </ul>
+            <button class="buy-subject-btn" id="btn-buy-pediatric" onclick="showModal('pediatric')">💳 Unlock Pediatric (PKR 350)</button>
           </div>
         </div>
       </div>
@@ -560,6 +526,7 @@
                 </a>
               </li>
             </ul>
+            <button class="buy-subject-btn" id="btn-buy-reproductive" onclick="showModal('reproductive')">💳 Unlock Reproductive (PKR 350)</button>
           </div>
         </div>
       </div>
@@ -585,6 +552,7 @@
                 </a>
               </li>
             </ul>
+            <button class="buy-subject-btn" id="btn-buy-english" onclick="showModal('english')">💳 Unlock English (PKR 250)</button>
           </div>
         </div>
       </div>
@@ -610,6 +578,7 @@
                 </a>
               </li>
             </ul>
+            <button class="buy-subject-btn" id="btn-buy-perls" onclick="showModal('perls')">💳 Unlock PERLS (PKR 250)</button>
           </div>
         </div>
       </div>
@@ -648,10 +617,10 @@
     <div class="modal-box">
       <button class="close-btn" onclick="closeModal()">×</button>
       <h2 style="font-size:1.25rem;">Unlock BSN Study Portal</h2>
-      <p style="font-size:0.82rem; color:#64748b; margin-top:4px;">Send payment to get your access approved.</p>
+      <p style="font-size:0.82rem; color:#64748b; margin-top:4px;">Send payment to get your specific subject access approved.</p>
       
       <div class="price-tag">
-        <span style="font-size:0.95rem;">PKR</span> <span id="modalPrice">993</span>
+        <span style="font-size:0.95rem;">PKR</span> <span id="modalPrice">250</span>
       </div>
 
       <div class="payment-methods">
@@ -675,7 +644,6 @@
   <script>
     const ALL_SUBJECTS = ['pediatric', 'reproductive', 'english', 'perls'];
     const SUBJECT_PRICES = {
-      'ALL': '993',
       'pediatric': '350',
       'reproductive': '350',
       'english': '250',
@@ -705,12 +673,12 @@
       const priceElement = document.getElementById('modalPrice');
       const whatsappBtn = document.getElementById('whatsappBtn');
       
-      const price = SUBJECT_PRICES[subject] || '993';
+      const price = SUBJECT_PRICES[subject] || '250';
       priceElement.innerText = price;
-      const currentEmail = localStorage.getItem('current_student') || '';
+      const currentEmail = localStorage.getItem('current_student') || 'Not Logged In';
 
-      const subName = subject === 'ALL' ? 'Full BSN Portal Access' : subject.toUpperCase() + ' Course Notes';
-      const defaultText = `Hi Mudassir, I have registered with email (${currentEmail}) and sent payment (PKR ${price}) for ${subName}. Please approve my account.`;
+      const subName = subject.toUpperCase() + ' Course Notes';
+      const defaultText = `Hi Mudassir, I have registered with email (${currentEmail}) and sent payment (PKR ${price}) for ${subName}. Please approve my access.`;
 
       whatsappBtn.href = `https://wa.me/923241064487?text=${encodeURIComponent(defaultText)}`;
       modal.style.display = 'flex';
@@ -724,16 +692,17 @@
       if (e.target.id === 'paymentModal') closeModal();
     }
 
-    function unlockAllSubjects() {
-      ALL_SUBJECTS.forEach(sub => {
-        const titleEl = document.getElementById('title-' + sub);
-        const tagEl = document.getElementById('tag-' + sub);
-        if (titleEl) titleEl.innerText = titleEl.innerText.replace(' 🔒', ' ✅');
-        if (tagEl) {
-          tagEl.className = "tag tag-unlocked";
-          tagEl.innerText = "✅ Unlocked";
-        }
-      });
+    function unlockSubjectUI(subject) {
+      const titleEl = document.getElementById('title-' + subject);
+      const tagEl = document.getElementById('tag-' + subject);
+      const btnEl = document.getElementById('btn-buy-' + subject);
+
+      if (titleEl) titleEl.innerText = titleEl.innerText.replace(' 🔒', ' ✅');
+      if (tagEl) {
+        tagEl.className = "tag tag-unlocked";
+        tagEl.innerText = "✅ Unlocked";
+      }
+      if (btnEl) btnEl.style.display = 'none';
     }
 
     function checkSubjectAccess(event, subject) {
@@ -746,7 +715,15 @@
       }
 
       const user = JSON.parse(localStorage.getItem('user_' + currentEmail));
-      if (!user || user.status !== 'approved') {
+      
+      // Check if user has specific access or full access approval
+      const hasAccess = user && user.status === 'approved' && (
+        user.access === 'ALL' || 
+        (Array.isArray(user.subjects) && user.subjects.includes(subject)) ||
+        user[subject] === true
+      );
+
+      if (!hasAccess) {
         event.preventDefault();
         showModal(subject);
       }
@@ -758,7 +735,11 @@
       if (savedEmail) {
         const user = JSON.parse(localStorage.getItem('user_' + savedEmail));
         if (user && user.status === 'approved') {
-          unlockAllSubjects();
+          ALL_SUBJECTS.forEach(sub => {
+            if (user.access === 'ALL' || (user.subjects && user.subjects.includes(sub)) || user[sub] === true) {
+              unlockSubjectUI(sub);
+            }
+          });
         }
       }
 
