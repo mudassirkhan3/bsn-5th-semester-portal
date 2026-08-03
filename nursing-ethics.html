@@ -6,171 +6,136 @@
   <title>Nursing Ethics | BSN Comprehensive Exam Masterclass</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #0284c7;
-      --primary-dark: #0369a1;
-      --primary-light: #e0f2fe;
-      --slate-dark: #0f172a;
-      --slate-body: #334155;
-      --bg-color: #f8fafc;
-      --border-color: #cbd5e1;
-      --radius: 12px;
-    }
-
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg-color); color: var(--slate-dark); line-height: 1.6; padding-bottom: 60px; -webkit-text-size-adjust: 100%; }
-
-    /* Layout Container */
-    .container { width: 100%; max-width: 1050px; margin: 0 auto; padding: 0 16px; }
-
-    /* Top Quiz Banner */
-    .quiz-banner-wrapper { padding-top: 16px; }
-    .quiz-banner {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      border: 1px solid #334155;
-      border-left: 5px solid #16a34a;
-      border-radius: var(--radius);
-      padding: 20px;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-      box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.2);
-    }
-    .quiz-banner-content { flex: 1; min-width: 240px; }
-    .quiz-badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
-    .quiz-tag {
-      background: rgba(22, 163, 74, 0.15);
-      color: #4ade80;
-      font-size: 0.7rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      padding: 3px 8px;
-      border-radius: 20px;
-      border: 1px solid rgba(74, 222, 128, 0.3);
-    }
-    .quiz-banner h3 { color: #ffffff; font-size: 1.15rem; font-weight: 800; margin: 0 0 4px 0; border: none; padding: 0; }
-    .quiz-banner p { color: #cbd5e1; font-size: 0.85rem; margin: 0; line-height: 1.4; }
-    
-    .quiz-btn {
-      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-      color: #ffffff;
-      padding: 12px 20px;
-      text-decoration: none;
-      border-radius: 10px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-weight: 800;
-      font-size: 0.9rem;
-      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
-      border: 1px solid #22c55e;
-      width: 100%;
-      text-align: center;
-      transition: transform 0.2s ease;
-    }
-    @media(min-width: 640px) { .quiz-btn { width: auto; } }
+    body { background: #f8fafc; color: #0f172a; line-height: 1.65; padding-bottom: 60px; }
 
     /* Top Header */
-    .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; padding: 36px 16px 28px; text-align: center; margin-bottom: 16px; }
-    .header-badge { background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; margin-bottom: 10px; }
-    .header h1 { font-size: 1.75rem; font-weight: 800; margin-bottom: 8px; line-height: 1.2; }
-    .header p { opacity: 0.95; font-size: 0.9rem; max-width: 800px; margin: 0 auto; }
-    @media(min-width: 768px) { .header { padding: 45px 24px 35px; } .header h1 { font-size: 2.3rem; } .header p { font-size: 1rem; } }
+    .header { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: white; padding: 45px 24px 35px; text-align: center; }
+    .header-badge { background: rgba(255, 255, 255, 0.2); padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; margin-bottom: 12px; }
+    .header h1 { font-size: 2.3rem; font-weight: 800; margin-bottom: 10px; }
+    .header p { opacity: 0.95; font-size: 1rem; max-width: 800px; margin: 0 auto; }
 
-    /* Navigation Bar */
-    .nav-bar { background: white; padding: 12px 16px; border-radius: var(--radius); border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.03); margin-bottom: 16px; font-size: 0.85rem; }
-    .nav-btn { color: var(--primary); text-decoration: none; font-weight: 700; }
+    /* Container & Navigation */
+    .container { max-width: 1050px; margin: 0 auto; padding: 0 20px; }
+    .nav-bar { background: white; padding: 12px 20px; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin: 20px auto; position: relative; z-index: 10; }
+    .nav-btn { color: #0284c7; text-decoration: none; font-weight: 700; font-size: 0.9rem; }
     
     /* Sticky Unit Navigation Bar */
-    .sticky-unit-nav { 
-      position: sticky; 
-      top: 8px; 
-      z-index: 100; 
-      background: #ffffff; 
-      border: 1px solid var(--border-color); 
-      border-radius: var(--radius); 
-      padding: 10px 12px; 
-      box-shadow: 0 8px 16px -4px rgba(0,0,0,0.08); 
-      margin-bottom: 24px; 
-      display: flex; 
-      gap: 8px; 
-      overflow-x: auto; 
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; /* Firefox */
-    }
-    .sticky-unit-nav::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
-    .unit-pill { background: #f1f5f9; color: var(--primary-dark); text-decoration: none; padding: 7px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; white-space: nowrap; border: 1px solid #e2e8f0; flex-shrink: 0; }
-    .unit-pill:hover, .unit-pill.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .sticky-unit-nav { position: sticky; top: 10px; z-index: 100; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 10px 14px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); margin-bottom: 30px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: thin; }
+    .unit-pill { background: #f1f5f9; color: #0369a1; text-decoration: none; padding: 8px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; white-space: nowrap; transition: 0.2s; border: 1px solid #e2e8f0; }
+    .unit-pill:hover, .unit-pill.active { background: #0284c7; color: white; border-color: #0284c7; }
 
     /* Content Sections */
-    .section-card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 20px 16px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); scroll-margin-top: 70px; }
-    @media(min-width: 768px) { .section-card { padding: 36px; margin-bottom: 32px; } }
-
-    .unit-header-tag { display: inline-block; background: var(--primary-light); color: var(--primary-dark); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; margin-bottom: 8px; }
-    .section-title { font-size: 1.3rem; font-weight: 800; color: var(--slate-dark); border-left: 4px solid var(--primary); padding-left: 10px; margin-bottom: 18px; line-height: 1.3; }
-    @media(min-width: 768px) { .section-title { font-size: 1.5rem; padding-left: 12px; margin-bottom: 22px; } }
+    .section-card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 36px; margin-bottom: 32px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); scroll-margin-top: 70px; }
+    .unit-header-tag { display: inline-block; background: #e0f2fe; color: #0369a1; font-weight: 800; font-size: 0.78rem; text-transform: uppercase; padding: 4px 12px; border-radius: 6px; margin-bottom: 10px; }
+    .section-title { font-size: 1.5rem; font-weight: 800; color: #0f172a; border-left: 5px solid #0284c7; padding-left: 12px; margin-bottom: 22px; }
     
     /* Typography & Content Elements */
-    h3 { font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); margin: 20px 0 10px; border-bottom: 1px solid #f1f5f9; padding-bottom: 6px; }
-    h4 { font-size: 0.98rem; font-weight: 700; color: var(--slate-dark); margin: 12px 0 4px; }
-    p { color: var(--slate-body); margin-bottom: 12px; font-size: 0.93rem; }
-    ul, ol { margin-left: 18px; margin-bottom: 16px; color: var(--slate-body); }
-    li { margin-bottom: 6px; font-size: 0.92rem; }
+    h3 { font-size: 1.2rem; font-weight: 700; color: #0369a1; margin: 24px 0 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 6px; }
+    h4 { font-size: 1.02rem; font-weight: 700; color: #0f172a; margin: 14px 0 6px; }
+    p { color: #334155; margin-bottom: 12px; font-size: 0.96rem; }
+    ul, ol { margin-left: 22px; margin-bottom: 18px; color: #334155; }
+    li { margin-bottom: 8px; font-size: 0.95rem; }
 
-    /* Visual Diagram Box - Mobile Responsive SVG Fix */
-    .visual-box { background: #f0f9ff; border: 1px dashed var(--primary); border-radius: var(--radius); padding: 16px 8px; margin: 18px 0; text-align: center; overflow-x: auto; }
-    .visual-box svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
-    .visual-caption { font-size: 0.8rem; color: var(--primary-dark); font-weight: 700; margin-top: 8px; }
+    /* Visual Diagram Box */
+    .visual-box { background: #f0f9ff; border: 1px dashed #0284c7; border-radius: 12px; padding: 20px; margin: 22px 0; text-align: center; }
+    .visual-box svg { max-width: 100%; height: auto; }
+    .visual-caption { font-size: 0.85rem; color: #0369a1; font-weight: 700; margin-top: 10px; }
 
     /* Highlights & Exam Boxes */
-    .imp-note { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 14px; border-radius: 8px; margin: 16px 0; font-size: 0.9rem; color: #78350f; }
+    .imp-note { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 8px; margin: 18px 0; font-size: 0.93rem; color: #78350f; }
     .imp-note strong { color: #b45309; }
 
-    .exam-tip { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 14px; border-radius: 8px; margin: 16px 0; font-size: 0.9rem; color: #14532d; }
+    .exam-tip { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 16px; border-radius: 8px; margin: 18px 0; font-size: 0.93rem; color: #14532d; }
     .exam-tip strong { color: #15803d; }
 
     /* Grids & Cards */
-    .grid-2 { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 16px 0; }
-    @media(min-width: 640px) { .grid-2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; } }
-    
-    .grid-card { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px; padding: 14px; }
-    .grid-card h4 { color: var(--primary); font-size: 0.95rem; margin-bottom: 6px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 18px 0; }
+    .grid-card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 18px; }
+    .grid-card h4 { color: #0284c7; font-size: 1rem; margin-bottom: 8px; }
 
-    /* Custom Tables with Horizontal Scroll wrapper for mobile */
-    .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 16px 0; border: 1px solid var(--border-color); border-radius: 8px; }
-    .custom-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 500px; }
-    .custom-table th, .custom-table td { border: 1px solid var(--border-color); padding: 10px 12px; text-align: left; }
-    .custom-table th { background-color: var(--primary-light); color: var(--primary-dark); font-weight: 700; }
+    /* Custom Tables */
+    .custom-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.92rem; }
+    .custom-table th, .custom-table td { border: 1px solid #cbd5e1; padding: 12px 14px; text-align: left; }
+    .custom-table th { background-color: #e0f2fe; color: #0369a1; font-weight: 700; }
     .custom-table tr:nth-child(even) { background-color: #f8fafc; }
 
     /* Footer */
-    footer { text-align: center; font-size: 0.8rem; color: #64748b; margin-top: 30px; padding: 0 16px; }
+    footer { text-align: center; font-size: 0.85rem; color: #64748b; margin-top: 40px; }
   </style>
 </head>
 <body>
 
   <!-- Impressive Nursing Ethics Quiz Callout Banner -->
-  <div class="container quiz-banner-wrapper">
-    <div class="quiz-banner">
+  <div class="container" style="padding-top: 20px;">
+    <div style="
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      border: 1px solid #334155;
+      border-left: 6px solid #16a34a;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+      position: relative;
+      overflow: hidden;
+    ">
       <!-- Content Section -->
-      <div class="quiz-banner-content">
-        <div class="quiz-badge-row">
-          <span class="quiz-tag">● Interactive Practice</span>
-          <span style="color: #94a3b8; font-size: 0.78rem; font-weight: 600;">BSN 5th Semester</span>
+      <div style="max-width: 580px;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <span style="
+            background: rgba(22, 163, 74, 0.15);
+            color: #4ade80;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+          ">
+            ● Interactive Practice
+          </span>
+          <span style="color: #94a3b8; font-size: 0.82rem; font-weight: 600;">BSN 5th Semester</span>
         </div>
-        <h3>Test Your Knowledge on Nursing Ethics</h3>
-        <p>Evaluate your exam readiness with multiple-choice practice questions covering all 8 syllabus units.</p>
+
+        <h3 style="color: #ffffff; font-size: 1.25rem; font-weight: 800; margin: 0 0 4px 0; border: none; padding: 0;">
+          Test Your Knowledge on Nursing Ethics
+        </h3>
+        <p style="color: #cbd5e1; font-size: 0.9rem; margin: 0; line-height: 1.5;">
+          Evaluate your exam readiness with multiple-choice practice questions covering all 8 syllabus units.
+        </p>
       </div>
+
       <!-- Interactive Quiz Button -->
-      <a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics-quiz.html" target="_blank" class="quiz-btn">
-        <span>📝 Take Ethics Quiz</span>
-        <span style="font-size: 1.1rem;">→</span>
+      <a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics-quiz.html" 
+         target="_blank" 
+         style="
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            color: #ffffff;
+            padding: 14px 26px;
+            text-decoration: none;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 0.2px;
+            box-shadow: 0 4px 14px rgba(22, 163, 74, 0.4);
+            border: 1px solid #22c55e;
+            white-space: nowrap;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+         "
+         onmouseover="this.style.transform='translateY(-2px) scale(1.02)'; this.style.boxShadow='0 8px 20px rgba(22, 163, 74, 0.6)';"
+         onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 14px rgba(22, 163, 74, 0.4)';">
+          <span>📝 Take Ethics Quiz</span>
+          <span style="font-size: 1.1rem; transition: transform 0.2s ease;">→</span>
       </a>
     </div>
   </div>
@@ -187,7 +152,7 @@
     <!-- Top Nav -->
     <div class="nav-bar">
       <a href="dashboard.html" class="nav-btn">← Back to Dashboard</a>
-      <span style="font-size: 0.8rem; font-weight: 600; color: #64748b;">Exam Syllabus: 15 MCQs • 3 SEQs</span>
+      <span style="font-size: 0.85rem; font-weight: 600; color: #64748b;">Exam Syllabus: 15 MCQs • 3 SEQs</span>
     </div>
 
     <!-- Sticky 8-Unit Navigation Header Bar -->
@@ -327,44 +292,42 @@
       <p><strong>Value Clarification:</strong> A reflective process by which individuals examine, identify, and understand their own personal values, how those values were formed, and how they influence daily behavior and professional practice.</p>
 
       <h3>2. Categorization / Types of Values</h3>
-      <div class="table-responsive">
-        <table class="custom-table">
-          <thead>
-            <tr>
-              <th>Value Category</th>
-              <th>Definition</th>
-              <th>Clinical Example</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Personal Values</strong></td>
-              <td>Beliefs adopted from family, culture, and life experiences.</td>
-              <td>Personal religious beliefs regarding end-of-life care.</td>
-            </tr>
-            <tr>
-              <td><strong>Societal Values</strong></td>
-              <td>Values held by the broader community or society.</td>
-              <td>Public right to equal, accessible healthcare access.</td>
-            </tr>
-            <tr>
-              <td><strong>Organizational Values</strong></td>
-              <td>Mission, vision, and operational ethos of a health institution.</td>
-              <td>Hospital policy emphasizing patient-centered excellence.</td>
-            </tr>
-            <tr>
-              <td><strong>Professional Values</strong></td>
-              <td>Standards endorsed by professional nursing bodies (e.g., AACN).</td>
-              <td>Altruism, Autonomy, Human Dignity, Integrity, Social Justice.</td>
-            </tr>
-            <tr>
-              <td><strong>Moral Values</strong></td>
-              <td>Beliefs regarding basic principles of right vs. wrong.</td>
-              <td>Honesty, non-harm, and truthfulness with clients.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Value Category</th>
+            <th>Definition</th>
+            <th>Clinical Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Personal Values</strong></td>
+            <td>Beliefs adopted from family, culture, and life experiences.</td>
+            <td>Personal religious beliefs regarding end-of-life care.</td>
+          </tr>
+          <tr>
+            <td><strong>Societal Values</strong></td>
+            <td>Values held by the broader community or society.</td>
+            <td>Public right to equal, accessible healthcare access.</td>
+          </tr>
+          <tr>
+            <td><strong>Organizational Values</strong></td>
+            <td>Mission, vision, and operational ethos of a health institution.</td>
+            <td>Hospital policy emphasizing patient-centered excellence.</td>
+          </tr>
+          <tr>
+            <td><strong>Professional Values</strong></td>
+            <td>Standards endorsed by professional nursing bodies (e.g., AACN).</td>
+            <td>Altruism, Autonomy, Human Dignity, Integrity, Social Justice.</td>
+          </tr>
+          <tr>
+            <td><strong>Moral Values</strong></td>
+            <td>Beliefs regarding basic principles of right vs. wrong.</td>
+            <td>Honesty, non-harm, and truthfulness with clients.</td>
+          </tr>
+        </tbody>
+      </table>
 
       <h3>3. Modes of Value Transmission</h3>
       <div class="grid-2">
@@ -486,54 +449,52 @@
       </div>
 
       <h3>2. The Four Core Principles &amp; Secondary Ethical Rules</h3>
-      <div class="table-responsive">
-        <table class="custom-table">
-          <thead>
-            <tr>
-              <th>Ethical Principle</th>
-              <th>Clinical Definition</th>
-              <th>Nursing Application Example</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Autonomy</strong></td>
-              <td>Respecting a patient's right to self-determination and personal choices.</td>
-              <td>Obtaining informed consent; respecting refusal of treatment.</td>
-            </tr>
-            <tr>
-              <td><strong>Non-Maleficence</strong></td>
-              <td><em>Primum non-nocere</em> — Above all, do no intentional or avoidable harm.</td>
-              <td>Double-checking high-alert medication doses before administration.</td>
-            </tr>
-            <tr>
-              <td><strong>Beneficence</strong></td>
-              <td>Actions performed for the benefit, safety, and well-being of others.</td>
-              <td>Providing pain relief and turning immobile clients to prevent ulcers.</td>
-            </tr>
-            <tr>
-              <td><strong>Justice</strong></td>
-              <td>Fairness in resource distribution and non-discriminatory care.</td>
-              <td>Triage in emergency departments based on medical need, not wealth.</td>
-            </tr>
-            <tr>
-              <td><strong>Fidelity</strong></td>
-              <td>Faithfulness, honoring promises, and maintaining professional loyalty.</td>
-              <td>Returning to evaluate a patient's pain 30 minutes after medication as promised.</td>
-            </tr>
-            <tr>
-              <td><strong>Veracity</strong></td>
-              <td>Absolute obligation to tell the truth without deception.</td>
-              <td>Honestly informing clients about procedure risks and medical errors.</td>
-            </tr>
-            <tr>
-              <td><strong>Confidentiality</strong></td>
-              <td>Respecting privacy and safeguarding protected health information.</td>
-              <td>Discussing client details only in private clinical areas with authorized staff.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Ethical Principle</th>
+            <th>Clinical Definition</th>
+            <th>Nursing Application Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Autonomy</strong></td>
+            <td>Respecting a patient's right to self-determination and personal choices.</td>
+            <td>Obtaining informed consent; respecting refusal of treatment.</td>
+          </tr>
+          <tr>
+            <td><strong>Non-Maleficence</strong></td>
+            <td><em>Primum non-nocere</em> — Above all, do no intentional or avoidable harm.</td>
+            <td>Double-checking high-alert medication doses before administration.</td>
+          </tr>
+          <tr>
+            <td><strong>Beneficence</strong></td>
+            <td>Actions performed for the benefit, safety, and well-being of others.</td>
+            <td>Providing pain relief and turning immobile clients to prevent ulcers.</td>
+          </tr>
+          <tr>
+            <td><strong>Justice</strong></td>
+            <td>Fairness in resource distribution and non-discriminatory care.</td>
+            <td>Triage in emergency departments based on medical need, not wealth.</td>
+          </tr>
+          <tr>
+            <td><strong>Fidelity</strong></td>
+            <td>Faithfulness, honoring promises, and maintaining professional loyalty.</td>
+            <td>Returning to evaluate a patient's pain 30 minutes after medication as promised.</td>
+          </tr>
+          <tr>
+            <td><strong>Veracity</strong></td>
+            <td>Absolute obligation to tell the truth without deception.</td>
+            <td>Honestly informing clients about procedure risks and medical errors.</td>
+          </tr>
+          <tr>
+            <td><strong>Confidentiality</strong></td>
+            <td>Respecting privacy and safeguarding protected health information.</td>
+            <td>Discussing client details only in private clinical areas with authorized staff.</td>
+          </tr>
+        </tbody>
+      </table>
 
       <h3>3. Steps of the Systematic Ethical Decision-Making Model</h3>
       <ol>
@@ -577,12 +538,285 @@
           <p>Verifying the legal and mental capacity of the client to make informed choices (adult, coherent, alert).</p>
         </div>
       </div>
+
+      <!-- SVG Visual: Informed Consent Roles -->
+      <div class="visual-box">
+        <svg width="600" height="150" viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="35" width="230" height="80" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+          <text x="145" y="60" fill="#0369a1" font-weight="800" font-size="13" text-anchor="middle">PHYSICIAN / SURGEON</text>
+          <text x="145" y="80" fill="#334155" font-size="11" text-anchor="middle">• Explains procedure &amp; risks</text>
+          <text x="145" y="96" fill="#334155" font-size="11" text-anchor="middle">• Obtains formal medical consent</text>
+
+          <rect x="340" y="35" width="230" height="80" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+          <text x="455" y="60" fill="#15803d" font-weight="800" font-size="13" text-anchor="middle">NURSE ADVOCATE</text>
+          <text x="455" y="80" fill="#334155" font-size="11" text-anchor="middle">• Witness client signature</text>
+          <text x="455" y="96" fill="#334155" font-size="11" text-anchor="middle">• Validates patient comprehension</text>
+        </svg>
+        <div class="visual-caption">Figure 4.1: Distinct Roles of Physicians vs. Nurses in Informed Consent</div>
+      </div>
+
+      <h3>3. Exceptions to Informed Consent</h3>
+      <ul>
+        <li><strong>Emergency Exception:</strong> In life-threatening emergencies where a patient is unconscious and unable to give consent, and immediate action is required to save life or prevent permanent injury (Implied Consent).</li>
+        <li><strong>Incompetent or Incapacitated Patient:</strong> When a client lacks decision-making capacity, consent must be obtained from a legally authorized surrogate decision-maker.</li>
+        <li><strong>Waiver of Consent:</strong> When a competent patient voluntarily relinquishes their right to information and requests that family members make decisions for them.</li>
+        <li><strong>Public Health Hazards:</strong> Mandatory treatment or isolation required by law for highly contagious, dangerous communicable diseases.</li>
+      </ul>
+
+      <h3>4. Legal &amp; Ethical Boundaries of Confidentiality (HIPAA &amp; Exceptions)</h3>
+      <p>Nurses have a strict legal duty to safeguard health records. However, confidentiality is <strong>not absolute</strong> and must be breached under specific legally mandated circumstances:</p>
+      <ol>
+        <li><strong>Suspected Child Abuse or Elder Abuse:</strong> Mandatory reporting to legal/protective authorities.</li>
+        <li><strong>Gunshot Wounds or Violent Crimes:</strong> Required reporting to law enforcement agencies.</li>
+        <li><strong>Infectious Disease Reporting:</strong> Mandatory notification of public health departments for specific communicable diseases (e.g., TB, HIV, Hepatitis).</li>
+        <li><strong>Duty to Warn / Protect (Tarasoff Ruling):</strong> If a patient expresses credible, explicit intent to harm an identifiable third party, the healthcare team has a duty to warn the intended victim and authorities.</li>
+      </ol>
     </section>
 
-    <footer>
-      <p>&copy; 2026 BSN 5th Semester Portal • Nursing Ethics Masterclass Study Guide</p>
-    </footer>
+    <!-- ==================== UNIT V ==================== -->
+    <section id="unit5" class="section-card">
+      <span class="unit-header-tag">Unit V • Weightage: 2 MCQs | 0.5 SEQ</span>
+      <h2 class="section-title">Unit V: Patient Rights &amp; Professional Advocacy</h2>
+
+      <h3>1. Concept of Patient Rights</h3>
+      <p><strong>Patient Rights:</strong> The fundamental moral, legal, and human entitlements that safeguard a client's dignity, autonomy, physical integrity, and right to equitable healthcare services while receiving medical care.</p>
+
+      <h3>2. Key Elements of the Patient Bill of Rights</h3>
+      <div class="grid-2">
+        <div class="grid-card">
+          <h4>Right to Respect &amp; Dignity</h4>
+          <p>Receiving considerate, respectful care free from discrimination, abuse, or disregard of personal values.</p>
+        </div>
+        <div class="grid-card">
+          <h4>Right to Privacy &amp; Confidentiality</h4>
+          <p>Absolute protection of personal health data and privacy during examinations, treatments, and discussions.</p>
+        </div>
+        <div class="grid-card">
+          <h4>Right to Information Access</h4>
+          <p>Clear, understandable explanations regarding diagnosis, treatment plans, prognoses, and medication side effects.</p>
+        </div>
+        <div class="grid-card">
+          <h4>Right to Refuse Treatment</h4>
+          <p>The legal right of a competent adult to decline any medication, test, or surgical procedure after being informed of consequences.</p>
+        </div>
+      </div>
+
+      <h3>3. Professional Nursing Advocacy</h3>
+      <p><strong>Advocacy:</strong> The act of speaking up for, defending, and supporting a patient's rights, health, safety, and personal choices, especially when clients are vulnerable, intimidated, or unable to advocate for themselves.</p>
+      <ul>
+        <li>Acting as a bridge between the client and the multidisciplinary medical team.</li>
+        <li>Protecting clients from unsafe medical orders, medication errors, or institutional neglect.</li>
+        <li>Ensuring patients fully comprehend their treatment options before signing consent forms.</li>
+      </ul>
+
+      <!-- SVG Visual: The Nursing Advocacy Shield -->
+      <div class="visual-box">
+        <svg width="600" height="150" viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="300,15 380,40 380,90 300,135 220,90 220,40" fill="#e0f2fe" stroke="#0284c7" stroke-width="3"/>
+          <text x="300" y="55" fill="#0369a1" font-weight="800" font-size="13" text-anchor="middle">PATIENT ADVOCACY</text>
+          <text x="300" y="78" fill="#334155" font-size="11" text-anchor="middle">🛡️ Safeguarding Client Rights</text>
+          <text x="300" y="98" fill="#334155" font-size="11" text-anchor="middle">⚖️ Balancing Safety &amp; Autonomy</text>
+        </svg>
+        <div class="visual-caption">Figure 5.1: The Core Pillars of Nursing Advocacy</div>
+      </div>
+
+      <h3>4. Vulnerable Patient Populations</h3>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Vulnerable Group</th>
+            <th>Primary Ethical Vulnerability</th>
+            <th>Nursing Responsibilities</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Pediatric Clients</strong></td>
+            <td>Incomplete cognitive maturity; unable to provide true legal consent.</td>
+            <td>Involve parents as surrogates; use developmentally appropriate explanations; practice assent.</td>
+          </tr>
+          <tr>
+            <td><strong>Elderly / Geriatric</strong></td>
+            <td>Risk of cognitive decline, physical frailty, financial exploitation, and neglect.</td>
+            <td>Assess mental capacity regularly; protect dignity; screen for elder abuse.</td>
+          </tr>
+          <tr>
+            <td><strong>Psychiatric / Mentally Ill</strong></td>
+            <td>Impaired reality testing, involuntary admission status, stigma.</td>
+            <td>Protect human rights; prevent chemical or physical restraint overuse; ensure least restrictive care.</td>
+          </tr>
+          <tr>
+            <td><strong>Terminally Ill / End-of-Life</strong></td>
+            <td>Severe pain, loss of control, vulnerability to despair or pressure.</td>
+            <td>Provide aggressive palliative comfort care; support advance directives; protect autonomy.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="exam-tip">
+        <strong>💡 High-Yield Exam Tip:</strong> Remember that <em>Assent</em> is sought from minors or impaired adults who cannot give legal consent, acknowledging their participation and agreement level in care decisions.
+      </div>
+    </section>
+
+    <!-- ==================== UNIT VI ==================== -->
+    <section id="unit6" class="section-card">
+      <span class="unit-header-tag">Unit VI • Weightage: 2 MCQs | 0.5 SEQ</span>
+      <h2 class="section-title">Unit VI: Professional Codes of Ethics &amp; Regulation</h2>
+
+      <h3>1. Purpose of a Code of Ethics</h3>
+      <p>A <strong>Code of Ethics</strong> is a formal published framework that outlines professional expectations, moral obligations, core values, and commitments of a profession to society. Its primary purposes are:</p>
+      <ul>
+        <li>To serve as a standard for professional behavior and self-regulation.</li>
+        <li>To guide nurses through complex ethical decision-making and moral dilemmas.</li>
+        <li>To inform the public of the ethical commitments and standards expected of registered nurses.</li>
+      </ul>
+
+      <h3>2. Major Regulatory &amp; Professional Bodies</h3>
+      <div class="grid-2">
+        <div class="grid-card">
+          <h4>Pakistan Nursing Council (PNC)</h4>
+          <p>The statutory regulatory body governing nursing education, registration, licensure, and professional conduct standards across Pakistan.</p>
+        </div>
+        <div class="grid-card">
+          <h4>International Council of Nurses (ICN)</h4>
+          <p>A global federation representing millions of nurses worldwide, responsible for establishing the universally recognized <em>ICN Code of Ethics for Nurses</em>.</p>
+        </div>
+        <div class="grid-card">
+          <h4>American Nurses Association (ANA)</h4>
+          <p>Publishes the comprehensive <em>Code of Ethics for Nurses with Interpretive Statements</em>, setting gold standards for ethical clinical practice.</p>
+        </div>
+        <div class="grid-card">
+          <h4>Pakistan Nursing Federation (PNF)</h4>
+          <p>A professional organizational body advocating for nurse welfare, rights, and working condition improvements in Pakistan.</p>
+        </div>
+      </div>
+
+      <h3>3. Core Elements of the ICN Code of Ethics for Nurses</h3>
+      <p>The ICN Code is structured around four fundamental ethical responsibilities:</p>
+      <ol>
+        <li><strong>Nurses and People:</strong> Primary professional responsibility is to people requiring nursing care. Promotes an environment of respect for human rights, values, customs, and spiritual beliefs.</li>
+        <li><strong>Nurses and Practice:</strong> Maintains personal accountability and competence for nursing practice; exercises judgment in accepting and delegating tasks.</li>
+        <li><strong>Nurses and the Profession:</strong> Assumes major role in determining and implementing acceptable standards of clinical nursing practice, research, and education.</li>
+        <li><strong>Nurses and Co-workers:</strong> Sustains collaborative, respectful relationships with members of health and other professions.</li>
+      </ol>
+
+      <div class="exam-tip">
+        <strong>💡 SEQ Exam Key:</strong> When answering questions on professional regulation, clearly distinguish between PNC (legal licensing &amp; curriculum control) and ICN/ANA (ethical codes &amp; professional guidance frameworks).
+      </div>
+    </section>
+
+    <!-- ==================== UNIT VII ==================== -->
+    <section id="unit7" class="section-card">
+      <span class="unit-header-tag">Unit VII • Weightage: 2 MCQs | 0.5 SEQ</span>
+      <h2 class="section-title">Unit VII: Patient Autonomy, Informed Refusal &amp; End-of-Life Decisions</h2>
+
+      <h3>1. Understanding Patient Autonomy &amp; Informed Refusal</h3>
+      <p><strong>Autonomy in Practice:</strong> The absolute right of a competent patient to direct their own medical care, including the right to accept or refuse prescribed treatments.</p>
+      <p><strong>Informed Refusal:</strong> The legal and ethical right of a competent adult to decline medical interventions (e.g., surgery, chemotherapy, blood transfusions), even if that refusal will result in permanent disability or death.</p>
+      
+      <div class="imp-note">
+        <strong>⚠️ Clinical Rule:</strong> A competent adult patient has the legal right to refuse treatment. Forcing treatment on a competent refusing patient constitutes medical battery. Nurses must verify patient competence, explore reasons for refusal, educate on consequences, and notify the physician immediately.
+      </div>
+
+      <h3>2. Advanced Directives &amp; End-of-Life Planning</h3>
+      <p><strong>Advance Directives:</strong> Legal documents that allow individuals to state their preferences for medical care before they lose the mental capacity to make decisions.</p>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Advance Directive Type</th>
+            <th>Definition &amp; Purpose</th>
+            <th>Clinical Implication</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Living Will</strong></td>
+            <td>A written legal document specifying exact medical treatments desired or refused (e.g., ventilators, tube feeding) if terminally ill or incapacitated.</td>
+            <td>Activated only when the patient is certified terminal or permanently unconscious.</td>
+          </tr>
+          <tr>
+            <td><strong>Durable Power of Attorney for Healthcare (Healthcare Proxy)</strong></td>
+            <td>Designates a trusted surrogate decision-maker to make medical choices if the patient becomes incapacitated.</td>
+            <td>Surrogate must make decisions based on substituted judgment (what the patient would have wanted).</td>
+          </tr>
+          <tr>
+            <td><strong>Do Not Resuscitate (DNR) Order</strong></td>
+            <td>A formal medical order written by a physician instructing healthcare providers not to attempt CPR if breathing or heartbeat stops.</td>
+            <td>Must be documented clearly in charts; does not mean "do not treat"—all other comfort and palliative care continues.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3. Euthanasia and Assisted Suicide: Ethical &amp; Legal Distinctions</h3>
+      <div class="grid-2">
+        <div class="grid-card">
+          <h4>Active Euthanasia</h4>
+          <p>A clinician directly and intentionally administers a lethal dose of medication to end a patient's life (e.g., lethal injection). <strong>Illegal in most countries and strongly condemned by nursing codes.</strong></p>
+        </div>
+        <div class="grid-card">
+          <h4>Passive Euthanasia (Letting Die)</h4>
+          <p>Withholding or withdrawing life-sustaining treatment (e.g., turning off a ventilator or stopping dialysis) allowing the underlying disease to take its natural course. <strong>Ethically and legally accepted with patient/surrogate consent.</strong></p>
+        </div>
+        <div class="grid-card">
+          <h4>Physician-Assisted Suicide (PAS)</h4>
+          <p>A clinician prescribes a lethal dose of medication, but the <em>patient</em> self-administers it to end their life. Highly controversial and restricted to specific legal jurisdictions.</p>
+        </div>
+        <div class="grid-card">
+          <h4>Palliative Sedation</h4>
+          <p>Administering sedatives to relieve intractable refractory symptoms at end-of-life, even if it may indirectly shorten life (justified under the <em>Principle of Double Effect</em>).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== UNIT VIII ==================== -->
+    <section id="unit8" class="section-card">
+      <span class="unit-header-tag">Unit VIII • Weightage: 3 MCQs | 1 SEQ</span>
+      <h2 class="section-title">Unit VIII: Ethical Dilemmas in Clinical Practice &amp; Moral Distress</h2>
+
+      <h3>1. Anatomy of Clinical Ethical Dilemmas</h3>
+      <p>An <strong>ethical dilemma</strong> arises in clinical practice when two or more morally justifiable principles compete, and no matter which choice the nurse makes, a moral duty is compromised.</p>
+      
+      <h4>Common Clinical Scenarios Leading to Dilemmas:</h4>
+      <ul>
+        <li><strong>Autonomy vs. Beneficence:</strong> A competent elderly patient refuses life-saving amputation due to personal beliefs, while family and physicians demand the surgery to save their life.</li>
+        <li><strong>Truth-Telling (Veracity) vs. Family Wishes:</strong> Family members request that a terminal cancer diagnosis be concealed from the patient, violating the patient's right to truth and autonomy.</li>
+        <li><strong>Resource Allocation (Justice):</strong> Allocating scarce intensive care unit (ICU) beds or ventilators during mass casualties or pandemic surges.</li>
+        <li><strong>Whistleblowing vs. Loyalty:</strong> Witnessing a senior physician or colleague commit a medication error or engage in unsafe patient neglect and deciding whether to report it.</li>
+      </ul>
+
+      <h3>2. Moral Distress in Nursing</h3>
+      <p><strong>Moral Distress:</strong> Occurs when a nurse knows the ethically correct action to take, but institutional constraints, administrative pressure, legal fear, or physician opposition prevent them from executing that action.</p>
+      
+      <div class="grid-2">
+        <div class="grid-card">
+          <h4>Causes of Moral Distress</h4>
+          <p>Prolonging painful end-of-life treatments due to family pressure (futile care); witnessing unsafe staffing ratios; lack of institutional support.</p>
+        </div>
+        <div class="grid-card">
+          <h4>Consequences &amp; Burnout</h4>
+          <p>Emotional exhaustion, depression, loss of empathy, clinical errors, and physical nurse burnout leading to high turnover rates in healthcare.</p>
+        </div>
+      </div>
+
+      <h3>3. Strategies for Resolving Ethical Dilemmas in Clinical Settings</h3>
+      <ol>
+        <li><strong>Utilize Institutional Ethics Committees (IEC):</strong> Multidisciplinary committees (composed of physicians, nurses, ethicists, legal advisors, and clergy) available to review complex cases, provide unbiased consultation, and mediate disputes.</li>
+        <li><strong>Open Interprofessional Dialogue:</strong> Conduct structured family-care conferences to align goals of care between healthcare providers, clients, and surrogates.</li>
+        <li><strong>Reflective Practice &amp; Debriefing:</strong> Engage in regular clinical debriefings to process moral distress, review decisions objectively, and promote psychological resilience.</li>
+        <li><strong>Conscientious Objection:</strong> The right of a nurse to decline participation in a procedure (e.g., abortion or assisted suicide) that violates their deep moral or religious convictions, <em>provided</em> patient care is safely transferred to another qualified provider without abandonment.</li>
+      </ol>
+
+      <div class="exam-tip">
+        <strong>💡 Master SEQ Exam Summary:</strong> When addressing clinical case studies in your SEQs, always follow a structured format: (1) Identify the core ethical principles involved, (2) State the exact dilemma, (3) Apply the 5-step ethical decision-making model, and (4) Propose an interprofessional resolution plan involving patient advocacy and ethics committee consultation.
+      </div>
+    </section>
 
   </div>
+
+  <footer>
+    <p>Nursing Ethics Masterclass • BSN Comprehensive Exam Preparation Portal</p>
+    <p style="margin-top: 5px; font-size: 0.8rem;">Designed for BSN Students • Pakistan Nursing Council Curriculum Standards</p>
+  </footer>
+
 </body>
 </html>
