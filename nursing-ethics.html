@@ -18,7 +18,7 @@
 
     /* Container & Navigation */
     .container { max-width: 1050px; margin: 0 auto; padding: 0 20px; }
-    .nav-bar { background: white; padding: 12px 20px; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin: -20px auto 20px; position: relative; z-index: 10; }
+    .nav-bar { background: white; padding: 12px 20px; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin: 20px auto; position: relative; z-index: 10; }
     .nav-btn { color: #0284c7; text-decoration: none; font-weight: 700; font-size: 0.9rem; }
     
     /* Sticky Unit Navigation Bar */
@@ -44,7 +44,7 @@
     .visual-caption { font-size: 0.85rem; color: #0369a1; font-weight: 700; margin-top: 10px; }
 
     /* Highlights & Exam Boxes */
-    .imp-note { background: #fffbebf5; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 8px; margin: 18px 0; font-size: 0.93rem; color: #78350f; }
+    .imp-note { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 8px; margin: 18px 0; font-size: 0.93rem; color: #78350f; }
     .imp-note strong { color: #b45309; }
 
     .exam-tip { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 16px; border-radius: 8px; margin: 18px 0; font-size: 0.93rem; color: #14532d; }
@@ -61,29 +61,84 @@
     .custom-table th { background-color: #e0f2fe; color: #0369a1; font-weight: 700; }
     .custom-table tr:nth-child(even) { background-color: #f8fafc; }
 
-    /* Quiz Button Style */
-    .quiz-btn {
-      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-      color: #ffffff;
-      padding: 12px 24px;
-      text-decoration: none;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      box-shadow: 0 4px 6px -1px rgba(22, 163, 74, 0.3);
-      transition: transform 0.2s ease;
-      margin-bottom: 20px;
-    }
-    .quiz-btn:hover { transform: translateY(-2px); }
-
     /* Footer */
     footer { text-align: center; font-size: 0.85rem; color: #64748b; margin-top: 40px; }
   </style>
 </head>
 <body>
+
+  <!-- Impressive Nursing Ethics Quiz Callout Banner -->
+  <div class="container" style="padding-top: 20px;">
+    <div style="
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      border: 1px solid #334155;
+      border-left: 6px solid #16a34a;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+      position: relative;
+      overflow: hidden;
+    ">
+      <!-- Content Section -->
+      <div style="max-width: 580px;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <span style="
+            background: rgba(22, 163, 74, 0.15);
+            color: #4ade80;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+          ">
+            ● Interactive Practice
+          </span>
+          <span style="color: #94a3b8; font-size: 0.82rem; font-weight: 600;">BSN 5th Semester</span>
+        </div>
+
+        <h3 style="color: #ffffff; font-size: 1.25rem; font-weight: 800; margin: 0 0 4px 0; border: none; padding: 0;">
+          Test Your Knowledge on Nursing Ethics
+        </h3>
+        <p style="color: #cbd5e1; font-size: 0.9rem; margin: 0; line-height: 1.5;">
+          Evaluate your exam readiness with multiple-choice practice questions covering all 8 syllabus units.
+        </p>
+      </div>
+
+      <!-- Interactive Quiz Button -->
+      <a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics-quiz.html" 
+         target="_blank" 
+         style="
+           background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+           color: #ffffff;
+           padding: 14px 26px;
+           text-decoration: none;
+           border-radius: 10px;
+           display: inline-flex;
+           align-items: center;
+           gap: 10px;
+           font-weight: 800;
+           font-size: 0.95rem;
+           letter-spacing: 0.2px;
+           box-shadow: 0 4px 14px rgba(22, 163, 74, 0.4);
+           border: 1px solid #22c55e;
+           white-space: nowrap;
+           transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+         "
+         onmouseover="this.style.transform='translateY(-2px) scale(1.02)'; this.style.boxShadow='0 8px 20px rgba(22, 163, 74, 0.6)';"
+         onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 14px rgba(22, 163, 74, 0.4)';">
+          <span>📝 Take Ethics Quiz</span>
+          <span style="font-size: 1.1rem; transition: transform 0.2s ease;">→</span>
+      </a>
+    </div>
+  </div>
 
   <!-- Top Header -->
   <header class="header">
@@ -99,13 +154,6 @@
       <a href="dashboard.html" class="nav-btn">← Back to Dashboard</a>
       <span style="font-size: 0.85rem; font-weight: 600; color: #64748b;">Exam Syllabus: 15 MCQs • 3 SEQs</span>
     </div>
-
-    <!-- Nursing Ethics Quiz Button Properly Placed -->
-    <a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics-quiz.html" 
-       target="_blank" 
-       class="quiz-btn">
-      📝 Take Nursing Ethics Quiz
-    </a>
 
     <!-- Sticky 8-Unit Navigation Header Bar -->
     <nav class="sticky-unit-nav">
@@ -500,63 +548,33 @@
           <text x="145" y="96" fill="#334155" font-size="11" text-anchor="middle">• Answers complex questions</text>
 
           <rect x="340" y="35" width="230" height="80" rx="10" fill="#0284c7"/>
-          <text x="455" y="60" fill="white" font-weight="800" font-size="13" text-anchor="middle">PROFESSIONAL NURSE</text>
-          <text x="455" y="80" fill="white" font-size="11" text-anchor="middle">• Witnesses client's signature</text>
-          <text x="455" y="96" fill="white" font-size="11" text-anchor="middle">• Confirms capacity &amp; voluntariness</text>
+          <text x="455" y="60" fill="white" font-weight="800" font-size="13" text-anchor="middle">NURSE ADVOCATE</text>
+          <text x="455" y="80" fill="white" font-size="11" text-anchor="middle">• Witness signature &amp; verifies patient</text>
+          <text x="455" y="96" fill="white" font-size="11" text-anchor="middle">• Ensures voluntariness &amp; comprehension</text>
         </svg>
-        <div class="visual-caption">Figure 4.1: Distinct Roles of Provider vs. Nurse in Informed Consent</div>
+        <div class="visual-caption">Figure 4.1: Distinct Roles of Physicians and Nurses in Informed Consent</div>
       </div>
 
-      <h3>3. Nurse’s Roles and Legal Responsibilities in Consent</h3>
-      <div class="imp-note">
-        <strong>📌 Crucial MCQ Point:</strong> The physician/surgeon is legally responsible for explaining the procedure and obtaining consent. The nurse acts as a <strong>witness to the signature</strong>, verifying that:
-        <ul style="margin-top: 8px; margin-bottom: 0;">
-          <li>The client signed the form voluntarily.</li>
-          <li>The signature is authentic.</li>
-          <li>The client appears mentally competent to sign.</li>
-        </ul>
-        <em>If a patient expresses confusion or lack of understanding, the nurse MUST hold the form and notify the surgeon immediately.</em>
-      </div>
-
-      <h3>4. Exceptions to Informed Consent &amp; Confidentiality</h3>
+      <h3>3. Exceptions to Informed Consent</h3>
       <ul>
-        <li><strong>Emergency Exception:</strong> Life-threatening emergency when the client is unconscious and no surrogate is available (Implied Consent applies).</li>
-        <li><strong>Mandatory Disclosure / Duty to Warn:</strong> Confidentiality may be legally breached in cases of child/elder abuse, communicable disease reporting to public health authorities, or clear threats to harm oneself or others (Tarasoff rule).</li>
+        <li><strong>Emergency Situations:</strong> When immediate intervention is necessary to preserve life or prevent serious impairment, and the patient is unconscious or incapacitated.</li>
+        <li><strong>Incompetent Patients:</strong> When designated legal surrogates or proxy decision-makers authorize care on behalf of minors or incapacitated adults.</li>
+        <li><strong>Waiver by Patient:</strong> When a competent patient explicitly states they prefer not to be informed and delegate decision-making to family members.</li>
       </ul>
-    </section>
 
-    <!-- ==================== UNIT V ==================== -->
-    <section id="unit5" class="section-card">
-      <span class="unit-header-tag">Unit V • Weightage: 2 MCQs | 0.5 SEQ</span>
-      <h2 class="section-title">Unit V: Patient Rights &amp; Professional Advocacy</h2>
-      <p>Content for patient rights, responsibilities, advocacy roles, and legal safeguards in clinical practice.</p>
-    </section>
-
-    <!-- ==================== UNIT VI ==================== -->
-    <section id="unit6" class="section-card">
-      <span class="unit-header-tag">Unit VI • Weightage: 2 MCQs | 0.5 SEQ</span>
-      <h2 class="section-title">Unit VI: Codes of Ethics for Nurses</h2>
-      <p>Overview of PNC (Pakistan Nursing Council) and ICN (International Council of Nurses) ethical codes.</p>
-    </section>
-
-    <!-- ==================== UNIT VII ==================== -->
-    <section id="unit7" class="section-card">
-      <span class="unit-header-tag">Unit VII • Weightage: 2 MCQs | 0.5 SEQ</span>
-      <h2 class="section-title">Unit VII: Autonomy &amp; End-of-Life Decisions</h2>
-      <p>Managing advanced directives, living wills, DNR (Do Not Resuscitate) orders, and palliative ethics.</p>
-    </section>
-
-    <!-- ==================== UNIT VIII ==================== -->
-    <section id="unit8" class="section-card">
-      <span class="unit-header-tag">Unit VIII • Weightage: 3 MCQs | 1 SEQ</span>
-      <h2 class="section-title">Unit VIII: Clinical Practice Dilemmas &amp; Moral Distress</h2>
-      <p>Addressing everyday ethical hurdles, resource allocation, and overcoming moral distress in clinical settings.</p>
+      <h3>4. Exceptions to Confidentiality (Duty to Warn / Protect)</h3>
+      <p>Nurses may breach confidentiality without legal liability under mandatory reporting laws:</p>
+      <ul>
+        <li>Suspected child abuse, elder abuse, or domestic violence.</li>
+        <li>Communicable or reportable infectious diseases (e.g., tuberculosis, HIV depending on local statutory laws).</li>
+        <li>Threat of imminent harm to self or a specifically identifiable third party (Tarasoff ruling / duty to warn).</li>
+      </ul>
     </section>
 
   </div>
 
   <footer>
-    <p>&copy; 2026 BSN Comprehensive Exam Masterclass • All Rights Reserved</p>
+    <p>&copy; 2026 BSN Nursing Ethics Masterclass • Prepared for Academic Excellence</p>
   </footer>
 
 </body>
