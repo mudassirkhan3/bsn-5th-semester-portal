@@ -21,32 +21,65 @@
       --border: #e2e8f0;
       --radius: 16px;
       --shadow: 0 10px 30px -5px rgba(2, 132, 199, 0.08);
+      --shadow-lg: 0 20px 40px -10px rgba(15, 23, 42, 0.12);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; }
     body { background-color: var(--bg-main); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; }
 
-    /* NAVBAR & HAMBURGER MENU */
-    .navbar { 
+    /* LAYOUT APP SHELL (PC Sidebar & Mobile Header) */
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+      position: relative;
+    }
+
+    /* PC SIDEBAR NAVIGATION (Hidden on Mobile) */
+    .pc-sidebar {
+      display: none;
+      width: 260px;
+      background: #ffffff;
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      z-index: 50;
+      padding: 24px 20px;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sidebar-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-dark); font-weight: 800; font-size: 1.1rem; margin-bottom: 30px; }
+    .pulse-box { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); }
+    
+    .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .sidebar-menu a {
+      text-decoration: none; color: var(--text-muted); font-weight: 700; font-size: 0.92rem;
+      display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; transition: all 0.2s ease;
+    }
+    .sidebar-menu a:hover, .sidebar-menu a.active { background: #f0f9ff; color: var(--primary-dark); }
+
+    /* MOBILE NAVBAR (Hidden on PC) */
+    .mobile-navbar { 
+      display: flex;
       position: sticky; top: 0; z-index: 100; 
       background: rgba(255, 255, 255, 0.92); 
       backdrop-filter: blur(14px); 
-      border-bottom: 1px solid rgba(226, 232, 240, 0.8); 
+      border-bottom: 1px solid var(--border); 
       padding: 12px 16px; 
-    }
-    .nav-container { 
-      max-width: 900px; margin: 0 auto; 
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
     }
     .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-dark); font-weight: 800; font-size: 1.05rem; }
-    .pulse-box { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
-    
     .menu-toggle {
       background: #f1f5f9; border: 1px solid var(--border); padding: 8px 12px; border-radius: 10px;
       font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
     }
 
-    /* SLIDE-OUT DRAWER MENU */
+    /* SLIDE-OUT DRAWER MENU (Mobile) */
     .drawer-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(4px);
@@ -54,7 +87,7 @@
     }
     .drawer {
       position: fixed; top: 0; right: -280px; width: 280px; height: 100%;
-      background: #ffffff; z-index: 201; transition: right 0.3s ease;
+      background: #ffffff; z-index: 201; transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       padding: 24px 20px; display: flex; flex-direction: column; justify-content: space-between;
       box-shadow: -10px 0 30px rgba(0,0,0,0.1);
     }
@@ -62,10 +95,10 @@
     .drawer-overlay.open { display: block; opacity: 1; }
     
     .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-    .drawer-menu { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .drawer-menu { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .drawer-menu a {
       text-decoration: none; color: var(--text-dark); font-weight: 700; font-size: 0.95rem;
-      display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 10px;
+      display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px;
     }
     .drawer-menu a:hover, .drawer-menu a.active { background: #f0f9ff; color: var(--primary-dark); }
     
@@ -73,314 +106,366 @@
       background: #fef2f2; color: #dc2626; border: 1px solid #fecaca;
       padding: 12px; border-radius: 12px; font-size: 0.88rem; font-weight: 700;
       cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: background 0.2s;
     }
+    .logout-btn:hover { background: #fee2e2; }
 
-    .main-wrapper { max-width: 900px; margin: 0 auto; padding: 20px 16px; width: 100%; flex: 1; }
+    /* MAIN CONTENT WRAPPER */
+    .main-content-area {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .main-wrapper { max-width: 1000px; margin: 0 auto; padding: 24px 20px; width: 100%; flex: 1; }
 
     /* PROFILE BANNER & ACADEMIC STATS */
     .profile-card {
       background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
-      color: white; border-radius: var(--radius); padding: 24px 20px; margin-bottom: 20px;
-      box-shadow: var(--shadow);
+      color: white; border-radius: var(--radius); padding: 28px 24px; margin-bottom: 24px;
+      box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
     }
-    .profile-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+    .profile-card::after {
+      content: '🩺';
+      position: absolute;
+      right: -20px;
+      bottom: -30px;
+      font-size: 10rem;
+      opacity: 0.05;
+      pointer-events: none;
+    }
+    .profile-header { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; }
     .avatar {
-      width: 54px; height: 54px; border-radius: 50%; background: #bae6fd; color: #0369a1;
-      display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800;
-      flex-shrink: 0;
+      width: 64px; height: 64px; border-radius: 50%; background: #bae6fd; color: #0369a1;
+      display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 800;
+      flex-shrink: 0; border: 3px solid rgba(255, 255, 255, 0.2);
     }
-    .profile-info h1 { font-size: 1.2rem; font-weight: 800; line-height: 1.2; }
-    .profile-info p { color: #bae6fd; font-size: 0.82rem; margin-top: 2px; }
+    .profile-info h1 { font-size: 1.35rem; font-weight: 800; line-height: 1.2; }
+    .profile-info p { color: #bae6fd; font-size: 0.88rem; margin-top: 4px; }
 
     .stats-bar {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
       background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px);
-      padding: 12px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 14px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.15);
       text-align: center;
     }
-    .stat-item span { display: block; font-size: 0.7rem; color: #cbd5e1; text-transform: uppercase; font-weight: 700; }
-    .stat-item strong { font-size: 0.85rem; color: #ffffff; font-weight: 800; }
+    .stat-item span { display: block; font-size: 0.72rem; color: #cbd5e1; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+    .stat-item strong { font-size: 0.92rem; color: #ffffff; font-weight: 800; margin-top: 2px; display: block; }
 
     /* ACCESS CODE REDEMPTION BOX */
     .access-redeem-card {
       background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 18px 16px; margin-bottom: 20px; box-shadow: var(--shadow);
+      padding: 22px 20px; margin-bottom: 24px; box-shadow: var(--shadow);
     }
-    .access-redeem-card h3 { font-size: 0.95rem; font-weight: 800; color: var(--text-dark); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-    .access-redeem-card p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px; }
-    .redeem-form-group { display: flex; gap: 10px; }
+    .access-redeem-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .access-redeem-card p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.4; }
+    .redeem-form-group { display: flex; gap: 12px; }
     .redeem-input {
-      flex: 1; padding: 10px 14px; border: 1px solid var(--border); border-radius: 10px;
-      font-size: 0.9rem; outline: none; transition: border-color 0.2s; text-transform: uppercase; font-weight: 700;
+      flex: 1; padding: 12px 16px; border: 2px solid var(--border); border-radius: 12px;
+      font-size: 0.95rem; outline: none; transition: border-color 0.2s; text-transform: uppercase; font-weight: 700;
+      background: #f8fafc;
     }
-    .redeem-input:focus { border-color: var(--primary); }
+    .redeem-input:focus { border-color: var(--primary); background: #ffffff; }
     .redeem-btn {
-      background: var(--accent); color: white; border: none; padding: 10px 18px; border-radius: 10px;
-      font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: background 0.2s; flex-shrink: 0;
+      background: var(--accent); color: white; border: none; padding: 12px 22px; border-radius: 12px;
+      font-size: 0.92rem; font-weight: 700; cursor: pointer; transition: all 0.2s; flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
     }
-    .redeem-btn:hover { background: #0f766e; }
-    #redeemMessage { font-size: 0.78rem; margin-top: 8px; font-weight: 700; display: none; }
+    .redeem-btn:hover { background: #0f766e; transform: translateY(-1px); }
+    #redeemMessage { font-size: 0.85rem; margin-top: 10px; font-weight: 700; display: none; }
 
     /* NOTICE ALERT */
     .notice-card {
       background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius);
-      padding: 14px 16px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px;
+      padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 14px;
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.05);
     }
-    .notice-icon { font-size: 1.2rem; flex-shrink: 0; }
-    .notice-text h4 { font-size: 0.88rem; font-weight: 800; color: #b45309; }
-    .notice-text p { font-size: 0.8rem; color: #92400e; margin-top: 2px; line-height: 1.35; }
+    .notice-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: -2px; }
+    .notice-text h4 { font-size: 0.92rem; font-weight: 800; color: #b45309; }
+    .notice-text p { font-size: 0.84rem; color: #92400e; margin-top: 3px; line-height: 1.4; }
 
-    .section-title { font-size: 0.8rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.5px; }
+    .section-title { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 14px; letter-spacing: 0.8px; }
 
     /* GRID LAYOUTS */
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 28px; }
     .card {
       background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between;
+      padding: 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
-    .card h3 { font-size: 0.95rem; font-weight: 700; }
+    .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .card-top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .card-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+    .card h3 { font-size: 1rem; font-weight: 700; }
     
-    .status-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+    .status-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; margin-top: 4px; }
     .status-unlocked { background: #dcfce7; color: #15803d; }
     .status-locked { background: #fef3c7; color: #b45309; }
 
     .action-link {
-      margin-top: 14px; text-decoration: none; text-align: center; padding: 10px; border-radius: 10px;
-      font-size: 0.85rem; font-weight: 700; display: block; transition: all 0.2s;
+      margin-top: 14px; text-decoration: none; text-align: center; padding: 12px; border-radius: 12px;
+      font-size: 0.88rem; font-weight: 700; display: block; transition: all 0.2s;
     }
-    .btn-unlocked { background: var(--primary); color: white; }
+    .btn-unlocked { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
     .btn-unlocked:hover { background: var(--primary-dark); }
-    .btn-locked { background: #f1f5f9; color: var(--text-muted); cursor: not-allowed; }
+    .btn-locked { background: #f1f5f9; color: var(--text-muted); cursor: not-allowed; border: 1px solid var(--border); }
 
     /* CLINICAL REFERENCE VALUES */
     .reference-card {
       background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 18px 16px; margin-bottom: 24px; box-shadow: var(--shadow);
+      padding: 22px 20px; margin-bottom: 28px; box-shadow: var(--shadow);
     }
-    .ref-header { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
-    .ref-header h3 { font-size: 0.95rem; font-weight: 800; color: var(--text-dark); }
+    .ref-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .ref-header h3 { font-size: 1rem; font-weight: 800; color: var(--text-dark); }
     
-    .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
-    .val-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px; text-align: center; }
-    .val-label { font-size: 0.7rem; color: var(--text-muted); font-weight: 700; display: block; }
-    .val-num { font-size: 0.9rem; font-weight: 800; color: #0369a1; margin-top: 2px; display: block; }
-    .val-unit { font-size: 0.68rem; color: #64748b; }
+    .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+    .val-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; transition: background 0.2s; }
+    .val-box:hover { background: #f0f9ff; border-color: #bae6fd; }
+    .val-label { font-size: 0.72rem; color: var(--text-muted); font-weight: 700; display: block; }
+    .val-num { font-size: 0.95rem; font-weight: 800; color: #0369a1; margin-top: 4px; display: block; }
+    .val-unit { font-size: 0.7rem; color: #64748b; font-weight: 500; }
+
+    /* RESPONSIVE MEDIA QUERY FOR PC/TABLET VIEW */
+    @media (min-width: 900px) {
+      .mobile-navbar { display: none; }
+      .pc-sidebar { display: flex; }
+      .main-content-area { margin-left: 260px; }
+      .main-wrapper { padding: 32px 36px; max-width: 1100px; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- DRAWER OVERLAY -->
-  <div id="drawerOverlay" class="drawer-overlay" onclick="toggleMenu()"></div>
+  <div class="app-layout">
 
-  <!-- SLIDE-OUT MENU DRAWER -->
-  <div id="drawer" class="drawer">
-    <div>
-      <div class="drawer-header">
-        <div class="brand">
+    <!-- PC SIDEBAR NAVIGATION -->
+    <aside class="pc-sidebar">
+      <div>
+        <a href="dashboard.html" class="sidebar-brand">
           <div class="pulse-box">🩺</div>
-          <span>Navigation Menu</span>
-        </div>
-        <button class="menu-toggle" onclick="toggleMenu()">✕</button>
+          <span>BSN Portal</span>
+        </a>
+        <ul class="sidebar-menu">
+          <li><a href="dashboard.html" class="active">🏠 Dashboard Home</a></li>
+          <li><a href="#courses-section">📚 Course Modules</a></li>
+          <li><a href="#vitals-section">🩸 Lab Reference</a></li>
+        </ul>
       </div>
-      <ul class="drawer-menu">
-        <li><a href="dashboard.html" class="active">🏠 Dashboard Home</a></li>
-        <li><a href="#courses-section" onclick="toggleMenu()">📚 Course Modules</a></li>
-        <li><a href="#vitals-section" onclick="toggleMenu()">🩸 Lab Reference Values</a></li>
-      </ul>
-    </div>
-    <button class="logout-btn" onclick="logout()">🚪 Logout / Exit</button>
-  </div>
+      <button class="logout-btn" onclick="logout()">🚪 Logout / Exit</button>
+    </aside>
 
-  <!-- MAIN DASHBOARD CONTENT -->
-  <div style="width: 100%;">
-    <!-- TOP NAVBAR -->
-    <header class="navbar">
-      <div class="nav-container">
+    <!-- MAIN APP CONTAINER -->
+    <div class="main-content-area">
+
+      <!-- MOBILE NAVBAR -->
+      <header class="mobile-navbar">
         <a href="dashboard.html" class="brand">
           <div class="pulse-box">🩺</div>
-          <span>BSN Student Portal</span>
+          <span>BSN Portal</span>
         </a>
         <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu">☰</button>
-      </div>
-    </header>
+      </header>
 
-    <main class="main-wrapper">
-      
-      <!-- PROFILE & ACADEMIC STATS BANNER -->
-      <div class="profile-card">
-        <div class="profile-header">
-          <div class="avatar" id="avatarLetter">S</div>
-          <div class="profile-info">
-            <h1 id="userName">Loading Student Profile...</h1>
-            <p id="userEmail">student@example.com</p>
+      <!-- DRAWER OVERLAY (Mobile) -->
+      <div id="drawerOverlay" class="drawer-overlay" onclick="toggleMenu()"></div>
+
+      <!-- SLIDE-OUT MENU DRAWER (Mobile) -->
+      <div id="drawer" class="drawer">
+        <div>
+          <div class="drawer-header">
+            <div class="brand">
+              <div class="pulse-box">🩺</div>
+              <span>Navigation</span>
+            </div>
+            <button class="menu-toggle" onclick="toggleMenu()">✕</button>
           </div>
+          <ul class="drawer-menu">
+            <li><a href="dashboard.html" class="active" onclick="toggleMenu()">🏠 Dashboard Home</a></li>
+            <li><a href="#courses-section" onclick="toggleMenu()">📚 Course Modules</a></li>
+            <li><a href="#vitals-section" onclick="toggleMenu()">🩸 Lab Reference Values</a></li>
+          </ul>
         </div>
+        <button class="logout-btn" onclick="logout()">🚪 Logout / Exit</button>
+      </div>
+
+      <!-- MAIN DASHBOARD CONTENT -->
+      <main class="main-wrapper">
         
-        <div class="stats-bar">
-          <div class="stat-item">
-            <span>Semester</span>
-            <strong id="userSemester">Semester -</strong>
-          </div>
-          <div class="stat-item">
-            <span>Institute</span>
-            <strong id="userInstitute">Institute -</strong>
-          </div>
-          <div class="stat-item">
-            <span>Status</span>
-            <strong style="color: #4ade80;">Active Account</strong>
-          </div>
-        </div>
-      </div>
-
-      <!-- ACCESS CODE REDEMPTION SECTION -->
-      <div class="access-redeem-card">
-        <h3>🔑 Have an Access Code?</h3>
-        <p>Enter your subject access code below to instantly unlock the course module notes and materials.</p>
-        <div class="redeem-form-group">
-          <input type="text" id="accessCodeInput" class="redeem-input" placeholder="e.g. PEDS-7782" />
-          <button class="redeem-btn" onclick="redeemAccessCode()">Unlock Module</button>
-        </div>
-        <div id="redeemMessage"></div>
-      </div>
-
-      <!-- ACADEMIC ANNOUNCEMENT NOTICE -->
-      <div class="notice-card">
-        <div class="notice-icon">📢</div>
-        <div class="notice-text">
-          <h4>Academic Announcement</h4>
-          <p>Please complete your registered semester practical logs and study modules before upcoming viva assessments.</p>
-        </div>
-      </div>
-
-      <!-- COURSE MODULES -->
-      <div class="section-title" id="courses-section">BSN Academic Courses</div>
-      <div class="grid">
-        <!-- NURSING ETHICS -->
-        <div class="card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon" style="background:#ecfeff;">⚖️</div>
-              <div>
-                <h3>Nursing Ethics</h3>
-                <span id="badge-ethics" class="status-badge status-unlocked">Unlocked</span>
-              </div>
+        <!-- PROFILE & ACADEMIC STATS BANNER -->
+        <div class="profile-card">
+          <div class="profile-header">
+            <div class="avatar" id="avatarLetter">S</div>
+            <div class="profile-info">
+              <h1 id="userName">Loading Student Profile...</h1>
+              <p id="userEmail">student@example.com</p>
             </div>
           </div>
-          <a id="link-ethics" href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics.html" class="action-link btn-unlocked">Open Notes & Modules →</a>
-        </div>
-
-        <!-- PEDIATRIC -->
-        <div class="card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon" style="background:#f0fdf4;">👶</div>
-              <div>
-                <h3>Pediatric Nursing</h3>
-                <span id="badge-pediatric" class="status-badge status-locked">Locked</span>
-              </div>
+          
+          <div class="stats-bar">
+            <div class="stat-item">
+              <span>Semester</span>
+              <strong id="userSemester">Semester -</strong>
+            </div>
+            <div class="stat-item">
+              <span>Institute</span>
+              <strong id="userInstitute">Institute -</strong>
+            </div>
+            <div class="stat-item">
+              <span>Status</span>
+              <strong style="color: #4ade80;">Active Account</strong>
             </div>
           </div>
-          <a id="link-pediatric" href="#" class="action-link btn-locked" onclick="checkAccess(event, 'pediatric', './pediatric/index.html')">Locked Module</a>
         </div>
 
-        <!-- REPRODUCTIVE -->
-        <div class="card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon" style="background:#fdf2f8;">🤰</div>
-              <div>
-                <h3>Reproductive Health</h3>
-                <span id="badge-reproductive" class="status-badge status-locked">Locked</span>
+        <!-- ACCESS CODE REDEMPTION SECTION -->
+        <div class="access-redeem-card">
+          <h3>🔑 Have an Access Code?</h3>
+          <p>Enter your subject access code below to instantly unlock the course module notes and materials.</p>
+          <div class="redeem-form-group">
+            <input type="text" id="accessCodeInput" class="redeem-input" placeholder="e.g. PEDS-7782" />
+            <button class="redeem-btn" onclick="redeemAccessCode()">Unlock Module</button>
+          </div>
+          <div id="redeemMessage"></div>
+        </div>
+
+        <!-- ACADEMIC ANNOUNCEMENT NOTICE -->
+        <div class="notice-card">
+          <div class="notice-icon">📢</div>
+          <div class="notice-text">
+            <h4>Academic Announcement</h4>
+            <p>Please complete your registered semester practical logs and study modules before upcoming viva assessments.</p>
+          </div>
+        </div>
+
+        <!-- COURSE MODULES -->
+        <div class="section-title" id="courses-section">BSN Academic Courses</div>
+        <div class="grid">
+          <!-- NURSING ETHICS -->
+          <div class="card">
+            <div>
+              <div class="card-top">
+                <div class="card-icon" style="background:#ecfeff;">⚖️</div>
+                <div>
+                  <h3>Nursing Ethics</h3>
+                  <span id="badge-ethics" class="status-badge status-unlocked">Unlocked</span>
+                </div>
               </div>
             </div>
+            <a id="link-ethics" href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics.html" class="action-link btn-unlocked">Open Notes & Modules →</a>
           </div>
-          <a id="link-reproductive" href="#" class="action-link btn-locked" onclick="checkAccess(event, 'reproductive', './reproductive/index.html')">Locked Module</a>
-        </div>
 
-        <!-- ENGLISH -->
-        <div class="card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon" style="background:#f5f3ff;">📚</div>
-              <div>
-                <h3>English Academic</h3>
-                <span id="badge-english" class="status-badge status-locked">Locked</span>
+          <!-- PEDIATRIC -->
+          <div class="card">
+            <div>
+              <div class="card-top">
+                <div class="card-icon" style="background:#f0fdf4;">👶</div>
+                <div>
+                  <h3>Pediatric Nursing</h3>
+                  <span id="badge-pediatric" class="status-badge status-locked">Locked</span>
+                </div>
               </div>
             </div>
+            <a id="link-pediatric" href="#" class="action-link btn-locked" onclick="checkAccess(event, 'pediatric', './pediatric/index.html')">Locked Module</a>
           </div>
-          <a id="link-english" href="#" class="action-link btn-locked" onclick="checkAccess(event, 'english', './english/index.html')">Locked Module</a>
-        </div>
 
-        <!-- PERLS -->
-        <div class="card">
-          <div>
-            <div class="card-top">
-              <div class="card-icon" style="background:#f0fdfa;">💡</div>
-              <div>
-                <h3>PERLS Module</h3>
-                <span id="badge-perls" class="status-badge status-locked">Locked</span>
+          <!-- REPRODUCTIVE -->
+          <div class="card">
+            <div>
+              <div class="card-top">
+                <div class="card-icon" style="background:#fdf2f8;">🤰</div>
+                <div>
+                  <h3>Reproductive Health</h3>
+                  <span id="badge-reproductive" class="status-badge status-locked">Locked</span>
+                </div>
               </div>
             </div>
+            <a id="link-reproductive" href="#" class="action-link btn-locked" onclick="checkAccess(event, 'reproductive', './reproductive/index.html')">Locked Module</a>
           </div>
-          <a id="link-perls" href="#" class="action-link btn-locked" onclick="checkAccess(event, 'perls', './perls/index.html')">Locked Module</a>
-        </div>
-      </div>
 
-      <!-- ESSENTIAL CLINICAL REFERENCE VALUES -->
-      <div class="section-title" id="vitals-section">Essential Clinical Reference Values</div>
-      <div class="reference-card">
-        <div class="ref-header">
-          <span>💉</span>
-          <h3>Normal Adult Vital Signs & Lab Ranges</h3>
-        </div>
-        
-        <div class="values-grid">
-          <div class="val-box">
-            <span class="val-label">Blood Pressure</span>
-            <span class="val-num">120 / 80</span>
-            <span class="val-unit">mmHg</span>
+          <!-- ENGLISH -->
+          <div class="card">
+            <div>
+              <div class="card-top">
+                <div class="card-icon" style="background:#f5f3ff;">📚</div>
+                <div>
+                  <h3>English Academic</h3>
+                  <span id="badge-english" class="status-badge status-locked">Locked</span>
+                </div>
+              </div>
+            </div>
+            <a id="link-english" href="#" class="action-link btn-locked" onclick="checkAccess(event, 'english', './english/index.html')">Locked Module</a>
           </div>
-          <div class="val-box">
-            <span class="val-label">Pulse / HR</span>
-            <span class="val-num">60 - 100</span>
-            <span class="val-unit">bpm</span>
-          </div>
-          <div class="val-box">
-            <span class="val-label">Resp. Rate</span>
-            <span class="val-num">12 - 20</span>
-            <span class="val-unit">breaths/min</span>
-          </div>
-          <div class="val-box">
-            <span class="val-label">SpO2 Level</span>
-            <span class="val-num">95 - 100%</span>
-            <span class="val-unit">Room Air</span>
-          </div>
-          <div class="val-box">
-            <span class="val-label">Temperature</span>
-            <span class="val-num">98.6°F</span>
-            <span class="val-unit">37.0°C</span>
-          </div>
-          <div class="val-box">
-            <span class="val-label">Fast. Blood Sugar</span>
-            <span class="val-num">70 - 99</span>
-            <span class="val-unit">mg/dL</span>
-          </div>
-          <div class="val-box">
-            <span class="val-label">Hemoglobin (Hb)</span>
-            <span class="val-num">12 - 16.5</span>
-            <span class="val-unit">g/dL</span>
-          </div>
-          <div class="val-box">
-            <span class="val-label">WBC Count</span>
-            <span class="val-num">4.5 - 11.0</span>
-            <span class="val-unit">x 10³/µL</span>
-          </div>
-        </div>
-      </div>
 
-    </main>
+          <!-- PERLS -->
+          <div class="card">
+            <div>
+              <div class="card-top">
+                <div class="card-icon" style="background:#f0fdfa;">💡</div>
+                <div>
+                  <h3>PERLS Module</h3>
+                  <span id="badge-perls" class="status-badge status-locked">Locked</span>
+                </div>
+              </div>
+            </div>
+            <a id="link-perls" href="#" class="action-link btn-locked" onclick="checkAccess(event, 'perls', './perls/index.html')">Locked Module</a>
+          </div>
+        </div>
+
+        <!-- ESSENTIAL CLINICAL REFERENCE VALUES -->
+        <div class="section-title" id="vitals-section">Essential Clinical Reference Values</div>
+        <div class="reference-card">
+          <div class="ref-header">
+            <span>💉</span>
+            <h3>Normal Adult Vital Signs &amp; Lab Ranges</h3>
+          </div>
+          
+          <div class="values-grid">
+            <div class="val-box">
+              <span class="val-label">Blood Pressure</span>
+              <span class="val-num">120 / 80</span>
+              <span class="val-unit">mmHg</span>
+            </div>
+            <div class="val-box">
+              <span class="val-label">Pulse / HR</span>
+              <span class="val-num">60 - 100</span>
+              <span class="val-unit">bpm</span>
+            </div>
+            <div class="val-box">
+              <span class="val-label">Resp. Rate</span>
+              <span class="val-num">12 - 20</span>
+              <span class="val-unit">breaths/min</span>
+            </div>
+            <div class="val-box">
+              <span class="val-label">SpO2 Level</span>
+              <span class="val-num">95 - 100%</span>
+              <span class="val-unit">Room Air</span>
+            </div>
+            <div class="val-box">
+              <span class="val-label">Temperature</span>
+              <span class="val-num">98.6°F</span>
+              <span class="val-unit">37.0°C</span>
+            </div>
+            <div class="val-box">
+              <span class="val-label">Fast. Blood Sugar</span>
+              <span class="val-num">70 - 99</span>
+              <span class="val-unit">mg/dL</span>
+            </div>
+            <div class="val-box">
+              <span class="val-label">Hemoglobin (Hb)</span>
+              <span class="val-num">12 - 16.5</span>
+              <span class="val-unit">g/dL</span>
+            </div>
+            <div class="val-box">
+              <span class="val-label">WBC Count</span>
+              <span class="val-num">4.5 - 11.0</span>
+              <span class="val-unit">x 10³/µL</span>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
   </div>
 
   <script>
@@ -514,14 +599,16 @@
       const userDataStr = localStorage.getItem('bsn_user_' + currentUserEmail) || localStorage.getItem('user_acc_' + currentUserEmail);
       if (userDataStr) {
         const user = JSON.parse(userDataStr);
-        document.getElementById('userName').innerText = user.name || 'BSN Student';
+        document.getElementById('userName').innerText = user.name || 'Mudassir Hussain Khan';
         document.getElementById('userEmail').innerText = user.email || currentUserEmail;
         document.getElementById('userSemester').innerText = user.semester || 'BSN 4th Semester';
         document.getElementById('userInstitute').innerText = user.institute || 'New Life Institute Multan';
-        document.getElementById('avatarLetter').innerText = (user.name ? user.name.charAt(0) : 'S').toUpperCase();
+        document.getElementById('avatarLetter').innerText = (user.name ? user.name.charAt(0) : 'M').toUpperCase();
       } else {
         document.getElementById('userEmail').innerText = currentUserEmail;
-        document.getElementById('userName').innerText = 'BSN Student';
+        document.getElementById('userName').innerText = 'Mudassir Hussain Khan';
+        document.getElementById('userSemester').innerText = 'BSN 4th Semester';
+        document.getElementById('userInstitute').innerText = 'New Life Institute Multan';
       }
 
       updateUIStates(currentUserEmail);
