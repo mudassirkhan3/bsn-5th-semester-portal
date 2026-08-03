@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Nursing Ethics Quiz Button -->
+<a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics-quiz.html" 
+   target="_blank" 
+   style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); 
+          color: #ffffff; 
+          padding: 12px 24px; 
+          text-decoration: none; 
+          border-radius: 8px; 
+          display: inline-flex; 
+          align-items: center; 
+          gap: 8px; 
+          font-weight: 700; 
+          font-size: 0.95rem; 
+          box-shadow: 0 4px 6px -1px rgba(22, 163, 74, 0.3); 
+          transition: transform 0.2s ease;">
+   📝 Take Nursing Ethics Quiz
+</a>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nursing Ethics | BSN Comprehensive Exam Masterclass</title>
@@ -18,12 +35,12 @@
 
     /* Container & Navigation */
     .container { max-width: 1050px; margin: 0 auto; padding: 0 20px; }
-    .nav-bar { background: white; padding: 12px 20px; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin: 20px auto; position: relative; z-index: 10; }
+    .nav-bar { background: white; padding: 12px 20px; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin: -20px auto 20px; position: relative; z-index: 10; }
     .nav-btn { color: #0284c7; text-decoration: none; font-weight: 700; font-size: 0.9rem; }
     
     /* Sticky Unit Navigation Bar */
     .sticky-unit-nav { position: sticky; top: 10px; z-index: 100; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 10px 14px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); margin-bottom: 30px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: thin; }
-    .unit-pill { background: #f1f5f9; color: #0369a1; text-decoration: none; padding: 8px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; white-space: nowrap; transition: 0.2s; border: 1px solid #e2e8f0; }
+    .unit-pill { background: #f1f5f9; color: #0369a1; text-decoration: none; padding: 8px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; whitespace: nowrap; transition: 0.2s; border: 1px solid #e2e8f0; }
     .unit-pill:hover, .unit-pill.active { background: #0284c7; color: white; border-color: #0284c7; }
 
     /* Content Sections */
@@ -44,7 +61,7 @@
     .visual-caption { font-size: 0.85rem; color: #0369a1; font-weight: 700; margin-top: 10px; }
 
     /* Highlights & Exam Boxes */
-    .imp-note { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 8px; margin: 18px 0; font-size: 0.93rem; color: #78350f; }
+    .imp-note { background: #fffbebf5; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 8px; margin: 18px 0; font-size: 0.93rem; color: #78350f; }
     .imp-note strong { color: #b45309; }
 
     .exam-tip { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 16px; border-radius: 8px; margin: 18px 0; font-size: 0.93rem; color: #14532d; }
@@ -61,84 +78,16 @@
     .custom-table th { background-color: #e0f2fe; color: #0369a1; font-weight: 700; }
     .custom-table tr:nth-child(even) { background-color: #f8fafc; }
 
+    /* Interactive Quiz Box */
+    .quiz-box { background: #f1f5f9; border-radius: 12px; padding: 22px; margin-top: 24px; }
+    .quiz-option { background: white; border: 1px solid #cbd5e1; padding: 12px 16px; border-radius: 8px; margin: 8px 0; cursor: pointer; transition: 0.2s; font-size: 0.92rem; font-weight: 500; }
+    .quiz-option:hover { border-color: #0284c7; background: #e0f2fe; }
+
     /* Footer */
     footer { text-align: center; font-size: 0.85rem; color: #64748b; margin-top: 40px; }
   </style>
 </head>
 <body>
-
-  <!-- Impressive Nursing Ethics Quiz Callout Banner -->
-  <div class="container" style="padding-top: 20px;">
-    <div style="
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      border: 1px solid #334155;
-      border-left: 6px solid #16a34a;
-      border-radius: 16px;
-      padding: 24px 28px;
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
-      position: relative;
-      overflow: hidden;
-    ">
-      <!-- Content Section -->
-      <div style="max-width: 580px;">
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-          <span style="
-            background: rgba(22, 163, 74, 0.15);
-            color: #4ade80;
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            padding: 3px 10px;
-            border-radius: 20px;
-            border: 1px solid rgba(74, 222, 128, 0.3);
-          ">
-            ● Interactive Practice
-          </span>
-          <span style="color: #94a3b8; font-size: 0.82rem; font-weight: 600;">BSN 5th Semester</span>
-        </div>
-
-        <h3 style="color: #ffffff; font-size: 1.25rem; font-weight: 800; margin: 0 0 4px 0; border: none; padding: 0;">
-          Test Your Knowledge on Nursing Ethics
-        </h3>
-        <p style="color: #cbd5e1; font-size: 0.9rem; margin: 0; line-height: 1.5;">
-          Evaluate your exam readiness with multiple-choice practice questions covering all 8 syllabus units.
-        </p>
-      </div>
-
-      <!-- Interactive Quiz Button -->
-      <a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics-quiz.html" 
-         target="_blank" 
-         style="
-           background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-           color: #ffffff;
-           padding: 14px 26px;
-           text-decoration: none;
-           border-radius: 10px;
-           display: inline-flex;
-           align-items: center;
-           gap: 10px;
-           font-weight: 800;
-           font-size: 0.95rem;
-           letter-spacing: 0.2px;
-           box-shadow: 0 4px 14px rgba(22, 163, 74, 0.4);
-           border: 1px solid #22c55e;
-           white-space: nowrap;
-           transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-         "
-         onmouseover="this.style.transform='translateY(-2px) scale(1.02)'; this.style.boxShadow='0 8px 20px rgba(22, 163, 74, 0.6)';"
-         onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 14px rgba(22, 163, 74, 0.4)';">
-          <span>📝 Take Ethics Quiz</span>
-          <span style="font-size: 1.1rem; transition: transform 0.2s ease;">→</span>
-      </a>
-    </div>
-  </div>
 
   <!-- Top Header -->
   <header class="header">
@@ -548,34 +497,309 @@
           <text x="145" y="96" fill="#334155" font-size="11" text-anchor="middle">• Answers complex questions</text>
 
           <rect x="340" y="35" width="230" height="80" rx="10" fill="#0284c7"/>
-          <text x="455" y="60" fill="white" font-weight="800" font-size="13" text-anchor="middle">NURSE ADVOCATE</text>
-          <text x="455" y="80" fill="white" font-size="11" text-anchor="middle">• Witness signature &amp; verifies patient</text>
-          <text x="455" y="96" fill="white" font-size="11" text-anchor="middle">• Ensures voluntariness &amp; comprehension</text>
+          <text x="455" y="60" fill="white" font-weight="800" font-size="13" text-anchor="middle">PROFESSIONAL NURSE</text>
+          <text x="455" y="80" fill="white" font-size="11" text-anchor="middle">• Witnesses client's signature</text>
+          <text x="455" y="96" fill="white" font-size="11" text-anchor="middle">• Confirms capacity &amp; voluntariness</text>
         </svg>
-        <div class="visual-caption">Figure 4.1: Distinct Roles of Physicians and Nurses in Informed Consent</div>
+        <div class="visual-caption">Figure 4.1: Distinct Roles of Provider vs. Nurse in Informed Consent</div>
       </div>
 
-      <h3>3. Exceptions to Informed Consent</h3>
+      <h3>3. Nurse’s Roles and Legal Responsibilities in Consent</h3>
+      <div class="imp-note">
+        <strong>📌 Crucial MCQ Point:</strong> The physician/surgeon is legally responsible for explaining the procedure and obtaining consent. The nurse acts as a <strong>witness to the signature</strong>, verifying that:
+        <ul style="margin-top: 8px; margin-bottom: 0;">
+          <li>The client signed the form voluntarily.</li>
+          <li>The signature is authentic.</li>
+          <li>The client appears mentally competent to sign.</li>
+        </ul>
+        <em>If a patient expresses confusion or lack of understanding, the nurse MUST hold the form and notify the surgeon immediately.</em>
+      </div>
+
+      <h3>4. Exceptions to Informed Consent &amp; Confidentiality</h3>
       <ul>
-        <li><strong>Emergency Situations:</strong> When immediate intervention is necessary to preserve life or prevent serious impairment, and the patient is unconscious or incapacitated.</li>
-        <li><strong>Incompetent Patients:</strong> When designated legal surrogates or proxy decision-makers authorize care on behalf of minors or incapacitated adults.</li>
-        <li><strong>Waiver by Patient:</strong> When a competent patient explicitly states they prefer not to be informed and delegate decision-making to family members.</li>
+        <li><strong>Emergency Exception:</strong> Life-threatening emergency when the client is unconscious and no surrogate is available (Implied Consent applies).</li>
+        <li><strong>Mandatory Disclosure / Duty to Warn:</strong> Confidentiality may be legally breached in cases of child/elder abuse, communicable disease reporting to public health authorities, or clear threats to harm oneself or others (Tarasoff rule).</li>
+      </ul>
+    </section>
+
+    <!-- ==================== UNIT V ==================== -->
+    <section id="unit5" class="section-card">
+      <span class="unit-header-tag">Unit V • Weightage: 2 MCQs | 0.5 SEQ</span>
+      <h2 class="section-title">Unit V: Bills of Rights</h2>
+
+      <h3>1. Definition of Rights &amp; Patient's Bill of Rights</h3>
+      <p><strong>Rights:</strong> Justifiable claims, entitlements, or legal protections guaranteed to individuals by law, ethics, or societal standards.</p>
+      <p><strong>Patient’s Bill of Rights:</strong> A formal document outlining the entitlements, guarantees, and responsibilities that clients possess while receiving care within a healthcare facility.</p>
+
+      <h3>2. Classifications of Rights</h3>
+      <div class="grid-2">
+        <div class="grid-card">
+          <h4>Legal Rights</h4>
+          <p>Entitlements backed and enforced by national or state laws (e.g., Right to Privacy, Medical Records access).</p>
+        </div>
+        <div class="grid-card">
+          <h4>Moral / Ethical Rights</h4>
+          <p>Entitlements rooted in ethical principles and human dignity, regardless of explicit legal statutes.</p>
+        </div>
+        <div class="grid-card">
+          <h4>Option / Choice Rights</h4>
+          <p>Rights that grant individuals freedom to make personal choices (e.g., choosing healthcare providers or refusing care).</p>
+        </div>
+        <div class="grid-card">
+          <h4>Welfare Rights</h4>
+          <p>Entitlements to basic life-sustaining resources (e.g., right to emergency stabilization and clean water).</p>
+        </div>
+      </div>
+
+      <h3>3. Core Elements of Patient Rights in Tertiary Care</h3>
+      <ol>
+        <li><strong>Right to Respectful and Equal Care:</strong> Access to compassionate, non-discriminatory care regardless of gender, race, or socio-economic status.</li>
+        <li><strong>Right to Complete Information:</strong> Clear information regarding diagnosis, prognosis, and planned treatments in understandable language.</li>
+        <li><strong>Right to Privacy and Confidentiality:</strong> Complete protection of medical discussions, examination privacy, and health records.</li>
+        <li><strong>Right to Refuse Treatment:</strong> The right to decline medical care or leave Against Medical Advice (AMA) after understanding consequences.</li>
+        <li><strong>Right to Continuity of Care:</strong> Clear discharge planning, follow-up instructions, and care coordination.</li>
+        <li><strong>Right to Review Billing &amp; Invoices:</strong> Transparent breakdown of costs and financial obligations.</li>
+      </ol>
+
+      <h3>4. The Nurse's Role in Upholding Rights</h3>
+      <p>Nurses act as primary <strong>Patient Advocates</strong> by ensuring clients understand their rights, protecting patient privacy (curtains, secure electronic records), preventing coercion, and speaking up when patient rights are threatened by hospital procedures or care teams.</p>
+    </section>
+
+    <!-- ==================== UNIT VI ==================== -->
+    <section id="unit6" class="section-card">
+      <span class="unit-header-tag">Unit VI • Weightage: 2 MCQs | 0.5 SEQ</span>
+      <h2 class="section-title">Unit VI: Code of Ethics</h2>
+
+      <h3>1. Definition and Functions of a Code of Ethics</h3>
+      <p>A <strong>Code of Ethics</strong> is a formal, written statement of a profession's values, moral standards, and expectations of conduct that serves as a guide for ethical clinical practice and self-regulation.</p>
+      
+      <h4>Key Functions:</h4>
+      <ul>
+        <li>Informs the public about minimum standards of nursing conduct.</li>
+        <li>Provides a framework for ethical decision-making and practice.</li>
+        <li>Outlines the nursing profession's commitment to society.</li>
+        <li>Serves as a benchmark for professional self-regulation and disciplinary review.</li>
       </ul>
 
-      <h3>4. Exceptions to Confidentiality (Duty to Warn / Protect)</h3>
-      <p>Nurses may breach confidentiality without legal liability under mandatory reporting laws:</p>
+      <h3>2. Comparison: ICN Code vs. Pakistan Nursing Council (PNC) Code</h3>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>International Council of Nurses (ICN) Code</th>
+            <th>Pakistan Nursing Council (PNC) Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Scope</strong></td>
+            <td>Global international guidelines for nurses worldwide.</td>
+            <td>National legal and professional standards within Pakistan.</td>
+          </tr>
+          <tr>
+            <td><strong>Core Elements</strong></td>
+            <td>4 Elements: Nurses &amp; People, Practice, Profession, Co-workers.</td>
+            <td>National professional standards, cultural values, and statutory regulation.</td>
+          </tr>
+          <tr>
+            <td><strong>Cultural Context</strong></td>
+            <td>Broad, secular, applicable across all nations.</td>
+            <td>Aligned with national laws, socio-cultural, and Islamic ethical values.</td>
+          </tr>
+          <tr>
+            <td><strong>Legal Authority</strong></td>
+            <td>Ethical guideline framework (non-statutory).</td>
+            <td>Statutory licensing body with power to revoke registration for violations.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3. The 4 Fundamental Elements of the ICN Code</h3>
+      <div class="grid-2">
+        <div class="grid-card">
+          <h4>1. Nurses and People</h4>
+          <p>Primary responsibility is to people requiring care; respecting human rights, values, customs, and spiritual beliefs.</p>
+        </div>
+        <div class="grid-card">
+          <h4>2. Nurses and Practice</h4>
+          <p>Maintains personal responsibility for practice, ongoing competence, and continuous learning.</p>
+        </div>
+        <div class="grid-card">
+          <h4>3. Nurses and the Profession</h4>
+          <p>Determines and implements professional standards, research-based practice, and policy development.</p>
+        </div>
+        <div class="grid-card">
+          <h4>4. Nurses and Co-Workers</h4>
+          <p>Sustains collaborative relationships with co-workers and takes appropriate action to safeguard clients when care is endangered.</p>
+        </div>
+      </div>
+
+      <h3>4. The Nightingale Pledge &amp; Modern Nursing Pledge</h3>
+      <p>The <strong>Nightingale Pledge</strong> (and modern nursing pledges) reflects a solemn oath taken upon graduation. It reinforces commitment to practice faithfully, abstain from harmful practices, maintain confidentiality, and elevate professional standards.</p>
+    </section>
+
+    <!-- ==================== UNIT VII ==================== -->
+    <section id="unit7" class="section-card">
+      <span class="unit-header-tag">Unit VII • Weightage: 2 MCQs | 0.5 SEQ</span>
+      <h2 class="section-title">Unit VII: Professional Autonomy &amp; Ethics</h2>
+
+      <h3>1. Core Professional Concepts</h3>
+      <div class="grid-2">
+        <div class="grid-card">
+          <h4>Profession</h4>
+          <p>A calling requiring specialized knowledge, extensive academic preparation, and ongoing adherence to ethical standards.</p>
+        </div>
+        <div class="grid-card">
+          <h4>Professional Autonomy</h4>
+          <p>The freedom, authority, and independence of nurses to make clinical decisions and carry out interventions within their legal scope of practice.</p>
+        </div>
+        <div class="grid-card">
+          <h4>Accountability</h4>
+          <p>Being answerable to oneself, patients, the nursing council, and society for one's professional judgments, actions, and omissions.</p>
+        </div>
+        <div class="grid-card">
+          <h4>Professional Unity</h4>
+          <p>Solidarity and collective collaboration among nurses through professional organizations to advance rights, standards, and health policy.</p>
+        </div>
+      </div>
+
+      <!-- SVG Visual: Autonomy & Accountability Balance -->
+      <div class="visual-box">
+        <svg width="600" height="140" viewBox="0 0 600 140" xmlns="http://www.w3.org/2000/svg">
+          <rect x="50" y="35" width="220" height="70" rx="10" fill="#0284c7"/>
+          <text x="160" y="65" fill="white" font-weight="800" font-size="13" text-anchor="middle">PROFESSIONAL AUTONOMY</text>
+          <text x="160" y="85" fill="white" font-size="11" text-anchor="middle">Independent Clinical Decision Power</text>
+
+          <line x1="270" y1="70" x2="330" y2="70" stroke="#0369a1" stroke-width="4" stroke-dasharray="6,6"/>
+
+          <rect x="330" y="35" width="220" height="70" rx="10" fill="#0369a1"/>
+          <text x="440" y="65" fill="white" font-weight="800" font-size="13" text-anchor="middle">ACCOUNTABILITY</text>
+          <text x="440" y="85" fill="white" font-size="11" text-anchor="middle">Answerable for Clinical Outcomes</text>
+        </svg>
+        <div class="visual-caption">Figure 7.1: Professional Autonomy is Inseparably Linked to Individual Accountability</div>
+      </div>
+
+      <h3>2. Relationship Between Ethics, Standards, and Professional Status</h3>
       <ul>
-        <li>Suspected child abuse, elder abuse, or domestic violence.</li>
-        <li>Communicable or reportable infectious diseases (e.g., tuberculosis, HIV depending on local statutory laws).</li>
-        <li>Threat of imminent harm to self or a specifically identifiable third party (Tarasoff ruling / duty to warn).</li>
+        <li><strong>Standards of Nursing Practice:</strong> Authoritative statements describing the responsibilities and quality level expected of competent nurses (ADPIE model).</li>
+        <li><strong>Connecting Ethics to Standards:</strong> Ethics dictates <em>why</em> we care (moral duty); Standards dictate <em>how</em> we deliver care safely (technical competency).</li>
+        <li><strong>Accountability to Regulatory Bodies:</strong> Failure to meet standards or violation of ethical codes results in professional disciplinary action, suspension, or revocation of PNC registration.</li>
       </ul>
+    </section>
+
+    <!-- ==================== UNIT VIII ==================== -->
+    <section id="unit8" class="section-card">
+      <span class="unit-header-tag">Unit VIII • Weightage: 3 MCQs | 0 SEQ</span>
+      <h2 class="section-title">Unit VIII: Ethical Dilemmas in Professional Practice</h2>
+
+      <h3>1. Legal Concepts &amp; Nurses' Liabilities</h3>
+      <p><strong>Negligence:</strong> Failure to act as a reasonably prudent nurse would act under similar circumstances, resulting in unintentional harm.</p>
+      <p><strong>Malpractice:</strong> Professional negligence—specifically when a nurse fails to meet standard professional skills, resulting in injury, loss, or damage to a patient.</p>
+
+      <h4>The Four Elements of Nursing Malpractice (Must All Be Proven):</h4>
+      <ol>
+        <li><strong>Duty of Care:</strong> The nurse had a legal obligation to care for the patient.</li>
+        <li><strong>Breach of Duty:</strong> The nurse failed to meet standard nursing care protocols.</li>
+        <li><strong>Causation:</strong> The nurse’s failure directly caused the injury or outcome.</li>
+        <li><strong>Damages / Injury:</strong> Actual physical, psychological, or financial damage resulted to the client.</li>
+      </ol>
+
+      <h3>2. Common Areas of Nursing Liability</h3>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Area of Negligence</th>
+            <th>Clinical Scenario</th>
+            <th>Preventative Nursing Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Medication Errors</strong></td>
+            <td>Administering wrong dose or wrong drug due to missed checks.</td>
+            <td>Strictly follow the 10 Rights of Medication Administration.</td>
+          </tr>
+          <tr>
+            <td><strong>Patient Falls</strong></td>
+            <td>Failing to raise bed side-rails or maintain fall-risk assessment.</td>
+            <td>Conduct Morse Fall Risk score checks; keep bed low and locked.</td>
+          </tr>
+          <tr>
+            <td><strong>Documentation Failure</strong></td>
+            <td>Failing to record deterioration in vital signs or physician notifications.</td>
+            <td>Maintain timely, accurate, factual clinical documentation ("If not written, it wasn't done").</td>
+          </tr>
+          <tr>
+            <td><strong>Defective Equipment</strong></td>
+            <td>Using a malfunctioning IV pump that causes fluid overload.</td>
+            <td>Inspect biomedical devices before use; tag and report faulty equipment.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3. Advocacy Scenarios in Clinical Cases</h3>
+      <div class="grid-2">
+        <div class="grid-card">
+          <h4>A) Life Support Equipment</h4>
+          <p>Navigating DNR (Do Not Resuscitate) orders and ventilator withdrawal. Nurse acts as advocate ensuring patient's advance directives are respected over family conflict.</p>
+        </div>
+        <div class="grid-card">
+          <h4>B) Selling Body Parts / Organ Procurement</h4>
+          <p>Commercial organ trade is illegal and unethical. Nurses ensure organ donation follows strictly voluntary, non-coerced, brain-death protocol pathways.</p>
+        </div>
+        <div class="grid-card">
+          <h4>C) Occupational Hazards &amp; Risk Management</h4>
+          <p>Balancing personal safety (needle-stick injuries, infectious diseases like COVID/TB) with duty to care. Utilizing PPE and reporting hazards immediately.</p>
+        </div>
+        <div class="grid-card">
+          <h4>D) Employment Issues &amp; Whistleblowing</h4>
+          <p>Addressing unsafe nurse-to-patient staffing ratios, substance abuse among peers, and reporting unsafe institutional practices through formal channels.</p>
+        </div>
+      </div>
+
+      <div class="exam-tip">
+        <strong>💡 Exam Golden Rule:</strong> Documentation in nursing is a legal document. In court, the legal rule applies: <em>"If it was not documented, it was not done."</em> Never document advance care before performing it.
+      </div>
+    </section>
+
+    <!-- INTERACTIVE QUIZ -->
+    <section class="section-card">
+      <h2 class="section-title">🧪 Comprehensive Course Exam Practice</h2>
+      <div class="quiz-box">
+        <p><strong>Q1: A surgeon asks a nurse to obtain consent for a complex procedure. The client states, "I don't understand what the doctor explained." What is the correct nursing action?</strong></p>
+        <div class="quiz-option" onclick="checkQuiz(this, false)">A) Re-explain the surgical procedure to the client and sign the consent.</div>
+        <div class="quiz-option" onclick="checkQuiz(this, true)">B) Notify the surgeon immediately and withhold signature until the surgeon clarifies.</div>
+        <div class="quiz-option" onclick="checkQuiz(this, false)">C) Instruct the client's family member to sign the consent form instead.</div>
+        <div class="quiz-option" onclick="checkQuiz(this, false)">D) Ask the patient to sign now and promise the doctor will explain again later.</div>
+        <div id="quizResult" style="margin-top: 12px; font-weight: 700; font-size: 0.92rem;"></div>
+      </div>
     </section>
 
   </div>
 
   <footer>
-    <p>&copy; 2026 BSN Nursing Ethics Masterclass • Prepared for Academic Excellence</p>
+    © 2026 Academic Portal • Comprehensive Study Material for BSN Nursing Ethics
   </footer>
+
+  <script>
+    function checkQuiz(element, isCorrect) {
+      const options = element.parentElement.querySelectorAll('.quiz-option');
+      options.forEach(opt => opt.style.background = 'white');
+      
+      const resultDiv = document.getElementById('quizResult');
+      if (isCorrect) {
+        element.style.background = '#dcfce7';
+        element.style.borderColor = '#16a34a';
+        resultDiv.innerText = '✅ Correct! The nurse acts as a witness to signature. The provider/surgeon holds primary responsibility for explaining the procedure.';
+        resultDiv.style.color = '#15803d';
+      } else {
+        element.style.background = '#fee2e2';
+        element.style.borderColor = '#dc2626';
+        resultDiv.innerText = '❌ Incorrect. The nurse cannot perform primary surgical disclosure; the provider must be called back!';
+        resultDiv.style.color = '#b91c1c';
+      }
+    }
+  </script>
 
 </body>
 </html>
