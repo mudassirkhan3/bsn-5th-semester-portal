@@ -163,7 +163,6 @@
     const btn = document.getElementById('regBtn');
     
     const user = {
-      action: 'register',
       name: document.getElementById('regName').value.trim(),
       institute: document.getElementById('regInstitute').value.trim(),
       email: document.getElementById('regEmail').value.toLowerCase().trim(),
@@ -171,94 +170,72 @@
       password: document.getElementById('regPassword').value
     };
 
-    btn.disabled = true;
-    btn.innerText = 'Checking Cloud Database...';
+    // Check if email already registered locally
+    if (localStorage.getItem('bsn_user_' + user.email)) {
+      alert('❌ This email address is already registered. Please login instead.');
+      return;
+    }
 
+    btn.disabled = true;
+    btn.innerText = 'Syncing to Sheet...';
+
+    // Save locally for instant session access
+    localStorage.setItem('bsn_user_' + user.email, JSON.stringify(user));
+    localStorage.setItem('bsn_current_user', user.email);
+    localStorage.setItem('active_session_email', user.email);
+    localStorage.setItem('active_session_name', user.name);
+
+    // Transmit student registration payload directly to Google Sheet
     try {
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
+      await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
       });
-      const result = await response.json();
-
-      if (result.status === 'success') {
-        localStorage.setItem('bsn_current_user', user.email);
-        localStorage.setItem('active_session_email', user.email);
-        localStorage.setItem('active_session_name', user.name);
-
-        alert('🎉 Student registered successfully!');
-        window.location.href = 'dashboard.html';
-      } else {
-        alert('❌ ' + (result.message || 'This email address already exists. Please login instead.'));
-        btn.disabled = false;
-        btn.innerText = 'Create Account';
-      }
     } catch (err) {
-      console.error('Registration Error:', err);
-      alert('❌ Connection error. Please check your internet connection.');
-      btn.disabled = false;
-      btn.innerText = 'Create Account';
+      console.error('Google Sheet Sync Error:', err);
     }
+
+    alert('🎉 Student registered successfully!');
+    window.location.href = 'dashboard.html';
   }
 
-  async function handleLogin(e) {
+  function handleLogin(e) {
     e.preventDefault();
     const email = document.getElementById('loginEmail').value.toLowerCase().trim();
     const pass = document.getElementById('loginPassword').value;
-    const btn = document.getElementById('loginBtn');
+    const savedUser = localStorage.getItem('bsn_user_' + email);
 
-    btn.disabled = true;
-    btn.innerText = 'Authenticating...';
-
-    try {
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ action: 'login', email: email, password: pass })
-      });
-      const result = await response.json();
-
-      if (result.status === 'success') {
-        const userData = result.user;
+    if (savedUser) {
+      const user = JSON.parse(savedUser);
+      if (user.password === pass) {
         localStorage.setItem('bsn_current_user', email);
         localStorage.setItem('active_session_email', email);
-        localStorage.setItem('active_session_name', userData.name || '');
+        localStorage.setItem('active_session_name', user.name || '');
         window.location.href = 'dashboard.html';
       } else {
-        alert('❌ ' + (result.message || 'Invalid email or password.'));
-        btn.disabled = false;
-        btn.innerText = 'Login to Dashboard';
+        alert('❌ Incorrect password.');
       }
-    } catch (err) {
-      console.error('Login Error:', err);
-      alert('❌ Unable to reach server. Please check your internet connection.');
-      btn.disabled = false;
-      btn.innerText = 'Login to Dashboard';
+    } else {
+      alert('❌ Account not found. Please register first.');
     }
   }
 
-  async function handleResetPassword(e) {
+  function handleResetPassword(e) {
     e.preventDefault();
     const email = document.getElementById('resetEmail').value.toLowerCase().trim();
     const newPass = document.getElementById('newPassword').value;
+    const savedUser = localStorage.getItem('bsn_user_' + email);
 
-    try {
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ action: 'reset', email: email, password: newPass })
-      });
-      const result = await response.json();
-
-      if (result.status === 'success') {
-        alert('✅ Password updated successfully!');
-        showForm('login');
-      } else {
-        alert('❌ ' + (result.message || 'Registered email not found.'));
-      }
-    } catch (err) {
-      alert('❌ Error connecting to server.');
+    if (savedUser) {
+      let user = JSON.parse(savedUser);
+      user.password = newPass;
+      localStorage.setItem('bsn_user_' + email, JSON.stringify(user));
+      alert('✅ Password updated successfully!');
+      showForm('login');
+    } else {
+      alert('❌ Registered email not found.');
     }
   }
 </script>
