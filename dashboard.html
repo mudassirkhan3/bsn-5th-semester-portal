@@ -584,6 +584,18 @@
           }
         }
       });
+
+      // Explicitly enforce Nursing Ethics to always be unlocked
+      const ethicsBadge = document.getElementById('badge-ethics');
+      const ethicsLink = document.getElementById('link-ethics');
+      if (ethicsBadge) {
+        ethicsBadge.className = "status-badge status-unlocked";
+        ethicsBadge.innerText = "Unlocked";
+      }
+      if (ethicsLink) {
+        ethicsLink.className = "action-link btn-unlocked";
+        ethicsLink.innerText = "Open Notes & Modules →";
+      }
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -594,6 +606,17 @@
         window.location.href = 'login.html';
         return;
       }
+
+      // Ensure default lock states on initial dashboard load for all subjects except Nursing Ethics
+      const subjects = ['pediatric', 'reproductive', 'english', 'perls'];
+      subjects.forEach(sub => {
+        const key = 'unlocked_' + currentUserEmail + '_' + sub;
+        if (localStorage.getItem(key) === null) {
+          localStorage.setItem(key, 'false');
+        }
+      });
+      localStorage.setItem('unlocked_' + currentUserEmail + '_ethics', 'true');
+      localStorage.setItem('unlocked_ethics', 'true');
 
       // Load user profile details
       const userDataStr = localStorage.getItem('bsn_user_' + currentUserEmail) || localStorage.getItem('user_acc_' + currentUserEmail);
