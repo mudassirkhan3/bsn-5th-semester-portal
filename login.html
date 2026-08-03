@@ -7,95 +7,153 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    
     body { 
-      background: #f8fafc; 
+      background: linear-gradient(135deg, #f0fdf4 0%, #f8fafc 50%, #eff6ff 100%); 
       display: flex; 
       flex-direction: column; 
       align-items: center; 
       justify-content: center; 
       min-height: 100vh; 
-      padding: 20px; 
+      padding: 24px 16px;
     }
     
+    .portal-container {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
     .auth-card { 
       background: #ffffff; 
       width: 100%; 
-      max-width: 440px; 
-      border-radius: 20px; 
-      padding: 32px; 
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+      border-radius: 24px; 
+      padding: 36px 32px; 
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04); 
       border: 1px solid #e2e8f0; 
-      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative top accent glow */
+    .auth-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #0284c7, #25d366, #0d9488);
     }
 
     .brand-header { text-align: center; margin-bottom: 24px; }
-    .brand-icon { background: linear-gradient(135deg, #0284c7, #0d9488); color: white; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 12px auto; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2); }
-    .brand-header h2 { font-size: 1.35rem; font-weight: 800; color: #0f172a; }
-    .brand-header p { font-size: 0.85rem; color: #64748b; margin-top: 4px; }
+    .brand-icon { 
+      background: linear-gradient(135deg, #0284c7, #0d9488); 
+      color: white; 
+      width: 56px; 
+      height: 56px; 
+      border-radius: 16px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 1.6rem; 
+      margin: 0 auto 14px auto; 
+      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.25); 
+    }
+    .brand-header h2 { font-size: 1.4rem; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; }
+    .brand-header p { font-size: 0.85rem; color: #64748b; margin-top: 4px; font-weight: 500; }
 
-    .tabs { display: flex; background: #f1f5f9; padding: 4px; border-radius: 12px; margin-bottom: 24px; }
-    .tab-btn { flex: 1; border: none; padding: 10px; border-radius: 8px; font-weight: 700; cursor: pointer; background: transparent; color: #64748b; font-size: 0.85rem; transition: all 0.2s; }
-    .tab-btn.active { background: #ffffff; color: #0284c7; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .tabs { display: flex; background: #f1f5f9; padding: 5px; border-radius: 14px; margin-bottom: 24px; border: 1px solid #e2e8f0; }
+    .tab-btn { flex: 1; border: none; padding: 10px; border-radius: 10px; font-weight: 700; cursor: pointer; background: transparent; color: #64748b; font-size: 0.85rem; transition: all 0.25s ease; }
+    .tab-btn.active { background: #ffffff; color: #0284c7; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
     
     .form-group { margin-bottom: 16px; }
     label { font-size: 0.82rem; font-weight: 700; color: #334155; display: block; margin-bottom: 6px; }
-    input, select { width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; font-size: 0.9rem; background: #ffffff; transition: all 0.2s; }
-    input:focus, select:focus { border-color: #0284c7; box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15); }
+    input, select { width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 12px; outline: none; font-size: 0.9rem; background: #ffffff; color: #0f172a; transition: all 0.2s ease; }
+    input:focus, select:focus { border-color: #0284c7; box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.12); background: #ffffff; }
     
-    .submit-btn { width: 100%; padding: 14px; background: #0284c7; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; font-size: 0.9rem; transition: background 0.2s, transform 0.1s; }
-    .submit-btn:hover { background: #0369a1; }
-    .submit-btn:active { transform: scale(0.99); }
-    .submit-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+    .submit-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 10px; font-size: 0.92rem; transition: all 0.25s ease; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
+    .submit-btn:hover { background: linear-gradient(135deg, #0369a1, #075985); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35); }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
     
     .forgot-link { font-size: 0.8rem; color: #0284c7; font-weight: 600; text-decoration: none; cursor: pointer; float: right; margin-bottom: 12px; }
     .forgot-link:hover { text-decoration: underline; }
     
-    .back-btn { font-size: 0.82rem; color: #64748b; font-weight: 700; background: none; border: none; cursor: pointer; margin-bottom: 16px; display: inline-flex; align-items: center; gap: 4px; }
+    .back-btn { font-size: 0.82rem; color: #64748b; font-weight: 700; background: none; border: none; cursor: pointer; margin-bottom: 16px; display: inline-flex; align-items: center; gap: 4px; transition: color 0.2s; }
+    .back-btn:hover { color: #0f172a; }
 
-    /* PROFESSIONAL FLOATING WHATSAPP CHAT BUTTON */
+    /* STUNNING IMPRESSIVE WHATSAPP BUTTON (Optimized for Mobile & PC) */
     .whatsapp-float {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, #25d366, #128c7e);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.88rem;
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
-      transition: all 0.3s ease;
-      margin-bottom: 20px;
-      animation: pulse-whatsapp 2.5s infinite;
-    }
-    .whatsapp-float:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
-      background: linear-gradient(135deg, #22bf5b, #0f7a6e);
-    }
-    .whatsapp-icon {
-      width: 24px;
-      height: 24px;
-      fill: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 12px;
+      width: 100%;
+      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+      color: white;
+      padding: 15px 24px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.95rem;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .whatsapp-float::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(rgba(255,255,255,0.2), transparent);
+      transform: rotate(45deg) translateY(-100%);
+      transition: transform 0.6s ease;
     }
 
-    @keyframes pulse-whatsapp {
-      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
-      70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    .whatsapp-float:hover::after {
+      transform: rotate(45deg) translateY(100%);
     }
 
-    /* STYLISH PROFESSIONAL FOOTER */
+    .whatsapp-float:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.45);
+      background: linear-gradient(135deg, #22bf5b, #0f7a6e);
+    }
+
+    .whatsapp-float:active {
+      transform: translateY(-1px);
+    }
+
+    .whatsapp-icon-box {
+      background: rgba(255, 255, 255, 0.2);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .whatsapp-icon {
+      width: 20px;
+      height: 20px;
+      fill: #ffffff;
+    }
+
+    /* MODERN STYLISH FOOTER */
     .portal-footer {
       width: 100%;
-      max-width: 440px;
       text-align: center;
-      padding: 16px 12px;
-      border-top: 1px solid #e2e8f0;
+      padding: 16px 8px 8px 8px;
       color: #64748b;
       font-size: 0.82rem;
       line-height: 1.6;
@@ -105,109 +163,119 @@
     }
     .portal-footer .developer-name {
       color: #0284c7;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    /* Media query adjustments for smaller screens */
+    @media (max-width: 480px) {
+      body { padding: 12px 8px; }
+      .auth-card { padding: 24px 20px; border-radius: 20px; }
+      .whatsapp-float { padding: 14px 20px; font-size: 0.9rem; }
     }
   </style>
 </head>
 <body>
 
-<div class="auth-card">
-  <div class="brand-header">
-    <div class="brand-icon">🩺</div>
-    <h2>BSN Student Portal</h2>
-    <p>Sign in or register to access study modules</p>
+<div class="portal-container">
+  <div class="auth-card">
+    <div class="brand-header">
+      <div class="brand-icon">🩺</div>
+      <h2>BSN Student Portal</h2>
+      <p>Sign in or register to access study modules</p>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs" id="authTabs">
+      <button class="tab-btn active" id="loginTab" onclick="showForm('login')">Login</button>
+      <button class="tab-btn" id="regTab" onclick="showForm('register')">Register Student</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="loginEmail" placeholder="student@example.com" required>
+      </div>
+      <div class="form-group">
+        <label>
+          Password 
+          <span class="forgot-link" onclick="showForm('forgot')">Forgot Password?</span>
+        </label>
+        <input type="password" id="loginPassword" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="submit-btn" id="loginBtn">Login to Dashboard</button>
+    </form>
+
+    <!-- REGISTRATION FORM -->
+    <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="regName" placeholder="e.g. Student Name" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Institute Name</label>
+        <input type="text" id="regInstitute" placeholder="e.g. New Life Institute of Nursing Multan" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="regEmail" placeholder="student@example.com" required>
+      </div>
+
+      <div class="form-group">
+        <label>Semester</label>
+        <select id="regSemester" required>
+          <option value="" disabled selected>Select your current semester</option>
+          <option value="BSN Semester 1">BSN Semester 1</option>
+          <option value="BSN Semester 2">BSN Semester 2</option>
+          <option value="BSN Semester 3">BSN Semester 3</option>
+          <option value="BSN Semester 4">BSN Semester 4</option>
+          <option value="BSN Semester 5">BSN Semester 5</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Create Password</label>
+        <input type="password" id="regPassword" placeholder="At least 6 characters" minlength="6" required>
+      </div>
+
+      <button type="submit" class="submit-btn" id="regBtn">Create Account</button>
+    </form>
+
+    <!-- FORGOT PASSWORD FORM -->
+    <form id="forgotForm" style="display: none;" onsubmit="handleResetPassword(event)">
+      <button type="button" class="back-btn" onclick="showForm('login')">← Back to Login</button>
+      <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 12px;">Reset Password</h3>
+      <div class="form-group">
+        <label>Your Registered Email</label>
+        <input type="email" id="resetEmail" placeholder="student@example.com" required>
+      </div>
+      <div class="form-group">
+        <label>New Password</label>
+        <input type="password" id="newPassword" placeholder="Enter new password" minlength="6" required>
+      </div>
+      <button type="submit" class="submit-btn" style="background: linear-gradient(135deg, #0d9488, #0f766e);">Update Password</button>
+    </form>
   </div>
 
-  <!-- Navigation Tabs -->
-  <div class="tabs" id="authTabs">
-    <button class="tab-btn active" id="loginTab" onclick="showForm('login')">Login</button>
-    <button class="tab-btn" id="regTab" onclick="showForm('register')">Register Student</button>
-  </div>
+  <!-- IMPRESSIVE WHATSAPP CHAT BUTTON (Appears seamlessly below card for both Mobile & PC) -->
+  <a href="https://wa.me/923241064487?text=Hello%20Mudassir,%20I%20need%20assistance%20regarding%20the%20BSN%20Student%20Portal." target="_blank" class="whatsapp-float">
+    <div class="whatsapp-icon-box">
+      <svg class="whatsapp-icon" viewBox="0 0 24 24">
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+      </svg>
+    </div>
+    <span>Chat on WhatsApp with Mudassir Khan</span>
+  </a>
 
-  <!-- LOGIN FORM -->
-  <form id="loginForm" onsubmit="handleLogin(event)">
-    <div class="form-group">
-      <label>Email Address</label>
-      <input type="email" id="loginEmail" placeholder="student@example.com" required>
-    </div>
-    <div class="form-group">
-      <label>
-        Password 
-        <span class="forgot-link" onclick="showForm('forgot')">Forgot Password?</span>
-      </label>
-      <input type="password" id="loginPassword" placeholder="••••••••" required>
-    </div>
-    <button type="submit" class="submit-btn" id="loginBtn">Login to Dashboard</button>
-  </form>
-
-  <!-- REGISTRATION FORM -->
-  <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
-    <div class="form-group">
-      <label>Full Name</label>
-      <input type="text" id="regName" placeholder="e.g. Student Name" required>
-    </div>
-    
-    <div class="form-group">
-      <label>Institute Name</label>
-      <input type="text" id="regInstitute" placeholder="e.g. New Life Institute of Nursing Multan" required>
-    </div>
-
-    <div class="form-group">
-      <label>Email Address</label>
-      <input type="email" id="regEmail" placeholder="student@example.com" required>
-    </div>
-
-    <div class="form-group">
-      <label>Semester</label>
-      <select id="regSemester" required>
-        <option value="" disabled selected>Select your current semester</option>
-        <option value="BSN Semester 1">BSN Semester 1</option>
-        <option value="BSN Semester 2">BSN Semester 2</option>
-        <option value="BSN Semester 3">BSN Semester 3</option>
-        <option value="BSN Semester 4">BSN Semester 4</option>
-        <option value="BSN Semester 5">BSN Semester 5</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Create Password</label>
-      <input type="password" id="regPassword" placeholder="At least 6 characters" minlength="6" required>
-    </div>
-
-    <button type="submit" class="submit-btn" id="regBtn">Create Account</button>
-  </form>
-
-  <!-- FORGOT PASSWORD FORM -->
-  <form id="forgotForm" style="display: none;" onsubmit="handleResetPassword(event)">
-    <button type="button" class="back-btn" onclick="showForm('login')">← Back to Login</button>
-    <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 12px;">Reset Password</h3>
-    <div class="form-group">
-      <label>Your Registered Email</label>
-      <input type="email" id="resetEmail" placeholder="student@example.com" required>
-    </div>
-    <div class="form-group">
-      <label>New Password</label>
-      <input type="password" id="newPassword" placeholder="Enter new password" minlength="6" required>
-    </div>
-    <button type="submit" class="submit-btn" style="background:#0d9488;">Update Password</button>
-  </form>
+  <!-- PROFESSIONAL FOOTER -->
+  <footer class="portal-footer">
+    <p>&copy; 2026 BSN Student Portal. All rights reserved.</p>
+    <p>Designed &amp; Developed with precision by <span class="developer-name">Mudassir Khan</span></p>
+  </footer>
 </div>
-
-<!-- IMPRESSIVE WHATSAPP CHAT BUTTON -->
-<a href="https://wa.me/923241064487?text=Hello%20Mudassir,%20I%20need%20assistance%20regarding%20the%20BSN%20Student%20Portal." target="_blank" class="whatsapp-float">
-  <div class="whatsapp-icon">
-    <svg viewBox="0 0 24 24" width="24" height="24">
-      <path fill="currentColor" d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-    </svg>
-  </div>
-  <span>Chat with Mudassir Khan</span>
-</a>
-
-<!-- PROFESSIONAL FOOTER -->
-<footer class="portal-footer">
-  <p>&copy; 2026 BSN Student Portal. All rights reserved.</p>
-  <p>Designed &amp; Developed with precision by <span class="developer-name">Mudassir Khan</span></p>
-</footer>
 
 <script>
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyMadxOTU_9Uys1xrQC8g7t8CGoKQkBM6aLlOEM4KdAvL0Qqate0nXSHuUUKp3F4Nx7/exec';
