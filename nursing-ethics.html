@@ -777,7 +777,7 @@
       if (btnEl) btnEl.style.display = 'none';
     }
 
-    // Secure Code Redeemer (Any Custom Code Works, Locked after 1 use)
+    // Secure Code Redeemer (Strict One-Time Use Validation)
     function redeemAccessCode() {
       const emailInput = document.getElementById('studentEmailInput');
       const email = emailInput ? emailInput.value.trim().toLowerCase() : '';
@@ -816,7 +816,7 @@
         return;
       }
 
-      // 2. Mark the code as used so it can't be shared or reused
+      // 2. Mark the code as permanently used globally so it can never be used again
       localStorage.setItem('used_code_' + codeInput, 'true');
 
       // 3. Save and Unlock content for this specific email session
