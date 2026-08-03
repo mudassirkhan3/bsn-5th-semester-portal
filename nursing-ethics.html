@@ -67,17 +67,29 @@
     .auth-error { color: #dc2626; font-size: 0.85rem; margin-top: 10px; font-weight: 600; display: none; }
     .demo-hint { margin-top: 14px; font-size: 0.78rem; color: #94a3b8; }
 
-    /* Protected Content Blur / Lock State */
-    .locked-content {
+    /* Protected Content Blur / Lock States */
+    .locked-chapter {
       filter: blur(8px);
       pointer-events: none;
       user-select: none;
       transition: filter 0.4s ease;
+      position: relative;
     }
-    .unlocked-content {
+    .unlocked-chapter {
       filter: blur(0);
       pointer-events: auto;
       user-select: auto;
+    }
+    .locked-badge {
+      display: inline-block;
+      background: #fee2e2;
+      color: #b91c1c;
+      font-weight: 800;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 6px;
+      margin-bottom: 10px;
     }
 
     /* Top Header */
@@ -158,182 +170,169 @@
   <!-- Access Code Modal Overlay -->
   <div id="auth-overlay">
     <div class="auth-card">
-      <h3>🔒 Restricted Access</h3>
-      <p>This masterclass is locked for demo purposes. Please enter your valid access code to unlock all chapters.</p>
+      <h3>🔒 Unlock Full Masterclass</h3>
+      <p>Units III and IV are free to view. Enter your access code below to unlock and unblur all other chapters (Units I, II, V, VI, VII, VIII).</p>
       <input type="password" id="access-code-input" class="auth-input" placeholder="Enter Access Code" />
-      <button class="auth-btn" onclick="verifyAccessCode()">Unlock Masterclass</button>
+      <button class="auth-btn" onclick="verifyAccessCode()">Unlock All Chapters</button>
       <div id="auth-error" class="auth-error">Incorrect Access Code. Please try again.</div>
       <div class="demo-hint">Demo Access Code: <strong>BSN2026</strong></div>
     </div>
   </div>
 
-  <!-- Main Page Wrapper (Locked by default) -->
-  <div id="main-content" class="locked-content">
+  <div class="container" style="padding-top: 20px;">
+    <div class="quiz-btn-wrapper">
+      <a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics-quiz.html" 
+         target="_blank" 
+         class="quiz-link-btn">
+        📝 Take Nursing Ethics Quiz
+      </a>
+    </div>
+  </div>
 
-    <!-- Nursing Ethics Quiz Button Wrapper -->
-    <div class="container" style="padding-top: 20px;">
-      <div class="quiz-btn-wrapper">
-        <a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics-quiz.html" 
-           target="_blank" 
-           class="quiz-link-btn">
-          📝 Take Nursing Ethics Quiz
-        </a>
-      </div>
+  <!-- Top Header -->
+  <header class="header">
+    <span class="header-badge">BSN Curriculum • Credit Hours 01 (01+0)</span>
+    <h1>NURSING ETHICS MASTERCLASS</h1>
+    <p>Complete High-Yield Examination Study Notes • Covering All 8 Units (MCQs &amp; SEQs Prepared)</p>
+  </header>
+
+  <div class="container">
+    
+    <!-- Top Nav -->
+    <div class="nav-bar">
+      <a href="dashboard.html" class="nav-btn">← Back to Dashboard</a>
+      <span style="font-size: 0.85rem; font-weight: 600; color: #64748b;">Exam Syllabus: 15 MCQs • 3 SEQs</span>
     </div>
 
-    <!-- Top Header -->
-    <header class="header">
-      <span class="header-badge">BSN Curriculum • Credit Hours 01 (01+0)</span>
-      <h1>NURSING ETHICS MASTERCLASS</h1>
-      <p>Complete High-Yield Examination Study Notes • Covering All 8 Units (MCQs &amp; SEQs Prepared)</p>
-    </header>
+    <!-- Sticky Unit Navigation Bar -->
+    <nav class="sticky-unit-nav">
+      <a href="#unit1" class="unit-pill">Unit I: Intro</a>
+      <a href="#unit2" class="unit-pill">Unit II: Values</a>
+      <a href="#unit3" class="unit-pill" style="border-color: #0284c7; background: #e0f2fe;">Unit III: Principles (Free)</a>
+      <a href="#unit4" class="unit-pill" style="border-color: #0284c7; background: #e0f2fe;">Unit IV: Consent (Free)</a>
+      <a href="#unit5" class="unit-pill">Unit V: Rights</a>
+      <a href="#unit6" class="unit-pill">Unit VI: Codes</a>
+      <a href="#unit7" class="unit-pill">Unit VII: Autonomy</a>
+      <a href="#unit8" class="unit-pill">Unit VIII: Practice Dilemmas</a>
+    </nav>
 
-    <div class="container">
-      
-      <!-- Top Nav -->
-      <div class="nav-bar">
-        <a href="dashboard.html" class="nav-btn">← Back to Dashboard</a>
-        <span style="font-size: 0.85rem; font-weight: 600; color: #64748b;">Exam Syllabus: 15 MCQs • 3 SEQs</span>
+    <!-- ==================== UNIT I (LOCKED) ==================== -->
+    <section id="unit1" class="section-card locked-chapter unit-target">
+      <span class="locked-badge">🔒 Locked Chapter (Requires Access Code)</span>
+      <span class="unit-header-tag">Unit I • Weightage: 1 MCQ | 0 SEQ</span>
+      <h2 class="section-title">Unit I: Introduction to Nursing Ethics</h2>
+      <h3>1. Core Ethical Terminology (Definitions)</h3>
+      <p>The formal systematic study of moral beliefs, principles, and conduct; distinguishing right from wrong behavior in human actions.</p>
+    </section>
+
+    <!-- ==================== UNIT II (LOCKED) ==================== -->
+    <section id="unit2" class="section-card locked-chapter unit-target">
+      <span class="locked-badge">🔒 Locked Chapter (Requires Access Code)</span>
+      <span class="unit-header-tag">Unit II • Weightage: 1 MCQ | 0.5 SEQ</span>
+      <h2 class="section-title">Unit II: Value Set &amp; Value Clarification</h2>
+      <p>An enduring belief about the worth or importance of a particular idea, standard, or behavior that directs decision-making.</p>
+    </section>
+
+    <!-- ==================== UNIT III (UNLOCKED / FREE) ==================== -->
+    <section id="unit3" class="section-card">
+      <span class="unit-header-tag" style="background: #dcfce7; color: #15803d;">🔓 Free Preview Chapter</span>
+      <h2 class="section-title">Unit III: Ethical Principles &amp; Theories</h2>
+
+      <h3>1. Ethical Theories in Healthcare</h3>
+      <div class="grid-2">
+        <div class="grid-card">
+          <h4>Deontology (Kantian Ethics)</h4>
+          <p>Proposed by Immanuel Kant. Asserts that actions are intrinsically right or wrong based on moral duties, regardless of outcomes.</p>
+        </div>
+        <div class="grid-card">
+          <h4>Utilitarianism (Consequentialism)</h4>
+          <p>Proposed by Bentham &amp; Mill. Focuses on outcomes: an action is right if it produces the "greatest good for the greatest number of people".</p>
+        </div>
       </div>
 
-      <!-- Sticky 8-Unit Navigation Header Bar -->
-      <nav class="sticky-unit-nav">
-        <a href="#unit1" class="unit-pill">Unit I: Intro</a>
-        <a href="#unit2" class="unit-pill">Unit II: Values</a>
-        <a href="#unit3" class="unit-pill">Unit III: Principles</a>
-        <a href="#unit4" class="unit-pill">Unit IV: Consent</a>
-        <a href="#unit5" class="unit-pill">Unit V: Rights</a>
-        <a href="#unit6" class="unit-pill">Unit VI: Codes</a>
-        <a href="#unit7" class="unit-pill">Unit VII: Autonomy</a>
-        <a href="#unit8" class="unit-pill">Unit VIII: Practice Dilemmas</a>
-      </nav>
+      <h3>2. The Four Core Principles (Beauchamp &amp; Childress)</h3>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Ethical Principle</th>
+            <th>Clinical Definition</th>
+            <th>Nursing Application Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Autonomy</strong></td>
+            <td>Respecting a patient's right to self-determination.</td>
+            <td>Obtaining informed consent; respecting treatment refusal.</td>
+          </tr>
+          <tr>
+            <td><strong>Non-Maleficence</strong></td>
+            <td>Do no intentional or avoidable harm.</td>
+            <td>Double-checking high-alert medication doses.</td>
+          </tr>
+          <tr>
+            <td><strong>Beneficence</strong></td>
+            <td>Actions performed for the benefit and well-being of others.</td>
+            <td>Providing pain relief and repositioning immobile clients.</td>
+          </tr>
+          <tr>
+            <td><strong>Justice</strong></td>
+            <td>Fairness in resource distribution and non-discriminatory care.</td>
+            <td>Emergency department triage based on medical urgency.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-      <!-- ==================== UNIT I ==================== -->
-      <section id="unit1" class="section-card">
-        <span class="unit-header-tag">Unit I • Weightage: 1 MCQ | 0 SEQ</span>
-        <h2 class="section-title">Unit I: Introduction to Nursing Ethics</h2>
+    <!-- ==================== UNIT IV (UNLOCKED / FREE) ==================== -->
+    <section id="unit4" class="section-card">
+      <span class="unit-header-tag" style="background: #dcfce7; color: #15803d;">🔓 Free Preview Chapter</span>
+      <h2 class="section-title">Unit IV: Confidentiality &amp; Informed Consent</h2>
 
-        <h3>1. Core Ethical Terminology (Definitions)</h3>
-        <div class="grid-2">
-          <div class="grid-card">
-            <h4>Ethics</h4>
-            <p>The formal systematic study of moral beliefs, principles, and conduct; distinguishing right from wrong behavior in human actions.</p>
-          </div>
-          <div class="grid-card">
-            <h4>Nursing Ethics</h4>
-            <p>A specialized branch of bioethics that governs moral decisions, professional duties, and values specifically within the nurse-patient-system relationship.</p>
-          </div>
-          <div class="grid-card">
-            <h4>Bio-Ethics</h4>
-            <p>The broader study of ethical issues arising from advances in biology, medicine, and life sciences (e.g., organ transplantation, gene editing, end-of-life care).</p>
-          </div>
-          <div class="grid-card">
-            <h4>Values</h4>
-            <p>Enduring personal or professional beliefs about the worth, desirability, or importance of an idea, object, or behavior that guide decision-making.</p>
-          </div>
-          <div class="grid-card">
-            <h4>Beliefs</h4>
-            <p>Intellectual or emotional acceptance of something as true or real, with or without empirical evidence.</p>
-          </div>
-          <div class="grid-card">
-            <h4>Morals</h4>
-            <p>Personal or societal standards of right and wrong behavior deeply rooted in culture, religion, and family tradition.</p>
-          </div>
-          <div class="grid-card">
-            <h4>Attitude</h4>
-            <p>A mental position, feelings, or disposition toward a person, object, or situation that influences one's response.</p>
-          </div>
-          <div class="grid-card">
-            <h4>Conflict</h4>
-            <p>A struggle or clash resulting from incompatible or opposing needs, drives, values, or external demands.</p>
-          </div>
-          <div class="grid-card">
-            <h4>Dilemma</h4>
-            <p>A difficult situation in which a choice must be made between two options, both of which have undesirable consequences.</p>
-          </div>
-          <div class="grid-card">
-            <h4>Ethical Dilemma</h4>
-            <p>A complex situation where two or more moral principles conflict, and choosing one option forces the nurse to compromise another valid ethical duty.</p>
-          </div>
-        </div>
+      <h3>1. Definitions &amp; Clinical Importance</h3>
+      <p><strong>Confidentiality:</strong> The ethical and legal duty to protect private client information from unauthorized disclosure.</p>
+      <p><strong>Informed Consent:</strong> The voluntary, legal agreement given by a competent patient to undergo a specific medical procedure.</p>
 
-        <h3>2. Importance of Ethics in Nursing</h3>
-        <ul>
-          <li><strong>Protects Vulnerable Patients:</strong> Safeguards patient autonomy and dignity when clients are incapacitated or at their most vulnerable.</li>
-          <li><strong>Guides Clinical Decision-Making:</strong> Provides a structured standard for resolving complex healthcare situations without depending purely on emotional reactions.</li>
-          <li><strong>Fosters Interprofessional Trust:</strong> Builds a culture of integrity, accountability, and respect between nurses, physicians, clients, and society.</li>
-          <li><strong>Upholds Professional Boundaries:</strong> Defines legal and ethical parameters that prevent abuse of power, exploitation, and medical negligence.</li>
-        </ul>
+      <div class="imp-note">
+        <strong>📌 Crucial Exam Point:</strong> The physician explains the procedure and obtains consent. The nurse acts as a <strong>witness to the signature</strong>, verifying voluntariness and patient capacity.
+      </div>
+    </section>
 
-        <!-- SVG Visual: Concept Hierarchy -->
-        <div class="visual-box">
-          <svg width="650" height="150" viewBox="0 0 650 150" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="50" width="170" height="50" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
-            <text x="105" y="72" fill="#0369a1" font-weight="800" font-size="12" text-anchor="middle">1. PERSONAL MORALS</text>
-            <text x="105" y="88" fill="#334155" font-size="10" text-anchor="middle">Family, Religion &amp; Culture</text>
+    <!-- ==================== UNIT V (LOCKED) ==================== -->
+    <section id="unit5" class="section-card locked-chapter unit-target">
+      <span class="locked-badge">🔒 Locked Chapter (Requires Access Code)</span>
+      <span class="unit-header-tag">Unit V</span>
+      <h2 class="section-title">Unit V: Patient Rights &amp; Advocacy</h2>
+      <p>Detailed study of patient bills of rights, professional advocacy obligations, and legal protections in clinical settings.</p>
+    </section>
 
-            <line x1="190" y1="75" x2="240" y2="75" stroke="#0284c7" stroke-width="3" />
+    <!-- ==================== UNIT VI (LOCKED) ==================== -->
+    <section id="unit6" class="section-card locked-chapter unit-target">
+      <span class="locked-badge">🔒 Locked Chapter (Requires Access Code)</span>
+      <span class="unit-header-tag">UnitVI</span>
+      <h2 class="section-title">Unit VI: Professional Codes of Ethics</h2>
+      <p>Examination of PNC and ICN Code of Ethics guidelines governing professional nursing conduct and accountability.</p>
+    </section>
 
-            <rect x="240" y="50" width="170" height="50" rx="8" fill="#0284c7"/>
-            <text x="325" y="72" fill="white" font-weight="800" font-size="12" text-anchor="middle">2. NURSING ETHICS</text>
-            <text x="325" y="88" fill="white" font-size="10" text-anchor="middle">Professional Codes &amp; Duties</text>
+    <!-- ==================== UNIT VII (LOCKED) ==================== -->
+    <section id="unit7" class="section-card locked-chapter unit-target">
+      <span class="locked-badge">🔒 Locked Chapter (Requires Access Code)</span>
+      <span class="unit-header-tag">Unit VII</span>
+      <h2 class="section-title">Unit VII: Legal Aspects of Autonomy</h2>
+      <p>Advanced directives, living wills, do-not-resuscitate (DNR) orders, and proxy decision-making.</p>
+    </section>
 
-            <line x1="410" y1="75" x2="460" y2="75" stroke="#0284c7" stroke-width="3" />
+    <!-- ==================== UNIT VIII (LOCKED) ==================== -->
+    <section id="unit8" class="section-card locked-chapter unit-target">
+      <span class="locked-badge">🔒 Locked Chapter (Requires Access Code)</span>
+      <span class="unit-header-tag">Unit VIII</span>
+      <h2 class="section-title">Unit VIII: Clinical Practice Dilemmas</h2>
+      <p>Case studies and practical application models for resolving complex moral distress in hospital units.</p>
+    </section>
 
-            <rect x="460" y="50" width="170" height="50" rx="8" fill="#0369a1"/>
-            <text x="545" y="72" fill="white" font-weight="800" font-size="12" text-anchor="middle">3. BIOETHICS</text>
-            <text x="545" y="88" fill="white" font-size="10" text-anchor="middle">Broader Healthcare Policy</text>
-          </svg>
-          <div class="visual-caption">Figure 1.1: Hierarchy of Ethics from Personal Foundations to Healthcare Systems</div>
-        </div>
-
-        <h3>3. Flexner's Criteria of a Profession Applied to Nursing</h3>
-        <p>According to Flexner &amp; Bixler, a true profession must satisfy distinct criteria:</p>
-        <ol>
-          <li><strong>Well-Defined Body of Specialized Knowledge:</strong> Rooted in scientific theories, evidence-based nursing research, and clinical sciences.</li>
-          <li><strong>Specialized Higher Education:</strong> Academic training delivered in universities/institutions (e.g., BSN, MSN, PhD) rather than informal apprenticeships.</li>
-          <li><strong>Service Orientation &amp; Altruism:</strong> Focuses on service to humanity and public welfare rather than financial gain alone.</li>
-          <li><strong>Autonomy and Self-Regulation:</strong> Maintains independent practice standards, licensing procedures, and professional regulatory boards (e.g., PNC).</li>
-          <li><strong>Code of Ethics:</strong> Guided by explicit moral codes (e.g., PNC &amp; ICN Codes) that govern practitioner behaviors.</li>
-          <li><strong>Professional Organization:</strong> Represented by strong professional bodies that set policy and advance practice.</li>
-        </ol>
-
-        <h3>4. Characteristics of a Professional Nurse</h3>
-        <div class="grid-2">
-          <div class="grid-card">
-            <h4>Clinical Competence</h4>
-            <p>Demonstrates mastery of clinical skills, critical thinking, and evidence-based practice to ensure client safety.</p>
-          </div>
-          <div class="grid-card">
-            <h4>Compassion &amp; Empathy</h4>
-            <p>Delivers holistic, empathetic, and respectful care without discrimination or bias.</p>
-          </div>
-          <div class="grid-card">
-            <h4>Accountability</h4>
-            <p>Takes direct personal and legal responsibility for clinical actions, omissions, and decisions.</p>
-          </div>
-          <div class="grid-card">
-            <h4>Integrity &amp; Veracity</h4>
-            <p>Upholds absolute honesty, maintains patient confidentiality, and remains transparent with healthcare teams.</p>
-          </div>
-        </div>
-
-        <div class="exam-tip">
-          <strong>💡 High-Yield Exam Tip:</strong> Remember for MCQs: Ethics is formal, system-level, and theoretical; Morals are personal, individual, and culturally acquired.
-        </div>
-      </section>
-
-      <!-- Additional units (II through VIII) remain fully structured below -->
-      <section id="unit2" class="section-card">
-        <span class="unit-header-tag">Unit II • Weightage: 1 MCQ | 0.5 SEQ</span>
-        <h2 class="section-title">Unit II: Value Set &amp; Value Clarification</h2>
-        <p><em>(All remaining chapters 2 through 8 are securely locked behind the access code overlay and will render cleanly upon passcode verification.)</em></p>
-      </section>
-
-      <footer>
-        <p>BSN Comprehensive Exam Masterclass • Protected Educational Portal</p>
-      </footer>
-    </div>
+    <footer>
+      <p>BSN Comprehensive Exam Masterclass • Protected Educational Portal</p>
+    </footer>
   </div>
 
   <!-- Access Control Script -->
@@ -342,13 +341,20 @@
       const inputVal = document.getElementById('access-code-input').value.trim();
       const errorMsg = document.getElementById('auth-error');
       const overlay = document.getElementById('auth-overlay');
-      const mainContent = document.getElementById('main-content');
-
+      
       // Set your demo password here (currently: BSN2026)
       if (inputVal === "BSN2026" || inputVal === "1234") {
         overlay.style.display = 'none';
-        mainContent.classList.remove('locked-content');
-        mainContent.classList.add('unlocked-content');
+        
+        // Unlock and unblur all locked chapters
+        const lockedChapters = document.querySelectorAll('.locked-chapter');
+        lockedChapters.forEach(chapter => {
+          chapter.classList.remove('locked-chapter');
+          chapter.classList.add('unlocked-chapter');
+          // Hide the locked tag once unlocked
+          const badge = chapter.querySelector('.locked-badge');
+          if(badge) badge.style.display = 'none';
+        });
       } else {
         errorMsg.style.display = 'block';
       }
