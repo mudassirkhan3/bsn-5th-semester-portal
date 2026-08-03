@@ -170,10 +170,10 @@
   <!-- Access Code Modal Overlay -->
   <div id="auth-overlay">
     <div class="auth-card">
-      <h3>🔒 Unlock Full Masterclass</h3>
-      <p>Units III and IV are free to view. Enter your access code below to unlock and unblur all other chapters (Units I, II, V, VI, VII, VIII).</p>
+      <h3>🔒 Restricted Access</h3>
+      <p>Units III and IV are free to view. Enter your access code below to unlock and unblur all other locked chapters.</p>
       <input type="password" id="access-code-input" class="auth-input" placeholder="Enter Access Code" />
-      <button class="auth-btn" onclick="verifyAccessCode()">Unlock All Chapters</button>
+      <button class="auth-btn" onclick="verifyAccessCode()">Unlock Masterclass</button>
       <div id="auth-error" class="auth-error">Incorrect Access Code. Please try again.</div>
       <div class="demo-hint">Demo Access Code: <strong>BSN2026</strong></div>
     </div>
@@ -217,23 +217,23 @@
     </nav>
 
     <!-- ==================== UNIT I (LOCKED) ==================== -->
-    <section id="unit1" class="section-card locked-chapter unit-target">
+    <section id="unit1" class="section-card locked-chapter">
       <span class="locked-badge">🔒 Locked Chapter (Requires Access Code)</span>
-      <span class="unit-header-tag">Unit I • Weightage: 1 MCQ | 0 SEQ</span>
+      <span class="unit-header-tag">Unit I • Weightage: 1 MCQ</span>
       <h2 class="section-title">Unit I: Introduction to Nursing Ethics</h2>
       <h3>1. Core Ethical Terminology (Definitions)</h3>
       <p>The formal systematic study of moral beliefs, principles, and conduct; distinguishing right from wrong behavior in human actions.</p>
     </section>
 
     <!-- ==================== UNIT II (LOCKED) ==================== -->
-    <section id="unit2" class="section-card locked-chapter unit-target">
+    <section id="unit2" class="section-card locked-chapter">
       <span class="locked-badge">🔒 Locked Chapter (Requires Access Code)</span>
-      <span class="unit-header-tag">Unit II • Weightage: 1 MCQ | 0.5 SEQ</span>
+      <span class="unit-header-tag">Unit II • Weightage: 1 MCQ</span>
       <h2 class="section-title">Unit II: Value Set &amp; Value Clarification</h2>
       <p>An enduring belief about the worth or importance of a particular idea, standard, or behavior that directs decision-making.</p>
     </section>
 
-    <!-- ==================== UNIT III (UNLOCKED / FREE) ==================== -->
+    <!-- ==================== UNIT III (OPEN / FREE) ==================== -->
     <section id="unit3" class="section-card">
       <span class="unit-header-tag" style="background: #dcfce7; color: #15803d;">🔓 Free Preview Chapter</span>
       <h2 class="section-title">Unit III: Ethical Principles &amp; Theories</h2>
@@ -284,7 +284,7 @@
       </table>
     </section>
 
-    <!-- ==================== UNIT IV (UNLOCKED / FREE) ==================== -->
+    <!-- ==================== UNIT IV (OPEN / FREE) ==================== -->
     <section id="unit4" class="section-card">
       <span class="unit-header-tag" style="background: #dcfce7; color: #15803d;">🔓 Free Preview Chapter</span>
       <h2 class="section-title">Unit IV: Confidentiality &amp; Informed Consent</h2>
@@ -299,7 +299,7 @@
     </section>
 
     <!-- ==================== UNIT V (LOCKED) ==================== -->
-    <section id="unit5" class="section-card locked-chapter unit-target">
+    <section id="unit5" class="section-card locked-chapter">
       <span class="locked-badge">🔒 Locked Chapter (Requires Access Code)</span>
       <span class="unit-header-tag">Unit V</span>
       <h2 class="section-title">Unit V: Patient Rights &amp; Advocacy</h2>
@@ -307,15 +307,15 @@
     </section>
 
     <!-- ==================== UNIT VI (LOCKED) ==================== -->
-    <section id="unit6" class="section-card locked-chapter unit-target">
+    <section id="unit6" class="section-card locked-chapter">
       <span class="locked-badge">🔒 Locked Chapter (Requires Access Code)</span>
-      <span class="unit-header-tag">UnitVI</span>
+      <span class="unit-header-tag">Unit VI</span>
       <h2 class="section-title">Unit VI: Professional Codes of Ethics</h2>
       <p>Examination of PNC and ICN Code of Ethics guidelines governing professional nursing conduct and accountability.</p>
     </section>
 
     <!-- ==================== UNIT VII (LOCKED) ==================== -->
-    <section id="unit7" class="section-card locked-chapter unit-target">
+    <section id="unit7" class="section-card locked-chapter">
       <span class="locked-badge">🔒 Locked Chapter (Requires Access Code)</span>
       <span class="unit-header-tag">Unit VII</span>
       <h2 class="section-title">Unit VII: Legal Aspects of Autonomy</h2>
@@ -323,7 +323,7 @@
     </section>
 
     <!-- ==================== UNIT VIII (LOCKED) ==================== -->
-    <section id="unit8" class="section-card locked-chapter unit-target">
+    <section id="unit8" class="section-card locked-chapter">
       <span class="locked-badge">🔒 Locked Chapter (Requires Access Code)</span>
       <span class="unit-header-tag">Unit VIII</span>
       <h2 class="section-title">Unit VIII: Clinical Practice Dilemmas</h2>
@@ -351,7 +351,6 @@
         lockedChapters.forEach(chapter => {
           chapter.classList.remove('locked-chapter');
           chapter.classList.add('unlocked-chapter');
-          // Hide the locked tag once unlocked
           const badge = chapter.querySelector('.locked-badge');
           if(badge) badge.style.display = 'none';
         });
