@@ -6,136 +6,171 @@
   <title>Nursing Ethics | BSN Comprehensive Exam Masterclass</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --slate-dark: #0f172a;
+      --slate-body: #334155;
+      --bg-color: #f8fafc;
+      --border-color: #cbd5e1;
+      --radius: 12px;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
     html { scroll-behavior: smooth; }
-    body { background: #f8fafc; color: #0f172a; line-height: 1.65; padding-bottom: 60px; }
+    body { background: var(--bg-color); color: var(--slate-dark); line-height: 1.6; padding-bottom: 60px; -webkit-text-size-adjust: 100%; }
 
-    /* Top Header */
-    .header { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: white; padding: 45px 24px 35px; text-align: center; }
-    .header-badge { background: rgba(255, 255, 255, 0.2); padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; margin-bottom: 12px; }
-    .header h1 { font-size: 2.3rem; font-weight: 800; margin-bottom: 10px; }
-    .header p { opacity: 0.95; font-size: 1rem; max-width: 800px; margin: 0 auto; }
+    /* Layout Container */
+    .container { width: 100%; max-width: 1050px; margin: 0 auto; padding: 0 16px; }
 
-    /* Container & Navigation */
-    .container { max-width: 1050px; margin: 0 auto; padding: 0 20px; }
-    .nav-bar { background: white; padding: 12px 20px; border-radius: 12px; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin: 20px auto; position: relative; z-index: 10; }
-    .nav-btn { color: #0284c7; text-decoration: none; font-weight: 700; font-size: 0.9rem; }
-    
-    /* Sticky Unit Navigation Bar */
-    .sticky-unit-nav { position: sticky; top: 10px; z-index: 100; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 10px 14px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); margin-bottom: 30px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: thin; }
-    .unit-pill { background: #f1f5f9; color: #0369a1; text-decoration: none; padding: 8px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; white-space: nowrap; transition: 0.2s; border: 1px solid #e2e8f0; }
-    .unit-pill:hover, .unit-pill.active { background: #0284c7; color: white; border-color: #0284c7; }
-
-    /* Content Sections */
-    .section-card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 36px; margin-bottom: 32px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); scroll-margin-top: 70px; }
-    .unit-header-tag { display: inline-block; background: #e0f2fe; color: #0369a1; font-weight: 800; font-size: 0.78rem; text-transform: uppercase; padding: 4px 12px; border-radius: 6px; margin-bottom: 10px; }
-    .section-title { font-size: 1.5rem; font-weight: 800; color: #0f172a; border-left: 5px solid #0284c7; padding-left: 12px; margin-bottom: 22px; }
-    
-    /* Typography & Content Elements */
-    h3 { font-size: 1.2rem; font-weight: 700; color: #0369a1; margin: 24px 0 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 6px; }
-    h4 { font-size: 1.02rem; font-weight: 700; color: #0f172a; margin: 14px 0 6px; }
-    p { color: #334155; margin-bottom: 12px; font-size: 0.96rem; }
-    ul, ol { margin-left: 22px; margin-bottom: 18px; color: #334155; }
-    li { margin-bottom: 8px; font-size: 0.95rem; }
-
-    /* Visual Diagram Box */
-    .visual-box { background: #f0f9ff; border: 1px dashed #0284c7; border-radius: 12px; padding: 20px; margin: 22px 0; text-align: center; }
-    .visual-box svg { max-width: 100%; height: auto; }
-    .visual-caption { font-size: 0.85rem; color: #0369a1; font-weight: 700; margin-top: 10px; }
-
-    /* Highlights & Exam Boxes */
-    .imp-note { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 8px; margin: 18px 0; font-size: 0.93rem; color: #78350f; }
-    .imp-note strong { color: #b45309; }
-
-    .exam-tip { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 16px; border-radius: 8px; margin: 18px 0; font-size: 0.93rem; color: #14532d; }
-    .exam-tip strong { color: #15803d; }
-
-    /* Grids & Cards */
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 18px 0; }
-    .grid-card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 18px; }
-    .grid-card h4 { color: #0284c7; font-size: 1rem; margin-bottom: 8px; }
-
-    /* Custom Tables */
-    .custom-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.92rem; }
-    .custom-table th, .custom-table td { border: 1px solid #cbd5e1; padding: 12px 14px; text-align: left; }
-    .custom-table th { background-color: #e0f2fe; color: #0369a1; font-weight: 700; }
-    .custom-table tr:nth-child(even) { background-color: #f8fafc; }
-
-    /* Footer */
-    footer { text-align: center; font-size: 0.85rem; color: #64748b; margin-top: 40px; }
-  </style>
-</head>
-<body>
-
-  <!-- Impressive Nursing Ethics Quiz Callout Banner -->
-  <div class="container" style="padding-top: 20px;">
-    <div style="
+    /* Top Quiz Banner */
+    .quiz-banner-wrapper { padding-top: 16px; }
+    .quiz-banner {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       border: 1px solid #334155;
-      border-left: 6px solid #16a34a;
-      border-radius: 16px;
-      padding: 24px 28px;
-      margin-bottom: 28px;
+      border-left: 5px solid #16a34a;
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
-      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
-      position: relative;
-      overflow: hidden;
-    ">
+      box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.2);
+    }
+    .quiz-banner-content { flex: 1; min-width: 240px; }
+    .quiz-badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+    .quiz-tag {
+      background: rgba(22, 163, 74, 0.15);
+      color: #4ade80;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+    }
+    .quiz-banner h3 { color: #ffffff; font-size: 1.15rem; font-weight: 800; margin: 0 0 4px 0; border: none; padding: 0; }
+    .quiz-banner p { color: #cbd5e1; font-size: 0.85rem; margin: 0; line-height: 1.4; }
+    
+    .quiz-btn {
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      color: #ffffff;
+      padding: 12px 20px;
+      text-decoration: none;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+      border: 1px solid #22c55e;
+      width: 100%;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    @media(min-width: 640px) { .quiz-btn { width: auto; } }
+
+    /* Top Header */
+    .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; padding: 36px 16px 28px; text-align: center; margin-bottom: 16px; }
+    .header-badge { background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; margin-bottom: 10px; }
+    .header h1 { font-size: 1.75rem; font-weight: 800; margin-bottom: 8px; line-height: 1.2; }
+    .header p { opacity: 0.95; font-size: 0.9rem; max-width: 800px; margin: 0 auto; }
+    @media(min-width: 768px) { .header { padding: 45px 24px 35px; } .header h1 { font-size: 2.3rem; } .header p { font-size: 1rem; } }
+
+    /* Navigation Bar */
+    .nav-bar { background: white; padding: 12px 16px; border-radius: var(--radius); border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.03); margin-bottom: 16px; font-size: 0.85rem; }
+    .nav-btn { color: var(--primary); text-decoration: none; font-weight: 700; }
+    
+    /* Sticky Unit Navigation Bar */
+    .sticky-unit-nav { 
+      position: sticky; 
+      top: 8px; 
+      z-index: 100; 
+      background: #ffffff; 
+      border: 1px solid var(--border-color); 
+      border-radius: var(--radius); 
+      padding: 10px 12px; 
+      box-shadow: 0 8px 16px -4px rgba(0,0,0,0.08); 
+      margin-bottom: 24px; 
+      display: flex; 
+      gap: 8px; 
+      overflow-x: auto; 
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox */
+    }
+    .sticky-unit-nav::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
+    .unit-pill { background: #f1f5f9; color: var(--primary-dark); text-decoration: none; padding: 7px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; white-space: nowrap; border: 1px solid #e2e8f0; flex-shrink: 0; }
+    .unit-pill:hover, .unit-pill.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* Content Sections */
+    .section-card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 20px 16px; margin-bottom: 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); scroll-margin-top: 70px; }
+    @media(min-width: 768px) { .section-card { padding: 36px; margin-bottom: 32px; } }
+
+    .unit-header-tag { display: inline-block; background: var(--primary-light); color: var(--primary-dark); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; margin-bottom: 8px; }
+    .section-title { font-size: 1.3rem; font-weight: 800; color: var(--slate-dark); border-left: 4px solid var(--primary); padding-left: 10px; margin-bottom: 18px; line-height: 1.3; }
+    @media(min-width: 768px) { .section-title { font-size: 1.5rem; padding-left: 12px; margin-bottom: 22px; } }
+    
+    /* Typography & Content Elements */
+    h3 { font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); margin: 20px 0 10px; border-bottom: 1px solid #f1f5f9; padding-bottom: 6px; }
+    h4 { font-size: 0.98rem; font-weight: 700; color: var(--slate-dark); margin: 12px 0 4px; }
+    p { color: var(--slate-body); margin-bottom: 12px; font-size: 0.93rem; }
+    ul, ol { margin-left: 18px; margin-bottom: 16px; color: var(--slate-body); }
+    li { margin-bottom: 6px; font-size: 0.92rem; }
+
+    /* Visual Diagram Box - Mobile Responsive SVG Fix */
+    .visual-box { background: #f0f9ff; border: 1px dashed var(--primary); border-radius: var(--radius); padding: 16px 8px; margin: 18px 0; text-align: center; overflow-x: auto; }
+    .visual-box svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+    .visual-caption { font-size: 0.8rem; color: var(--primary-dark); font-weight: 700; margin-top: 8px; }
+
+    /* Highlights & Exam Boxes */
+    .imp-note { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 14px; border-radius: 8px; margin: 16px 0; font-size: 0.9rem; color: #78350f; }
+    .imp-note strong { color: #b45309; }
+
+    .exam-tip { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 14px; border-radius: 8px; margin: 16px 0; font-size: 0.9rem; color: #14532d; }
+    .exam-tip strong { color: #15803d; }
+
+    /* Grids & Cards */
+    .grid-2 { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 16px 0; }
+    @media(min-width: 640px) { .grid-2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; } }
+    
+    .grid-card { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px; padding: 14px; }
+    .grid-card h4 { color: var(--primary); font-size: 0.95rem; margin-bottom: 6px; }
+
+    /* Custom Tables with Horizontal Scroll wrapper for mobile */
+    .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 16px 0; border: 1px solid var(--border-color); border-radius: 8px; }
+    .custom-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 500px; }
+    .custom-table th, .custom-table td { border: 1px solid var(--border-color); padding: 10px 12px; text-align: left; }
+    .custom-table th { background-color: var(--primary-light); color: var(--primary-dark); font-weight: 700; }
+    .custom-table tr:nth-child(even) { background-color: #f8fafc; }
+
+    /* Footer */
+    footer { text-align: center; font-size: 0.8rem; color: #64748b; margin-top: 30px; padding: 0 16px; }
+  </style>
+</head>
+<body>
+
+  <!-- Impressive Nursing Ethics Quiz Callout Banner -->
+  <div class="container quiz-banner-wrapper">
+    <div class="quiz-banner">
       <!-- Content Section -->
-      <div style="max-width: 580px;">
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-          <span style="
-            background: rgba(22, 163, 74, 0.15);
-            color: #4ade80;
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            padding: 3px 10px;
-            border-radius: 20px;
-            border: 1px solid rgba(74, 222, 128, 0.3);
-          ">
-            ● Interactive Practice
-          </span>
-          <span style="color: #94a3b8; font-size: 0.82rem; font-weight: 600;">BSN 5th Semester</span>
+      <div class="quiz-banner-content">
+        <div class="quiz-badge-row">
+          <span class="quiz-tag">● Interactive Practice</span>
+          <span style="color: #94a3b8; font-size: 0.78rem; font-weight: 600;">BSN 5th Semester</span>
         </div>
-
-        <h3 style="color: #ffffff; font-size: 1.25rem; font-weight: 800; margin: 0 0 4px 0; border: none; padding: 0;">
-          Test Your Knowledge on Nursing Ethics
-        </h3>
-        <p style="color: #cbd5e1; font-size: 0.9rem; margin: 0; line-height: 1.5;">
-          Evaluate your exam readiness with multiple-choice practice questions covering all 8 syllabus units.
-        </p>
+        <h3>Test Your Knowledge on Nursing Ethics</h3>
+        <p>Evaluate your exam readiness with multiple-choice practice questions covering all 8 syllabus units.</p>
       </div>
-
       <!-- Interactive Quiz Button -->
-      <a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics-quiz.html" 
-         target="_blank" 
-         style="
-           background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-           color: #ffffff;
-           padding: 14px 26px;
-           text-decoration: none;
-           border-radius: 10px;
-           display: inline-flex;
-           align-items: center;
-           gap: 10px;
-           font-weight: 800;
-           font-size: 0.95rem;
-           letter-spacing: 0.2px;
-           box-shadow: 0 4px 14px rgba(22, 163, 74, 0.4);
-           border: 1px solid #22c55e;
-           white-space: nowrap;
-           transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-         "
-         onmouseover="this.style.transform='translateY(-2px) scale(1.02)'; this.style.boxShadow='0 8px 20px rgba(22, 163, 74, 0.6)';"
-         onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 14px rgba(22, 163, 74, 0.4)';">
-          <span>📝 Take Ethics Quiz</span>
-          <span style="font-size: 1.1rem; transition: transform 0.2s ease;">→</span>
+      <a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics-quiz.html" target="_blank" class="quiz-btn">
+        <span>📝 Take Ethics Quiz</span>
+        <span style="font-size: 1.1rem;">→</span>
       </a>
     </div>
   </div>
@@ -152,7 +187,7 @@
     <!-- Top Nav -->
     <div class="nav-bar">
       <a href="dashboard.html" class="nav-btn">← Back to Dashboard</a>
-      <span style="font-size: 0.85rem; font-weight: 600; color: #64748b;">Exam Syllabus: 15 MCQs • 3 SEQs</span>
+      <span style="font-size: 0.8rem; font-weight: 600; color: #64748b;">Exam Syllabus: 15 MCQs • 3 SEQs</span>
     </div>
 
     <!-- Sticky 8-Unit Navigation Header Bar -->
@@ -292,42 +327,44 @@
       <p><strong>Value Clarification:</strong> A reflective process by which individuals examine, identify, and understand their own personal values, how those values were formed, and how they influence daily behavior and professional practice.</p>
 
       <h3>2. Categorization / Types of Values</h3>
-      <table class="custom-table">
-        <thead>
-          <tr>
-            <th>Value Category</th>
-            <th>Definition</th>
-            <th>Clinical Example</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Personal Values</strong></td>
-            <td>Beliefs adopted from family, culture, and life experiences.</td>
-            <td>Personal religious beliefs regarding end-of-life care.</td>
-          </tr>
-          <tr>
-            <td><strong>Societal Values</strong></td>
-            <td>Values held by the broader community or society.</td>
-            <td>Public right to equal, accessible healthcare access.</td>
-          </tr>
-          <tr>
-            <td><strong>Organizational Values</strong></td>
-            <td>Mission, vision, and operational ethos of a health institution.</td>
-            <td>Hospital policy emphasizing patient-centered excellence.</td>
-          </tr>
-          <tr>
-            <td><strong>Professional Values</strong></td>
-            <td>Standards endorsed by professional nursing bodies (e.g., AACN).</td>
-            <td>Altruism, Autonomy, Human Dignity, Integrity, Social Justice.</td>
-          </tr>
-          <tr>
-            <td><strong>Moral Values</strong></td>
-            <td>Beliefs regarding basic principles of right vs. wrong.</td>
-            <td>Honesty, non-harm, and truthfulness with clients.</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Value Category</th>
+              <th>Definition</th>
+              <th>Clinical Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Personal Values</strong></td>
+              <td>Beliefs adopted from family, culture, and life experiences.</td>
+              <td>Personal religious beliefs regarding end-of-life care.</td>
+            </tr>
+            <tr>
+              <td><strong>Societal Values</strong></td>
+              <td>Values held by the broader community or society.</td>
+              <td>Public right to equal, accessible healthcare access.</td>
+            </tr>
+            <tr>
+              <td><strong>Organizational Values</strong></td>
+              <td>Mission, vision, and operational ethos of a health institution.</td>
+              <td>Hospital policy emphasizing patient-centered excellence.</td>
+            </tr>
+            <tr>
+              <td><strong>Professional Values</strong></td>
+              <td>Standards endorsed by professional nursing bodies (e.g., AACN).</td>
+              <td>Altruism, Autonomy, Human Dignity, Integrity, Social Justice.</td>
+            </tr>
+            <tr>
+              <td><strong>Moral Values</strong></td>
+              <td>Beliefs regarding basic principles of right vs. wrong.</td>
+              <td>Honesty, non-harm, and truthfulness with clients.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3>3. Modes of Value Transmission</h3>
       <div class="grid-2">
@@ -449,52 +486,54 @@
       </div>
 
       <h3>2. The Four Core Principles &amp; Secondary Ethical Rules</h3>
-      <table class="custom-table">
-        <thead>
-          <tr>
-            <th>Ethical Principle</th>
-            <th>Clinical Definition</th>
-            <th>Nursing Application Example</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Autonomy</strong></td>
-            <td>Respecting a patient's right to self-determination and personal choices.</td>
-            <td>Obtaining informed consent; respecting refusal of treatment.</td>
-          </tr>
-          <tr>
-            <td><strong>Non-Maleficence</strong></td>
-            <td><em>Primum non-nocere</em> — Above all, do no intentional or avoidable harm.</td>
-            <td>Double-checking high-alert medication doses before administration.</td>
-          </tr>
-          <tr>
-            <td><strong>Beneficence</strong></td>
-            <td>Actions performed for the benefit, safety, and well-being of others.</td>
-            <td>Providing pain relief and turning immobile clients to prevent ulcers.</td>
-          </tr>
-          <tr>
-            <td><strong>Justice</strong></td>
-            <td>Fairness in resource distribution and non-discriminatory care.</td>
-            <td>Triage in emergency departments based on medical need, not wealth.</td>
-          </tr>
-          <tr>
-            <td><strong>Fidelity</strong></td>
-            <td>Faithfulness, honoring promises, and maintaining professional loyalty.</td>
-            <td>Returning to evaluate a patient's pain 30 minutes after medication as promised.</td>
-          </tr>
-          <tr>
-            <td><strong>Veracity</strong></td>
-            <td>Absolute obligation to tell the truth without deception.</td>
-            <td>Honestly informing clients about procedure risks and medical errors.</td>
-          </tr>
-          <tr>
-            <td><strong>Confidentiality</strong></td>
-            <td>Respecting privacy and safeguarding protected health information.</td>
-            <td>Discussing client details only in private clinical areas with authorized staff.</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Ethical Principle</th>
+              <th>Clinical Definition</th>
+              <th>Nursing Application Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Autonomy</strong></td>
+              <td>Respecting a patient's right to self-determination and personal choices.</td>
+              <td>Obtaining informed consent; respecting refusal of treatment.</td>
+            </tr>
+            <tr>
+              <td><strong>Non-Maleficence</strong></td>
+              <td><em>Primum non-nocere</em> — Above all, do no intentional or avoidable harm.</td>
+              <td>Double-checking high-alert medication doses before administration.</td>
+            </tr>
+            <tr>
+              <td><strong>Beneficence</strong></td>
+              <td>Actions performed for the benefit, safety, and well-being of others.</td>
+              <td>Providing pain relief and turning immobile clients to prevent ulcers.</td>
+            </tr>
+            <tr>
+              <td><strong>Justice</strong></td>
+              <td>Fairness in resource distribution and non-discriminatory care.</td>
+              <td>Triage in emergency departments based on medical need, not wealth.</td>
+            </tr>
+            <tr>
+              <td><strong>Fidelity</strong></td>
+              <td>Faithfulness, honoring promises, and maintaining professional loyalty.</td>
+              <td>Returning to evaluate a patient's pain 30 minutes after medication as promised.</td>
+            </tr>
+            <tr>
+              <td><strong>Veracity</strong></td>
+              <td>Absolute obligation to tell the truth without deception.</td>
+              <td>Honestly informing clients about procedure risks and medical errors.</td>
+            </tr>
+            <tr>
+              <td><strong>Confidentiality</strong></td>
+              <td>Respecting privacy and safeguarding protected health information.</td>
+              <td>Discussing client details only in private clinical areas with authorized staff.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3>3. Steps of the Systematic Ethical Decision-Making Model</h3>
       <ol>
@@ -538,44 +577,12 @@
           <p>Verifying the legal and mental capacity of the client to make informed choices (adult, coherent, alert).</p>
         </div>
       </div>
-
-      <!-- SVG Visual: Informed Consent Roles -->
-      <div class="visual-box">
-        <svg width="600" height="150" viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
-          <rect x="30" y="35" width="230" height="80" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
-          <text x="145" y="60" fill="#0369a1" font-weight="800" font-size="13" text-anchor="middle">PHYSICIAN / SURGEON</text>
-          <text x="145" y="80" fill="#334155" font-size="11" text-anchor="middle">• Explains procedure &amp; risks</text>
-          <text x="145" y="96" fill="#334155" font-size="11" text-anchor="middle">• Answers complex questions</text>
-
-          <rect x="340" y="35" width="230" height="80" rx="10" fill="#0284c7"/>
-          <text x="455" y="60" fill="white" font-weight="800" font-size="13" text-anchor="middle">NURSE ADVOCATE</text>
-          <text x="455" y="80" fill="white" font-size="11" text-anchor="middle">• Witness signature &amp; verifies patient</text>
-          <text x="455" y="96" fill="white" font-size="11" text-anchor="middle">• Ensures voluntariness &amp; comprehension</text>
-        </svg>
-        <div class="visual-caption">Figure 4.1: Distinct Roles of Physicians and Nurses in Informed Consent</div>
-      </div>
-
-      <h3>3. Exceptions to Informed Consent</h3>
-      <ul>
-        <li><strong>Emergency Situations:</strong> When immediate intervention is necessary to preserve life or prevent serious impairment, and the patient is unconscious or incapacitated.</li>
-        <li><strong>Incompetent Patients:</strong> When designated legal surrogates or proxy decision-makers authorize care on behalf of minors or incapacitated adults.</li>
-        <li><strong>Waiver by Patient:</strong> When a competent patient explicitly states they prefer not to be informed and delegate decision-making to family members.</li>
-      </ul>
-
-      <h3>4. Exceptions to Confidentiality (Duty to Warn / Protect)</h3>
-      <p>Nurses may breach confidentiality without legal liability under mandatory reporting laws:</p>
-      <ul>
-        <li>Suspected child abuse, elder abuse, or domestic violence.</li>
-        <li>Communicable or reportable infectious diseases (e.g., tuberculosis, HIV depending on local statutory laws).</li>
-        <li>Threat of imminent harm to self or a specifically identifiable third party (Tarasoff ruling / duty to warn).</li>
-      </ul>
     </section>
 
+    <footer>
+      <p>&copy; 2026 BSN 5th Semester Portal • Nursing Ethics Masterclass Study Guide</p>
+    </footer>
+
   </div>
-
-  <footer>
-    <p>&copy; 2026 BSN Nursing Ethics Masterclass • Prepared for Academic Excellence</p>
-  </footer>
-
 </body>
 </html>
