@@ -191,86 +191,56 @@
       color: #e0f2fe; 
     }
 
-    /* AUTH CARD */
-    .auth-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+    /* IMPRESSIVE QUICK LOGIN / DASHBOARD BANNER */
+    .login-hero-banner {
+      background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+      border: 1px solid #bbf7d0;
       border-radius: var(--radius);
-      padding: 20px;
+      padding: 22px 20px;
       margin-bottom: 24px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
-    .auth-card h2 {
+    .login-hero-text h3 {
       font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: var(--text-dark);
+      font-weight: 800;
+      color: #065f46;
+      margin-bottom: 4px;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    .auth-card p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 16px;
+    .login-hero-text p {
+      font-size: 0.84rem;
+      color: #047857;
     }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr auto;
-      gap: 10px;
-    }
-
-    @media (max-width: 600px) {
-      .form-grid { grid-template-columns: 1fr; }
-    }
-
-    .input-field {
-      width: 100%;
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .input-field:focus {
-      border-color: var(--primary);
-    }
-
-    .btn-submit {
-      background: var(--primary);
+    .dashboard-action-btn {
+      background: linear-gradient(135deg, #059669, #047857);
       color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 0.9rem;
+      text-decoration: none;
+      padding: 12px 22px;
+      border-radius: 12px;
       font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 14px rgba(5, 150, 105, 0.25);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       white-space: nowrap;
     }
 
-    .btn-submit:hover {
-      background: var(--primary-dark);
+    .dashboard-action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(5, 150, 105, 0.35);
     }
-
-    /* STATUS BADGE */
-    .status-badge {
-      margin-top: 14px;
-      padding: 12px 16px;
-      border-radius: 10px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      display: none;
-    }
-
-    .status-approved { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; display: block; }
-    .status-pending { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; display: block; }
-    .status-locked { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; display: block; }
 
     .section-title { 
       font-size: 0.8rem; 
@@ -550,18 +520,15 @@
       <div class="author-bar">👤 Curated & Maintained by <strong>Mudassir Hussain Khan</strong> • Class Representative</div>
     </div>
 
-    <!-- STUDENT REGISTRATION & ACCESS CHECK -->
-    <div class="auth-card">
-      <h2>👤 Student Account Access</h2>
-      <p>Enter your details to request approval or check your status.</p>
-
-      <div class="form-grid">
-        <input type="text" id="studentName" class="input-field" placeholder="Full Name (e.g., Ali Raza)">
-        <input type="email" id="studentEmail" class="input-field" placeholder="Email Address">
-        <button onclick="handleStudentRegister()" class="btn-submit">Register / Login</button>
+    <!-- IMPRESSIVE LOGIN / DASHBOARD BUTTON BANNER -->
+    <div class="login-hero-banner" id="loginBannerSection">
+      <div class="login-hero-text">
+        <h3>🚀 Student Portal Hub</h3>
+        <p>Already registered? Open your personalized student dashboard to view study access status.</p>
       </div>
-
-      <div id="statusNotice" class="status-badge"></div>
+      <a href="dashboard.html" class="dashboard-action-btn">
+        🔐 Login & Open Dashboard →
+      </a>
     </div>
 
     <!-- SECTION TITLE -->
@@ -780,49 +747,6 @@
       if (e.target.id === 'paymentModal') closeModal();
     }
 
-    // STUDENT REGISTRATION & APPROVAL SYSTEM
-    function handleStudentRegister() {
-      const nameInput = document.getElementById('studentName').value.trim();
-      const emailInput = document.getElementById('studentEmail').value.trim().toLowerCase();
-
-      if (!nameInput || !emailInput) {
-        alert("⚠️ Please enter both your Full Name and Email.");
-        return;
-      }
-
-      const userKey = 'user_' + emailInput;
-      let existingUser = JSON.parse(localStorage.getItem(userKey));
-
-      if (!existingUser) {
-        existingUser = {
-          name: nameInput,
-          email: emailInput,
-          status: 'pending',
-          access: [],
-          date: new Date().toLocaleDateString()
-        };
-        localStorage.setItem(userKey, JSON.stringify(existingUser));
-        alert("Registration submitted! Your account is pending CR approval.");
-      }
-
-      localStorage.setItem('current_student', emailInput);
-      updateUIStatus(existingUser);
-    }
-
-    function updateUIStatus(user) {
-      const notice = document.getElementById('statusNotice');
-      notice.className = "status-badge";
-
-      if (user.status === 'approved') {
-        notice.classList.add('status-approved');
-        notice.innerHTML = `✅ Account Approved! Welcome, <strong>${user.name}</strong>. All materials unlocked.`;
-        unlockAllSubjects();
-      } else {
-        notice.classList.add('status-pending');
-        notice.innerHTML = `⏳ Status: Pending CR Approval for <strong>${user.email}</strong>. <a href="#" onclick="showModal('ALL')" style="color: inherit; font-weight: bold; text-decoration: underline;">Pay PKR 993 & Chat to Unlock</a>`;
-      }
-    }
-
     function unlockAllSubjects() {
       ALL_SUBJECTS.forEach(sub => {
         const titleEl = document.getElementById('title-' + sub);
@@ -839,8 +763,8 @@
       const currentEmail = localStorage.getItem('current_student');
       if (!currentEmail) {
         event.preventDefault();
-        alert("⚠️ Please register with your Name and Email above first.");
-        document.getElementById('studentEmail').focus();
+        alert("⚠️ Please log in to your student dashboard first.");
+        window.location.href = 'login.html';
         return;
       }
 
@@ -856,10 +780,8 @@
       const savedEmail = localStorage.getItem('current_student');
       if (savedEmail) {
         const user = JSON.parse(localStorage.getItem('user_' + savedEmail));
-        if (user) {
-          document.getElementById('studentName').value = user.name;
-          document.getElementById('studentEmail').value = user.email;
-          updateUIStatus(user);
+        if (user && user.status === 'approved') {
+          unlockAllSubjects();
         }
       }
 
