@@ -172,7 +172,7 @@
     };
 
     btn.disabled = true;
-    btn.innerText = 'Registering on Cloud...';
+    btn.innerText = 'Checking Cloud Database...';
 
     try {
       const response = await fetch(GOOGLE_SCRIPT_URL, {
@@ -183,15 +183,14 @@
       const result = await response.json();
 
       if (result.status === 'success') {
-        localStorage.setItem('bsn_user_' + user.email, JSON.stringify(user));
         localStorage.setItem('bsn_current_user', user.email);
         localStorage.setItem('active_session_email', user.email);
         localStorage.setItem('active_session_name', user.name);
 
-        alert('🎉 Student registered successfully on cloud!');
+        alert('🎉 Student registered successfully!');
         window.location.href = 'dashboard.html';
       } else {
-        alert('❌ ' + (result.message || 'Registration failed. Email might already exist.'));
+        alert('❌ ' + (result.message || 'This email address already exists. Please login instead.'));
         btn.disabled = false;
         btn.innerText = 'Create Account';
       }
@@ -210,7 +209,7 @@
     const btn = document.getElementById('loginBtn');
 
     btn.disabled = true;
-    btn.innerText = 'Logging in from Cloud...';
+    btn.innerText = 'Authenticating...';
 
     try {
       const response = await fetch(GOOGLE_SCRIPT_URL, {
@@ -222,7 +221,6 @@
 
       if (result.status === 'success') {
         const userData = result.user;
-        localStorage.setItem('bsn_user_' + email, JSON.stringify(userData));
         localStorage.setItem('bsn_current_user', email);
         localStorage.setItem('active_session_email', email);
         localStorage.setItem('active_session_name', userData.name || '');
