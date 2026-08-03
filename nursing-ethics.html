@@ -205,12 +205,6 @@
       gap: 8px;
     }
 
-    .access-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
     .access-input-group input {
       flex: 1;
       min-width: 200px;
@@ -547,7 +541,7 @@
       <p>Enter your email and unique access code below to unlock your course.</p>
       <div class="access-input-group">
         <input type="email" id="studentEmailInput" placeholder="Enter your email (e.g. ali@gmail.com)">
-        <input type="text" id="directAccessCode" placeholder="Enter access code (e.g. ali-eng-250)">
+        <input type="text" id="directAccessCode" placeholder="Enter access code (e.g. peds-01)">
         <button onclick="redeemAccessCode()">Unlock Content</button>
       </div>
     </div>
@@ -783,14 +777,14 @@
       if (btnEl) btnEl.style.display = 'none';
     }
 
-    // Secure Code Redeemer with Email Validation and One-Time Use Lock
+    // Secure Code Redeemer (Any Custom Code Works, Locked after 1 use)
     function redeemAccessCode() {
       const emailInput = document.getElementById('studentEmailInput');
       const email = emailInput ? emailInput.value.trim().toLowerCase() : '';
       const codeInput = document.getElementById('directAccessCode').value.trim().toLowerCase();
       
       if (!email) {
-        alert("⚠️ Please enter your email address first so the code locks to you.");
+        alert("⚠️ Please enter your email address first.");
         return;
       }
       
@@ -806,7 +800,6 @@
       }
 
       let targetSubject = '';
-      let prefix = email.split('@')[0]; // Extracts name part before '@' (e.g. 'ali' from 'ali@gmail.com')
 
       if (codeInput.includes('peds') || (codeInput.includes('350') && !codeInput.includes('repo'))) {
         targetSubject = 'pediatric';
@@ -823,20 +816,14 @@
         return;
       }
 
-      // 2. Security Check: Does the code include their email prefix?
-      if (!codeInput.includes(prefix)) {
-        alert(`❌ This code does not belong to ${email}. Codes are personalized for single use.`);
-        return;
-      }
-
-      // 3. Mark the code as used so it can't be shared or reused
+      // 2. Mark the code as used so it can't be shared or reused
       localStorage.setItem('used_code_' + codeInput, 'true');
 
-      // 4. Save and Unlock content for this specific email session
+      // 3. Save and Unlock content for this specific email session
       if (targetSubject === 'ALL') {
         ALL_SUBJECTS.forEach(sub => {
           localStorage.setItem('unlocked_' + email + '_' + sub, 'true');
-          localStorage.setItem('unlocked_' + sub, 'true'); // Fallback for simple check
+          localStorage.setItem('unlocked_' + sub, 'true'); // Fallback
           unlockSubjectUI(sub);
         });
         alert("🎉 Success! All subjects unlocked for " + email);
