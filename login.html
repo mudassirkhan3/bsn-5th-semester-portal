@@ -179,6 +179,10 @@
     btn.disabled = true;
     btn.innerText = 'Syncing to Sheet...';
 
+    // Automatically unlock Pediatric module (and other core courses if desired) upon registration
+    localStorage.setItem('unlocked_' + user.email + '_pediatric', 'true');
+    localStorage.setItem('unlocked_pediatric', 'true');
+
     // Save locally for instant session access
     localStorage.setItem('bsn_user_' + user.email, JSON.stringify(user));
     localStorage.setItem('bsn_current_user', user.email);
@@ -197,7 +201,7 @@
       console.error('Google Sheet Sync Error:', err);
     }
 
-    alert('🎉 Student registered successfully!');
+    alert('🎉 Student registered successfully! Pediatric module unlocked.');
     window.location.href = 'dashboard.html';
   }
 
