@@ -101,27 +101,6 @@
       display: flex; 
       align-items: center; 
       gap: 8px; 
-      flex-wrap: wrap;
-    }
-
-    .nav-btn-alt {
-      background: #f1f5f9;
-      color: #0369a1;
-      border: 1px solid #cbd5e1;
-      padding: 8px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      min-height: 38px;
-      transition: all 0.2s ease;
-    }
-
-    .nav-btn-alt:hover {
-      background: #e2e8f0;
     }
     
     .pay-menu-btn { 
@@ -502,8 +481,6 @@
         <span>BSN Portal</span>
       </a>
       <div class="nav-actions">
-        <a href="dashboard.html" class="nav-btn-alt">📊 Dashboard</a>
-        <a href="login.html" class="nav-btn-alt">🔐 Login / Register</a>
         <button class="pay-menu-btn" onclick="showModal('ALL')">💳 Buy Access (PKR 993)</button>
       </div>
     </div>
@@ -764,7 +741,7 @@
       if (!currentEmail) {
         event.preventDefault();
         alert("⚠️ Please log in to your student dashboard first.");
-        window.location.href = 'login.html';
+        window.location.href = 'dashboard.html';
         return;
       }
 
