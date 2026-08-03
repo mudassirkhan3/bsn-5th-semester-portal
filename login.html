@@ -172,7 +172,7 @@
     };
 
     btn.disabled = true;
-    btn.innerText = 'Registering with Cloud...';
+    btn.innerText = 'Registering on Cloud...';
 
     try {
       const response = await fetch(GOOGLE_SCRIPT_URL, {
@@ -183,13 +183,12 @@
       const result = await response.json();
 
       if (result.status === 'success') {
-        // Save locally for instant session access
         localStorage.setItem('bsn_user_' + user.email, JSON.stringify(user));
         localStorage.setItem('bsn_current_user', user.email);
         localStorage.setItem('active_session_email', user.email);
         localStorage.setItem('active_session_name', user.name);
 
-        alert('🎉 Student registered successfully!');
+        alert('🎉 Student registered successfully on cloud!');
         window.location.href = 'dashboard.html';
       } else {
         alert('❌ ' + (result.message || 'Registration failed. Email might already exist.'));
@@ -198,14 +197,9 @@
       }
     } catch (err) {
       console.error('Registration Error:', err);
-      // Fallback local registration if CORS/Network blocks response parsing
-      localStorage.setItem('bsn_user_' + user.email, JSON.stringify(user));
-      localStorage.setItem('bsn_current_user', user.email);
-      localStorage.setItem('active_session_email', user.email);
-      localStorage.setItem('active_session_name', user.name);
-      
-      alert('🎉 Registered locally! Redirecting...');
-      window.location.href = 'dashboard.html';
+      alert('❌ Connection error. Please check your internet connection.');
+      btn.disabled = false;
+      btn.innerText = 'Create Account';
     }
   }
 
@@ -216,22 +210,8 @@
     const btn = document.getElementById('loginBtn');
 
     btn.disabled = true;
-    btn.innerText = 'Verifying...';
+    btn.innerText = 'Logging in from Cloud...';
 
-    // 1. Check local storage first for speed
-    const savedUser = localStorage.getItem('bsn_user_' + email);
-    if (savedUser) {
-      const user = JSON.parse(savedUser);
-      if (user.password === pass) {
-        localStorage.setItem('bsn_current_user', email);
-        localStorage.setItem('active_session_email', email);
-        localStorage.setItem('active_session_name', user.name || '');
-        window.location.href = 'dashboard.html';
-        return;
-      }
-    }
-
-    // 2. If not local or password mismatch, verify across devices via Google Sheet Script
     try {
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
@@ -254,7 +234,7 @@
       }
     } catch (err) {
       console.error('Login Error:', err);
-      alert('❌ Incorrect password or account not found on this device.');
+      alert('❌ Unable to reach server. Please check your internet connection.');
       btn.disabled = false;
       btn.innerText = 'Login to Dashboard';
     }
@@ -274,13 +254,13 @@
       const result = await response.json();
 
       if (result.status === 'success') {
-        alert('✅ Password updated successfully across cloud database!');
+        alert('✅ Password updated successfully!');
         showForm('login');
       } else {
         alert('❌ ' + (result.message || 'Registered email not found.'));
       }
     } catch (err) {
-      alert('❌ Error connecting to cloud database.');
+      alert('❌ Error connecting to server.');
     }
   }
 </script>
