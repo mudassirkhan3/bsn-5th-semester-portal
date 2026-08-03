@@ -101,6 +101,26 @@
     .stat-item span { display: block; font-size: 0.7rem; color: #cbd5e1; text-transform: uppercase; font-weight: 700; }
     .stat-item strong { font-size: 0.85rem; color: #ffffff; font-weight: 800; }
 
+    /* ACCESS CODE REDEMPTION BOX */
+    .access-redeem-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px 16px; margin-bottom: 20px; box-shadow: var(--shadow);
+    }
+    .access-redeem-card h3 { font-size: 0.95rem; font-weight: 800; color: var(--text-dark); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .access-redeem-card p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px; }
+    .redeem-form-group { display: flex; gap: 10px; }
+    .redeem-input {
+      flex: 1; padding: 10px 14px; border: 1px solid var(--border); border-radius: 10px;
+      font-size: 0.9rem; outline: none; transition: border-color 0.2s; text-transform: uppercase; font-weight: 700;
+    }
+    .redeem-input:focus { border-color: var(--primary); }
+    .redeem-btn {
+      background: var(--accent); color: white; border: none; padding: 10px 18px; border-radius: 10px;
+      font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: background 0.2s; flex-shrink: 0;
+    }
+    .redeem-btn:hover { background: #0f766e; }
+    #redeemMessage { font-size: 0.78rem; margin-top: 8px; font-weight: 700; display: none; }
+
     /* NOTICE ALERT */
     .notice-card {
       background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius);
@@ -212,6 +232,17 @@
             <strong style="color: #4ade80;">Active Account</strong>
           </div>
         </div>
+      </div>
+
+      <!-- ACCESS CODE REDEMPTION SECTION -->
+      <div class="access-redeem-card">
+        <h3>🔑 Have an Access Code?</h3>
+        <p>Enter your subject access code below to instantly unlock the course module notes and materials.</p>
+        <div class="redeem-form-group">
+          <input type="text" id="accessCodeInput" class="redeem-input" placeholder="e.g. PEDS-7782" />
+          <button class="redeem-btn" onclick="redeemAccessCode()">Unlock Module</button>
+        </div>
+        <div id="redeemMessage"></div>
       </div>
 
       <!-- ACADEMIC ANNOUNCEMENT NOTICE -->
@@ -353,6 +384,64 @@
       window.location.href = 'login.html';
     }
 
+    // Access Code Mapping
+    const codeMap = {
+      'PEDS-7782': 'pediatric',
+      'REPO-4419': 'reproductive',
+      'ENG-9931': 'english',
+      'PERL-5526': 'perls',
+      'ALL-0021': 'all'
+    };
+
+    function redeemAccessCode() {
+      const inputVal = document.getElementById('accessCodeInput').value.trim().toUpperCase();
+      const msgEl = document.getElementById('redeemMessage');
+      const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
+
+      if (!inputVal) {
+        msgEl.style.display = 'block';
+        msgEl.style.color = '#dc2626';
+        msgEl.innerText = '⚠️ Please enter a valid access code.';
+        return;
+      }
+
+      if (!currentUserEmail) {
+        alert('Session expired. Please login again.');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      const mappedSubject = codeMap[inputVal];
+
+      if (mappedSubject) {
+        msgEl.style.display = 'block';
+        msgEl.style.color = '#15803d';
+
+        if (mappedSubject === 'all') {
+          ['pediatric', 'reproductive', 'english', 'perls'].forEach(sub => {
+            localStorage.setItem('unlocked_' + currentUserEmail + '_' + sub, 'true');
+            localStorage.setItem('unlocked_' + sub, 'true');
+          });
+          msgEl.innerText = '🎉 Success! All course modules have been fully unlocked.';
+        } else {
+          localStorage.setItem('unlocked_' + currentUserEmail + '_' + mappedSubject, 'true');
+          localStorage.setItem('unlocked_' + mappedSubject, 'true');
+          msgEl.innerText = `🎉 Success! ${mappedSubject.toUpperCase()} module is now unlocked.`;
+        }
+
+        document.getElementById('accessCodeInput').value = '';
+        setTimeout(() => {
+          updateUIStates(currentUserEmail);
+          msgEl.style.display = 'none';
+        }, 1500);
+
+      } else {
+        msgEl.style.display = 'block';
+        msgEl.style.color = '#dc2626';
+        msgEl.innerText = '❌ Invalid access code. Please check and try again.';
+      }
+    }
+
     function checkAccess(event, subject, targetUrl) {
       const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
       
@@ -361,36 +450,13 @@
 
       if (!isUnlocked) {
         event.preventDefault();
-        alert("🔒 This course module is locked. Please unlock it using your access code or purchase verification.");
+        alert("🔒 This course module is locked. Please enter your valid access code in the redemption box above to unlock it.");
       } else {
         window.location.href = targetUrl;
       }
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
-
-      // Redirect to login if user isn't logged in
-      if (!currentUserEmail) {
-        window.location.href = 'login.html';
-        return;
-      }
-
-      // Load user profile details
-      const userDataStr = localStorage.getItem('bsn_user_' + currentUserEmail) || localStorage.getItem('user_acc_' + currentUserEmail);
-      if (userDataStr) {
-        const user = JSON.parse(userDataStr);
-        document.getElementById('userName').innerText = user.name || 'BSN Student';
-        document.getElementById('userEmail').innerText = user.email || currentUserEmail;
-        document.getElementById('userSemester').innerText = user.semester || 'BSN 4th Semester';
-        document.getElementById('userInstitute').innerText = user.institute || 'New Life Institute Multan';
-        document.getElementById('avatarLetter').innerText = (user.name ? user.name.charAt(0) : 'S').toUpperCase();
-      } else {
-        document.getElementById('userEmail').innerText = currentUserEmail;
-        document.getElementById('userName').innerText = 'BSN Student';
-      }
-
-      // Check course permissions for this specific user
+    function updateUIStates(currentUserEmail) {
       const subjects = ['pediatric', 'reproductive', 'english', 'perls'];
       subjects.forEach(sub => {
         const isUnlocked = localStorage.getItem('unlocked_' + currentUserEmail + '_' + sub) === 'true' || 
@@ -419,6 +485,32 @@
           }
         }
       });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
+
+      // Redirect to login if user isn't logged in
+      if (!currentUserEmail) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Load user profile details
+      const userDataStr = localStorage.getItem('bsn_user_' + currentUserEmail) || localStorage.getItem('user_acc_' + currentUserEmail);
+      if (userDataStr) {
+        const user = JSON.parse(userDataStr);
+        document.getElementById('userName').innerText = user.name || 'BSN Student';
+        document.getElementById('userEmail').innerText = user.email || currentUserEmail;
+        document.getElementById('userSemester').innerText = user.semester || 'BSN 4th Semester';
+        document.getElementById('userInstitute').innerText = user.institute || 'New Life Institute Multan';
+        document.getElementById('avatarLetter').innerText = (user.name ? user.name.charAt(0) : 'S').toUpperCase();
+      } else {
+        document.getElementById('userEmail').innerText = currentUserEmail;
+        document.getElementById('userName').innerText = 'BSN Student';
+      }
+
+      updateUIStates(currentUserEmail);
     });
   </script>
 </body>
