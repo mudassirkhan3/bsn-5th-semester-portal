@@ -167,23 +167,96 @@
     .modal-btn-save { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
     .modal-btn-save:hover { background: var(--primary-dark); }
 
-    .pricing-banner {
-      background: #ffffff; border: 1px solid #bae6fd; border-radius: var(--radius);
-      padding: 18px 20px; margin-bottom: 24px; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.05);
+    /* PROFESSIONAL JAZZCASH & PRICING CARD */
+    .pricing-card-pro {
+      background: #ffffff;
+      border: 1px solid #bae6fd;
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.08);
     }
-    .pricing-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
-    .pricing-header h4 { font-size: 0.95rem; font-weight: 800; color: var(--primary-dark); display: flex; align-items: center; gap: 8px; }
-    .price-pill { background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; }
-    
-    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 14px; }
-    .price-card-item { background: #f8fafc; border: 1px solid var(--border); padding: 10px 12px; border-radius: 10px; font-size: 0.82rem; }
-    .price-card-item strong { color: var(--text-dark); display: block; font-size: 0.9rem; margin-top: 2px; }
-    
-    .jazzcash-box {
-      background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px;
-      padding: 12px 14px; font-size: 0.85rem; color: #92400e; display: flex; flex-direction: column; gap: 4px;
+    .pro-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    .jazzcash-box strong { color: #b45309; }
+    .pro-title-wrap { display: flex; align-items: center; gap: 12px; }
+    .pro-icon {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white; width: 42px; height: 42px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+    }
+    .pro-title h3 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); }
+    .pro-title p { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+    
+    .bundle-badge {
+      background: #e0f2fe; color: #0369a1; padding: 6px 14px; border-radius: 10px;
+      font-size: 0.84rem; font-weight: 800; border: 1px solid #bae6fd;
+    }
+
+    .price-tier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .tier-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      transition: all 0.2s;
+    }
+    .tier-box:hover { background: #f0f9ff; border-color: #7dd3fc; }
+    .tier-name { font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+    .tier-subjects { font-size: 0.82rem; font-weight: 700; color: var(--text-dark); margin: 4px 0 8px 0; }
+    .tier-price { font-size: 1.1rem; font-weight: 800; color: #0284c7; }
+
+    /* PROFESSIONAL PAYMENT BOX & WHATSAPP BUTTON */
+    .payment-action-box {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 1px solid #fde68a;
+      border-radius: 14px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .account-details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .acc-detail-item {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid #fcd34d;
+      padding: 10px 14px;
+      border-radius: 10px;
+    }
+    .acc-detail-label { font-size: 0.72rem; font-weight: 700; color: #92400e; text-transform: uppercase; display: block; }
+    .acc-detail-val { font-size: 0.95rem; font-weight: 800; color: #b45309; margin-top: 2px; display: block; }
+
+    .whatsapp-pay-btn {
+      background: #25d366;
+      color: white;
+      text-decoration: none;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      transition: background 0.2s, transform 0.1s;
+    }
+    .whatsapp-pay-btn:hover { background: #20ba5a; transform: translateY(-1px); }
 
     .notice-card {
       background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius);
@@ -377,7 +450,7 @@
       <!-- MAIN DASHBOARD CONTENT -->
       <div class="main-wrapper">
         
-        <!-- PROFILE & ACADEMIC STATS BANNER -->
+        <!-- PROFILE & ACADEMIC STATS BANNER (Single Edit Profile Button) -->
         <div class="profile-card">
           <div class="profile-header">
             <div class="profile-user-details">
@@ -445,29 +518,55 @@
           </div>
         </div>
 
-        <!-- PRICING & JAZZCASH PAYMENT BANNER -->
-        <div class="pricing-banner" id="pricing-section">
-          <div class="pricing-header">
-            <h4><span>💳</span> Portal Access Pricing &amp; Plans</h4>
-            <span class="price-pill">Complete Portal: PKR 993</span>
+        <!-- PROFESSIONAL PRICING & DIRECT WHATSAPP JAZZCASH PAYMENT CARD -->
+        <div class="pricing-card-pro" id="pricing-section">
+          <div class="pro-header">
+            <div class="pro-title-wrap">
+              <div class="pro-icon">💳</div>
+              <div class="pro-title">
+                <h3>Portal Access &amp; Pricing Plans</h3>
+                <p>Choose individual subjects or unlock the entire portal bundle</p>
+              </div>
+            </div>
+            <span class="bundle-badge">⚡ Complete Portal Bundle: PKR 993</span>
           </div>
-          <div class="pricing-grid">
-            <div class="price-card-item">
-              <span>Single Subject (English / Ethics / PERLS)</span>
-              <strong>PKR 269</strong>
+
+          <div class="price-tier-grid">
+            <div class="tier-box">
+              <span class="tier-name">Single Subject Tier 1</span>
+              <div class="tier-subjects">English, Ethics, PERLS</div>
+              <div class="tier-price">PKR 269 <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">/ subject</span></div>
             </div>
-            <div class="price-card-item">
-              <span>Single Subject (Peds / Reproductive)</span>
-              <strong>PKR 369</strong>
+            <div class="tier-box">
+              <span class="tier-name">Single Subject Tier 2</span>
+              <div class="tier-subjects">Pediatric, Reproductive</div>
+              <div class="tier-price">PKR 369 <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">/ subject</span></div>
             </div>
-            <div class="price-card-item">
-              <span>All Complete Portal Bundle</span>
-              <strong style="color: #0284c7;">PKR 993</strong>
+            <div class="tier-box" style="background:#f0fdf4; border-color:#bbf7d0;">
+              <span class="tier-name" style="color:#16a34a;">Best Value Bundle</span>
+              <div class="tier-subjects">All 5 Subjects (Complete Portal)</div>
+              <div class="tier-price" style="color:#16a34a;">PKR 993</div>
             </div>
           </div>
-          <div class="jazzcash-box">
-            <span>📲 <strong>JazzCash Payment Details:</strong> Transfer respective amount to JazzCash Number: <strong>03241064487</strong></span>
-            <span>Account Name: <strong>Mudassir Hussain Khan</strong> (Send screenshot of payment to activate codes instantly).</span>
+
+          <div class="payment-action-box">
+            <div style="font-size: 0.88rem; font-weight: 800; color: #b45309;">📲 JazzCash Direct Transfer Details:</div>
+            <div class="account-details-grid">
+              <div class="acc-detail-item">
+                <span class="acc-detail-label">JazzCash Number</span>
+                <span class="acc-detail-val">03241064487</span>
+              </div>
+              <div class="acc-detail-item">
+                <span class="acc-detail-label">Account Name</span>
+                <span class="acc-detail-val">Mudassir Hussain Khan</span>
+              </div>
+            </div>
+            <div style="font-size: 0.82rem; color: #92400e; font-weight: 600; line-height: 1.4;">
+              After sending the payment via JazzCash, tap the button below to instantly send your screenshot &amp; transfer details via WhatsApp to receive your access codes.
+            </div>
+            <a href="https://wa.me/923241064487?text=Hi%20Mudassir,%20I%20have%20transferred%20the%20payment%20via%20JazzCash.%20Here%20is%20my%20payment%20screenshot%20and%20details%20for%20Portal%20Access:" class="whatsapp-pay-btn" target="_blank" rel="noopener">
+              💬 Send Screenshot &amp; Transfer Details on WhatsApp
+            </a>
           </div>
         </div>
 
@@ -477,7 +576,7 @@
             <div class="notice-icon">📢</div>
             <div class="notice-text">
               <h4>Academic Announcement</h4>
-              <p>All course modules are currently locked. Enter individual access codes or use the Master Unlock Code (Complete Portal Bundle) below to unlock all materials instantly.</p>
+              <p>All course modules are currently locked. Enter your individual access code or use the Master Unlock Code (for PKR 993 Complete Bundle) below to unlock all materials instantly.</p>
             </div>
           </div>
           
