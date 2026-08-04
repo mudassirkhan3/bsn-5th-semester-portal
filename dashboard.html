@@ -167,6 +167,24 @@
     .modal-btn-save { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
     .modal-btn-save:hover { background: var(--primary-dark); }
 
+    .pricing-banner {
+      background: #ffffff; border: 1px solid #bae6fd; border-radius: var(--radius);
+      padding: 18px 20px; margin-bottom: 24px; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.05);
+    }
+    .pricing-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
+    .pricing-header h4 { font-size: 0.95rem; font-weight: 800; color: var(--primary-dark); display: flex; align-items: center; gap: 8px; }
+    .price-pill { background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; }
+    
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 14px; }
+    .price-card-item { background: #f8fafc; border: 1px solid var(--border); padding: 10px 12px; border-radius: 10px; font-size: 0.82rem; }
+    .price-card-item strong { color: var(--text-dark); display: block; font-size: 0.9rem; margin-top: 2px; }
+    
+    .jazzcash-box {
+      background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px;
+      padding: 12px 14px; font-size: 0.85rem; color: #92400e; display: flex; flex-direction: column; gap: 4px;
+    }
+    .jazzcash-box strong { color: #b45309; }
+
     .notice-card {
       background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius);
       padding: 16px 20px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 14px;
@@ -222,9 +240,11 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease; position: relative;
     }
     .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-    .card-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .card-top { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
     .card-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
     .card h3 { font-size: 1rem; font-weight: 700; }
+    
+    .subject-price-tag { font-size: 0.78rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; display: block; }
     
     .status-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; margin-top: 4px; }
     .status-locked { background: #fee2e2; color: #dc2626; }
@@ -232,7 +252,7 @@
 
     /* SUBJECT ACCESS CODE FORM WIDGET */
     .access-form-box {
-      margin: 10px 0 14px 0;
+      margin: 4px 0 14px 0;
       background: #f8fafc;
       border: 1px solid var(--border);
       padding: 10px;
@@ -312,8 +332,8 @@
         <ul class="sidebar-menu">
           <li><a href="dashboard.html" class="active">🏠 Dashboard Home</a></li>
           <li><a href="#courses-section">📚 Course Modules</a></li>
+          <li><a href="#pricing-section">💳 Pricing &amp; Payment</a></li>
           <li><a href="#vitals-section">🩸 Lab Reference</a></li>
-          <li><button onclick="openEditProfile()">✏️ Edit Profile</button></li>
         </ul>
       </div>
       <button class="logout-btn" onclick="logout()">🚪 Logout / Exit</button>
@@ -347,8 +367,8 @@
           <ul class="drawer-menu">
             <li><a href="dashboard.html" class="active" onclick="toggleMenu()">🏠 Dashboard Home</a></li>
             <li><a href="#courses-section" onclick="toggleMenu()">📚 Course Modules</a></li>
+            <li><a href="#pricing-section" onclick="toggleMenu()">💳 Pricing &amp; Payment</a></li>
             <li><a href="#vitals-section" onclick="toggleMenu()">🩸 Lab Reference Values</a></li>
-            <li><button onclick="toggleMenu(); openEditProfile();">✏️ Edit Profile</button></li>
           </ul>
         </div>
         <button class="logout-btn" onclick="logout()">🚪 Logout / Exit</button>
@@ -425,24 +445,50 @@
           </div>
         </div>
 
+        <!-- PRICING & JAZZCASH PAYMENT BANNER -->
+        <div class="pricing-banner" id="pricing-section">
+          <div class="pricing-header">
+            <h4><span>💳</span> Portal Access Pricing &amp; Plans</h4>
+            <span class="price-pill">Complete Portal: PKR 993</span>
+          </div>
+          <div class="pricing-grid">
+            <div class="price-card-item">
+              <span>Single Subject (English / Ethics / PERLS)</span>
+              <strong>PKR 269</strong>
+            </div>
+            <div class="price-card-item">
+              <span>Single Subject (Peds / Reproductive)</span>
+              <strong>PKR 369</strong>
+            </div>
+            <div class="price-card-item">
+              <span>All Complete Portal Bundle</span>
+              <strong style="color: #0284c7;">PKR 993</strong>
+            </div>
+          </div>
+          <div class="jazzcash-box">
+            <span>📲 <strong>JazzCash Payment Details:</strong> Transfer respective amount to JazzCash Number: <strong>03241064487</strong></span>
+            <span>Account Name: <strong>Mudassir Hussain Khan</strong> (Send screenshot of payment to activate codes instantly).</span>
+          </div>
+        </div>
+
         <!-- ACADEMIC ANNOUNCEMENT & MASTER UNLOCK ALL FIELD -->
         <div class="notice-card">
           <div class="notice-card-top">
             <div class="notice-icon">📢</div>
             <div class="notice-text">
               <h4>Academic Announcement</h4>
-              <p>All course modules are currently locked. Enter individual access codes or use the Master Unlock Code below to unlock all materials instantly.</p>
+              <p>All course modules are currently locked. Enter individual access codes or use the Master Unlock Code (Complete Portal Bundle) below to unlock all materials instantly.</p>
             </div>
           </div>
           
           <!-- MASTER UNLOCK ALL FIELD -->
           <div class="master-unlock-box">
-            <input type="text" id="masterAccessInput" class="master-unlock-input" placeholder="Enter Master Unlock Code" autocomplete="off">
+            <input type="text" id="masterAccessInput" class="master-unlock-input" placeholder="Enter Master Unlock Code (PKR 993 Bundle)" autocomplete="off">
             <button class="master-unlock-btn" onclick="verifyAndUnlockAll()">Unlock All Subjects</button>
           </div>
         </div>
 
-        <!-- COURSE MODULES WITH ACCESS CODES -->
+        <!-- COURSE MODULES WITH ACCESS CODES & PRICES -->
         <div class="section-title" id="courses-section">BSN Academic Courses (Locked Modules)</div>
         <div class="grid">
           
@@ -456,6 +502,7 @@
                   <span class="status-badge status-locked" id="badge-ethics">Locked</span>
                 </div>
               </div>
+              <span class="subject-price-tag">Price: PKR 269</span>
               <div class="access-form-box">
                 <div class="access-input-row">
                   <input type="text" id="input-ethics" class="access-code-input" placeholder="Enter access code" autocomplete="off">
@@ -476,6 +523,7 @@
                   <span class="status-badge status-locked" id="badge-pediatric">Locked</span>
                 </div>
               </div>
+              <span class="subject-price-tag">Price: PKR 369</span>
               <div class="access-form-box">
                 <div class="access-input-row">
                   <input type="text" id="input-pediatric" class="access-code-input" placeholder="Enter access code" autocomplete="off">
@@ -496,6 +544,7 @@
                   <span class="status-badge status-locked" id="badge-reproductive">Locked</span>
                 </div>
               </div>
+              <span class="subject-price-tag">Price: PKR 369</span>
               <div class="access-form-box">
                 <div class="access-input-row">
                   <input type="text" id="input-reproductive" class="access-code-input" placeholder="Enter access code" autocomplete="off">
@@ -516,6 +565,7 @@
                   <span class="status-badge status-locked" id="badge-english">Locked</span>
                 </div>
               </div>
+              <span class="subject-price-tag">Price: PKR 269</span>
               <div class="access-form-box">
                 <div class="access-input-row">
                   <input type="text" id="input-english" class="access-code-input" placeholder="Enter access code" autocomplete="off">
@@ -536,6 +586,7 @@
                   <span class="status-badge status-locked" id="badge-perls">Locked</span>
                 </div>
               </div>
+              <span class="subject-price-tag">Price: PKR 269</span>
               <div class="access-form-box">
                 <div class="access-input-row">
                   <input type="text" id="input-perls" class="access-code-input" placeholder="Enter access code" autocomplete="off">
@@ -708,7 +759,7 @@
       }
     }
 
-    // MASTER UNLOCK ALL FUNCTION
+    // MASTER UNLOCK ALL FUNCTION (PKR 993 Bundle)
     function verifyAndUnlockAll() {
       const inputVal = document.getElementById('masterAccessInput').value.trim();
       const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
@@ -720,9 +771,9 @@
           applySubjectUnlockState(subj, true);
         });
         localStorage.setItem('bsn_unlocked_' + currentUserEmail, JSON.stringify(unlockedSubjects));
-        alert('🎉 Success! All course modules have been unlocked successfully.');
+        alert('🎉 Success! Complete portal (PKR 993 bundle) unlocked successfully.');
       } else {
-        alert('❌ Invalid Master Unlock Code.');
+        alert('❌ Invalid Master Unlock Code for Complete Portal.');
       }
     }
 
