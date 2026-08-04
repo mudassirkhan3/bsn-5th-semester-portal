@@ -169,12 +169,49 @@
 
     .notice-card {
       background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius);
-      padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px 20px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 14px;
       box-shadow: 0 2px 8px rgba(245, 158, 11, 0.05);
     }
+    .notice-card-top { display: flex; align-items: flex-start; gap: 14px; }
     .notice-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: -2px; }
     .notice-text h4 { font-size: 0.92rem; font-weight: 800; color: #b45309; }
     .notice-text p { font-size: 0.84rem; color: #92400e; margin-top: 3px; line-height: 1.4; }
+    
+    /* MASTER UNLOCK ALL FIELD */
+    .master-unlock-box {
+      background: #ffffff;
+      border: 1px solid #fcd34d;
+      padding: 12px 14px;
+      border-radius: 12px;
+      display: flex;
+      gap: 8px;
+    }
+    .master-unlock-input {
+      flex: 1;
+      padding: 10px 12px;
+      font-size: 0.88rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+      background: #f8fafc;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #b45309;
+    }
+    .master-unlock-input:focus { border-color: #d97706; background: #fff; }
+    .master-unlock-btn {
+      background: #d97706;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .master-unlock-btn:hover { background: #b45309; }
 
     .section-title { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 14px; letter-spacing: 0.8px; }
 
@@ -388,12 +425,20 @@
           </div>
         </div>
 
-        <!-- ACADEMIC ANNOUNCEMENT NOTICE -->
+        <!-- ACADEMIC ANNOUNCEMENT & MASTER UNLOCK ALL FIELD -->
         <div class="notice-card">
-          <div class="notice-icon">📢</div>
-          <div class="notice-text">
-            <h4>Academic Announcement</h4>
-            <p>All course modules are currently locked. Enter your unique one-time access code for each subject to unlock materials and notes.</p>
+          <div class="notice-card-top">
+            <div class="notice-icon">📢</div>
+            <div class="notice-text">
+              <h4>Academic Announcement</h4>
+              <p>All course modules are currently locked. Enter individual access codes or use the Master Unlock Code below to unlock all materials instantly.</p>
+            </div>
+          </div>
+          
+          <!-- MASTER UNLOCK ALL FIELD -->
+          <div class="master-unlock-box">
+            <input type="text" id="masterAccessInput" class="master-unlock-input" placeholder="Enter Master Unlock Code" autocomplete="off">
+            <button class="master-unlock-btn" onclick="verifyAndUnlockAll()">Unlock All Subjects</button>
           </div>
         </div>
 
@@ -560,7 +605,7 @@
   </div>
 
   <script>
-    // UNIQUE ONE-TIME USE ACCESS CODES ASSIGNED TO SUBJECTS
+    // UNIQUE ONE-TIME USE ACCESS CODES & MASTER UNLOCK CODE
     const validSubjectCodes = {
       ethics: "ETH-7892-BSN",
       pediatric: "PED-4510-BSN",
@@ -568,6 +613,8 @@
       english: "ENG-2268-BSN",
       perls: "PER-5519-BSN"
     };
+
+    const MASTER_UNLOCK_CODE = "MASTER-BSN-2026";
 
     function toggleMenu() {
       const drawer = document.getElementById('drawer');
@@ -661,12 +708,29 @@
       }
     }
 
+    // MASTER UNLOCK ALL FUNCTION
+    function verifyAndUnlockAll() {
+      const inputVal = document.getElementById('masterAccessInput').value.trim();
+      const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
+
+      if (inputVal === MASTER_UNLOCK_CODE) {
+        let unlockedSubjects = {};
+        Object.keys(validSubjectCodes).forEach(subj => {
+          unlockedSubjects[subj] = true;
+          applySubjectUnlockState(subj, true);
+        });
+        localStorage.setItem('bsn_unlocked_' + currentUserEmail, JSON.stringify(unlockedSubjects));
+        alert('🎉 Success! All course modules have been unlocked successfully.');
+      } else {
+        alert('❌ Invalid Master Unlock Code.');
+      }
+    }
+
     // UNLOCK SUBJECT LOGIC WITH ONE-TIME CODE RESTRICTION STORAGE
     function verifyAndUnlockSubject(subjectKey) {
       const inputVal = document.getElementById('input-' + subjectKey).value.trim().toUpperCase();
       const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
       
-      // Check if code was already used globally or by this user
       let usedCodes = JSON.parse(localStorage.getItem('bsn_used_access_codes')) || {};
 
       if (usedCodes[inputVal]) {
@@ -675,11 +739,9 @@
       }
 
       if (inputVal === validSubjectCodes[subjectKey]) {
-        // Mark code as used globally
         usedCodes[inputVal] = currentUserEmail;
         localStorage.setItem('bsn_used_access_codes', JSON.stringify(usedCodes));
 
-        // Save subject unlock state for current user
         let unlockedSubjects = JSON.parse(localStorage.getItem('bsn_unlocked_' + currentUserEmail)) || {};
         unlockedSubjects[subjectKey] = true;
         localStorage.setItem('bsn_unlocked_' + currentUserEmail, JSON.stringify(unlockedSubjects));
@@ -700,7 +762,7 @@
         badge.innerText = 'Unlocked';
         badge.className = 'status-badge status-unlocked';
         link.className = 'action-link btn-unlocked';
-        if (accessBox) accessBox.style.display = 'none'; // hide code input once unlocked
+        if (accessBox) accessBox.style.display = 'none';
       } else {
         badge.innerText = 'Locked';
         badge.className = 'status-badge status-locked';
@@ -738,7 +800,6 @@
         });
       }
 
-      // Check previously unlocked subjects for this user
       let unlockedSubjects = JSON.parse(localStorage.getItem('bsn_unlocked_' + currentUserEmail)) || {};
       Object.keys(validSubjectCodes).forEach(subj => {
         if (unlockedSubjects[subj]) {
