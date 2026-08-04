@@ -171,7 +171,6 @@
       letter-spacing: 0.01em;
     }
 
-    /* Media query adjustments for smaller screens */
     @media (max-width: 480px) {
       body { padding: 12px 8px; }
       .auth-card { padding: 24px 20px; border-radius: 20px; }
@@ -240,7 +239,7 @@
         </select>
       </div>
 
-      <!-- UNIQUE SECURITY QUESTION SETUP -->
+      <!-- SECURITY QUESTION SETUP -->
       <div class="form-group">
         <label>Security Question (For Password Recovery)</label>
         <select id="regSecurityQ" required>
@@ -254,7 +253,7 @@
 
       <div class="form-group">
         <label>Security Answer</label>
-        <input type="text" id="regSecurityA" placeholder="Enter your secret answer (case insensitive)" required>
+        <input type="text" id="regSecurityA" placeholder="Enter your secret answer" required>
       </div>
 
       <div class="form-group">
@@ -265,20 +264,21 @@
       <button type="submit" class="submit-btn" id="regBtn">Create Account</button>
     </form>
 
-    <!-- FORGOT PASSWORD FORM (EMBEDDED INSIDE THE MAIN LOGIN VIEW/CARD) -->
+    <!-- FORGOT PASSWORD FORM (AUTOMATICALLY MATCHES REGISTERED QUESTION & ANSWER) -->
     <form id="forgotForm" style="display: none;" onsubmit="handleResetPassword(event)">
       <button type="button" class="back-btn" onclick="showForm('login')">← Back to Login</button>
-      <h3 style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 12px;">Reset Password</h3>
-      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">Verify your registered email and answer your security question to reset your password.</p>
+      <h3 style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 8px;">Reset Password</h3>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px;">Enter your email to load your exact security question.</p>
       
       <div class="form-group">
-        <label>Your Registered Email</label>
+        <label>Registered Email</label>
         <input type="email" id="resetEmail" placeholder="student@example.com" onblur="fetchSecurityQuestion()" required>
       </div>
 
+      <!-- DYNAMICALLY LOADED SECURITY QUESTION MATCHING REGISTRATION -->
       <div class="form-group" id="questionBoxGroup" style="display: none;">
-        <label id="displaySecurityQ" style="color: var(--primary); font-weight: 800;"></label>
-        <input type="text" id="resetSecurityAns" placeholder="Enter your security answer" required>
+        <label id="displaySecurityQ" style="color: var(--primary); font-weight: 800; font-size: 0.85rem; line-height: 1.4;"></label>
+        <input type="text" id="resetSecurityAns" placeholder="Enter your exact security answer" required style="margin-top: 6px;">
       </div>
 
       <div class="form-group">
@@ -290,14 +290,12 @@
     </form>
   </div>
 
-  <!-- PROFESSIONAL FOOTER -->
   <footer class="portal-footer">
     <p>&copy; 2026 BSN Student Portal. All rights reserved.</p>
     <p>Designed &amp; Developed with precision by <span class="developer-name">Mudassir Khan</span></p>
   </footer>
 </div>
 
-<!-- SMALL BEAUTIFUL IMPRESSIVE FLOATING WHATSAPP POPUP BUTTON -->
 <a href="https://wa.me/923241064487?text=Hello%20Mudassir,%20Need%20Help?%20Ask%20Admin." target="_blank" class="whatsapp-float">
   <div class="whatsapp-icon-box">
     <svg class="whatsapp-icon" viewBox="0 0 24 24">
@@ -336,6 +334,9 @@
       registerForm.style.display = 'none';
       forgotForm.style.display = 'block';
       document.getElementById('questionBoxGroup').style.display = 'none';
+      document.getElementById('resetEmail').value = '';
+      document.getElementById('resetSecurityAns').value = '';
+      document.getElementById('newPassword').value = '';
     }
   }
 
@@ -430,7 +431,7 @@
     if (savedUser) {
       const user = JSON.parse(savedUser);
       if (user.securityQ) {
-        displayQ.innerText = "🔒 " + user.securityQ;
+        displayQ.innerText = "🔒 Security Question: " + user.securityQ;
         questionBoxGroup.style.display = 'block';
       } else {
         displayQ.innerText = "🔒 Security Question: What is your favorite clinical subject?";
@@ -459,7 +460,7 @@
         alert('✅ Password updated successfully!');
         showForm('login');
       } else {
-        alert('❌ Incorrect security answer. Please try again.');
+        alert('❌ Incorrect security answer. Please check your answer and try again.');
       }
     } else {
       alert('❌ Registered email not found.');
