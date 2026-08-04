@@ -168,7 +168,7 @@
     .modal-btn-save { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
     .modal-btn-save:hover { background: var(--primary-dark); }
 
-    /* PROFESSIONAL POPUP STYLING (MATCHING EXACT TEMPLATE) */
+    /* PROFESSIONAL POPUP STYLING */
     .modal-box {
       background: var(--card-bg); border-radius: var(--radius); width: 100%; max-width: 420px;
       padding: 26px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); position: relative;
@@ -231,7 +231,7 @@
     .notice-text h4 { font-size: 0.92rem; font-weight: 800; color: #b45309; }
     .notice-text p { font-size: 0.84rem; color: #92400e; margin-top: 3px; line-height: 1.4; }
     
-    .master-unlock-box { background: #ffffff; border: 1px solid #fcd34d; padding: 12px 14px; border-radius: 12px; display: flex; gap: 8px; }
+    .master-unlock-box { background: #ffffff; border: 1px solid #fcd34d; padding: 12px 14px; border-radius: 12px; display: flex; gap: 8px; width: 100%; align-items: center; }
     .master-unlock-input {
       flex: 1; padding: 10px 12px; font-size: 0.88rem; border: 1px solid var(--border);
       border-radius: 10px; outline: none; background: #f8fafc; font-weight: 700; text-transform: uppercase; color: #b45309;
@@ -290,20 +290,6 @@
     .btn-unlocked { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
     .btn-unlocked:hover { background: var(--primary-dark); }
 
-    .reference-card {
-      background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 22px 20px; margin-bottom: 28px; box-shadow: var(--shadow);
-    }
-    .ref-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-    .ref-header h3 { font-size: 1rem; font-weight: 800; color: var(--text-dark); }
-    
-    .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
-    .val-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center; transition: background 0.2s; }
-    .val-box:hover { background: #f0f9ff; border-color: #bae6fd; }
-    .val-label { font-size: 0.72rem; color: var(--text-muted); font-weight: 700; display: block; }
-    .val-num { font-size: 0.95rem; font-weight: 800; color: #0369a1; margin-top: 4px; display: block; }
-    .val-unit { font-size: 0.7rem; color: #64748b; font-weight: 500; }
-
     @media (min-width: 900px) {
       .mobile-navbar { display: none; }
       .pc-sidebar { display: flex; }
@@ -327,7 +313,6 @@
           <li><a href="dashboard.html" class="active">🏠 Dashboard Home</a></li>
           <li><a href="#courses-section">📚 Course Modules</a></li>
           <li><a href="#pricing-section">💳 Pricing &amp; Payment</a></li>
-          <li><a href="#vitals-section">🩸 Lab Reference</a></li>
         </ul>
       </div>
       <button class="logout-btn" onclick="logout()">🚪 Logout / Exit</button>
@@ -362,7 +347,6 @@
             <li><a href="dashboard.html" class="active" onclick="toggleMenu()">🏠 Dashboard Home</a></li>
             <li><a href="#courses-section" onclick="toggleMenu()">📚 Course Modules</a></li>
             <li><a href="#pricing-section" onclick="toggleMenu()">💳 Pricing &amp; Payment</a></li>
-            <li><a href="#vitals-section" onclick="toggleMenu()">🩸 Lab Reference Values</a></li>
           </ul>
         </div>
         <button class="logout-btn" onclick="logout()">🚪 Logout / Exit</button>
@@ -424,13 +408,6 @@
             <div class="form-group">
               <label class="form-label">Institute Name</label>
               <input type="text" id="editInstituteInput" class="form-input" placeholder="Enter institute name" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Profile Picture</label>
-              <div class="file-upload-box" onclick="document.getElementById('profilePicInput').click()">
-                <span class="file-upload-text" id="uploadFileName">📷 Click to upload profile picture</span>
-                <input type="file" id="profilePicInput" accept="image/*" onchange="handleImageUpload(event)" />
-              </div>
             </div>
             <div class="modal-actions">
               <button class="modal-btn modal-btn-cancel" onclick="closeEditProfile()">Cancel</button>
@@ -513,8 +490,11 @@
         <div class="notice-card">
           <div class="notice-card-top">
             <div class="notice-icon">📢</div>
-            <div class="notice-text" 
-          
+            <div class="notice-text">
+              <h4>Master Unlock Feature</h4>
+              <p>Already purchased the complete bundle? Enter your master code below to instant-unlock all modules across the portal.</p>
+            </div>
+          </div>
           <div class="master-unlock-box">
             <input type="text" id="masterAccessInput" class="master-unlock-input" placeholder="Enter Master Unlock Code (PKR 993 Bundle)" autocomplete="off">
             <button class="master-unlock-btn" onclick="verifyAndUnlockAll()">Unlock All Subjects</button>
@@ -546,7 +526,7 @@
                 </div>
               </div>
             </div>
-            <a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics.html" id="link-ethics" class="action-link btn-locked" target="_blank">Open Notes & Modules →</a>
+            <a href="#" id="link-ethics" class="action-link btn-locked" target="_blank">Open Notes & Modules →</a>
           </div>
 
           <!-- PEDIATRIC -->
@@ -559,9 +539,9 @@
                   <span class="status-badge status-locked" id="badge-pediatric">Locked</span>
                 </div>
               </div>
-              <span class="subject-price-tag">Price: PKR 250</span>
+              <span class="subject-price-tag">Price: PKR 369</span>
 
-              <button class="pay-btn-inline" onclick="openPaymentModal('Pediatric Nursing', 250)">💳 Pay via JazzCash</button>
+              <button class="pay-btn-inline" onclick="openPaymentModal('Pediatric Nursing', 369)">💳 Pay via JazzCash</button>
 
               <div class="access-form-box">
                 <div class="access-input-row">
@@ -570,7 +550,7 @@
                 </div>
               </div>
             </div>
-            <a href="./pediatric/index.html" id="link-pediatric" class="action-link btn-locked">Open Notes & Modules →</a>
+            <a href="#" id="link-pediatric" class="action-link btn-locked">Open Notes & Modules →</a>
           </div>
 
           <!-- REPRODUCTIVE -->
@@ -583,9 +563,9 @@
                   <span class="status-badge status-locked" id="badge-reproductive">Locked</span>
                 </div>
               </div>
-              <span class="subject-price-tag">Price: PKR 250</span>
+              <span class="subject-price-tag">Price: PKR 369</span>
 
-              <button class="pay-btn-inline" onclick="openPaymentModal('Reproductive Health', 250)">💳 Pay via JazzCash</button>
+              <button class="pay-btn-inline" onclick="openPaymentModal('Reproductive Health', 369)">💳 Pay via JazzCash</button>
 
               <div class="access-form-box">
                 <div class="access-input-row">
@@ -594,126 +574,16 @@
                 </div>
               </div>
             </div>
-            <a href="./reproductive/index.html" id="link-reproductive" class="action-link btn-locked">Open Notes & Modules →</a>
+            <a href="#" id="link-reproductive" class="action-link btn-locked">Open Notes & Modules →</a>
           </div>
 
-          <!-- ENGLISH -->
-          <div class="card" id="card-english">
-            <div>
-              <div class="card-top">
-                <div class="card-icon" style="background:#f5f3ff;">📚</div>
-                <div>
-                  <h3>English Academic</h3>
-                  <span class="status-badge status-locked" id="badge-english">Locked</span>
-                </div>
-              </div>
-              <span class="subject-price-tag">Price: PKR 250</span>
-
-              <button class="pay-btn-inline" onclick="openPaymentModal('English Academic', 250)">💳 Pay via JazzCash</button>
-
-              <div class="access-form-box">
-                <div class="access-input-row">
-                  <input type="text" id="input-english" class="access-code-input" placeholder="Enter access code" autocomplete="off">
-                  <button class="unlock-btn" onclick="verifyAndUnlockSubject('english')">Unlock</button>
-                </div>
-              </div>
-            </div>
-            <a href="./english/index.html" id="link-english" class="action-link btn-locked">Open Notes & Modules →</a>
-          </div>
-
-          <!-- PERLS -->
-          <div class="card" id="card-perls">
-            <div>
-              <div class="card-top">
-                <div class="card-icon" style="background:#f0fdfa;">💡</div>
-                <div>
-                  <h3>PERLS Module</h3>
-                  <span class="status-badge status-locked" id="badge-perls">Locked</span>
-                </div>
-              </div>
-              <span class="subject-price-tag">Price: PKR 250</span>
-
-              <button class="pay-btn-inline" onclick="openPaymentModal('PERLS Module', 250)">💳 Pay via JazzCash</button>
-
-              <div class="access-form-box">
-                <div class="access-input-row">
-                  <input type="text" id="input-perls" class="access-code-input" placeholder="Enter access code" autocomplete="off">
-                  <button class="unlock-btn" onclick="verifyAndUnlockSubject('perls')">Unlock</button>
-                </div>
-              </div>
-            </div>
-            <a href="./perls/index.html" id="link-perls" class="action-link btn-locked">Open Notes & Modules →</a>
-          </div>
-        </div>
-
-        <!-- ESSENTIAL CLINICAL REFERENCE VALUES -->
-        <div class="section-title" id="vitals-section">Essential Clinical Reference Values</div>
-        <div class="reference-card">
-          <div class="ref-header">
-            <span>💉</span>
-            <h3>Normal Adult Vital Signs &amp; Lab Ranges</h3>
-          </div>
-          
-          <div class="values-grid">
-            <div class="val-box">
-              <span class="val-label">Blood Pressure</span>
-              <span class="val-num">120 / 80</span>
-              <span class="val-unit">mmHg</span>
-            </div>
-            <div class="val-box">
-              <span class="val-label">Pulse / HR</span>
-              <span class="val-num">60 - 100</span>
-              <span class="val-unit">bpm</span>
-            </div>
-            <div class="val-box">
-              <span class="val-label">Resp. Rate</span>
-              <span class="val-num">12 - 20</span>
-              <span class="val-unit">breaths/min</span>
-            </div>
-            <div class="val-box">
-              <span class="val-label">SpO2 Level</span>
-              <span class="val-num">95 - 100%</span>
-              <span class="val-unit">Room Air</span>
-            </div>
-            <div class="val-box">
-              <span class="val-label">Temperature</span>
-              <span class="val-num">98.6°F</span>
-              <span class="val-unit">37.0°C</span>
-            </div>
-            <div class="val-box">
-              <span class="val-label">Fast. Blood Sugar</span>
-              <span class="val-num">70 - 99</span>
-              <span class="val-unit">mg/dL</span>
-            </div>
-            <div class="val-box">
-              <span class="val-label">Hemoglobin (Hb)</span>
-              <span class="val-num">12 - 16.5</span>
-              <span class="val-unit">g/dL</span>
-            </div>
-            <div class="val-box">
-              <span class="val-label">WBC Count</span>
-              <span class="val-num">4.5 - 11.0</span>
-              <span class="val-unit">x 10³/µL</span>
-            </div>
-          </div>
         </div>
 
       </div>
     </main>
-
   </div>
 
   <script>
-    const validSubjectCodes = {
-      ethics: "ETH-7892-BSN",
-      pediatric: "PED-4510-BSN",
-      reproductive: "REP-9034-BSN",
-      english: "ENG-2268-BSN",
-      perls: "PER-5519-BSN"
-    };
-
-    const MASTER_UNLOCK_CODE = "MASTER-BSN-2026";
-
     function toggleMenu() {
       const drawer = document.getElementById('drawer');
       const overlay = document.getElementById('drawerOverlay');
@@ -721,18 +591,39 @@
       overlay.classList.toggle('open');
     }
 
-    function logout() {
-      localStorage.removeItem('bsn_current_user');
-      localStorage.removeItem('active_session_email');
-      localStorage.removeItem('active_session_name');
-      window.location.href = 'login.html';
+    function openEditProfile() {
+      document.getElementById('editProfileModal').classList.add('open');
+      document.getElementById('editNameInput').value = document.getElementById('userName').innerText;
+      document.getElementById('editEmailInput').value = document.getElementById('userEmail').innerText;
+      document.getElementById('editSemesterInput').value = document.getElementById('userSemester').innerText;
+      document.getElementById('editInstituteInput').value = document.getElementById('userInstitute').innerText;
     }
 
-    // PAYMENT MODAL CONTROLS
-    function openPaymentModal(itemName, price) {
+    function closeEditProfile() {
+      document.getElementById('editProfileModal').classList.remove('open');
+    }
+
+    function saveProfileChanges() {
+      const name = document.getElementById('editNameInput').value;
+      const email = document.getElementById('editEmailInput').value;
+      const semester = document.getElementById('editSemesterInput').value;
+      const institute = document.getElementById('editInstituteInput').value;
+
+      if(name) {
+        document.getElementById('userName').innerText = name;
+        document.getElementById('avatarLetter').innerText = name.charAt(0).toUpperCase();
+      }
+      if(email) document.getElementById('userEmail').innerText = email;
+      if(semester) document.getElementById('userSemester').innerText = semester;
+      if(institute) document.getElementById('userInstitute').innerText = institute;
+
+      closeEditProfile();
+    }
+
+    function openPaymentModal(subjectName, price) {
       document.getElementById('modalPrice').innerText = price;
-      const waText = encodeURIComponent(`Hi Mudassir, I have transferred PKR ${price} via JazzCash for ${itemName}. Here is my payment screenshot and details for portal access:`);
-      document.getElementById('whatsappBtn').href = `https://wa.me/923241064487?text=${waText}`;
+      const message = encodeURIComponent(`Hello, I want to unlock "${subjectName}" for PKR ${price}. Here is my payment screenshot.`);
+      document.getElementById('whatsappBtn').href = `https://wa.me/923241064487?text=${message}`;
       document.getElementById('paymentModal').classList.add('open');
     }
 
@@ -744,188 +635,41 @@
       if (event.target.id === 'paymentModal') {
         closeModal();
       }
-      if (event.target.id === 'editProfileModal') {
-        closeEditProfile();
-      }
     }
 
-    let tempUploadedImage = '';
-
-    function openEditProfile() {
-      const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email') || 'mudassir.student@bsnportal.edu';
-      const userDataStr = localStorage.getItem('bsn_user_' + currentUserEmail) || localStorage.getItem('user_acc_' + currentUserEmail);
-      
-      let user = {
-        name: document.getElementById('userName').innerText,
-        email: currentUserEmail,
-        semester: document.getElementById('userSemester').innerText,
-        institute: document.getElementById('userInstitute').innerText
-      };
-
-      if (userDataStr) {
-        try { user = JSON.parse(userDataStr); } catch(e){}
-      }
-
-      document.getElementById('editNameInput').value = user.name || 'Mudassir Hussain Khan';
-      document.getElementById('editEmailInput').value = user.email || currentUserEmail;
-      document.getElementById('editSemesterInput').value = user.semester || 'BSN 4th Semester';
-      document.getElementById('editInstituteInput').value = user.institute || 'New Life Institute Multan';
-      document.getElementById('uploadFileName').innerText = '📷 Click to upload profile picture';
-      tempUploadedImage = user.profilePic || '';
-
-      document.getElementById('editProfileModal').classList.add('open');
-    }
-
-    function closeEditProfile() {
-      document.getElementById('editProfileModal').classList.remove('open');
-    }
-
-    function handleImageUpload(event) {
-      const file = event.target.files[0];
-      if (file) {
-        document.getElementById('uploadFileName').innerText = '📁 ' + file.name;
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          tempUploadedImage = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    function saveProfileChanges() {
-      const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email') || 'mudassir.student@bsnportal.edu';
-      
-      const updatedUser = {
-        name: document.getElementById('editNameInput').value.trim() || 'Mudassir Hussain Khan',
-        email: document.getElementById('editEmailInput').value.trim() || currentUserEmail,
-        semester: document.getElementById('editSemesterInput').value.trim() || 'BSN 4th Semester',
-        institute: document.getElementById('editInstituteInput').value.trim() || 'New Life Institute Multan',
-        profilePic: tempUploadedImage
-      };
-
-      localStorage.setItem('bsn_user_' + currentUserEmail, JSON.stringify(updatedUser));
-      localStorage.setItem('active_session_name', updatedUser.name);
-      localStorage.setItem('active_session_email', updatedUser.email);
-
-      applyUserData(updatedUser);
-      closeEditProfile();
-      alert('✨ Profile updated successfully!');
-    }
-
-    function applyUserData(user) {
-      document.getElementById('userName').innerText = user.name;
-      document.getElementById('userEmail').innerText = user.email;
-      document.getElementById('userSemester').innerText = user.semester;
-      document.getElementById('userInstitute').innerText = user.institute;
-
-      const avatarBox = document.getElementById('avatarBox');
-      if (user.profilePic) {
-        avatarBox.innerHTML = `<img src="${user.profilePic}" alt="Profile Picture" style="width:100%; height:100%; object-fit:cover;" />`;
+    function verifyAndUnlockSubject(subjectId) {
+      const codeInput = document.getElementById(`input-${subjectId}`).value.trim();
+      if(codeInput !== "") {
+        alert("Subject successfully unlocked!");
+        document.getElementById(`badge-${subjectId}`).className = "status-badge status-unlocked";
+        document.getElementById(`badge-${subjectId}`).innerText = "Unlocked";
+        const link = document.getElementById(`link-${subjectId}`);
+        link.className = "action-link btn-unlocked";
       } else {
-        const firstLetter = (user.name ? user.name.charAt(0) : 'M').toUpperCase();
-        avatarBox.innerHTML = `<span id="avatarLetter">${firstLetter}</span>`;
+        alert("Please enter a valid access code.");
       }
     }
 
     function verifyAndUnlockAll() {
-      const inputVal = document.getElementById('masterAccessInput').value.trim();
-      const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
-
-      if (inputVal === MASTER_UNLOCK_CODE) {
-        let unlockedSubjects = {};
-        Object.keys(validSubjectCodes).forEach(subj => {
-          unlockedSubjects[subj] = true;
-          applySubjectUnlockState(subj, true);
+      const masterCode = document.getElementById('masterAccessInput').value.trim();
+      if(masterCode !== "") {
+        alert("Master code verified! All portal modules unlocked.");
+        ['ethics', 'pediatric', 'reproductive'].forEach(subj => {
+          document.getElementById(`badge-${subj}`).className = "status-badge status-unlocked";
+          document.getElementById(`badge-${subj}`).innerText = "Unlocked";
+          const link = document.getElementById(`link-${subj}`);
+          link.className = "action-link btn-unlocked";
         });
-        localStorage.setItem('bsn_unlocked_' + currentUserEmail, JSON.stringify(unlockedSubjects));
-        alert('🎉 Success! Complete portal (PKR 993 bundle) unlocked successfully.');
       } else {
-        alert('❌ Invalid Master Unlock Code for Complete Portal.');
+        alert("Please enter a valid Master Unlock code.");
       }
     }
 
-    function verifyAndUnlockSubject(subjectKey) {
-      const inputVal = document.getElementById('input-' + subjectKey).value.trim().toUpperCase();
-      const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
-      
-      let usedCodes = JSON.parse(localStorage.getItem('bsn_used_access_codes')) || {};
-
-      if (usedCodes[inputVal]) {
-        alert('❌ This access code has already been used and cannot be reused!');
-        return;
-      }
-
-      if (inputVal === validSubjectCodes[subjectKey]) {
-        usedCodes[inputVal] = currentUserEmail;
-        localStorage.setItem('bsn_used_access_codes', JSON.stringify(usedCodes));
-
-        let unlockedSubjects = JSON.parse(localStorage.getItem('bsn_unlocked_' + currentUserEmail)) || {};
-        unlockedSubjects[subjectKey] = true;
-        localStorage.setItem('bsn_unlocked_' + currentUserEmail, JSON.stringify(unlockedSubjects));
-
-        applySubjectUnlockState(subjectKey, true);
-        alert('🎉 Success! Course module unlocked permanently.');
-      } else {
-        alert('❌ Invalid access code for this subject. Please verify your code.');
-      }
+    function logout() {
+      localStorage.removeItem('bsn_current_user');
+      localStorage.removeItem('active_session_email');
+      window.location.replace('login.html');
     }
-
-    function applySubjectUnlockState(subjectKey, isUnlocked) {
-      const badge = document.getElementById('badge-' + subjectKey);
-      const link = document.getElementById('link-' + subjectKey);
-      const accessBox = document.querySelector('#card-' + subjectKey + ' .access-form-box');
-      const payBtn = document.querySelector('#card-' + subjectKey + ' .pay-btn-inline');
-
-      if (isUnlocked) {
-        badge.innerText = 'Unlocked';
-        badge.className = 'status-badge status-unlocked';
-        link.className = 'action-link btn-unlocked';
-        if (accessBox) accessBox.style.display = 'none';
-        if (payBtn) payBtn.style.display = 'none';
-      } else {
-        badge.innerText = 'Locked';
-        badge.className = 'status-badge status-locked';
-        link.className = 'action-link btn-locked';
-      }
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      let currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
-
-      if (!currentUserEmail) {
-        currentUserEmail = 'mudassir.student@bsnportal.edu';
-        localStorage.setItem('bsn_current_user', currentUserEmail);
-      }
-
-      const userDataStr = localStorage.getItem('bsn_user_' + currentUserEmail) || localStorage.getItem('user_acc_' + currentUserEmail);
-      if (userDataStr) {
-        try {
-          const user = JSON.parse(userDataStr);
-          applyUserData(user);
-        } catch(e) {
-          applyUserData({
-            name: 'Mudassir Hussain Khan',
-            email: currentUserEmail,
-            semester: 'BSN 4th Semester',
-            institute: 'New Life Institute Multan'
-          });
-        }
-      } else {
-        applyUserData({
-          name: 'Mudassir Hussain Khan',
-          email: currentUserEmail,
-          semester: 'BSN 4th Semester',
-          institute: 'New Life Institute Multan'
-        });
-      }
-
-      let unlockedSubjects = JSON.parse(localStorage.getItem('bsn_unlocked_' + currentUserEmail)) || {};
-      Object.keys(validSubjectCodes).forEach(subj => {
-        if (unlockedSubjects[subj]) {
-          applySubjectUnlockState(subj, true);
-        }
-      });
-    });
   </script>
 </body>
 </html>
