@@ -2,471 +2,394 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Student Portal | Login & Registration</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Portal Access | Pharmacology-I BSN</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
   <style>
-    :root {
-      --primary: #0284c7;
-      --primary-dark: #0369a1;
-      --accent: #0d9488;
-      --bg-main: #f8fafc;
-      --card-bg: #ffffff;
-      --text-dark: #0f172a;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --radius: 24px;
-      --shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.12);
-    }
-
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-    html { scroll-behavior: smooth; }
+    
     body { 
-      background: linear-gradient(135deg, #f0fdf4 0%, #f8fafc 50%, #eff6ff 100%); 
-      display: flex; 
-      flex-direction: column; 
-      align-items: center; 
-      justify-content: center; 
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); 
+      color: #0f172a; 
       min-height: 100vh; 
-      padding: 24px 16px;
-      color: var(--text-dark);
-    }
-    
-    .portal-container {
-      width: 100%;
-      max-width: 440px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .auth-card { 
-      background: var(--card-bg); 
-      width: 100%; 
-      border-radius: var(--radius); 
-      padding: 36px 32px; 
-      box-shadow: var(--shadow); 
-      border: 1px solid var(--border); 
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Decorative top accent glow */
-    .auth-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary), #25d366, var(--accent));
-    }
-
-    .brand-header { text-align: center; margin-bottom: 24px; }
-    .brand-icon { 
-      background: linear-gradient(135deg, var(--primary), var(--accent)); 
-      color: white; 
-      width: 56px; 
-      height: 56px; 
-      border-radius: 16px; 
       display: flex; 
       align-items: center; 
       justify-content: center; 
-      font-size: 1.6rem; 
-      margin: 0 auto 14px auto; 
-      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.25); 
+      padding: 16px; 
     }
-    .brand-header h2 { font-size: 1.4rem; font-weight: 800; color: var(--text-dark); letter-spacing: -0.02em; }
-    .brand-header p { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
 
-    .tabs { display: flex; background: #f1f5f9; padding: 5px; border-radius: 14px; margin-bottom: 24px; border: 1px solid var(--border); }
-    .tab-btn { flex: 1; border: none; padding: 10px; border-radius: 10px; font-weight: 700; cursor: pointer; background: transparent; color: var(--text-muted); font-size: 0.85rem; transition: all 0.25s ease; }
-    .tab-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-    
+    /* Login Box Container */
+    .login-container { 
+      background: white; 
+      width: 100%; 
+      max-width: 440px; 
+      padding: 36px 28px; 
+      border-radius: 28px; 
+      box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04); 
+      border: 1px solid rgba(226, 232, 240, 0.8); 
+      position: relative; 
+    }
+
+    .login-header { text-align: center; margin-bottom: 24px; }
+    .login-header h1 { font-size: 1.5rem; font-weight: 800; color: #0284c7; letter-spacing: -0.5px; margin-bottom: 6px; }
+    .login-header p { font-size: 0.85rem; color: #64748b; font-weight: 500; }
+
+    /* Tab Switcher */
+    .tab-switcher { display: flex; background: #f1f5f9; border-radius: 14px; padding: 5px; margin-bottom: 22px; }
+    .tab-btn { flex: 1; text-align: center; padding: 11px; font-size: 0.85rem; font-weight: 700; border: none; background: transparent; cursor: pointer; border-radius: 10px; color: #64748b; transition: all 0.25s ease; }
+    .tab-btn.active { background: white; color: #0284c7; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+
+    /* Form Styles */
     .form-group { margin-bottom: 16px; }
-    label { font-size: 0.82rem; font-weight: 700; color: #334155; display: block; margin-bottom: 6px; }
-    input, select { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; outline: none; font-size: 0.9rem; background: #ffffff; color: var(--text-dark); transition: all 0.2s ease; }
-    input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.12); background: #ffffff; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 700; color: #334155; margin-bottom: 6px; }
+    .form-input, select.form-input { width: 100%; padding: 13px 16px; border: 1.5px solid #cbd5e1; border-radius: 14px; font-size: 0.95rem; font-weight: 600; outline: none; background: #f8fafc; color: #0f172a; transition: all 0.2s; }
+    .form-input:focus, select.form-input:focus { border-color: #0284c7; background: white; box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.12); }
+
+    .auth-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: white; border: none; border-radius: 14px; font-weight: 700; font-size: 1rem; cursor: pointer; margin-top: 8px; box-shadow: 0 6px 16px rgba(2, 132, 199, 0.25); transition: transform 0.1s, opacity 0.2s; }
+    .auth-btn:hover { opacity: 0.94; }
+    .auth-btn:active { transform: scale(0.98); }
+
+    /* Forgot Password Row */
+    .forgot-row { display: flex; justify-content: flex-end; margin-top: -8px; margin-bottom: 12px; }
+    .forgot-link { font-size: 0.8rem; font-weight: 700; color: #0284c7; text-decoration: none; cursor: pointer; transition: color 0.2s; }
+    .forgot-link:hover { color: #0369a1; text-decoration: underline; }
+
+    /* Gorgeous Help Admin WhatsApp Button */
+    .help-admin-btn { 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 10px; 
+      width: 100%; 
+      margin-top: 16px; 
+      padding: 13px; 
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); 
+      color: white; 
+      border: none; 
+      border-radius: 14px; 
+      font-size: 0.9rem; 
+      font-weight: 700; 
+      text-decoration: none; 
+      box-shadow: 0 6px 16px rgba(34, 197, 94, 0.25);
+      transition: all 0.2s ease; 
+    }
+    .help-admin-btn:hover { 
+      opacity: 0.92;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.35);
+    }
+    .help-admin-btn:active { transform: scale(0.98); }
+    .whatsapp-icon { font-size: 1.1rem; }
+
+    .help-text { text-align: center; margin-top: 20px; font-size: 0.8rem; color: #64748b; }
+    .help-text span { color: #0284c7; font-weight: 700; }
     
-    .submit-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 10px; font-size: 0.92rem; transition: all 0.25s ease; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
-    .submit-btn:hover { background: linear-gradient(135deg, var(--primary-dark), #075985); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35); }
-    .submit-btn:active { transform: translateY(0); }
-    .submit-btn:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
-    
-    .forgot-link { font-size: 0.8rem; color: var(--primary); font-weight: 600; text-decoration: none; cursor: pointer; float: right; margin-bottom: 12px; }
-    .forgot-link:hover { text-decoration: underline; }
-    
-    .back-btn { font-size: 0.82rem; color: var(--text-muted); font-weight: 700; background: none; border: none; cursor: pointer; margin-bottom: 16px; display: inline-flex; align-items: center; gap: 4px; transition: color 0.2s; }
-    .back-btn:hover { color: var(--text-dark); }
+    .hidden { display: none; }
 
-    /* SMALL BEAUTIFUL IMPRESSIVE FLOATING WHATSAPP POPUP BUTTON */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-      color: white;
-      padding: 10px 16px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.82rem;
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      z-index: 1000;
-      animation: pulse-soft 2.5s infinite;
-    }
-
-    @keyframes pulse-soft {
-      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
-      70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-    }
-
-    .whatsapp-float:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
-      background: linear-gradient(135deg, #22bf5b, #0f7a6e);
-      animation: none;
-    }
-
-    .whatsapp-icon-box {
-      background: rgba(255, 255, 255, 0.25);
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .whatsapp-icon {
-      width: 15px;
-      height: 15px;
-      fill: #ffffff;
-    }
-
-    /* MODERN STYLISH FOOTER */
-    .portal-footer {
-      width: 100%;
-      text-align: center;
-      padding: 16px 8px 8px 8px;
-      color: var(--text-muted);
-      font-size: 0.82rem;
-      line-height: 1.6;
-    }
-    .portal-footer p { font-weight: 500; }
-    .portal-footer .developer-name {
-      color: var(--primary);
-      font-weight: 800;
-      letter-spacing: 0.01em;
-    }
+    /* Modal Backdrop */
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(3px); }
+    .modal-box { background: white; border-radius: 20px; padding: 24px; width: 100%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); animation: modalPopup 0.2s ease; }
+    @keyframes modalPopup { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .modal-box h3 { font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
+    .modal-box p { font-size: 0.82rem; color: #64748b; margin-bottom: 16px; line-height: 1.4; }
+    .modal-actions { display: flex; gap: 8px; margin-top: 20px; }
+    .btn-primary { flex: 1; background: #0284c7; color: white; border: none; padding: 11px; border-radius: 12px; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
+    .btn-primary:hover { opacity: 0.9; }
+    .btn-secondary { flex: 1; background: #e2e8f0; color: #334155; border: none; padding: 11px; border-radius: 12px; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
+    .btn-secondary:hover { background: #cbd5e1; }
 
     @media (max-width: 480px) {
-      body { padding: 12px 8px; }
-      .auth-card { padding: 24px 20px; border-radius: 20px; }
-      .whatsapp-float { bottom: 16px; right: 16px; padding: 8px 14px; font-size: 0.78rem; }
+      body { padding: 12px; }
+      .login-container { padding: 28px 20px; border-radius: 24px; }
+      .login-header h1 { font-size: 1.35rem; }
     }
   </style>
 </head>
 <body>
 
-<div class="portal-container">
-  <div class="auth-card">
-    <div class="brand-header">
-      <div class="brand-icon">🩺</div>
-      <h2>BSN Student Portal</h2>
-      <p>Sign in or register to access study modules</p>
+  <div class="login-container">
+    <div class="login-header">
+      <h1>Pharmacology-I Portal</h1>
+      <p id="headerSubtitle">Sign in with your email &amp; password</p>
     </div>
 
-    <!-- Navigation Tabs -->
-    <div class="tabs" id="authTabs">
-      <button class="tab-btn active" id="loginTab" onclick="showForm('login')">Login</button>
-      <button class="tab-btn" id="regTab" onclick="showForm('register')">Register Student</button>
+    <!-- Switch Tabs for Login / Register -->
+    <div class="tab-switcher">
+      <button type="button" id="loginTabBtn" class="tab-btn active" onclick="switchMode('login')">Log In</button>
+      <button type="button" id="registerTabBtn" class="tab-btn" onclick="switchMode('register')">Register</button>
     </div>
 
-    <!-- LOGIN FORM -->
-    <form id="loginForm" onsubmit="handleLogin(event)">
-      <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" id="loginEmail" placeholder="student@example.com" required>
+    <!-- Auth Form -->
+    <form id="authForm" onsubmit="handleAuth(event)">
+      
+      <!-- Extra fields shown only during Register -->
+      <div id="registerFields" class="hidden">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="studentName" class="form-input" placeholder="e.g. Mudassir Khan">
+        </div>
+
+        <div class="form-group">
+          <label>Institute Name</label>
+          <input type="text" id="studentInstitute" class="form-input" value="New Life Institute of Nursing Multan">
+        </div>
+
+        <div class="form-group">
+          <label>Semester</label>
+          <input type="text" id="studentSemester" class="form-input" value="4th Semester">
+        </div>
+
+        <div class="form-group">
+          <label>🔐 Security Recovery Question</label>
+          <select id="studentSecurityQ" class="form-input">
+            <option value="" disabled selected>Choose a security question</option>
+            <option value="What is your favorite clinical subject?">What is your favorite clinical subject?</option>
+            <option value="What was your first pet's name?">What was your first pet's name?</option>
+            <option value="In what city were you born?">In what city were you born?</option>
+            <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Security Answer</label>
+          <input type="text" id="studentSecurityAnswer" class="form-input" placeholder="Enter your secret answer">
+          <p style="font-size: 0.72rem; color: #64748b; margin-top: 4px;">Remember this answer! Required if you ever forget your password.</p>
+        </div>
       </div>
+
+      <!-- Common Field: Email -->
       <div class="form-group">
-        <label>
-          Password 
-          <span class="forgot-link" onclick="showForm('forgot')">Forgot Password?</span>
-        </label>
-        <input type="password" id="loginPassword" placeholder="••••••••" required>
+        <label>Student Email</label>
+        <input type="email" id="studentEmail" class="form-input" placeholder="e.g. student@nursing.edu" required>
       </div>
-      <button type="submit" class="submit-btn" id="loginBtn">Login to Dashboard</button>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="studentPassword" class="form-input" placeholder="Enter your password" required>
+      </div>
+
+      <!-- Forgot Password Row (Only visible in Login mode) -->
+      <div id="forgotPasswordRow" class="forgot-row">
+        <a class="forgot-link" onclick="openForgotModal()">Forgot Password?</a>
+      </div>
+
+      <button type="submit" id="submitBtn" class="auth-btn">Log In to Dashboard →</button>
     </form>
 
-    <!-- REGISTRATION FORM -->
-    <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" id="regName" placeholder="e.g. Mudassir Hussain Khan" required>
-      </div>
+    <!-- Gorgeous Need Help? Ask Admin WhatsApp Pop Button -->
+    <a href="https://wa.me/923241064487?text=Hello%20Mudassir,%20I%20need%20help%20with%20my%20Pharmacology-I%20portal%20account." target="_blank" class="help-admin-btn">
+      <span class="whatsapp-icon">💬</span> Need Help? Ask Admin
+    </a>
+
+    <div class="help-text">
+      <p>Protected Student Portal • Developed by <span>Mudassir Khan</span></p>
+    </div>
+  </div>
+
+  <!-- Secure Local Forgot Password Modal -->
+  <div id="forgotModal" class="modal-backdrop">
+    <div class="modal-box">
+      <h3>Reset Password</h3>
+      <p>Enter your registered account email to load your exact security question and safely reset your password.</p>
       
       <div class="form-group">
-        <label>Institute Name</label>
-        <input type="text" id="regInstitute" placeholder="e.g. New Life Institute of Nursing Multan" required>
+        <label>Registered Student Email</label>
+        <input type="email" id="recoveryEmail" class="form-input" placeholder="student@nursing.edu" onblur="fetchRecoveryQuestion()">
       </div>
 
-      <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" id="regEmail" placeholder="student@example.com" required>
-      </div>
-
-      <div class="form-group">
-        <label>Semester</label>
-        <select id="regSemester" required>
-          <option value="" disabled selected>Select your current semester</option>
-          <option value="BSN Semester 1">BSN Semester 1</option>
-          <option value="BSN Semester 2">BSN Semester 2</option>
-          <option value="BSN Semester 3">BSN Semester 3</option>
-          <option value="BSN 4th Semester" selected>BSN 4th Semester</option>
-          <option value="BSN Semester 5">BSN Semester 5</option>
-        </select>
-      </div>
-
-      <!-- SECURITY QUESTION SETUP -->
-      <div class="form-group">
-        <label>Security Question (For Password Recovery)</label>
-        <select id="regSecurityQ" required>
-          <option value="" disabled selected>Choose a security question</option>
-          <option value="What is your favorite clinical subject?">What is your favorite clinical subject?</option>
-          <option value="What was your first pet's name?">What was your first pet's name?</option>
-          <option value="In what city were you born?">In what city were you born?</option>
-          <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Security Answer</label>
-        <input type="text" id="regSecurityA" placeholder="Enter your secret answer" required>
-      </div>
-
-      <div class="form-group">
-        <label>Create Password</label>
-        <input type="password" id="regPassword" placeholder="At least 6 characters" minlength="6" required>
-      </div>
-
-      <button type="submit" class="submit-btn" id="regBtn">Create Account</button>
-    </form>
-
-    <!-- FORGOT PASSWORD FORM (AUTOMATICALLY MATCHES REGISTERED QUESTION & ANSWER) -->
-    <form id="forgotForm" style="display: none;" onsubmit="handleResetPassword(event)">
-      <button type="button" class="back-btn" onclick="showForm('login')">← Back to Login</button>
-      <h3 style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 8px;">Reset Password</h3>
-      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px;">Enter your email to load your exact security question.</p>
-      
-      <div class="form-group">
-        <label>Registered Email</label>
-        <input type="email" id="resetEmail" placeholder="student@example.com" onblur="fetchSecurityQuestion()" required>
-      </div>
-
-      <!-- DYNAMICALLY LOADED SECURITY QUESTION MATCHING REGISTRATION -->
-      <div class="form-group" id="questionBoxGroup" style="display: none;">
-        <label id="displaySecurityQ" style="color: var(--primary); font-weight: 800; font-size: 0.85rem; line-height: 1.4;"></label>
-        <input type="text" id="resetSecurityAns" placeholder="Enter your exact security answer" required style="margin-top: 6px;">
+      <div class="form-group" id="recoveryQuestionBox" style="display: none;">
+        <label id="displayRecoveryQ" style="color: #0284c7; font-weight: 800; font-size: 0.85rem; line-height: 1.4;"></label>
+        <input type="text" id="recoveryAnswer" class="form-input" placeholder="Enter your exact security answer" style="margin-top: 6px;">
       </div>
 
       <div class="form-group">
         <label>New Password</label>
-        <input type="password" id="newPassword" placeholder="Enter new password (min 6 chars)" minlength="6" required>
+        <input type="password" id="recoveryNewPassword" class="form-input" placeholder="Enter new password (min 6 chars)">
       </div>
 
-      <button type="submit" class="submit-btn" style="background: linear-gradient(135deg, var(--accent), #0f766e);">Update Password</button>
-    </form>
+      <div class="modal-actions">
+        <button onclick="executePasswordReset()" class="btn-primary">Reset Password</button>
+        <button onclick="closeForgotModal()" class="btn-secondary">Cancel</button>
+      </div>
+    </div>
   </div>
 
-  <footer class="portal-footer">
-    <p>&copy; 2026 BSN Student Portal. All rights reserved.</p>
-    <p>Designed &amp; Developed with precision by <span class="developer-name">Mudassir Khan</span></p>
-  </footer>
-</div>
+  <script>
+    let currentMode = 'login';
 
-<a href="https://wa.me/923241064487?text=Hello%20Mudassir,%20Need%20Help?%20Ask%20Admin." target="_blank" class="whatsapp-float">
-  <div class="whatsapp-icon-box">
-    <svg class="whatsapp-icon" viewBox="0 0 24 24">
-      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-    </svg>
-  </div>
-  <span>Need Help? Ask Admin</span>
-</a>
-
-<script>
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyMadxOTU_9Uys1xrQC8g7t8CGoKQkBM6aLlOEM4KdAvL0Qqate0nXSHuUUKp3F4Nx7/exec';
-
-  function showForm(type) {
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-    const forgotForm = document.getElementById('forgotForm');
-    const authTabs = document.getElementById('authTabs');
-
-    if (type === 'login') {
-      authTabs.style.display = 'flex';
-      loginForm.style.display = 'block';
-      registerForm.style.display = 'none';
-      forgotForm.style.display = 'none';
-      document.getElementById('loginTab').classList.add('active');
-      document.getElementById('regTab').classList.remove('active');
-    } else if (type === 'register') {
-      authTabs.style.display = 'flex';
-      loginForm.style.display = 'none';
-      registerForm.style.display = 'block';
-      forgotForm.style.display = 'none';
-      document.getElementById('loginTab').classList.remove('active');
-      document.getElementById('regTab').classList.add('active');
-    } else if (type === 'forgot') {
-      authTabs.style.display = 'none';
-      loginForm.style.display = 'none';
-      registerForm.style.display = 'none';
-      forgotForm.style.display = 'block';
-      document.getElementById('questionBoxGroup').style.display = 'none';
-      document.getElementById('resetEmail').value = '';
-      document.getElementById('resetSecurityAns').value = '';
-      document.getElementById('newPassword').value = '';
-    }
-  }
-
-  async function handleRegister(e) {
-    e.preventDefault();
-    const btn = document.getElementById('regBtn');
-    
-    const user = {
-      name: document.getElementById('regName').value.trim(),
-      institute: document.getElementById('regInstitute').value.trim(),
-      email: document.getElementById('regEmail').value.toLowerCase().trim(),
-      semester: document.getElementById('regSemester').value,
-      securityQ: document.getElementById('regSecurityQ').value,
-      securityA: document.getElementById('regSecurityA').value.trim().toLowerCase(),
-      password: document.getElementById('regPassword').value
+    window.onload = function() {
+      if (localStorage.getItem('pharmacologyLoggedIn') === 'true') {
+        window.location.href = 'dashboard.html';
+      }
     };
 
-    if (localStorage.getItem('bsn_user_' + user.email)) {
-      alert('❌ This email address is already registered. Please login instead.');
-      return;
+    function switchMode(mode) {
+      currentMode = mode;
+      const regFields = document.getElementById('registerFields');
+      const submitBtn = document.getElementById('submitBtn');
+      const headerSubtitle = document.getElementById('headerSubtitle');
+      const loginTab = document.getElementById('loginTabBtn');
+      const regTab = document.getElementById('registerTabBtn');
+      const forgotRow = document.getElementById('forgotPasswordRow');
+
+      if (mode === 'register') {
+        regFields.classList.remove('hidden');
+        forgotRow.classList.add('hidden');
+        submitBtn.innerText = 'Create Account & Register →';
+        headerSubtitle.innerText = 'Create your student account';
+        regTab.classList.add('active');
+        loginTab.classList.remove('active');
+        document.getElementById('studentName').required = true;
+        document.getElementById('studentSecurityQ').required = true;
+        document.getElementById('studentSecurityAnswer').required = true;
+      } else {
+        regFields.classList.add('hidden');
+        forgotRow.classList.remove('hidden');
+        submitBtn.innerText = 'Log In to Dashboard →';
+        headerSubtitle.innerText = 'Sign in with your email & password';
+        loginTab.classList.add('active');
+        regTab.classList.remove('active');
+        document.getElementById('studentName').required = false;
+        document.getElementById('studentSecurityQ').required = false;
+        document.getElementById('studentSecurityAnswer').required = false;
+      }
     }
 
-    btn.disabled = true;
-    btn.innerText = 'Syncing to Sheet...';
-
-    const modules = ['pediatric', 'reproductive', 'english', 'perls'];
-    modules.forEach(mod => {
-      localStorage.setItem('unlocked_' + user.email + '_' + mod, 'false');
-    });
-    localStorage.setItem('unlocked_' + user.email + '_ethics', 'true');
-    localStorage.setItem('unlocked_ethics', 'true');
-
-    localStorage.setItem('bsn_user_' + user.email, JSON.stringify(user));
-    localStorage.setItem('bsn_current_user', user.email);
-    localStorage.setItem('active_session_email', user.email);
-    localStorage.setItem('active_session_name', user.name);
-
-    try {
-      await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-      });
-    } catch (err) {
-      console.error('Google Sheet Sync Error:', err);
+    // Modal Control Functions
+    function openForgotModal() {
+      const typedEmail = document.getElementById('studentEmail').value.trim();
+      if(typedEmail) {
+        document.getElementById('recoveryEmail').value = typedEmail;
+        fetchRecoveryQuestion();
+      } else {
+        document.getElementById('recoveryEmail').value = '';
+        document.getElementById('recoveryQuestionBox').style.display = 'none';
+      }
+      document.getElementById('recoveryAnswer').value = '';
+      document.getElementById('recoveryNewPassword').value = '';
+      document.getElementById('forgotModal').style.display = 'flex';
     }
 
-    alert('🎉 Student registered successfully!');
-    window.location.href = 'dashboard.html';
-  }
+    function closeForgotModal() {
+      document.getElementById('forgotModal').style.display = 'none';
+    }
 
-  function handleLogin(e) {
-    e.preventDefault();
-    const email = document.getElementById('loginEmail').value.toLowerCase().trim();
-    const pass = document.getElementById('loginPassword').value;
-    const savedUser = localStorage.getItem('bsn_user_' + email);
+    function fetchRecoveryQuestion() {
+      const email = document.getElementById('recoveryEmail').value.trim().toLowerCase();
+      const questionBox = document.getElementById('recoveryQuestionBox');
+      const displayQ = document.getElementById('displayRecoveryQ');
 
-    if (savedUser) {
-      const user = JSON.parse(savedUser);
-      if (user.password === pass) {
-        const modules = ['pediatric', 'reproductive', 'english', 'perls'];
-        modules.forEach(mod => {
-          const key = 'unlocked_' + email + '_' + mod;
-          if (localStorage.getItem(key) === null) {
-            localStorage.setItem(key, 'false');
-          }
-        });
-        localStorage.setItem('unlocked_' + email + '_ethics', 'true');
-        localStorage.setItem('unlocked_ethics', 'true');
+      if (!email) return;
 
-        localStorage.setItem('bsn_current_user', email);
-        localStorage.setItem('active_session_email', email);
-        localStorage.setItem('active_session_name', user.name || '');
+      let usersDB = JSON.parse(localStorage.getItem('pharmacologyRegisteredUsers')) || {};
+
+      if (usersDB.hasOwnProperty(email)) {
+        const userRecord = usersDB[email];
+        if (userRecord.securityQ) {
+          displayQ.innerText = "🔒 Security Question: " + userRecord.securityQ;
+          questionBox.style.display = 'block';
+        } else {
+          displayQ.innerText = "🔒 Security Question: What is your favorite clinical subject?";
+          questionBox.style.display = 'block';
+        }
+      } else {
+        questionBox.style.display = 'none';
+        alert('❌ No account found with this email address.');
+      }
+    }
+
+    // Secure local password reset verification
+    function executePasswordReset() {
+      const email = document.getElementById('recoveryEmail').value.trim().toLowerCase();
+      const answer = document.getElementById('recoveryAnswer').value.trim().toLowerCase();
+      const newPassword = document.getElementById('recoveryNewPassword').value.trim();
+
+      if (!email || !answer || !newPassword) {
+        alert('❌ Please fill in all fields to verify your identity.');
+        return;
+      }
+
+      let usersDB = JSON.parse(localStorage.getItem('pharmacologyRegisteredUsers')) || {};
+
+      if (!usersDB.hasOwnProperty(email)) {
+        alert('❌ No account found with this email address.');
+        return;
+      }
+
+      const userRecord = usersDB[email];
+      const correctAns = (userRecord.securityAnswer || '').trim().toLowerCase();
+
+      // Check if security answer matches case-insensitively
+      if (!correctAns || correctAns !== answer) {
+        alert('❌ Incorrect security answer! Please check your answer and try again.');
+        return;
+      }
+
+      // Update password locally
+      userRecord.password = newPassword;
+      usersDB[email] = userRecord;
+      localStorage.setItem('pharmacologyRegisteredUsers', JSON.stringify(usersDB));
+
+      alert('🎉 Password reset successfully! You can now log in with your new password.');
+      closeForgotModal();
+      document.getElementById('studentEmail').value = email;
+      document.getElementById('studentPassword').value = '';
+    }
+
+    function handleAuth(event) {
+      event.preventDefault();
+
+      const email = document.getElementById('studentEmail').value.trim().toLowerCase();
+      const password = document.getElementById('studentPassword').value.trim();
+
+      let usersDB = JSON.parse(localStorage.getItem('pharmacologyRegisteredUsers')) || {};
+
+      if (currentMode === 'register') {
+        const name = document.getElementById('studentName').value.trim();
+        const institute = document.getElementById('studentInstitute').value.trim();
+        const semester = document.getElementById('studentSemester').value.trim();
+        const securityQ = document.getElementById('studentSecurityQ').value;
+        const securityAnswer = document.getElementById('studentSecurityAnswer').value.trim().toLowerCase();
+
+        if (usersDB.hasOwnProperty(email)) {
+          alert('❌ This email is already registered! Please log in instead.');
+          return;
+        }
+
+        usersDB[email] = {
+          name: name,
+          institute: institute,
+          email: email,
+          password: password,
+          semester: semester,
+          securityQ: securityQ,
+          securityAnswer: securityAnswer
+        };
+        localStorage.setItem('pharmacologyRegisteredUsers', JSON.stringify(usersDB));
+        
+        alert('🎉 Registration successful! You can now log in with your email and password.');
+        switchMode('login');
+        document.getElementById('authForm').reset();
+
+      } else {
+        if (!usersDB.hasOwnProperty(email)) {
+          alert('❌ Account not found! Please register first by clicking the Register tab.');
+          return;
+        }
+
+        const userRecord = usersDB[email];
+        if (userRecord.password !== password) {
+          alert('❌ Incorrect password! Please check your credentials and try again.');
+          return;
+        }
+
+        localStorage.setItem('pharmacologyUser', JSON.stringify(userRecord));
+        localStorage.setItem('pharmacologyLoggedIn', 'true');
+
         window.location.href = 'dashboard.html';
-      } else {
-        alert('❌ Incorrect password.');
       }
-    } else {
-      alert('❌ Account not found. Please register first.');
     }
-  }
-
-  function fetchSecurityQuestion() {
-    const email = document.getElementById('resetEmail').value.toLowerCase().trim();
-    const questionBoxGroup = document.getElementById('questionBoxGroup');
-    const displayQ = document.getElementById('displaySecurityQ');
-
-    if (!email) return;
-
-    const savedUser = localStorage.getItem('bsn_user_' + email);
-    if (savedUser) {
-      const user = JSON.parse(savedUser);
-      if (user.securityQ) {
-        displayQ.innerText = "🔒 Security Question: " + user.securityQ;
-        questionBoxGroup.style.display = 'block';
-      } else {
-        displayQ.innerText = "🔒 Security Question: What is your favorite clinical subject?";
-        questionBoxGroup.style.display = 'block';
-      }
-    } else {
-      questionBoxGroup.style.display = 'none';
-      alert('❌ Registered email not found.');
-    }
-  }
-
-  function handleResetPassword(e) {
-    e.preventDefault();
-    const email = document.getElementById('resetEmail').value.toLowerCase().trim();
-    const enteredAns = document.getElementById('resetSecurityAns').value.trim().toLowerCase();
-    const newPass = document.getElementById('newPassword').value;
-    const savedUser = localStorage.getItem('bsn_user_' + email);
-
-    if (savedUser) {
-      let user = JSON.parse(savedUser);
-      const correctAns = (user.securityA || '').trim().toLowerCase();
-
-      if (correctAns && enteredAns === correctAns) {
-        user.password = newPass;
-        localStorage.setItem('bsn_user_' + email, JSON.stringify(user));
-        alert('✅ Password updated successfully!');
-        showForm('login');
-      } else {
-        alert('❌ Incorrect security answer. Please check your answer and try again.');
-      }
-    } else {
-      alert('❌ Registered email not found.');
-    }
-  }
-</script>
+  </script>
 
 </body>
 </html>
