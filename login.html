@@ -2,12 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Student Portal | Login & Registration</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --accent: #0d9488;
+      --bg-main: #f8fafc;
+      --card-bg: #ffffff;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 24px;
+      --shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; }
     body { 
       background: linear-gradient(135deg, #f0fdf4 0%, #f8fafc 50%, #eff6ff 100%); 
       display: flex; 
@@ -16,7 +33,7 @@
       justify-content: center; 
       min-height: 100vh; 
       padding: 24px 16px;
-      position: relative;
+      color: var(--text-dark);
     }
     
     .portal-container {
@@ -28,17 +45,17 @@
     }
 
     .auth-card { 
-      background: #ffffff; 
+      background: var(--card-bg); 
       width: 100%; 
-      border-radius: 24px; 
+      border-radius: var(--radius); 
       padding: 36px 32px; 
-      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04); 
-      border: 1px solid #e2e8f0; 
+      box-shadow: var(--shadow); 
+      border: 1px solid var(--border); 
       position: relative;
       overflow: hidden;
     }
 
-    /* Decorative top accent glow */
+    /* Decorative top accent glow matching dashboard */
     .auth-card::before {
       content: '';
       position: absolute;
@@ -46,12 +63,12 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: linear-gradient(90deg, #0284c7, #25d366, #0d9488);
+      background: linear-gradient(90deg, var(--primary), #25d366, var(--accent));
     }
 
     .brand-header { text-align: center; margin-bottom: 24px; }
     .brand-icon { 
-      background: linear-gradient(135deg, #0284c7, #0d9488); 
+      background: linear-gradient(135deg, var(--primary), var(--accent)); 
       color: white; 
       width: 56px; 
       height: 56px; 
@@ -63,28 +80,28 @@
       margin: 0 auto 14px auto; 
       box-shadow: 0 8px 20px rgba(2, 132, 199, 0.25); 
     }
-    .brand-header h2 { font-size: 1.4rem; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; }
-    .brand-header p { font-size: 0.85rem; color: #64748b; margin-top: 4px; font-weight: 500; }
+    .brand-header h2 { font-size: 1.4rem; font-weight: 800; color: var(--text-dark); letter-spacing: -0.02em; }
+    .brand-header p { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
 
-    .tabs { display: flex; background: #f1f5f9; padding: 5px; border-radius: 14px; margin-bottom: 24px; border: 1px solid #e2e8f0; }
-    .tab-btn { flex: 1; border: none; padding: 10px; border-radius: 10px; font-weight: 700; cursor: pointer; background: transparent; color: #64748b; font-size: 0.85rem; transition: all 0.25s ease; }
-    .tab-btn.active { background: #ffffff; color: #0284c7; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+    .tabs { display: flex; background: #f1f5f9; padding: 5px; border-radius: 14px; margin-bottom: 24px; border: 1px solid var(--border); }
+    .tab-btn { flex: 1; border: none; padding: 10px; border-radius: 10px; font-weight: 700; cursor: pointer; background: transparent; color: var(--text-muted); font-size: 0.85rem; transition: all 0.25s ease; }
+    .tab-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
     
     .form-group { margin-bottom: 16px; }
     label { font-size: 0.82rem; font-weight: 700; color: #334155; display: block; margin-bottom: 6px; }
-    input, select { width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 12px; outline: none; font-size: 0.9rem; background: #ffffff; color: #0f172a; transition: all 0.2s ease; }
-    input:focus, select:focus { border-color: #0284c7; box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.12); background: #ffffff; }
+    input, select { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; outline: none; font-size: 0.9rem; background: #ffffff; color: var(--text-dark); transition: all 0.2s ease; }
+    input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.12); background: #ffffff; }
     
-    .submit-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 10px; font-size: 0.92rem; transition: all 0.25s ease; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
-    .submit-btn:hover { background: linear-gradient(135deg, #0369a1, #075985); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35); }
+    .submit-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 10px; font-size: 0.92rem; transition: all 0.25s ease; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
+    .submit-btn:hover { background: linear-gradient(135deg, var(--primary-dark), #075985); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35); }
     .submit-btn:active { transform: translateY(0); }
     .submit-btn:disabled { background: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
     
-    .forgot-link { font-size: 0.8rem; color: #0284c7; font-weight: 600; text-decoration: none; cursor: pointer; float: right; margin-bottom: 12px; }
+    .forgot-link { font-size: 0.8rem; color: var(--primary); font-weight: 600; text-decoration: none; cursor: pointer; float: right; margin-bottom: 12px; }
     .forgot-link:hover { text-decoration: underline; }
     
-    .back-btn { font-size: 0.82rem; color: #64748b; font-weight: 700; background: none; border: none; cursor: pointer; margin-bottom: 16px; display: inline-flex; align-items: center; gap: 4px; transition: color 0.2s; }
-    .back-btn:hover { color: #0f172a; }
+    .back-btn { font-size: 0.82rem; color: var(--text-muted); font-weight: 700; background: none; border: none; cursor: pointer; margin-bottom: 16px; display: inline-flex; align-items: center; gap: 4px; transition: color 0.2s; }
+    .back-btn:hover { color: var(--text-dark); }
 
     /* SMALL BEAUTIFUL IMPRESSIVE FLOATING WHATSAPP POPUP BUTTON */
     .whatsapp-float {
@@ -121,10 +138,6 @@
       animation: none;
     }
 
-    .whatsapp-float:active {
-      transform: translateY(-1px);
-    }
-
     .whatsapp-icon-box {
       background: rgba(255, 255, 255, 0.25);
       width: 26px;
@@ -147,15 +160,13 @@
       width: 100%;
       text-align: center;
       padding: 16px 8px 8px 8px;
-      color: #64748b;
+      color: var(--text-muted);
       font-size: 0.82rem;
       line-height: 1.6;
     }
-    .portal-footer p {
-      font-weight: 500;
-    }
+    .portal-footer p { font-weight: 500; }
     .portal-footer .developer-name {
-      color: #0284c7;
+      color: var(--primary);
       font-weight: 800;
       letter-spacing: 0.01em;
     }
@@ -204,7 +215,7 @@
     <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
       <div class="form-group">
         <label>Full Name</label>
-        <input type="text" id="regName" placeholder="e.g. Student Name" required>
+        <input type="text" id="regName" placeholder="e.g. Mudassir Hussain Khan" required>
       </div>
       
       <div class="form-group">
@@ -224,7 +235,7 @@
           <option value="BSN Semester 1">BSN Semester 1</option>
           <option value="BSN Semester 2">BSN Semester 2</option>
           <option value="BSN Semester 3">BSN Semester 3</option>
-          <option value="BSN Semester 4">BSN Semester 4</option>
+          <option value="BSN 4th Semester" selected>BSN 4th Semester</option>
           <option value="BSN Semester 5">BSN Semester 5</option>
         </select>
       </div>
@@ -240,7 +251,7 @@
     <!-- FORGOT PASSWORD FORM -->
     <form id="forgotForm" style="display: none;" onsubmit="handleResetPassword(event)">
       <button type="button" class="back-btn" onclick="showForm('login')">← Back to Login</button>
-      <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 12px;">Reset Password</h3>
+      <h3 style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 12px;">Reset Password</h3>
       <div class="form-group">
         <label>Your Registered Email</label>
         <input type="email" id="resetEmail" placeholder="student@example.com" required>
@@ -249,7 +260,7 @@
         <label>New Password</label>
         <input type="password" id="newPassword" placeholder="Enter new password" minlength="6" required>
       </div>
-      <button type="submit" class="submit-btn" style="background: linear-gradient(135deg, #0d9488, #0f766e);">Update Password</button>
+      <button type="submit" class="submit-btn" style="background: linear-gradient(135deg, var(--accent), #0f766e);">Update Password</button>
     </form>
   </div>
 
