@@ -602,6 +602,50 @@
             <a href="#" id="link-reproductive" class="action-link btn-locked">Open Study Notes →</a>
           </div>
 
+          <!-- ENGLISH ACADEMIC -->
+          <div class="card" id="card-english">
+            <div>
+              <div class="card-top">
+                <div class="card-icon" style="background:#faf5ff;">📖</div>
+                <div>
+                  <h3>English Academic</h3>
+                  <span class="status-badge status-locked" id="badge-english">Locked</span>
+                </div>
+              </div>
+              <p class="subject-desc">Advanced technical writing, research grammar, and medical documentation standards.</p>
+
+              <div class="access-form-box">
+                <div class="access-input-row">
+                  <input type="text" id="input-english" class="access-code-input" placeholder="Access code" autocomplete="off">
+                  <button class="unlock-btn" onclick="verifyAndUnlockSubject('english')">Enter</button>
+                </div>
+              </div>
+            </div>
+            <a href="#" id="link-english" class="action-link btn-locked">Open Study Notes →</a>
+          </div>
+
+          <!-- PERLS MODULE -->
+          <div class="card" id="card-perls">
+            <div>
+              <div class="card-top">
+                <div class="card-icon" style="background:#fffbeb;">🧠</div>
+                <div>
+                  <h3>PERLS Module</h3>
+                  <span class="status-badge status-locked" id="badge-perls">Locked</span>
+                </div>
+              </div>
+              <p class="subject-desc">Clinical reasoning exercises, high-yield scenario applications, and practical learning guides.</p>
+
+              <div class="access-form-box">
+                <div class="access-input-row">
+                  <input type="text" id="input-perls" class="access-code-input" placeholder="Access code" autocomplete="off">
+                  <button class="unlock-btn" onclick="verifyAndUnlockSubject('perls')">Enter</button>
+                </div>
+              </div>
+            </div>
+            <a href="#" id="link-perls" class="action-link btn-locked">Open Study Notes →</a>
+          </div>
+
         </div>
 
       </div>
@@ -691,7 +735,7 @@
       const masterCode = document.getElementById('masterAccessInput').value.trim();
       if(masterCode !== "") {
         alert("Key verified! All modules unlocked.");
-        ['ethics', 'pediatric', 'reproductive'].forEach(subj => {
+        ['ethics', 'pediatric', 'reproductive', 'english', 'perls'].forEach(subj => {
           document.getElementById(`badge-${subj}`).className = "status-badge status-unlocked";
           document.getElementById(`badge-${subj}`).innerText = "Unlocked";
           const link = document.getElementById(`link-${subj}`);
