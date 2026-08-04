@@ -46,7 +46,7 @@
       flex-direction: column; justify-content: space-between;
     }
     .sidebar-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-dark); font-weight: 800; font-size: 1.1rem; margin-bottom: 30px; }
-    .pulse-box { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); }
+    .pulse-box { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); flex-shrink: 0; }
     
     .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 8px; }
     .sidebar-menu a, .sidebar-menu button {
@@ -90,7 +90,7 @@
     }
     .logout-btn:hover { background: #fee2e2; }
 
-    .main-content-area { flex: 1; width: 100%; display: flex; flex-direction: column; }
+    .main-content-area { flex: 1; width: 100%; display: flex; flex-direction: column; min-width: 0; }
     .main-wrapper { max-width: 1000px; margin: 0 auto; padding: 24px 20px; width: 100%; flex: 1; }
 
     .profile-card {
@@ -100,20 +100,21 @@
     }
     .profile-card::after { content: '🩺'; position: absolute; right: -20px; bottom: -30px; font-size: 10rem; opacity: 0.05; pointer-events: none; }
     .profile-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
-    .profile-user-details { display: flex; align-items: center; gap: 16px; }
+    .profile-user-details { display: flex; align-items: center; gap: 16px; min-width: 0; }
     .avatar-wrapper { position: relative; flex-shrink: 0; }
     .avatar {
       width: 64px; height: 64px; border-radius: 50%; background: #bae6fd; color: #0369a1;
       display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 800;
       border: 3px solid rgba(255, 255, 255, 0.2); object-fit: cover; overflow: hidden;
     }
-    .profile-info h1 { font-size: 1.35rem; font-weight: 800; line-height: 1.2; }
-    .profile-info p { color: #bae6fd; font-size: 0.88rem; margin-top: 4px; }
+    .profile-info { min-width: 0; }
+    .profile-info h1 { font-size: 1.35rem; font-weight: 800; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .profile-info p { color: #bae6fd; font-size: 0.88rem; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     
     .edit-profile-trigger {
       background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3);
       color: white; padding: 8px 16px; border-radius: 10px; font-size: 0.82rem; font-weight: 700;
-      cursor: pointer; transition: background 0.2s; display: flex; align-items: center; gap: 6px;
+      cursor: pointer; transition: background 0.2s; display: flex; align-items: center; gap: 6px; white-space: nowrap;
     }
     .edit-profile-trigger:hover { background: rgba(255, 255, 255, 0.25); }
 
@@ -123,7 +124,7 @@
       padding: 14px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.15); text-align: center;
     }
     .stat-item span { display: block; font-size: 0.72rem; color: #cbd5e1; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
-    .stat-item strong { font-size: 0.92rem; color: #ffffff; font-weight: 800; margin-top: 2px; display: block; }
+    .stat-item strong { font-size: 0.92rem; color: #ffffff; font-weight: 800; margin-top: 2px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
     .modal-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -181,20 +182,60 @@
     .card {
       background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
       padding: 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease; position: relative;
     }
     .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-    .card-top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .card-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
     .card-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
     .card h3 { font-size: 1rem; font-weight: 700; }
     
     .status-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; margin-top: 4px; }
+    .status-locked { background: #fee2e2; color: #dc2626; }
     .status-unlocked { background: #dcfce7; color: #15803d; }
 
+    /* SUBJECT ACCESS CODE FORM WIDGET */
+    .access-form-box {
+      margin: 10px 0 14px 0;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 10px;
+      border-radius: 12px;
+    }
+    .access-input-row {
+      display: flex;
+      gap: 6px;
+    }
+    .access-code-input {
+      flex: 1;
+      padding: 8px 10px;
+      font-size: 0.82rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      background: #fff;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .access-code-input:focus { border-color: var(--primary); }
+    .unlock-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .unlock-btn:hover { background: var(--primary-dark); }
+
     .action-link {
-      margin-top: 14px; text-decoration: none; text-align: center; padding: 12px; border-radius: 12px;
+      text-decoration: none; text-align: center; padding: 12px; border-radius: 12px;
       font-size: 0.88rem; font-weight: 700; display: block; transition: all 0.2s;
     }
+    .btn-locked { background: #e2e8f0; color: #94a3b8; cursor: not-allowed; pointer-events: none; }
     .btn-unlocked { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
     .btn-unlocked:hover { background: var(--primary-dark); }
 
@@ -352,81 +393,112 @@
           <div class="notice-icon">📢</div>
           <div class="notice-text">
             <h4>Academic Announcement</h4>
-            <p>Please complete your registered semester practical logs and study modules before upcoming viva assessments.</p>
+            <p>All course modules are currently locked. Enter your unique one-time access code for each subject to unlock materials and notes.</p>
           </div>
         </div>
 
-        <!-- COURSE MODULES -->
-        <div class="section-title" id="courses-section">BSN Academic Courses</div>
+        <!-- COURSE MODULES WITH ACCESS CODES -->
+        <div class="section-title" id="courses-section">BSN Academic Courses (Locked Modules)</div>
         <div class="grid">
+          
           <!-- NURSING ETHICS -->
-          <div class="card">
+          <div class="card" id="card-ethics">
             <div>
               <div class="card-top">
                 <div class="card-icon" style="background:#ecfeff;">⚖️</div>
                 <div>
                   <h3>Nursing Ethics</h3>
-                  <span class="status-badge status-unlocked">Unlocked</span>
+                  <span class="status-badge status-locked" id="badge-ethics">Locked</span>
+                </div>
+              </div>
+              <div class="access-form-box">
+                <div class="access-input-row">
+                  <input type="text" id="input-ethics" class="access-code-input" placeholder="Enter access code" autocomplete="off">
+                  <button class="unlock-btn" onclick="verifyAndUnlockSubject('ethics')">Unlock</button>
                 </div>
               </div>
             </div>
-            <a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics.html" class="action-link btn-unlocked">Open Notes & Modules →</a>
+            <a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics.html" id="link-ethics" class="action-link btn-locked" target="_blank">Open Notes & Modules →</a>
           </div>
 
           <!-- PEDIATRIC -->
-          <div class="card">
+          <div class="card" id="card-pediatric">
             <div>
               <div class="card-top">
                 <div class="card-icon" style="background:#f0fdf4;">👶</div>
                 <div>
                   <h3>Pediatric Nursing</h3>
-                  <span class="status-badge status-unlocked">Unlocked</span>
+                  <span class="status-badge status-locked" id="badge-pediatric">Locked</span>
+                </div>
+              </div>
+              <div class="access-form-box">
+                <div class="access-input-row">
+                  <input type="text" id="input-pediatric" class="access-code-input" placeholder="Enter access code" autocomplete="off">
+                  <button class="unlock-btn" onclick="verifyAndUnlockSubject('pediatric')">Unlock</button>
                 </div>
               </div>
             </div>
-            <a href="./pediatric/index.html" class="action-link btn-unlocked">Open Notes & Modules →</a>
+            <a href="./pediatric/index.html" id="link-pediatric" class="action-link btn-locked">Open Notes & Modules →</a>
           </div>
 
           <!-- REPRODUCTIVE -->
-          <div class="card">
+          <div class="card" id="card-reproductive">
             <div>
               <div class="card-top">
                 <div class="card-icon" style="background:#fdf2f8;">🤰</div>
                 <div>
                   <h3>Reproductive Health</h3>
-                  <span class="status-badge status-unlocked">Unlocked</span>
+                  <span class="status-badge status-locked" id="badge-reproductive">Locked</span>
+                </div>
+              </div>
+              <div class="access-form-box">
+                <div class="access-input-row">
+                  <input type="text" id="input-reproductive" class="access-code-input" placeholder="Enter access code" autocomplete="off">
+                  <button class="unlock-btn" onclick="verifyAndUnlockSubject('reproductive')">Unlock</button>
                 </div>
               </div>
             </div>
-            <a href="./reproductive/index.html" class="action-link btn-unlocked">Open Notes & Modules →</a>
+            <a href="./reproductive/index.html" id="link-reproductive" class="action-link btn-locked">Open Notes & Modules →</a>
           </div>
 
           <!-- ENGLISH -->
-          <div class="card">
+          <div class="card" id="card-english">
             <div>
               <div class="card-top">
                 <div class="card-icon" style="background:#f5f3ff;">📚</div>
                 <div>
                   <h3>English Academic</h3>
-                  <span class="status-badge status-unlocked">Unlocked</span>
+                  <span class="status-badge status-locked" id="badge-english">Locked</span>
+                </div>
+              </div>
+              <div class="access-form-box">
+                <div class="access-input-row">
+                  <input type="text" id="input-english" class="access-code-input" placeholder="Enter access code" autocomplete="off">
+                  <button class="unlock-btn" onclick="verifyAndUnlockSubject('english')">Unlock</button>
                 </div>
               </div>
             </div>
-            <a href="./english/index.html" class="action-link btn-unlocked">Open Notes & Modules →</a>
+            <a href="./english/index.html" id="link-english" class="action-link btn-locked">Open Notes & Modules →</a>
           </div>
 
           <!-- PERLS -->
-          <div class="card">
+          <div class="card" id="card-perls">
             <div>
               <div class="card-top">
                 <div class="card-icon" style="background:#f0fdfa;">💡</div>
                 <div>
                   <h3>PERLS Module</h3>
-                  <span class="status-badge status-unlocked">Unlocked</span>
+                  <span class="status-badge status-locked" id="badge-perls">Locked</span>
+                </div>
+              </div>
+              <div class="access-form-box">
+                <div class="access-input-row">
+                  <input type="text" id="input-perls" class="access-code-input" placeholder="Enter access code" autocomplete="off">
+                  <button class="unlock-btn" onclick="verifyAndUnlockSubject('perls')">Unlock</button>
                 </div>
               </div>
             </div>
-            <a href="./perls/index.html" class="action-link btn-unlocked">Open Notes & Modules →</a>
+            <a href="./perls/index.html" id="link-perls" class="action-link btn-locked">Open Notes & Modules →</a>
           </div>
         </div>
 
@@ -488,6 +560,15 @@
   </div>
 
   <script>
+    // UNIQUE ONE-TIME USE ACCESS CODES ASSIGNED TO SUBJECTS
+    const validSubjectCodes = {
+      ethics: "ETH-7892-BSN",
+      pediatric: "PED-4510-BSN",
+      reproductive: "REP-9034-BSN",
+      english: "ENG-2268-BSN",
+      perls: "PER-5519-BSN"
+    };
+
     function toggleMenu() {
       const drawer = document.getElementById('drawer');
       const overlay = document.getElementById('drawerOverlay');
@@ -580,6 +661,53 @@
       }
     }
 
+    // UNLOCK SUBJECT LOGIC WITH ONE-TIME CODE RESTRICTION STORAGE
+    function verifyAndUnlockSubject(subjectKey) {
+      const inputVal = document.getElementById('input-' + subjectKey).value.trim().toUpperCase();
+      const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
+      
+      // Check if code was already used globally or by this user
+      let usedCodes = JSON.parse(localStorage.getItem('bsn_used_access_codes')) || {};
+
+      if (usedCodes[inputVal]) {
+        alert('❌ This access code has already been used and cannot be reused!');
+        return;
+      }
+
+      if (inputVal === validSubjectCodes[subjectKey]) {
+        // Mark code as used globally
+        usedCodes[inputVal] = currentUserEmail;
+        localStorage.setItem('bsn_used_access_codes', JSON.stringify(usedCodes));
+
+        // Save subject unlock state for current user
+        let unlockedSubjects = JSON.parse(localStorage.getItem('bsn_unlocked_' + currentUserEmail)) || {};
+        unlockedSubjects[subjectKey] = true;
+        localStorage.setItem('bsn_unlocked_' + currentUserEmail, JSON.stringify(unlockedSubjects));
+
+        applySubjectUnlockState(subjectKey, true);
+        alert('🎉 Success! Course module unlocked permanently.');
+      } else {
+        alert('❌ Invalid access code for this subject. Please verify your code.');
+      }
+    }
+
+    function applySubjectUnlockState(subjectKey, isUnlocked) {
+      const badge = document.getElementById('badge-' + subjectKey);
+      const link = document.getElementById('link-' + subjectKey);
+      const accessBox = document.querySelector('#card-' + subjectKey + ' .access-form-box');
+
+      if (isUnlocked) {
+        badge.innerText = 'Unlocked';
+        badge.className = 'status-badge status-unlocked';
+        link.className = 'action-link btn-unlocked';
+        if (accessBox) accessBox.style.display = 'none'; // hide code input once unlocked
+      } else {
+        badge.innerText = 'Locked';
+        badge.className = 'status-badge status-locked';
+        link.className = 'action-link btn-locked';
+      }
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       let currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
 
@@ -595,7 +723,7 @@
           applyUserData(user);
         } catch(e) {
           applyUserData({
-            name: 'Mudassir Khan',
+            name: 'Mudassir Hussain Khan',
             email: currentUserEmail,
             semester: 'BSN 4th Semester',
             institute: 'New Life Institute Multan'
@@ -603,12 +731,20 @@
         }
       } else {
         applyUserData({
-          name: 'Mudassir Khan',
+          name: 'Mudassir Hussain Khan',
           email: currentUserEmail,
           semester: 'BSN 4th Semester',
           institute: 'New Life Institute Multan'
         });
       }
+
+      // Check previously unlocked subjects for this user
+      let unlockedSubjects = JSON.parse(localStorage.getItem('bsn_unlocked_' + currentUserEmail)) || {};
+      Object.keys(validSubjectCodes).forEach(subj => {
+        if (unlockedSubjects[subj]) {
+          applySubjectUnlockState(subj, true);
+        }
+      });
     });
   </script>
 </body>
