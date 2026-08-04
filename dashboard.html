@@ -126,6 +126,7 @@
     .stat-item span { display: block; font-size: 0.72rem; color: #cbd5e1; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
     .stat-item strong { font-size: 0.92rem; color: #ffffff; font-weight: 800; margin-top: 2px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+    /* EDIT PROFILE MODAL */
     .modal-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px);
@@ -167,96 +168,58 @@
     .modal-btn-save { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
     .modal-btn-save:hover { background: var(--primary-dark); }
 
-    /* PROFESSIONAL JAZZCASH & PRICING CARD */
+    /* PROFESSIONAL POPUP STYLING (MATCHING YOUR EXACT TEMPLATE) */
+    .modal-box {
+      background: var(--card-bg); border-radius: var(--radius); width: 100%; max-width: 420px;
+      padding: 26px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); position: relative;
+      animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .close-btn {
+      position: absolute; top: 16px; right: 16px; background: #f1f5f9; border: none; font-size: 1.2rem;
+      width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); transition: background 0.2s;
+    }
+    .close-btn:hover { background: #e2e8f0; color: var(--text-dark); }
+    
+    .price-tag {
+      background: #f0fdf4; border: 1px solid #bbf7d0; color: #16a34a; padding: 12px 16px;
+      border-radius: 12px; font-size: 1.4rem; font-weight: 800; margin: 18px 0; display: flex; align-items: baseline; gap: 6px;
+    }
+    .payment-methods {
+      background: #fffbeb; border: 1px solid #fde68a; padding: 16px; border-radius: 12px; margin-bottom: 20px;
+      font-size: 0.86rem; color: #92400e; line-height: 1.5;
+    }
+    .payment-methods code { background: #fef3c7; padding: 2px 6px; border-radius: 6px; font-weight: 800; color: #b45309; }
+    
+    .wa-btn {
+      background: #25d366; color: white; text-decoration: none; padding: 14px 20px; border-radius: 12px;
+      font-weight: 800; font-size: 0.92rem; display: flex; align-items: center; justify-content: center; gap: 10px;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); transition: background 0.2s, transform 0.1s; width: 100%;
+    }
+    .wa-btn:hover { background: #20ba5a; transform: translateY(-1px); }
+
+    /* PRICING CARD & BUNDLE TIERS */
     .pricing-card-pro {
-      background: #ffffff;
-      border: 1px solid #bae6fd;
-      border-radius: var(--radius);
-      padding: 24px;
-      margin-bottom: 24px;
-      box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.08);
+      background: #ffffff; border: 1px solid #bae6fd; border-radius: var(--radius);
+      padding: 24px; margin-bottom: 24px; box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.08);
     }
-    .pro-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
+    .pro-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 12px; }
     .pro-title-wrap { display: flex; align-items: center; gap: 12px; }
     .pro-icon {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      color: white; width: 42px; height: 42px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+      background: linear-gradient(135deg, #f59e0b, #d97706); color: white; width: 42px; height: 42px;
+      border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
       box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
     }
     .pro-title h3 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); }
     .pro-title p { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
-    
-    .bundle-badge {
-      background: #e0f2fe; color: #0369a1; padding: 6px 14px; border-radius: 10px;
-      font-size: 0.84rem; font-weight: 800; border: 1px solid #bae6fd;
-    }
+    .bundle-badge { background: #e0f2fe; color: #0369a1; padding: 6px 14px; border-radius: 10px; font-size: 0.84rem; font-weight: 800; border: 1px solid #bae6fd; }
 
-    .price-tier-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    .tier-box {
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
-      transition: all 0.2s;
-    }
+    .price-tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 20px; }
+    .tier-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 14px; transition: all 0.2s; cursor: pointer; }
     .tier-box:hover { background: #f0f9ff; border-color: #7dd3fc; }
     .tier-name { font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
     .tier-subjects { font-size: 0.82rem; font-weight: 700; color: var(--text-dark); margin: 4px 0 8px 0; }
     .tier-price { font-size: 1.1rem; font-weight: 800; color: #0284c7; }
-
-    /* PROFESSIONAL PAYMENT BOX & WHATSAPP BUTTON */
-    .payment-action-box {
-      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-      border: 1px solid #fde68a;
-      border-radius: 14px;
-      padding: 18px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .account-details-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-    }
-    .acc-detail-item {
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid #fcd34d;
-      padding: 10px 14px;
-      border-radius: 10px;
-    }
-    .acc-detail-label { font-size: 0.72rem; font-weight: 700; color: #92400e; text-transform: uppercase; display: block; }
-    .acc-detail-val { font-size: 0.95rem; font-weight: 800; color: #b45309; margin-top: 2px; display: block; }
-
-    .whatsapp-pay-btn {
-      background: #25d366;
-      color: white;
-      text-decoration: none;
-      padding: 14px 20px;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-      transition: background 0.2s, transform 0.1s;
-    }
-    .whatsapp-pay-btn:hover { background: #20ba5a; transform: translateY(-1px); }
 
     .notice-card {
       background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius);
@@ -268,39 +231,15 @@
     .notice-text h4 { font-size: 0.92rem; font-weight: 800; color: #b45309; }
     .notice-text p { font-size: 0.84rem; color: #92400e; margin-top: 3px; line-height: 1.4; }
     
-    /* MASTER UNLOCK ALL FIELD */
-    .master-unlock-box {
-      background: #ffffff;
-      border: 1px solid #fcd34d;
-      padding: 12px 14px;
-      border-radius: 12px;
-      display: flex;
-      gap: 8px;
-    }
+    .master-unlock-box { background: #ffffff; border: 1px solid #fcd34d; padding: 12px 14px; border-radius: 12px; display: flex; gap: 8px; }
     .master-unlock-input {
-      flex: 1;
-      padding: 10px 12px;
-      font-size: 0.88rem;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      outline: none;
-      background: #f8fafc;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #b45309;
+      flex: 1; padding: 10px 12px; font-size: 0.88rem; border: 1px solid var(--border);
+      border-radius: 10px; outline: none; background: #f8fafc; font-weight: 700; text-transform: uppercase; color: #b45309;
     }
     .master-unlock-input:focus { border-color: #d97706; background: #fff; }
     .master-unlock-btn {
-      background: #d97706;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 10px;
-      font-size: 0.84rem;
-      font-weight: 800;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.2s;
+      background: #d97706; color: white; border: none; padding: 10px 16px; border-radius: 10px;
+      font-size: 0.84rem; font-weight: 800; cursor: pointer; white-space: nowrap; transition: background 0.2s;
     }
     .master-unlock-btn:hover { background: #b45309; }
 
@@ -323,43 +262,25 @@
     .status-locked { background: #fee2e2; color: #dc2626; }
     .status-unlocked { background: #dcfce7; color: #15803d; }
 
-    /* SUBJECT ACCESS CODE FORM WIDGET */
-    .access-form-box {
-      margin: 4px 0 14px 0;
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      padding: 10px;
-      border-radius: 12px;
-    }
-    .access-input-row {
-      display: flex;
-      gap: 6px;
-    }
+    .access-form-box { margin: 4px 0 14px 0; background: #f8fafc; border: 1px solid var(--border); padding: 10px; border-radius: 12px; }
+    .access-input-row { display: flex; gap: 6px; }
     .access-code-input {
-      flex: 1;
-      padding: 8px 10px;
-      font-size: 0.82rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      outline: none;
-      background: #fff;
-      font-weight: 600;
-      text-transform: uppercase;
+      flex: 1; padding: 8px 10px; font-size: 0.82rem; border: 1px solid var(--border);
+      border-radius: 8px; outline: none; background: #fff; font-weight: 600; text-transform: uppercase;
     }
     .access-code-input:focus { border-color: var(--primary); }
     .unlock-btn {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.2s;
+      background: var(--primary); color: white; border: none; padding: 8px 12px; border-radius: 8px;
+      font-size: 0.78rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background 0.2s;
     }
     .unlock-btn:hover { background: var(--primary-dark); }
+
+    .pay-btn-inline {
+      background: #fef3c7; color: #b45309; border: 1px solid #fde68a; padding: 8px 12px; border-radius: 8px;
+      font-size: 0.78rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
+      margin-bottom: 10px; transition: background 0.2s; width: 100%;
+    }
+    .pay-btn-inline:hover { background: #fde68a; }
 
     .action-link {
       text-decoration: none; text-align: center; padding: 12px; border-radius: 12px;
@@ -450,7 +371,7 @@
       <!-- MAIN DASHBOARD CONTENT -->
       <div class="main-wrapper">
         
-        <!-- PROFILE & ACADEMIC STATS BANNER (Single Edit Profile Button) -->
+        <!-- PROFILE & ACADEMIC STATS BANNER -->
         <div class="profile-card">
           <div class="profile-header">
             <div class="profile-user-details">
@@ -518,7 +439,30 @@
           </div>
         </div>
 
-        <!-- PROFESSIONAL PRICING & DIRECT WHATSAPP JAZZCASH PAYMENT CARD -->
+        <!-- PAYMENT / APPROVAL POPUP MODAL -->
+        <div id="paymentModal" class="modal-overlay" onclick="handleOverlayClick(event)">
+          <div class="modal-box">
+            <button class="close-btn" onclick="closeModal()">×</button>
+            <h2 style="font-size:1.25rem;">Unlock BSN Study Portal</h2>
+            <p style="font-size:0.82rem; color:#64748b; margin-top:4px;">Send payment to get your access code.</p>
+            
+            <div class="price-tag">
+              <span style="font-size:0.95rem;">PKR</span> <span id="modalPrice">250</span>
+            </div>
+
+            <div class="payment-methods">
+              <strong>📱 JazzCash Transfer Details</strong>
+              <p style="margin-top:6px;">Account No: <code>03241064487</code></p>
+              <p style="margin-top:4px;">Account Name: <strong>Mudassir Hussain Khan</strong></p>
+            </div>
+
+            <a id="whatsappBtn" href="#" target="_blank" class="wa-btn">
+              💬 Send Screenshot on WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- PRICING TIERS OVERVIEW -->
         <div class="pricing-card-pro" id="pricing-section">
           <div class="pro-header">
             <div class="pro-title-wrap">
@@ -532,41 +476,21 @@
           </div>
 
           <div class="price-tier-grid">
-            <div class="tier-box">
+            <div class="tier-box" onclick="openPaymentModal('Nursing Ethics', 269)">
               <span class="tier-name">Single Subject Tier 1</span>
               <div class="tier-subjects">English, Ethics, PERLS</div>
               <div class="tier-price">PKR 269 <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">/ subject</span></div>
             </div>
-            <div class="tier-box">
+            <div class="tier-box" onclick="openPaymentModal('Pediatric/Reproductive', 369)">
               <span class="tier-name">Single Subject Tier 2</span>
               <div class="tier-subjects">Pediatric, Reproductive</div>
               <div class="tier-price">PKR 369 <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">/ subject</span></div>
             </div>
-            <div class="tier-box" style="background:#f0fdf4; border-color:#bbf7d0;">
+            <div class="tier-box" style="background:#f0fdf4; border-color:#bbf7d0;" onclick="openPaymentModal('Complete Portal Bundle', 993)">
               <span class="tier-name" style="color:#16a34a;">Best Value Bundle</span>
               <div class="tier-subjects">All 5 Subjects (Complete Portal)</div>
               <div class="tier-price" style="color:#16a34a;">PKR 993</div>
             </div>
-          </div>
-
-          <div class="payment-action-box">
-            <div style="font-size: 0.88rem; font-weight: 800; color: #b45309;">📲 JazzCash Direct Transfer Details:</div>
-            <div class="account-details-grid">
-              <div class="acc-detail-item">
-                <span class="acc-detail-label">JazzCash Number</span>
-                <span class="acc-detail-val">03241064487</span>
-              </div>
-              <div class="acc-detail-item">
-                <span class="acc-detail-label">Account Name</span>
-                <span class="acc-detail-val">Mudassir Hussain Khan</span>
-              </div>
-            </div>
-            <div style="font-size: 0.82rem; color: #92400e; font-weight: 600; line-height: 1.4;">
-              After sending the payment via JazzCash, tap the button below to instantly send your screenshot &amp; transfer details via WhatsApp to receive your access codes.
-            </div>
-            <a href="https://wa.me/923241064487?text=Hi%20Mudassir,%20I%20have%20transferred%20the%20payment%20via%20JazzCash.%20Here%20is%20my%20payment%20screenshot%20and%20details%20for%20Portal%20Access:" class="whatsapp-pay-btn" target="_blank" rel="noopener">
-              💬 Send Screenshot &amp; Transfer Details on WhatsApp
-            </a>
           </div>
         </div>
 
@@ -580,14 +504,13 @@
             </div>
           </div>
           
-          <!-- MASTER UNLOCK ALL FIELD -->
           <div class="master-unlock-box">
             <input type="text" id="masterAccessInput" class="master-unlock-input" placeholder="Enter Master Unlock Code (PKR 993 Bundle)" autocomplete="off">
             <button class="master-unlock-btn" onclick="verifyAndUnlockAll()">Unlock All Subjects</button>
           </div>
         </div>
 
-        <!-- COURSE MODULES WITH ACCESS CODES & PRICES -->
+        <!-- COURSE MODULES -->
         <div class="section-title" id="courses-section">BSN Academic Courses (Locked Modules)</div>
         <div class="grid">
           
@@ -602,6 +525,9 @@
                 </div>
               </div>
               <span class="subject-price-tag">Price: PKR 269</span>
+              
+              <button class="pay-btn-inline" onclick="openPaymentModal('Nursing Ethics', 269)">💳 Pay via JazzCash</button>
+
               <div class="access-form-box">
                 <div class="access-input-row">
                   <input type="text" id="input-ethics" class="access-code-input" placeholder="Enter access code" autocomplete="off">
@@ -623,6 +549,9 @@
                 </div>
               </div>
               <span class="subject-price-tag">Price: PKR 369</span>
+
+              <button class="pay-btn-inline" onclick="openPaymentModal('Pediatric Nursing', 369)">💳 Pay via JazzCash</button>
+
               <div class="access-form-box">
                 <div class="access-input-row">
                   <input type="text" id="input-pediatric" class="access-code-input" placeholder="Enter access code" autocomplete="off">
@@ -644,6 +573,9 @@
                 </div>
               </div>
               <span class="subject-price-tag">Price: PKR 369</span>
+
+              <button class="pay-btn-inline" onclick="openPaymentModal('Reproductive Health', 369)">💳 Pay via JazzCash</button>
+
               <div class="access-form-box">
                 <div class="access-input-row">
                   <input type="text" id="input-reproductive" class="access-code-input" placeholder="Enter access code" autocomplete="off">
@@ -665,6 +597,9 @@
                 </div>
               </div>
               <span class="subject-price-tag">Price: PKR 269</span>
+
+              <button class="pay-btn-inline" onclick="openPaymentModal('English Academic', 269)">💳 Pay via JazzCash</button>
+
               <div class="access-form-box">
                 <div class="access-input-row">
                   <input type="text" id="input-english" class="access-code-input" placeholder="Enter access code" autocomplete="off">
@@ -686,6 +621,9 @@
                 </div>
               </div>
               <span class="subject-price-tag">Price: PKR 269</span>
+
+              <button class="pay-btn-inline" onclick="openPaymentModal('PERLS Module', 269)">💳 Pay via JazzCash</button>
+
               <div class="access-form-box">
                 <div class="access-input-row">
                   <input type="text" id="input-perls" class="access-code-input" placeholder="Enter access code" autocomplete="off">
@@ -755,7 +693,6 @@
   </div>
 
   <script>
-    // UNIQUE ONE-TIME USE ACCESS CODES & MASTER UNLOCK CODE
     const validSubjectCodes = {
       ethics: "ETH-7892-BSN",
       pediatric: "PED-4510-BSN",
@@ -778,6 +715,27 @@
       localStorage.removeItem('active_session_email');
       localStorage.removeItem('active_session_name');
       window.location.href = 'login.html';
+    }
+
+    // PAYMENT MODAL CONTROLS
+    function openPaymentModal(itemName, price) {
+      document.getElementById('modalPrice').innerText = price;
+      const waText = encodeURIComponent(`Hi Mudassir, I have transferred PKR ${price} via JazzCash for ${itemName}. Here is my payment screenshot and details for portal access:`);
+      document.getElementById('whatsappBtn').href = `https://wa.me/923241064487?text=${waText}`;
+      document.getElementById('paymentModal').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('paymentModal').classList.remove('open');
+    }
+
+    function handleOverlayClick(event) {
+      if (event.target.id === 'paymentModal') {
+        closeModal();
+      }
+      if (event.target.id === 'editProfileModal') {
+        closeEditProfile();
+      }
     }
 
     let tempUploadedImage = '';
@@ -858,7 +816,6 @@
       }
     }
 
-    // MASTER UNLOCK ALL FUNCTION (PKR 993 Bundle)
     function verifyAndUnlockAll() {
       const inputVal = document.getElementById('masterAccessInput').value.trim();
       const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
@@ -876,7 +833,6 @@
       }
     }
 
-    // UNLOCK SUBJECT LOGIC WITH ONE-TIME CODE RESTRICTION STORAGE
     function verifyAndUnlockSubject(subjectKey) {
       const inputVal = document.getElementById('input-' + subjectKey).value.trim().toUpperCase();
       const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
@@ -907,12 +863,14 @@
       const badge = document.getElementById('badge-' + subjectKey);
       const link = document.getElementById('link-' + subjectKey);
       const accessBox = document.querySelector('#card-' + subjectKey + ' .access-form-box');
+      const payBtn = document.querySelector('#card-' + subjectKey + ' .pay-btn-inline');
 
       if (isUnlocked) {
         badge.innerText = 'Unlocked';
         badge.className = 'status-badge status-unlocked';
         link.className = 'action-link btn-unlocked';
         if (accessBox) accessBox.style.display = 'none';
+        if (payBtn) payBtn.style.display = 'none';
       } else {
         badge.innerText = 'Locked';
         badge.className = 'status-badge status-locked';
