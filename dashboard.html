@@ -168,7 +168,7 @@
     .modal-btn-save { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
     .modal-btn-save:hover { background: var(--primary-dark); }
 
-    /* PROFESSIONAL POPUP STYLING (MATCHING YOUR EXACT TEMPLATE) */
+    /* PROFESSIONAL POPUP STYLING (MATCHING EXACT TEMPLATE) */
     .modal-box {
       background: var(--card-bg); border-radius: var(--radius); width: 100%; max-width: 420px;
       padding: 26px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); position: relative;
@@ -214,7 +214,7 @@
     .pro-title p { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
     .bundle-badge { background: #e0f2fe; color: #0369a1; padding: 6px 14px; border-radius: 10px; font-size: 0.84rem; font-weight: 800; border: 1px solid #bae6fd; }
 
-    .price-tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 20px; }
+    .price-tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
     .tier-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 14px; transition: all 0.2s; cursor: pointer; }
     .tier-box:hover { background: #f0f9ff; border-color: #7dd3fc; }
     .tier-name { font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
@@ -476,15 +476,30 @@
           </div>
 
           <div class="price-tier-grid">
-            <div class="tier-box" onclick="openPaymentModal('Nursing Ethics', 269)">
-              <span class="tier-name">Single Subject Tier 1</span>
-              <div class="tier-subjects">English, Ethics, PERLS</div>
-              <div class="tier-price">PKR 269 <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">/ subject</span></div>
+            <div class="tier-box" onclick="openPaymentModal('Nursing Ethics', 250)">
+              <span class="tier-name">Nursing Ethics</span>
+              <div class="tier-subjects">Single Subject</div>
+              <div class="tier-price">PKR 250</div>
             </div>
-            <div class="tier-box" onclick="openPaymentModal('Pediatric/Reproductive', 369)">
-              <span class="tier-name">Single Subject Tier 2</span>
-              <div class="tier-subjects">Pediatric, Reproductive</div>
-              <div class="tier-price">PKR 369 <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">/ subject</span></div>
+            <div class="tier-box" onclick="openPaymentModal('Pediatric Nursing', 250)">
+              <span class="tier-name">Pediatric Nursing</span>
+              <div class="tier-subjects">Single Subject</div>
+              <div class="tier-price">PKR 250</div>
+            </div>
+            <div class="tier-box" onclick="openPaymentModal('Reproductive Health', 250)">
+              <span class="tier-name">Reproductive Health</span>
+              <div class="tier-subjects">Single Subject</div>
+              <div class="tier-price">PKR 250</div>
+            </div>
+            <div class="tier-box" onclick="openPaymentModal('English Academic', 250)">
+              <span class="tier-name">English Academic</span>
+              <div class="tier-subjects">Single Subject</div>
+              <div class="tier-price">PKR 250</div>
+            </div>
+            <div class="tier-box" onclick="openPaymentModal('PERLS Module', 250)">
+              <span class="tier-name">PERLS Module</span>
+              <div class="tier-subjects">Single Subject</div>
+              <div class="tier-price">PKR 250</div>
             </div>
             <div class="tier-box" style="background:#f0fdf4; border-color:#bbf7d0;" onclick="openPaymentModal('Complete Portal Bundle', 993)">
               <span class="tier-name" style="color:#16a34a;">Best Value Bundle</span>
@@ -500,7 +515,7 @@
             <div class="notice-icon">📢</div>
             <div class="notice-text">
               <h4>Academic Announcement</h4>
-              <p>All course modules are currently locked. Enter your individual access code or use the Master Unlock Code (for PKR 993 Complete Bundle) below to unlock all materials instantly.</p>
+              <p>All course modules are currently locked. Enter your individual access code (PKR 250 per subject) or use the Master Unlock Code (for PKR 993 Complete Bundle) below to unlock all materials instantly.</p>
             </div>
           </div>
           
@@ -524,9 +539,9 @@
                   <span class="status-badge status-locked" id="badge-ethics">Locked</span>
                 </div>
               </div>
-              <span class="subject-price-tag">Price: PKR 269</span>
+              <span class="subject-price-tag">Price: PKR 250</span>
               
-              <button class="pay-btn-inline" onclick="openPaymentModal('Nursing Ethics', 269)">💳 Pay via JazzCash</button>
+              <button class="pay-btn-inline" onclick="openPaymentModal('Nursing Ethics', 250)">💳 Pay via JazzCash</button>
 
               <div class="access-form-box">
                 <div class="access-input-row">
@@ -548,9 +563,9 @@
                   <span class="status-badge status-locked" id="badge-pediatric">Locked</span>
                 </div>
               </div>
-              <span class="subject-price-tag">Price: PKR 369</span>
+              <span class="subject-price-tag">Price: PKR 250</span>
 
-              <button class="pay-btn-inline" onclick="openPaymentModal('Pediatric Nursing', 369)">💳 Pay via JazzCash</button>
+              <button class="pay-btn-inline" onclick="openPaymentModal('Pediatric Nursing', 250)">💳 Pay via JazzCash</button>
 
               <div class="access-form-box">
                 <div class="access-input-row">
@@ -572,9 +587,9 @@
                   <span class="status-badge status-locked" id="badge-reproductive">Locked</span>
                 </div>
               </div>
-              <span class="subject-price-tag">Price: PKR 369</span>
+              <span class="subject-price-tag">Price: PKR 250</span>
 
-              <button class="pay-btn-inline" onclick="openPaymentModal('Reproductive Health', 369)">💳 Pay via JazzCash</button>
+              <button class="pay-btn-inline" onclick="openPaymentModal('Reproductive Health', 250)">💳 Pay via JazzCash</button>
 
               <div class="access-form-box">
                 <div class="access-input-row">
@@ -596,9 +611,9 @@
                   <span class="status-badge status-locked" id="badge-english">Locked</span>
                 </div>
               </div>
-              <span class="subject-price-tag">Price: PKR 269</span>
+              <span class="subject-price-tag">Price: PKR 250</span>
 
-              <button class="pay-btn-inline" onclick="openPaymentModal('English Academic', 269)">💳 Pay via JazzCash</button>
+              <button class="pay-btn-inline" onclick="openPaymentModal('English Academic', 250)">💳 Pay via JazzCash</button>
 
               <div class="access-form-box">
                 <div class="access-input-row">
@@ -620,9 +635,9 @@
                   <span class="status-badge status-locked" id="badge-perls">Locked</span>
                 </div>
               </div>
-              <span class="subject-price-tag">Price: PKR 269</span>
+              <span class="subject-price-tag">Price: PKR 250</span>
 
-              <button class="pay-btn-inline" onclick="openPaymentModal('PERLS Module', 269)">💳 Pay via JazzCash</button>
+              <button class="pay-btn-inline" onclick="openPaymentModal('PERLS Module', 250)">💳 Pay via JazzCash</button>
 
               <div class="access-form-box">
                 <div class="access-input-row">
