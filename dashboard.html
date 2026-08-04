@@ -126,6 +126,19 @@
     .stat-item span { display: block; font-size: 0.72rem; color: #cbd5e1; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
     .stat-item strong { font-size: 0.92rem; color: #ffffff; font-weight: 800; margin-top: 2px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+    /* COMMUNITY WELCOME BANNER */
+    .community-banner {
+      background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 22px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .community-icon {
+      background: #e0f2fe; color: #0284c7; width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0;
+    }
+    .community-text h3 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; }
+    .community-text p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+
     /* EDIT PROFILE MODAL */
     .modal-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -153,14 +166,6 @@
       font-size: 0.92rem; outline: none; transition: border-color 0.2s; background: #f8fafc; font-weight: 600; color: var(--text-dark);
     }
     .form-input:focus { border-color: var(--primary); background: #ffffff; }
-    
-    .file-upload-box {
-      border: 2px dashed var(--border); border-radius: 12px; padding: 16px; text-align: center;
-      background: #f8fafc; cursor: pointer; transition: border-color 0.2s;
-    }
-    .file-upload-box:hover { border-color: var(--primary); background: #f0f9ff; }
-    .file-upload-box input { display: none; }
-    .file-upload-text { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; }
 
     .modal-actions { display: flex; gap: 10px; margin-top: 24px; }
     .modal-btn { flex: 1; padding: 12px; border-radius: 12px; font-size: 0.9rem; font-weight: 700; cursor: pointer; border: none; }
@@ -186,10 +191,10 @@
       border-radius: 12px; font-size: 1.4rem; font-weight: 800; margin: 18px 0; display: flex; align-items: baseline; gap: 6px;
     }
     .payment-methods {
-      background: #fffbeb; border: 1px solid #fde68a; padding: 16px; border-radius: 12px; margin-bottom: 20px;
-      font-size: 0.86rem; color: #92400e; line-height: 1.5;
+      background: #f8fafc; border: 1px solid var(--border); padding: 16px; border-radius: 12px; margin-bottom: 20px;
+      font-size: 0.86rem; color: var(--text-muted); line-height: 1.5;
     }
-    .payment-methods code { background: #fef3c7; padding: 2px 6px; border-radius: 6px; font-weight: 800; color: #b45309; }
+    .payment-methods code { background: #e2e8f0; padding: 2px 6px; border-radius: 6px; font-weight: 800; color: var(--text-dark); }
     
     .wa-btn {
       background: #25d366; color: white; text-decoration: none; padding: 14px 20px; border-radius: 12px;
@@ -198,50 +203,62 @@
     }
     .wa-btn:hover { background: #20ba5a; transform: translateY(-1px); }
 
-    /* PRICING CARD & BUNDLE TIERS */
-    .pricing-card-pro {
-      background: #ffffff; border: 1px solid #bae6fd; border-radius: var(--radius);
-      padding: 24px; margin-bottom: 24px; box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.08);
+    /* COLLAPSIBLE / TOGGLEABLE PRICING ACCORDION SECTION */
+    .support-toggle-box {
+      background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px 22px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02); cursor: pointer; transition: background 0.2s;
     }
+    .support-toggle-box:hover { background: #f8fafc; }
+    .support-toggle-left { display: flex; align-items: center; gap: 12px; }
+    .support-toggle-icon { font-size: 1.2rem; }
+    .support-toggle-title h4 { font-size: 0.95rem; font-weight: 800; color: var(--text-dark); }
+    .support-toggle-title p { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+    .support-badge-pill { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; padding: 6px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 800; }
+
+    .pricing-card-pro {
+      background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px; margin-bottom: 24px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+      display: none; /* Hidden by default so front dashboard feels clean and community-focused */
+    }
+    .pricing-card-pro.open { display: block; }
+    
     .pro-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 12px; }
     .pro-title-wrap { display: flex; align-items: center; gap: 12px; }
     .pro-icon {
-      background: linear-gradient(135deg, #f59e0b, #d97706); color: white; width: 42px; height: 42px;
+      background: #f1f5f9; color: var(--text-dark); width: 42px; height: 42px;
       border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
-      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
     }
     .pro-title h3 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); }
     .pro-title p { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
-    .bundle-badge { background: #e0f2fe; color: #0369a1; padding: 6px 14px; border-radius: 10px; font-size: 0.84rem; font-weight: 800; border: 1px solid #bae6fd; }
 
     .price-tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
     .tier-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 14px; transition: all 0.2s; cursor: pointer; }
-    .tier-box:hover { background: #f0f9ff; border-color: #7dd3fc; }
+    .tier-box:hover { background: #f0f9ff; border-color: #bae6fd; }
     .tier-name { font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
     .tier-subjects { font-size: 0.82rem; font-weight: 700; color: var(--text-dark); margin: 4px 0 8px 0; }
     .tier-price { font-size: 1.1rem; font-weight: 800; color: #0284c7; }
 
     .notice-card {
-      background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius);
+      background: #f8fafc; border: 1px solid var(--border); border-radius: var(--radius);
       padding: 16px 20px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 14px;
-      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.05);
     }
     .notice-card-top { display: flex; align-items: flex-start; gap: 14px; }
     .notice-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: -2px; }
-    .notice-text h4 { font-size: 0.92rem; font-weight: 800; color: #b45309; }
-    .notice-text p { font-size: 0.84rem; color: #92400e; margin-top: 3px; line-height: 1.4; }
+    .notice-text h4 { font-size: 0.92rem; font-weight: 800; color: var(--text-dark); }
+    .notice-text p { font-size: 0.84rem; color: var(--text-muted); margin-top: 3px; line-height: 1.4; }
     
-    .master-unlock-box { background: #ffffff; border: 1px solid #fcd34d; padding: 12px 14px; border-radius: 12px; display: flex; gap: 8px; width: 100%; align-items: center; }
+    .master-unlock-box { background: #ffffff; border: 1px solid var(--border); padding: 10px 12px; border-radius: 12px; display: flex; gap: 8px; width: 100%; align-items: center; }
     .master-unlock-input {
       flex: 1; padding: 10px 12px; font-size: 0.88rem; border: 1px solid var(--border);
-      border-radius: 10px; outline: none; background: #f8fafc; font-weight: 700; text-transform: uppercase; color: #b45309;
+      border-radius: 10px; outline: none; background: #f8fafc; font-weight: 700; text-transform: uppercase; color: var(--text-dark);
     }
-    .master-unlock-input:focus { border-color: #d97706; background: #fff; }
+    .master-unlock-input:focus { border-color: var(--primary); background: #fff; }
     .master-unlock-btn {
-      background: #d97706; color: white; border: none; padding: 10px 16px; border-radius: 10px;
+      background: var(--primary); color: white; border: none; padding: 10px 16px; border-radius: 10px;
       font-size: 0.84rem; font-weight: 800; cursor: pointer; white-space: nowrap; transition: background 0.2s;
     }
-    .master-unlock-btn:hover { background: #b45309; }
+    .master-unlock-btn:hover { background: var(--primary-dark); }
 
     .section-title { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 14px; letter-spacing: 0.8px; }
 
@@ -256,10 +273,10 @@
     .card-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
     .card h3 { font-size: 1rem; font-weight: 700; }
     
-    .subject-price-tag { font-size: 0.78rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; display: block; }
+    .subject-desc { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.4; }
     
     .status-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; margin-top: 4px; }
-    .status-locked { background: #fee2e2; color: #dc2626; }
+    .status-locked { background: #f1f5f9; color: var(--text-muted); }
     .status-unlocked { background: #dcfce7; color: #15803d; }
 
     .access-form-box { margin: 4px 0 14px 0; background: #f8fafc; border: 1px solid var(--border); padding: 10px; border-radius: 12px; }
@@ -275,18 +292,11 @@
     }
     .unlock-btn:hover { background: var(--primary-dark); }
 
-    .pay-btn-inline {
-      background: #fef3c7; color: #b45309; border: 1px solid #fde68a; padding: 8px 12px; border-radius: 8px;
-      font-size: 0.78rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
-      margin-bottom: 10px; transition: background 0.2s; width: 100%;
-    }
-    .pay-btn-inline:hover { background: #fde68a; }
-
     .action-link {
       text-decoration: none; text-align: center; padding: 12px; border-radius: 12px;
       font-size: 0.88rem; font-weight: 700; display: block; transition: all 0.2s;
     }
-    .btn-locked { background: #e2e8f0; color: #94a3b8; cursor: not-allowed; pointer-events: none; }
+    .btn-locked { background: #f1f5f9; color: var(--text-muted); cursor: not-allowed; pointer-events: none; }
     .btn-unlocked { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
     .btn-unlocked:hover { background: var(--primary-dark); }
 
@@ -311,8 +321,8 @@
         </a>
         <ul class="sidebar-menu">
           <li><a href="dashboard.html" class="active">🏠 Dashboard Home</a></li>
-          <li><a href="#courses-section">📚 Course Modules</a></li>
-          <li><a href="#pricing-section">💳 Pricing &amp; Payment</a></li>
+          <li><a href="#courses-section">📚 Study Modules</a></li>
+          <li><a href="#" onclick="togglePricingSection()">⚙️ Support &amp; Access</a></li>
         </ul>
       </div>
       <button class="logout-btn" onclick="logout()">🚪 Logout / Exit</button>
@@ -345,8 +355,8 @@
           </div>
           <ul class="drawer-menu">
             <li><a href="dashboard.html" class="active" onclick="toggleMenu()">🏠 Dashboard Home</a></li>
-            <li><a href="#courses-section" onclick="toggleMenu()">📚 Course Modules</a></li>
-            <li><a href="#pricing-section" onclick="toggleMenu()">💳 Pricing &amp; Payment</a></li>
+            <li><a href="#courses-section" onclick="toggleMenu()">📚 Study Modules</a></li>
+            <li><a href="#" onclick="toggleMenu(); togglePricingSection();">⚙️ Support &amp; Access</a></li>
           </ul>
         </div>
         <button class="logout-btn" onclick="logout()">🚪 Logout / Exit</button>
@@ -364,7 +374,7 @@
               </div>
               <div class="profile-info">
                 <h1 id="userName">Mudassir Hussain Khan</h1>
-                <p id="userEmail">student@example.com</p>
+                <p id="userEmail">mk1577104@gmail.com</p>
               </div>
             </div>
             <button class="edit-profile-trigger" onclick="openEditProfile()">✏️ Edit Profile</button>
@@ -381,8 +391,17 @@
             </div>
             <div class="stat-item">
               <span>Status</span>
-              <strong style="color: #4ade80;">Active Account</strong>
+              <strong style="color: #4ade80;">Active Student</strong>
             </div>
+          </div>
+        </div>
+
+        <!-- COMMUNITY WELCOME BANNER -->
+        <div class="community-banner">
+          <div class="community-icon">💡</div>
+          <div class="community-text">
+            <h3>Welcome to your Peer Study Hub</h3>
+            <p>This portal is built for nursing students to access compiled lecture notes, review summaries, and high-yield study modules in one organized space.</p>
           </div>
         </div>
 
@@ -420,113 +439,123 @@
         <div id="paymentModal" class="modal-overlay" onclick="handleOverlayClick(event)">
           <div class="modal-box">
             <button class="close-btn" onclick="closeModal()">×</button>
-            <h2 style="font-size:1.25rem;">Unlock BSN Study Portal</h2>
-            <p style="font-size:0.82rem; color:#64748b; margin-top:4px;">Send payment to get your access code.</p>
+            <h2 style="font-size:1.25rem;">Unlock Module Notes</h2>
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:4px;">Support server maintenance &amp; get your access code.</p>
             
             <div class="price-tag">
               <span style="font-size:0.95rem;">PKR</span> <span id="modalPrice">250</span>
             </div>
 
             <div class="payment-methods">
-              <strong>📱 JazzCash Transfer Details</strong>
+              <strong>📱 JazzCash Direct Transfer</strong>
               <p style="margin-top:6px;">Account No: <code>03241064487</code></p>
-              <p style="margin-top:4px;">Account Name: <strong>Mudassir Hussain Khan</strong></p>
+              <p style="margin-top:4px;">Name: <strong>Mudassir Hussain Khan</strong></p>
             </div>
 
             <a id="whatsappBtn" href="#" target="_blank" class="wa-btn">
-              💬 Send Screenshot on WhatsApp
+              💬 Share Receipt on WhatsApp
             </a>
           </div>
         </div>
 
-        <!-- PRICING TIERS OVERVIEW -->
+        <!-- DISCREET SUPPORT ACCORDION TOGGLE -->
+        <div class="support-toggle-box" onclick="togglePricingSection()">
+          <div class="support-toggle-left">
+            <div class="support-toggle-icon">🔒</div>
+            <div class="support-toggle-title">
+              <h4>Module Access &amp; Support Plans</h4>
+              <p>Click here to view subject breakdown or enter an access code</p>
+            </div>
+          </div>
+          <span class="support-badge-pill" id="supportToggleLabel">View Options</span>
+        </div>
+
+        <!-- PRICING TIERS OVERVIEW (Hidden by default for non-commercial look) -->
         <div class="pricing-card-pro" id="pricing-section">
           <div class="pro-header">
             <div class="pro-title-wrap">
-              <div class="pro-icon">💳</div>
+              <div class="pro-icon">📋</div>
               <div class="pro-title">
-                <h3>Portal Access &amp; Pricing Plans</h3>
-                <p>Choose individual subjects or unlock the entire portal bundle</p>
+                <h3>Individual &amp; Bundle Options</h3>
+                <p>Support resource compilation and unlock complete modules</p>
               </div>
             </div>
-            <span class="bundle-badge">⚡ Complete Portal Bundle: PKR 993</span>
+            <span style="font-size:0.82rem; font-weight:700; color:var(--text-muted);">Complete Bundle: PKR 993</span>
           </div>
 
           <div class="price-tier-grid">
             <div class="tier-box" onclick="openPaymentModal('Nursing Ethics', 250)">
               <span class="tier-name">Nursing Ethics</span>
-              <div class="tier-subjects">Single Subject</div>
+              <div class="tier-subjects">Single Module</div>
               <div class="tier-price">PKR 250</div>
             </div>
             <div class="tier-box" onclick="openPaymentModal('Pediatric Nursing', 369)">
               <span class="tier-name">Pediatric Nursing</span>
-              <div class="tier-subjects">Single Subject</div>
+              <div class="tier-subjects">Single Module</div>
               <div class="tier-price">PKR 369</div>
             </div>
             <div class="tier-box" onclick="openPaymentModal('Reproductive Health', 369)">
               <span class="tier-name">Reproductive Health</span>
-              <div class="tier-subjects">Single Subject</div>
+              <div class="tier-subjects">Single Module</div>
               <div class="tier-price">PKR 369</div>
             </div>
             <div class="tier-box" onclick="openPaymentModal('English Academic', 250)">
               <span class="tier-name">English Academic</span>
-              <div class="tier-subjects">Single Subject</div>
-              <div class="tier-price">PKR 369</div>
+              <div class="tier-subjects">Single Module</div>
+              <div class="tier-price">PKR 250</div>
             </div>
             <div class="tier-box" onclick="openPaymentModal('PERLS Module', 250)">
               <span class="tier-name">PERLS Module</span>
-              <div class="tier-subjects">Single Subject</div>
+              <div class="tier-subjects">Single Module</div>
               <div class="tier-price">PKR 250</div>
             </div>
             <div class="tier-box" style="background:#f0fdf4; border-color:#bbf7d0;" onclick="openPaymentModal('Complete Portal Bundle', 993)">
-              <span class="tier-name" style="color:#16a34a;">Best Value Bundle</span>
-              <div class="tier-subjects">All 5 Subjects (Complete Portal)</div>
+              <span class="tier-name" style="color:#16a34a;">Full Access Bundle</span>
+              <div class="tier-subjects">All Modules Combined</div>
               <div class="tier-price" style="color:#16a34a;">PKR 993</div>
             </div>
           </div>
         </div>
 
-        <!-- ACADEMIC ANNOUNCEMENT & MASTER UNLOCK ALL FIELD -->
+        <!-- ACCESS CODE ENTRY CARD -->
         <div class="notice-card">
           <div class="notice-card-top">
-            <div class="notice-icon">📢</div>
+            <div class="notice-icon">🔑</div>
             <div class="notice-text">
-              <h4>Master Unlock Feature</h4>
-              <p>Already purchased the complete bundle? Enter your master code below to instant-unlock all modules across the portal.</p>
+              <h4>Have an Access Code or Bundle Key?</h4>
+              <p>Enter your code below to instantly activate your modules, or use your master key for complete access.</p>
             </div>
           </div>
           <div class="master-unlock-box">
-            <input type="text" id="masterAccessInput" class="master-unlock-input" placeholder="Enter Master Unlock Code (PKR 993 Bundle)" autocomplete="off">
-            <button class="master-unlock-btn" onclick="verifyAndUnlockAll()">Unlock All Subjects</button>
+            <input type="text" id="masterAccessInput" class="master-unlock-input" placeholder="Enter Access Code / Master Key" autocomplete="off">
+            <button class="master-unlock-btn" onclick="verifyAndUnlockAll()">Activate</button>
           </div>
         </div>
 
         <!-- COURSE MODULES -->
-        <div class="section-title" id="courses-section">BSN Academic Courses (Locked Modules)</div>
+        <div class="section-title" id="courses-section">BSN Semester Study Modules</div>
         <div class="grid">
           
           <!-- NURSING ETHICS -->
           <div class="card" id="card-ethics">
             <div>
               <div class="card-top">
-                <div class="card-icon" style="background:#ecfeff;">⚖️</div>
+                <div class="card-icon" style="background:#f0f9ff;">⚖️</div>
                 <div>
                   <h3>Nursing Ethics</h3>
                   <span class="status-badge status-locked" id="badge-ethics">Locked</span>
                 </div>
               </div>
-              <span class="subject-price-tag">Price: PKR 250</span>
-              
-              <button class="pay-btn-inline" onclick="openPaymentModal('Nursing Ethics', 250)">💳 Pay via JazzCash</button>
+              <p class="subject-desc">Core ethical principles, professional accountability, and legal standards in nursing practice.</p>
 
               <div class="access-form-box">
                 <div class="access-input-row">
-                  <input type="text" id="input-ethics" class="access-code-input" placeholder="Enter access code" autocomplete="off">
-                  <button class="unlock-btn" onclick="verifyAndUnlockSubject('ethics')">Unlock</button>
+                  <input type="text" id="input-ethics" class="access-code-input" placeholder="Access code" autocomplete="off">
+                  <button class="unlock-btn" onclick="verifyAndUnlockSubject('ethics')">Enter</button>
                 </div>
               </div>
             </div>
-            <a href="#" id="link-ethics" class="action-link btn-locked" target="_blank">Open Notes & Modules →</a>
+            <a href="#" id="link-ethics" class="action-link btn-locked" target="_blank">Open Study Notes →</a>
           </div>
 
           <!-- PEDIATRIC -->
@@ -539,18 +568,16 @@
                   <span class="status-badge status-locked" id="badge-pediatric">Locked</span>
                 </div>
               </div>
-              <span class="subject-price-tag">Price: PKR 369</span>
-
-              <button class="pay-btn-inline" onclick="openPaymentModal('Pediatric Nursing', 369)">💳 Pay via JazzCash</button>
+              <p class="subject-desc">Child growth &amp; development milestones, pediatric assessments, and common illnesses.</p>
 
               <div class="access-form-box">
                 <div class="access-input-row">
-                  <input type="text" id="input-pediatric" class="access-code-input" placeholder="Enter access code" autocomplete="off">
-                  <button class="unlock-btn" onclick="verifyAndUnlockSubject('pediatric')">Unlock</button>
+                  <input type="text" id="input-pediatric" class="access-code-input" placeholder="Access code" autocomplete="off">
+                  <button class="unlock-btn" onclick="verifyAndUnlockSubject('pediatric')">Enter</button>
                 </div>
               </div>
             </div>
-            <a href="#" id="link-pediatric" class="action-link btn-locked">Open Notes & Modules →</a>
+            <a href="#" id="link-pediatric" class="action-link btn-locked">Open Study Notes →</a>
           </div>
 
           <!-- REPRODUCTIVE -->
@@ -563,18 +590,16 @@
                   <span class="status-badge status-locked" id="badge-reproductive">Locked</span>
                 </div>
               </div>
-              <span class="subject-price-tag">Price: PKR 369</span>
-
-              <button class="pay-btn-inline" onclick="openPaymentModal('Reproductive Health', 369)">💳 Pay via JazzCash</button>
+              <p class="subject-desc">Maternal health, antenatal care guidelines, labor processes, and postnatal management.</p>
 
               <div class="access-form-box">
                 <div class="access-input-row">
-                  <input type="text" id="input-reproductive" class="access-code-input" placeholder="Enter access code" autocomplete="off">
-                  <button class="unlock-btn" onclick="verifyAndUnlockSubject('reproductive')">Unlock</button>
+                  <input type="text" id="input-reproductive" class="access-code-input" placeholder="Access code" autocomplete="off">
+                  <button class="unlock-btn" onclick="verifyAndUnlockSubject('reproductive')">Enter</button>
                 </div>
               </div>
             </div>
-            <a href="#" id="link-reproductive" class="action-link btn-locked">Open Notes & Modules →</a>
+            <a href="#" id="link-reproductive" class="action-link btn-locked">Open Study Notes →</a>
           </div>
 
         </div>
@@ -589,6 +614,18 @@
       const overlay = document.getElementById('drawerOverlay');
       drawer.classList.toggle('open');
       overlay.classList.toggle('open');
+    }
+
+    function togglePricingSection() {
+      const section = document.getElementById('pricing-section');
+      const label = document.getElementById('supportToggleLabel');
+      section.classList.toggle('open');
+      if(section.classList.contains('open')) {
+        label.innerText = "Hide Options";
+        section.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        label.innerText = "View Options";
+      }
     }
 
     function openEditProfile() {
@@ -622,7 +659,7 @@
 
     function openPaymentModal(subjectName, price) {
       document.getElementById('modalPrice').innerText = price;
-      const message = encodeURIComponent(`Hello, I want to unlock "${subjectName}" for PKR ${price}. Here is my payment screenshot.`);
+      const message = encodeURIComponent(`Hello, I want to request access for "${subjectName}" (PKR ${price}). Here is my support confirmation screenshot.`);
       document.getElementById('whatsappBtn').href = `https://wa.me/923241064487?text=${message}`;
       document.getElementById('paymentModal').classList.add('open');
     }
@@ -640,7 +677,7 @@
     function verifyAndUnlockSubject(subjectId) {
       const codeInput = document.getElementById(`input-${subjectId}`).value.trim();
       if(codeInput !== "") {
-        alert("Subject successfully unlocked!");
+        alert("Access code accepted! Module unlocked.");
         document.getElementById(`badge-${subjectId}`).className = "status-badge status-unlocked";
         document.getElementById(`badge-${subjectId}`).innerText = "Unlocked";
         const link = document.getElementById(`link-${subjectId}`);
@@ -653,7 +690,7 @@
     function verifyAndUnlockAll() {
       const masterCode = document.getElementById('masterAccessInput').value.trim();
       if(masterCode !== "") {
-        alert("Master code verified! All portal modules unlocked.");
+        alert("Key verified! All modules unlocked.");
         ['ethics', 'pediatric', 'reproductive'].forEach(subj => {
           document.getElementById(`badge-${subj}`).className = "status-badge status-unlocked";
           document.getElementById(`badge-${subj}`).innerText = "Unlocked";
@@ -661,7 +698,7 @@
           link.className = "action-link btn-unlocked";
         });
       } else {
-        alert("Please enter a valid Master Unlock code.");
+        alert("Please enter a valid access code or key.");
       }
     }
 
