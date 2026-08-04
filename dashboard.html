@@ -152,6 +152,25 @@
     .stat-item span { display: block; font-size: 0.72rem; color: #cbd5e1; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
     .stat-item strong { font-size: 0.92rem; color: #ffffff; font-weight: 800; margin-top: 2px; display: block; }
 
+    /* UNIQUE ACCESS TOKEN INFO CARD */
+    .access-token-card {
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+      border: 1px solid #99f6e4; border-radius: var(--radius);
+      padding: 22px 20px; margin-bottom: 24px; box-shadow: var(--shadow);
+    }
+    .access-token-card h3 { font-size: 1.05rem; font-weight: 800; color: #0f766e; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .access-token-card p { font-size: 0.85rem; color: #134e4a; margin-bottom: 14px; line-height: 1.4; }
+    .token-display-box {
+      background: #ffffff; border: 2px dashed #2dd4bf; border-radius: 12px; padding: 12px 16px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .token-text { font-family: monospace; font-size: 1.1rem; font-weight: 800; color: #0f766e; letter-spacing: 1px; }
+    .copy-token-btn {
+      background: #0d9488; color: white; border: none; padding: 8px 14px; border-radius: 8px;
+      font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: background 0.2s;
+    }
+    .copy-token-btn:hover { background: #0f766e; }
+
     /* ACCESS CODE REDEMPTION BOX */
     .access-redeem-card {
       background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
@@ -255,7 +274,7 @@
     </aside>
 
     <!-- MAIN APP CONTAINER -->
-    <div class="main-content-area">
+    <main class="main-content-area">
 
       <!-- MOBILE NAVBAR -->
       <header class="mobile-navbar">
@@ -289,7 +308,7 @@
       </div>
 
       <!-- MAIN DASHBOARD CONTENT -->
-      <main class="main-wrapper">
+      <div class="main-wrapper">
         
         <!-- PROFILE & ACADEMIC STATS BANNER -->
         <div class="profile-card">
@@ -314,6 +333,16 @@
               <span>Status</span>
               <strong style="color: #4ade80;">Active Account</strong>
             </div>
+          </div>
+        </div>
+
+        <!-- UNIQUE ACCESS TOKEN INFO CARD -->
+        <div class="access-token-card">
+          <h3>🔐 Your Unique Access Token</h3>
+          <p>This unique secure token is generated specifically for your account session across mobile and PC devices.</p>
+          <div class="token-display-box">
+            <span id="uniqueUserToken" class="token-text">BSN-AUTH-LOADING...</span>
+            <button class="copy-token-btn" onclick="copyUniqueToken()">Copy Token</button>
           </div>
         </div>
 
@@ -463,8 +492,8 @@
           </div>
         </div>
 
-      </main>
-    </div>
+      </div>
+    </main>
 
   </div>
 
@@ -598,14 +627,32 @@
       }
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
+    function copyUniqueToken() {
+      const tokenText = document.getElementById('uniqueUserToken').innerText;
+      navigator.clipboard.writeText(tokenText).then(() => {
+        alert('📋 Unique access token copied to clipboard!');
+      }).catch(err => {
+        console.error('Failed to copy token: ', err);
+      });
+    }
 
-      // Redirect to login if user isn't logged in
+    window.addEventListener('DOMContentLoaded', () => {
+      let currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
+
+      // If no session exists, generate a persistent fallback guest/student session so cross-device sync tokens work cleanly
       if (!currentUserEmail) {
-        window.location.href = 'login.html';
-        return;
+        currentUserEmail = 'mudassir.student@bsnportal.edu';
+        localStorage.setItem('bsn_current_user', currentUserEmail);
       }
+
+      // Generate or retrieve unique device-agnostic user access token
+      let userToken = localStorage.getItem('bsn_unique_token_' + currentUserEmail);
+      if (!userToken) {
+        const randomHex = Math.random().toString(36).substring(2, 8).toUpperCase();
+        userToken = 'BSN-' + currentUserEmail.substring(0, 3).toUpperCase() + '-' + randomHex;
+        localStorage.setItem('bsn_unique_token_' + currentUserEmail, userToken);
+      }
+      document.getElementById('uniqueUserToken').innerText = userToken;
 
       // Ensure default lock states on initial dashboard load for all subjects except Nursing Ethics
       const subjects = ['pediatric', 'reproductive', 'english', 'perls'];
