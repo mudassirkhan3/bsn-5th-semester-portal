@@ -186,7 +186,7 @@
     <div class="brand-header">
       <div class="brand-icon">🩺</div>
       <h2>BSN Student Portal</h2>
-      <p>Sign in or register to access 5th Semester modules</p>
+      <p id="portalSubtitle">Sign in or register to access 5th Semester modules</p>
     </div>
 
     <!-- Navigation Tabs -->
@@ -240,21 +240,11 @@
         </select>
       </div>
 
-      <!-- SECURITY QUESTION SETUP -->
+      <!-- BULLETPROOF REGISTRATION PIN/PASSCODE SETUP -->
       <div class="form-group">
-        <label>Security Question (For Password Recovery)</label>
-        <select id="regSecurityQ" required>
-          <option value="" disabled selected>Choose a security question</option>
-          <option value="What is your favorite clinical subject?">What is your favorite clinical subject?</option>
-          <option value="What was your first pet's name?">What was your first pet's name?</option>
-          <option value="In what city were you born?">In what city were you born?</option>
-          <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Security Answer (Required to recover password)</label>
-        <input type="text" id="regSecurityA" placeholder="Enter your secret answer" required>
+        <label>Secret Recovery PIN (4-Digits)</label>
+        <input type="password" id="regSecretPin" placeholder="e.g. 1234 (Remember this to reset password)" maxlength="4" pattern="\d{4}" title="Please enter a 4-digit PIN" required>
+        <small style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-top: 4px;">Used instantly if you forget your password.</small>
       </div>
 
       <div class="form-group">
@@ -265,21 +255,20 @@
       <button type="submit" class="submit-btn" id="regBtn">Create Account</button>
     </form>
 
-    <!-- FORGOT PASSWORD FORM -->
+    <!-- HASSLE-FREE 2-STEP PIN RECOVERY FORM (NO EMAIL NEEDED) -->
     <form id="forgotForm" style="display: none;" onsubmit="handleResetPassword(event)">
       <button type="button" class="back-btn" onclick="showForm('login')">← Back to Login</button>
-      <h3 style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 12px;">Reset Password</h3>
-      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">Verify your registered email and provide the exact answer to your security question to reset your password.</p>
+      <h3 style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 6px;">Instant Password Recovery</h3>
+      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">Verify your identity using your Secret 4-Digit PIN to reset your password instantly.</p>
       
       <div class="form-group">
-        <label>Your Registered Email</label>
-        <input type="email" id="resetEmail" placeholder="student@example.com" onblur="fetchSecurityQuestion()" required>
+        <label>Your Email Address</label>
+        <input type="email" id="resetEmail" placeholder="student@example.com" required>
       </div>
 
-      <!-- DYNAMIC SECURITY QUESTION DISPLAY FIELD -->
-      <div class="form-group" id="questionBoxGroup" style="display: none;">
-        <label id="displaySecurityQ" style="color: var(--primary); font-weight: 800; margin-bottom: 6px;"></label>
-        <input type="text" id="resetSecurityAns" placeholder="Enter security answer used during registration" required>
+      <div class="form-group">
+        <label>Your Secret 4-Digit Recovery PIN</label>
+        <input type="password" id="resetPin" placeholder="Enter your 4-digit PIN" maxlength="4" required>
       </div>
 
       <div class="form-group">
@@ -287,7 +276,7 @@
         <input type="password" id="newPassword" placeholder="Enter new password (min 6 chars)" minlength="6" required>
       </div>
 
-      <button type="submit" class="submit-btn" style="background: linear-gradient(135deg, var(--accent), #0f766e);">Update Password</button>
+      <button type="submit" class="submit-btn" style="background: linear-gradient(135deg, var(--accent), #0f766e);">Update &amp; Secure Password</button>
     </form>
   </div>
 
@@ -316,6 +305,7 @@
     const registerForm = document.getElementById('registerForm');
     const forgotForm = document.getElementById('forgotForm');
     const authTabs = document.getElementById('authTabs');
+    const subtitle = document.getElementById('portalSubtitle');
 
     if (type === 'login') {
       authTabs.style.display = 'flex';
@@ -324,6 +314,7 @@
       forgotForm.style.display = 'none';
       document.getElementById('loginTab').classList.add('active');
       document.getElementById('regTab').classList.remove('active');
+      subtitle.innerText = 'Sign in or register to access 5th Semester modules';
     } else if (type === 'register') {
       authTabs.style.display = 'flex';
       loginForm.style.display = 'none';
@@ -331,12 +322,13 @@
       forgotForm.style.display = 'none';
       document.getElementById('loginTab').classList.remove('active');
       document.getElementById('regTab').classList.add('active');
+      subtitle.innerText = 'Create your student account with secure recovery PIN';
     } else if (type === 'forgot') {
       authTabs.style.display = 'none';
       loginForm.style.display = 'none';
       registerForm.style.display = 'none';
       forgotForm.style.display = 'block';
-      document.getElementById('questionBoxGroup').style.display = 'none';
+      subtitle.innerText = 'Recover your password securely';
     }
   }
 
@@ -349,8 +341,7 @@
       institute: document.getElementById('regInstitute').value.trim(),
       email: document.getElementById('regEmail').value.toLowerCase().trim(),
       semester: document.getElementById('regSemester').value,
-      securityQ: document.getElementById('regSecurityQ').value,
-      securityA: document.getElementById('regSecurityA').value.trim().toLowerCase(),
+      secretPin: document.getElementById('regSecretPin').value.trim(),
       password: document.getElementById('regPassword').value
     };
 
@@ -385,7 +376,7 @@
       console.error('Google Sheet Sync Error:', err);
     }
 
-    alert('🎉 Student registered successfully!');
+    alert('🎉 Student registered successfully with secure PIN!');
     window.location.href = 'dashboard.html';
   }
 
@@ -420,50 +411,27 @@
     }
   }
 
-  function fetchSecurityQuestion() {
-    const email = document.getElementById('resetEmail').value.toLowerCase().trim();
-    const questionBoxGroup = document.getElementById('questionBoxGroup');
-    const displayQ = document.getElementById('displaySecurityQ');
-
-    if (!email) return;
-
-    const savedUser = localStorage.getItem('bsn_user_' + email);
-    if (savedUser) {
-      const user = JSON.parse(savedUser);
-      if (user.securityQ) {
-        displayQ.innerText = "🔒 Security Question: " + user.securityQ;
-        questionBoxGroup.style.display = 'block';
-      } else {
-        displayQ.innerText = "🔒 Security Question: What is your favorite clinical subject?";
-        questionBoxGroup.style.display = 'block';
-      }
-    } else {
-      questionBoxGroup.style.display = 'none';
-      alert('❌ Registered email not found.');
-    }
-  }
-
   function handleResetPassword(e) {
     e.preventDefault();
     const email = document.getElementById('resetEmail').value.toLowerCase().trim();
-    const enteredAns = document.getElementById('resetSecurityAns').value.trim().toLowerCase();
+    const enteredPin = document.getElementById('resetPin').value.trim();
     const newPass = document.getElementById('newPassword').value;
     const savedUser = localStorage.getItem('bsn_user_' + email);
 
     if (savedUser) {
       let user = JSON.parse(savedUser);
-      const correctAns = (user.securityA || '').trim().toLowerCase();
+      const correctPin = (user.secretPin || '').trim();
 
-      if (correctAns && enteredAns === correctAns) {
+      if (correctPin && enteredPin === correctPin) {
         user.password = newPass;
         localStorage.setItem('bsn_user_' + email, JSON.stringify(user));
-        alert('✅ Password updated successfully!');
+        alert('✅ Password updated & secured successfully!');
         showForm('login');
       } else {
-        alert('❌ Incorrect security answer. Please make sure it matches your registration answer.');
+        alert('❌ Incorrect 4-digit secret recovery PIN. Please check and try again.');
       }
     } else {
-      alert('❌ Registered email not found.');
+      alert('❌ Registered email address not found.');
     }
   }
 </script>
