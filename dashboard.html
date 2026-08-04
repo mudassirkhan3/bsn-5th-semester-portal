@@ -55,11 +55,12 @@
     .pulse-box { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); }
     
     .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .sidebar-menu a {
+    .sidebar-menu a, .sidebar-menu button {
       text-decoration: none; color: var(--text-muted); font-weight: 700; font-size: 0.92rem;
       display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px; transition: all 0.2s ease;
+      background: none; border: none; width: 100%; text-align: left; cursor: pointer;
     }
-    .sidebar-menu a:hover, .sidebar-menu a.active { background: #f0f9ff; color: var(--primary-dark); }
+    .sidebar-menu a:hover, .sidebar-menu a.active, .sidebar-menu button:hover { background: #f0f9ff; color: var(--primary-dark); }
 
     /* MOBILE NAVBAR (Hidden on PC) */
     .mobile-navbar { 
@@ -96,11 +97,12 @@
     
     .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
     .drawer-menu { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .drawer-menu a {
+    .drawer-menu a, .drawer-menu button {
       text-decoration: none; color: var(--text-dark); font-weight: 700; font-size: 0.95rem;
       display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px;
+      background: none; border: none; width: 100%; text-align: left; cursor: pointer;
     }
-    .drawer-menu a:hover, .drawer-menu a.active { background: #f0f9ff; color: var(--primary-dark); }
+    .drawer-menu a:hover, .drawer-menu a.active, .drawer-menu button:hover { background: #f0f9ff; color: var(--primary-dark); }
     
     .logout-btn {
       background: #fef2f2; color: #dc2626; border: 1px solid #fecaca;
@@ -134,14 +136,23 @@
       opacity: 0.05;
       pointer-events: none;
     }
-    .profile-header { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; }
+    .profile-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
+    .profile-user-details { display: flex; align-items: center; gap: 16px; }
+    .avatar-wrapper { position: relative; flex-shrink: 0; }
     .avatar {
       width: 64px; height: 64px; border-radius: 50%; background: #bae6fd; color: #0369a1;
       display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 800;
-      flex-shrink: 0; border: 3px solid rgba(255, 255, 255, 0.2);
+      border: 3px solid rgba(255, 255, 255, 0.2); object-fit: cover; overflow: hidden;
     }
     .profile-info h1 { font-size: 1.35rem; font-weight: 800; line-height: 1.2; }
     .profile-info p { color: #bae6fd; font-size: 0.88rem; margin-top: 4px; }
+    
+    .edit-profile-trigger {
+      background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white; padding: 8px 16px; border-radius: 10px; font-size: 0.82rem; font-weight: 700;
+      cursor: pointer; transition: background 0.2s; display: flex; align-items: center; gap: 6px;
+    }
+    .edit-profile-trigger:hover { background: rgba(255, 255, 255, 0.25); }
 
     .stats-bar {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
@@ -152,46 +163,47 @@
     .stat-item span { display: block; font-size: 0.72rem; color: #cbd5e1; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
     .stat-item strong { font-size: 0.92rem; color: #ffffff; font-weight: 800; margin-top: 2px; display: block; }
 
-    /* UNIQUE ACCESS TOKEN INFO CARD */
-    .access-token-card {
-      background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
-      border: 1px solid #99f6e4; border-radius: var(--radius);
-      padding: 22px 20px; margin-bottom: 24px; box-shadow: var(--shadow);
+    /* EDIT PROFILE MODAL */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px);
+      z-index: 300; display: none; align-items: center; justify-content: center; padding: 20px;
     }
-    .access-token-card h3 { font-size: 1.05rem; font-weight: 800; color: #0f766e; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-    .access-token-card p { font-size: 0.85rem; color: #134e4a; margin-bottom: 14px; line-height: 1.4; }
-    .token-display-box {
-      background: #ffffff; border: 2px dashed #2dd4bf; border-radius: 12px; padding: 12px 16px;
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: var(--card-bg); border-radius: var(--radius); width: 100%; max-width: 450px;
+      padding: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);
+      animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .token-text { font-family: monospace; font-size: 1.1rem; font-weight: 800; color: #0f766e; letter-spacing: 1px; }
-    .copy-token-btn {
-      background: #0d9488; color: white; border: none; padding: 8px 14px; border-radius: 8px;
-      font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: background 0.2s;
+    @keyframes modalPop {
+      0% { transform: scale(0.95); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
-    .copy-token-btn:hover { background: #0f766e; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .modal-header h3 { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); }
+    .modal-close { background: #f1f5f9; border: none; font-size: 1rem; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 0.82rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; }
+    .form-input {
+      width: 100%; padding: 12px 14px; border: 2px solid var(--border); border-radius: 12px;
+      font-size: 0.92rem; outline: none; transition: border-color 0.2s; background: #f8fafc; font-weight: 600; color: var(--text-dark);
+    }
+    .form-input:focus { border-color: var(--primary); background: #ffffff; }
+    
+    .file-upload-box {
+      border: 2px dashed var(--border); border-radius: 12px; padding: 16px; text-align: center;
+      background: #f8fafc; cursor: pointer; transition: border-color 0.2s;
+    }
+    .file-upload-box:hover { border-color: var(--primary); background: #f0f9ff; }
+    .file-upload-box input { display: none; }
+    .file-upload-text { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; }
 
-    /* ACCESS CODE REDEMPTION BOX */
-    .access-redeem-card {
-      background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 22px 20px; margin-bottom: 24px; box-shadow: var(--shadow);
-    }
-    .access-redeem-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-    .access-redeem-card p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.4; }
-    .redeem-form-group { display: flex; gap: 12px; }
-    .redeem-input {
-      flex: 1; padding: 12px 16px; border: 2px solid var(--border); border-radius: 12px;
-      font-size: 0.95rem; outline: none; transition: border-color 0.2s; text-transform: uppercase; font-weight: 700;
-      background: #f8fafc;
-    }
-    .redeem-input:focus { border-color: var(--primary); background: #ffffff; }
-    .redeem-btn {
-      background: var(--accent); color: white; border: none; padding: 12px 22px; border-radius: 12px;
-      font-size: 0.92rem; font-weight: 700; cursor: pointer; transition: all 0.2s; flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
-    }
-    .redeem-btn:hover { background: #0f766e; transform: translateY(-1px); }
-    #redeemMessage { font-size: 0.85rem; margin-top: 10px; font-weight: 700; display: none; }
+    .modal-actions { display: flex; gap: 10px; margin-top: 24px; }
+    .modal-btn { flex: 1; padding: 12px; border-radius: 12px; font-size: 0.9rem; font-weight: 700; cursor: pointer; border: none; }
+    .modal-btn-cancel { background: #f1f5f9; color: var(--text-muted); }
+    .modal-btn-save { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
+    .modal-btn-save:hover { background: var(--primary-dark); }
 
     /* NOTICE ALERT */
     .notice-card {
@@ -219,7 +231,6 @@
     
     .status-badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; margin-top: 4px; }
     .status-unlocked { background: #dcfce7; color: #15803d; }
-    .status-locked { background: #fef3c7; color: #b45309; }
 
     .action-link {
       margin-top: 14px; text-decoration: none; text-align: center; padding: 12px; border-radius: 12px;
@@ -227,7 +238,6 @@
     }
     .btn-unlocked { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
     .btn-unlocked:hover { background: var(--primary-dark); }
-    .btn-locked { background: #f1f5f9; color: var(--text-muted); cursor: not-allowed; border: 1px solid var(--border); }
 
     /* CLINICAL REFERENCE VALUES */
     .reference-card {
@@ -268,6 +278,7 @@
           <li><a href="dashboard.html" class="active">🏠 Dashboard Home</a></li>
           <li><a href="#courses-section">📚 Course Modules</a></li>
           <li><a href="#vitals-section">🩸 Lab Reference</a></li>
+          <li><button onclick="openEditProfile()">✏️ Edit Profile</button></li>
         </ul>
       </div>
       <button class="logout-btn" onclick="logout()">🚪 Logout / Exit</button>
@@ -302,6 +313,7 @@
             <li><a href="dashboard.html" class="active" onclick="toggleMenu()">🏠 Dashboard Home</a></li>
             <li><a href="#courses-section" onclick="toggleMenu()">📚 Course Modules</a></li>
             <li><a href="#vitals-section" onclick="toggleMenu()">🩸 Lab Reference Values</a></li>
+            <li><button onclick="toggleMenu(); openEditProfile();">✏️ Edit Profile</button></li>
           </ul>
         </div>
         <button class="logout-btn" onclick="logout()">🚪 Logout / Exit</button>
@@ -313,11 +325,16 @@
         <!-- PROFILE & ACADEMIC STATS BANNER -->
         <div class="profile-card">
           <div class="profile-header">
-            <div class="avatar" id="avatarLetter">M</div>
-            <div class="profile-info">
-              <h1 id="userName">Mudassir Hussain Khan</h1>
-              <p id="userEmail">student@example.com</p>
+            <div class="profile-user-details">
+              <div class="avatar-wrapper">
+                <div class="avatar" id="avatarBox"><span id="avatarLetter">M</span></div>
+              </div>
+              <div class="profile-info">
+                <h1 id="userName">Mudassir Hussain Khan</h1>
+                <p id="userEmail">student@example.com</p>
+              </div>
             </div>
+            <button class="edit-profile-trigger" onclick="openEditProfile()">✏️ Edit Profile</button>
           </div>
           
           <div class="stats-bar">
@@ -336,25 +353,41 @@
           </div>
         </div>
 
-        <!-- UNIQUE ACCESS TOKEN INFO CARD -->
-        <div class="access-token-card">
-          <h3>🔐 Your Unique Access Token</h3>
-          <p>This unique secure token is generated specifically for your account session across mobile and PC devices.</p>
-          <div class="token-display-box">
-            <span id="uniqueUserToken" class="token-text">BSN-AUTH-LOADING...</span>
-            <button class="copy-token-btn" onclick="copyUniqueToken()">Copy Token</button>
+        <!-- EDIT PROFILE MODAL -->
+        <div id="editProfileModal" class="modal-overlay">
+          <div class="modal-card">
+            <div class="modal-header">
+              <h3>Edit Student Profile</h3>
+              <button class="modal-close" onclick="closeEditProfile()">✕</button>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" id="editNameInput" class="form-input" placeholder="Enter full name" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" id="editEmailInput" class="form-input" placeholder="Enter email address" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Semester / Program</label>
+              <input type="text" id="editSemesterInput" class="form-input" placeholder="e.g. BSN 4th Semester" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Institute Name</label>
+              <input type="text" id="editInstituteInput" class="form-input" placeholder="Enter institute name" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Profile Picture</label>
+              <div class="file-upload-box" onclick="document.getElementById('profilePicInput').click()">
+                <span class="file-upload-text" id="uploadFileName">📷 Click to upload profile picture</span>
+                <input type="file" id="profilePicInput" accept="image/*" onchange="handleImageUpload(event)" />
+              </div>
+            </div>
+            <div class="modal-actions">
+              <button class="modal-btn modal-btn-cancel" onclick="closeEditProfile()">Cancel</button>
+              <button class="modal-btn modal-btn-save" onclick="saveProfileChanges()">Save Changes</button>
+            </div>
           </div>
-        </div>
-
-        <!-- ACCESS CODE REDEMPTION SECTION -->
-        <div class="access-redeem-card">
-          <h3>🔑 Have an Access Code?</h3>
-          <p>Enter your subject access code below to instantly unlock the course module notes and materials.</p>
-          <div class="redeem-form-group">
-            <input type="text" id="accessCodeInput" class="redeem-input" placeholder="e.g. PEDS-72" />
-            <button class="redeem-btn" onclick="redeemAccessCode()">Unlock Module</button>
-          </div>
-          <div id="redeemMessage"></div>
         </div>
 
         <!-- ACADEMIC ANNOUNCEMENT NOTICE -->
@@ -376,11 +409,11 @@
                 <div class="card-icon" style="background:#ecfeff;">⚖️</div>
                 <div>
                   <h3>Nursing Ethics</h3>
-                  <span id="badge-ethics" class="status-badge status-unlocked">Unlocked</span>
+                  <span class="status-badge status-unlocked">Unlocked</span>
                 </div>
               </div>
             </div>
-            <a id="link-ethics" href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics.html" class="action-link btn-unlocked">Open Notes & Modules →</a>
+            <a href="https://mudassirkhan3.github.io/bsn-5th-semester-portal/nursing-ethics.html" class="action-link btn-unlocked">Open Notes & Modules →</a>
           </div>
 
           <!-- PEDIATRIC -->
@@ -390,11 +423,11 @@
                 <div class="card-icon" style="background:#f0fdf4;">👶</div>
                 <div>
                   <h3>Pediatric Nursing</h3>
-                  <span id="badge-pediatric" class="status-badge status-locked">Locked</span>
+                  <span class="status-badge status-unlocked">Unlocked</span>
                 </div>
               </div>
             </div>
-            <a id="link-pediatric" href="#" class="action-link btn-locked" onclick="checkAccess(event, 'pediatric', './pediatric/index.html')">Locked Module</a>
+            <a href="./pediatric/index.html" class="action-link btn-unlocked">Open Notes & Modules →</a>
           </div>
 
           <!-- REPRODUCTIVE -->
@@ -404,11 +437,11 @@
                 <div class="card-icon" style="background:#fdf2f8;">🤰</div>
                 <div>
                   <h3>Reproductive Health</h3>
-                  <span id="badge-reproductive" class="status-badge status-locked">Locked</span>
+                  <span class="status-badge status-unlocked">Unlocked</span>
                 </div>
               </div>
             </div>
-            <a id="link-reproductive" href="#" class="action-link btn-locked" onclick="checkAccess(event, 'reproductive', './reproductive/index.html')">Locked Module</a>
+            <a href="./reproductive/index.html" class="action-link btn-unlocked">Open Notes & Modules →</a>
           </div>
 
           <!-- ENGLISH -->
@@ -418,11 +451,11 @@
                 <div class="card-icon" style="background:#f5f3ff;">📚</div>
                 <div>
                   <h3>English Academic</h3>
-                  <span id="badge-english" class="status-badge status-locked">Locked</span>
+                  <span class="status-badge status-unlocked">Unlocked</span>
                 </div>
               </div>
             </div>
-            <a id="link-english" href="#" class="action-link btn-locked" onclick="checkAccess(event, 'english', './english/index.html')">Locked Module</a>
+            <a href="./english/index.html" class="action-link btn-unlocked">Open Notes & Modules →</a>
           </div>
 
           <!-- PERLS -->
@@ -432,11 +465,11 @@
                 <div class="card-icon" style="background:#f0fdfa;">💡</div>
                 <div>
                   <h3>PERLS Module</h3>
-                  <span id="badge-perls" class="status-badge status-locked">Locked</span>
+                  <span class="status-badge status-unlocked">Unlocked</span>
                 </div>
               </div>
             </div>
-            <a id="link-perls" href="#" class="action-link btn-locked" onclick="checkAccess(event, 'perls', './perls/index.html')">Locked Module</a>
+            <a href="./perls/index.html" class="action-link btn-unlocked">Open Notes & Modules →</a>
           </div>
         </div>
 
@@ -512,176 +545,113 @@
       window.location.href = 'login.html';
     }
 
-    // Access Code Mapping
-    const codeMap = {
-      'PEDS-7782': 'pediatric',
-      'REPO-4419': 'reproductive',
-      'ENG-9931': 'english',
-      'PERL-5526': 'perls',
-      'ALL-0021': 'all'
-    };
+    let tempUploadedImage = '';
 
-    function redeemAccessCode() {
-      const inputVal = document.getElementById('accessCodeInput').value.trim().toUpperCase();
-      const msgEl = document.getElementById('redeemMessage');
-      const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
-
-      if (!inputVal) {
-        msgEl.style.display = 'block';
-        msgEl.style.color = '#dc2626';
-        msgEl.innerText = '⚠️ Please enter a valid access code.';
-        return;
-      }
-
-      if (!currentUserEmail) {
-        alert('Session expired. Please login again.');
-        window.location.href = 'login.html';
-        return;
-      }
-
-      const mappedSubject = codeMap[inputVal];
-
-      if (mappedSubject) {
-        msgEl.style.display = 'block';
-        msgEl.style.color = '#15803d';
-
-        if (mappedSubject === 'all') {
-          ['pediatric', 'reproductive', 'english', 'perls'].forEach(sub => {
-            localStorage.setItem('unlocked_' + currentUserEmail + '_' + sub, 'true');
-            localStorage.setItem('unlocked_' + sub, 'true');
-          });
-          msgEl.innerText = '🎉 Success! All course modules have been fully unlocked.';
-        } else {
-          localStorage.setItem('unlocked_' + currentUserEmail + '_' + mappedSubject, 'true');
-          localStorage.setItem('unlocked_' + mappedSubject, 'true');
-          msgEl.innerText = `🎉 Success! ${mappedSubject.toUpperCase()} module is now unlocked.`;
-        }
-
-        document.getElementById('accessCodeInput').value = '';
-        setTimeout(() => {
-          updateUIStates(currentUserEmail);
-          msgEl.style.display = 'none';
-        }, 1500);
-
-      } else {
-        msgEl.style.display = 'block';
-        msgEl.style.color = '#dc2626';
-        msgEl.innerText = '❌ Invalid access code. Please check and try again.';
-      }
-    }
-
-    function checkAccess(event, subject, targetUrl) {
-      const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
+    function openEditProfile() {
+      const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email') || 'mudassir.student@bsnportal.edu';
+      const userDataStr = localStorage.getItem('bsn_user_' + currentUserEmail) || localStorage.getItem('user_acc_' + currentUserEmail);
       
-      const isUnlocked = (currentUserEmail && localStorage.getItem('unlocked_' + currentUserEmail + '_' + subject) === 'true') ||
-                         localStorage.getItem('unlocked_' + subject) === 'true';
+      let user = {
+        name: document.getElementById('userName').innerText,
+        email: currentUserEmail,
+        semester: document.getElementById('userSemester').innerText,
+        institute: document.getElementById('userInstitute').innerText
+      };
 
-      if (!isUnlocked) {
-        event.preventDefault();
-        alert("🔒 This course module is locked. Please enter your valid access code in the redemption box above to unlock it.");
+      if (userDataStr) {
+        try { user = JSON.parse(userDataStr); } catch(e){}
+      }
+
+      document.getElementById('editNameInput').value = user.name || 'Mudassir Hussain Khan';
+      document.getElementById('editEmailInput').value = user.email || currentUserEmail;
+      document.getElementById('editSemesterInput').value = user.semester || 'BSN 4th Semester';
+      document.getElementById('editInstituteInput').value = user.institute || 'New Life Institute Multan';
+      document.getElementById('uploadFileName').innerText = '📷 Click to upload profile picture';
+      tempUploadedImage = user.profilePic || '';
+
+      document.getElementById('editProfileModal').classList.add('open');
+    }
+
+    function closeEditProfile() {
+      document.getElementById('editProfileModal').classList.remove('open');
+    }
+
+    function handleImageUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        document.getElementById('uploadFileName').innerText = '📁 ' + file.name;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          tempUploadedImage = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function saveProfileChanges() {
+      const currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email') || 'mudassir.student@bsnportal.edu';
+      
+      const updatedUser = {
+        name: document.getElementById('editNameInput').value.trim() || 'Mudassir Hussain Khan',
+        email: document.getElementById('editEmailInput').value.trim() || currentUserEmail,
+        semester: document.getElementById('editSemesterInput').value.trim() || 'BSN 4th Semester',
+        institute: document.getElementById('editInstituteInput').value.trim() || 'New Life Institute Multan',
+        profilePic: tempUploadedImage
+      };
+
+      localStorage.setItem('bsn_user_' + currentUserEmail, JSON.stringify(updatedUser));
+      localStorage.setItem('active_session_name', updatedUser.name);
+      localStorage.setItem('active_session_email', updatedUser.email);
+
+      applyUserData(updatedUser);
+      closeEditProfile();
+      alert('✨ Profile updated successfully!');
+    }
+
+    function applyUserData(user) {
+      document.getElementById('userName').innerText = user.name;
+      document.getElementById('userEmail').innerText = user.email;
+      document.getElementById('userSemester').innerText = user.semester;
+      document.getElementById('userInstitute').innerText = user.institute;
+
+      const avatarBox = document.getElementById('avatarBox');
+      if (user.profilePic) {
+        avatarBox.innerHTML = `<img src="${user.profilePic}" alt="Profile Picture" style="width:100%; height:100%; object-fit:cover;" />`;
       } else {
-        window.location.href = targetUrl;
+        const firstLetter = (user.name ? user.name.charAt(0) : 'M').toUpperCase();
+        avatarBox.innerHTML = `<span id="avatarLetter">${firstLetter}</span>`;
       }
-    }
-
-    function updateUIStates(currentUserEmail) {
-      const subjects = ['pediatric', 'reproductive', 'english', 'perls'];
-      subjects.forEach(sub => {
-        const isUnlocked = localStorage.getItem('unlocked_' + currentUserEmail + '_' + sub) === 'true' || 
-                           localStorage.getItem('unlocked_' + sub) === 'true';
-        
-        const badgeEl = document.getElementById('badge-' + sub);
-        const linkEl = document.getElementById('link-' + sub);
-
-        if (isUnlocked) {
-          if (badgeEl) {
-            badgeEl.className = "status-badge status-unlocked";
-            badgeEl.innerText = "Unlocked";
-          }
-          if (linkEl) {
-            linkEl.className = "action-link btn-unlocked";
-            linkEl.innerText = "Open Notes & Modules →";
-          }
-        } else {
-          if (badgeEl) {
-            badgeEl.className = "status-badge status-locked";
-            badgeEl.innerText = "Locked";
-          }
-          if (linkEl) {
-            linkEl.className = "action-link btn-locked";
-            linkEl.innerText = "Locked Module";
-          }
-        }
-      });
-
-      // Explicitly enforce Nursing Ethics to always be unlocked
-      const ethicsBadge = document.getElementById('badge-ethics');
-      const ethicsLink = document.getElementById('link-ethics');
-      if (ethicsBadge) {
-        ethicsBadge.className = "status-badge status-unlocked";
-        ethicsBadge.innerText = "Unlocked";
-      }
-      if (ethicsLink) {
-        ethicsLink.className = "action-link btn-unlocked";
-        ethicsLink.innerText = "Open Notes & Modules →";
-      }
-    }
-
-    function copyUniqueToken() {
-      const tokenText = document.getElementById('uniqueUserToken').innerText;
-      navigator.clipboard.writeText(tokenText).then(() => {
-        alert('📋 Unique access token copied to clipboard!');
-      }).catch(err => {
-        console.error('Failed to copy token: ', err);
-      });
     }
 
     window.addEventListener('DOMContentLoaded', () => {
       let currentUserEmail = localStorage.getItem('bsn_current_user') || localStorage.getItem('active_session_email');
 
-      // If no session exists, generate a persistent fallback guest/student session so cross-device sync tokens work cleanly
       if (!currentUserEmail) {
         currentUserEmail = 'mudassir.student@bsnportal.edu';
         localStorage.setItem('bsn_current_user', currentUserEmail);
       }
 
-      // Generate or retrieve unique device-agnostic user access token
-      let userToken = localStorage.getItem('bsn_unique_token_' + currentUserEmail);
-      if (!userToken) {
-        const randomHex = Math.random().toString(36).substring(2, 8).toUpperCase();
-        userToken = 'BSN-' + currentUserEmail.substring(0, 3).toUpperCase() + '-' + randomHex;
-        localStorage.setItem('bsn_unique_token_' + currentUserEmail, userToken);
-      }
-      document.getElementById('uniqueUserToken').innerText = userToken;
-
-      // Ensure default lock states on initial dashboard load for all subjects except Nursing Ethics
-      const subjects = ['pediatric', 'reproductive', 'english', 'perls'];
-      subjects.forEach(sub => {
-        const key = 'unlocked_' + currentUserEmail + '_' + sub;
-        if (localStorage.getItem(key) === null) {
-          localStorage.setItem(key, 'false');
-        }
-      });
-      localStorage.setItem('unlocked_' + currentUserEmail + '_ethics', 'true');
-      localStorage.setItem('unlocked_ethics', 'true');
-
-      // Load user profile details
       const userDataStr = localStorage.getItem('bsn_user_' + currentUserEmail) || localStorage.getItem('user_acc_' + currentUserEmail);
       if (userDataStr) {
-        const user = JSON.parse(userDataStr);
-        document.getElementById('userName').innerText = user.name || 'Mudassir Hussain Khan';
-        document.getElementById('userEmail').innerText = user.email || currentUserEmail;
-        document.getElementById('userSemester').innerText = user.semester || 'BSN 4th Semester';
-        document.getElementById('userInstitute').innerText = user.institute || 'New Life Institute Multan';
-        document.getElementById('avatarLetter').innerText = (user.name ? user.name.charAt(0) : 'M').toUpperCase();
+        try {
+          const user = JSON.parse(userDataStr);
+          applyUserData(user);
+        } catch(e) {
+          applyUserData({
+            name: 'Mudassir Hussain Khan',
+            email: currentUserEmail,
+            semester: 'BSN 4th Semester',
+            institute: 'New Life Institute Multan'
+          });
+        }
       } else {
-        document.getElementById('userEmail').innerText = currentUserEmail;
-        document.getElementById('userName').innerText = 'Mudassir Hussain Khan';
-        document.getElementById('userSemester').innerText = 'BSN 4th Semester';
-        document.getElementById('userInstitute').innerText = 'New Life Institute Multan';
+        applyUserData({
+          name: 'Mudassir Hussain Khan',
+          email: currentUserEmail,
+          semester: 'BSN 4th Semester',
+          institute: 'New Life Institute Multan'
+        });
       }
-
-      updateUIStates(currentUserEmail);
     });
   </script>
 </body>
