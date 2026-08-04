@@ -265,10 +265,11 @@
       <button type="submit" class="submit-btn" id="regBtn">Create Account</button>
     </form>
 
-    <!-- FORGOT PASSWORD FORM (WITH SECURITY QUESTION VERIFICATION) -->
+    <!-- FORGOT PASSWORD FORM (EMBEDDED INSIDE THE MAIN LOGIN VIEW/CARD) -->
     <form id="forgotForm" style="display: none;" onsubmit="handleResetPassword(event)">
       <button type="button" class="back-btn" onclick="showForm('login')">← Back to Login</button>
       <h3 style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 12px;">Reset Password</h3>
+      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">Verify your registered email and answer your security question to reset your password.</p>
       
       <div class="form-group">
         <label>Your Registered Email</label>
@@ -282,7 +283,7 @@
 
       <div class="form-group">
         <label>New Password</label>
-        <input type="password" id="newPassword" placeholder="Enter new password" minlength="6" required>
+        <input type="password" id="newPassword" placeholder="Enter new password (min 6 chars)" minlength="6" required>
       </div>
 
       <button type="submit" class="submit-btn" style="background: linear-gradient(135deg, var(--accent), #0f766e);">Update Password</button>
